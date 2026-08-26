@@ -53,6 +53,7 @@ The dashboard says so in the model note.
 | `sa_stats` | `stockanalysis.com/stocks/{t}/statistics/` | latest published headcount, where the headcount series stops short |
 | `mt_emp` | `macrotrends.net/stocks/charts/{T}/{slug}/number-of-employees` | annual headcount |
 | `td_px` | Twelve Data `get_time_series(symbol, 1month, 2021-12 → 2026-08)` | unadjusted monthly closes |
+| `exa_news` | curated web-search snapshot (Exa), Jan 2025 – Aug 2026 | public AI-deployment announcements and workforce-reduction statements, one verified source URL per row — `data/raw/news.tsv` |
 | `manual` | hand-curated | peer group, M&A / one-off / model flags |
 
 Direct access to SEC EDGAR, Stooq and Yahoo is blocked by this environment's egress policy,
@@ -176,7 +177,47 @@ the denominator the entire thesis rests on. M&T FY2025: **22,278 from both sourc
 
 ---
 
-## 6. Distortion flags — 70 across 30 banks
+## 6. Derived signals
+
+Four signals are computed on top of the raw series. Each has a stated blind spot, because a
+signal whose failure mode is unstated is a trap.
+
+### Jaws and the machine signature
+
+`jaws = revenue growth − expense growth` over one fiscal year (the live snapshot uses
+FY2024→FY2025: expense lines have no published TTM). The **machine signature** is four
+conditions at once — jaws positive, headcount down, **comp per employee held** (within 0.5% or
+rising), and no M&A/one-off flag in the window. The point of the combination is that each common
+*fake* efficiency gain breaks a different light: a rate-cycle revenue windfall usually arrives
+with cost growth (breaks jaws), growth-by-hiring breaks the headcount light, wage suppression
+breaks comp-per-head, and outsourcing moves salaries into vendor expense — comp per head can
+even rise while jaws collapses. All four together is the accounting shape of automation.
+**Blind spot:** a one-year window; a bank can pass it once by coincidence. Two consecutive
+matches mean far more than one, and the panel is recomputed per snapshot so that history is one
+click away.
+
+### Conviction (headcount-decline streak)
+
+Consecutive fiscal years of falling headcount ending FY2025, counting only years without an
+M&A/one-off flag. WFC has shrunk four straight clean years; USB, ALLY, ZION and VLY three; BNY
+two. Shrinking outside a merger, repeatedly, is a decision — the "difficult employee retainment
+decisions" the thesis says full dedication requires. **Blind spot:** the flag set covers
+mergers and disclosed one-offs, not every small divestiture; and a streak says nothing about
+*why* headcount fell until read next to revenue (which is what Thrust is for).
+
+### The announcement flag (say vs do)
+
+A hand-curated snapshot of public statements, January 2025 – August 2026: `kind=ai` rows are
+the bank itself deploying AI (internal copilots, customer assistants, agentic programs, stated
+AI efficiency targets — *not* investing in AI startups or conference talk), `kind=workforce`
+rows are concrete reductions, attrition-as-policy or severance programs. Every row carries a
+date and one verified source URL and lives in `data/raw/news.tsv`; nine banks have no ai row
+(EWBC, WTFC, ONB, CBSH, BOKF, PB, CBC, GBCI, UBSI). **Blind spots, stated on the page itself:**
+"quiet" means the sweep found nothing public, never that nothing is happening; the snapshot is
+manual and dated, not a live feed; and announcement *intensity* is not scored — one strong
+primary source counts the same as ten.
+
+## 7. Distortion flags — 70 across 30 banks
 
 Mergers and one-offs move headcount and revenue for reasons that have nothing to do with
 productivity. Flagged bank-years are **excluded from every screen** and marked in the table.
@@ -224,7 +265,7 @@ The ones that would most distort the thesis if left unflagged:
 
 ---
 
-## 7. Regenerating
+## 8. Regenerating
 
 ```bash
 node scripts/assemble.mjs   # data/raw/*.tsv + data/raw/px/*.txt  ->  data/banks.json
@@ -241,7 +282,7 @@ hand-verified figures (`RPE(MTB, 2025) = $434,958`, `efficiency ratio = 56.69%`,
 
 ---
 
-## 8. What this dashboard cannot tell you
+## 9. What this dashboard cannot tell you
 
 - **Revenue per employee is not a direct measure of AI adoption.** It is a proxy. A bank can lift
   it by selling a low-margin business, outsourcing staff to a vendor, or a favourable rate cycle —
@@ -255,4 +296,15 @@ hand-verified figures (`RPE(MTB, 2025) = $434,958`, `efficiency ratio = 56.69%`,
   three-state chip with a wide dead band, never a decimal.
 - **Headcount is a blunt denominator.** Full-time-equivalents, contractors and offshore staff are
   counted differently across issuers, and definitions change between filings.
+- **AI-specialist hiring cannot be measured honestly from free sources.** LinkedIn and the job
+  boards block systematic collection, and per-bank career sites sit on a dozen different
+  applicant-tracking systems with no stable coverage across all 50. The commercial datasets
+  that do cover this — Revelio Labs, LinkUp, Lightcast — are the upgrade path if this monitor
+  ever warrants a data budget. A half-covered column would be worse than none, so there isn't
+  one.
+- **Forward guidance is not extracted.** Banks guide on net interest income, fees and expenses
+  (mostly in Q4/Q1 materials), and the guidance that would confirm this thesis is specific:
+  expense growth guided *below* inflation together with positive operating leverage, which is
+  management underwriting its own efficiency gains. That lives in decks and transcripts that
+  cannot be collected reliably here; it is the one thing worth reading by hand each January.
 - Not investment advice.

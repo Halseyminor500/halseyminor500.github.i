@@ -50,7 +50,7 @@ ok('makes zero external network requests', external.length === 0, external.slice
 ok('renders 50 table rows', await page.locator('#tb tr').count() === 50);
 ok('renders all three charts', await page.locator('#c1 svg, #c2 svg, #c3 svg').count() === 3);
 ok('renders four stat tiles', await page.locator('#tiles .tile').count() === 4);
-ok('renders six highlight panels', await page.locator('#panels .card').count() === 6);
+ok('renders eight highlight panels', await page.locator('#panels .card').count() === 8);
 
 /* ── 2. NaN sweep across every rendered SVG attribute ── */
 const nan = await page.evaluate(() => {
@@ -77,6 +77,11 @@ ok('table header stays pinned while the table scrolls under it', pinned < 2, pin
 await page.evaluate(() => { document.querySelector('.tscroll').scrollTop = 0; });
 ok('the watchlist panels lead with Progressing and Falling behind',
   (await page.locator('#panels .card h2').allTextContents()).slice(0, 2).join('|') === 'Progressing|Falling behind');
+ok('the AI-signature panel renders its four-light strips',
+  await page.locator('#panels .sl').count() >= 16);
+ok('the say-vs-do matrix renders with populated cells',
+  await page.locator('.mx .mxn').count() >= 20);
+ok('conviction column sorts and renders', /Conviction/i.test(await page.textContent('#thr')));
 
 /* ── 2b. the controls a human reaches for are genuinely clickable at rest ── */
 await page.evaluate(() => window.scrollTo(0, 0));

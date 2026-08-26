@@ -64,6 +64,23 @@ for (const r of tsv('data/raw/income.tsv')) {
   };
 }
 
+// ── announcement signals — curated snapshot of public AI / workforce statements ──
+// Each row was verified against its source before entering this file. A ticker
+// with a NONE row (or no ai rows) means the curated sweep found nothing — which
+// is a statement about public communication, never about actual activity.
+const SIGNALS_AS_OF = '2026-08-26';
+const signalsByTicker = {};
+for (const r of tsv('data/raw/news.tsv').slice(1)) {
+  const bucket = (signalsByTicker[r[0]] ||= { ai: [], workforce: [] });
+  if (r[1] === 'NONE') continue;
+  const [, date, kind, summary, url] = r;
+  bucket[kind].push({ date, summary, url });
+}
+for (const t of Object.keys(signalsByTicker)) {
+  signalsByTicker[t].ai.sort((a, b) => b.date.localeCompare(a.date));
+  signalsByTicker[t].workforce.sort((a, b) => b.date.localeCompare(a.date));
+}
+
 // ── employees ─────────────────────────────────────────────────────────────────
 const employees = {};
 for (const r of tsv('data/raw/employees.tsv')) employees[r[0]] = r.slice(1, 6).map(num);
@@ -201,6 +218,7 @@ for (const [ticker, name, , peerGroup] of universe.members) {
       employees: E[4],
     },
     px: { start: MONTHS[0], freq: 'M', close: P },
+    signals: { asOf: SIGNALS_AS_OF, ...(signalsByTicker[ticker] || { ai: [], workforce: [] }) },
     flags,
     gaps,
   });
@@ -297,6 +315,7 @@ const out = {
     sa_income: 'https://stockanalysis.com/stocks/{t}/financials/income-statement/ — per-FY revenue before loan losses, salaries, operating expense, net income to common, diluted shares',
     sa_stats: 'https://stockanalysis.com/stocks/{t}/statistics/ — latest published headcount where the headcount series stops short',
     mt_emp: 'https://www.macrotrends.net/stocks/charts/{T}/{slug}/number-of-employees — annual headcount',
+    exa_news: 'curated web-search snapshot (Exa), Jan 2025 – Aug 2026 — public AI-deployment announcements and workforce-reduction statements, one verified source URL per row; see data/raw/news.tsv',
     td_px: 'Twelve Data get_time_series(symbol, 1month, 2021-12..2026-08) — unadjusted monthly closes',
     derived: 'computed from two sourced fields; the computation is named in the field description',
     manual: 'hand-curated: peer group assignment and the M&A / one-off / model flags in DATA.md',
@@ -310,6 +329,7 @@ const out = {
     'live.price': 'td_px', 'live.revenueTTM': 'sa_income', 'live.salariesTTM': 'sa_income',
     'live.netIncomeToCommonTTM': 'sa_income', 'live.dilutedShares': 'sa_income, or derived = marketCap / closeAdjusted',
     'live.employees': 'mt_emp / sa_stats (latest published)',
+    'signals': 'exa_news — a curated snapshot, not a feed; "none found" means none found, not "not doing it"',
     peerGroup: 'manual', flags: 'manual',
   },
   dataQuality,

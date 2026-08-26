@@ -8,10 +8,12 @@
   --bg:#f6f6f4; --surface-1:#fcfcfb; --surface-2:#f0efec; --surface-3:#e7e6e2;
   --hair:#dedcd6; --hair-strong:#c9c7c0;
   --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837c;
-  --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
+  --series-1:#3066ae; --series-2:#eb6834; --series-3:#1baf7a;
   --accent:#3066ae;
+  --edge:color-mix(in srgb,#3066ae 34%,var(--hair));
+  --edge-strong:color-mix(in srgb,#3066ae 62%,var(--hair));
   --good:#0c7549; --bad:#c8332f; --warn:#875a00;
-  --pos:#2a78d6; --neg:#eb6834; --mid:#f0efec;
+  --pos:#3066ae; --neg:#eb6834; --mid:#f0efec;
   --grid:rgba(11,11,11,.07); --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.18);
   --glass:rgba(252,252,251,.72);
   --r-lg:18px; --r-md:12px; --r-sm:8px;
@@ -23,10 +25,12 @@
   --bg:#111110; --surface-1:#1a1a19; --surface-2:#222221; --surface-3:#2c2c2a;
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
-  --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
-  --accent:#7fa9de;
+  --series-1:#4f93ea; --series-2:#d95926; --series-3:#199e70;
+  --accent:#4f93ea;
+  --edge:color-mix(in srgb,#4f93ea 30%,var(--hair));
+  --edge-strong:color-mix(in srgb,#4f93ea 58%,var(--hair));
   --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
-  --pos:#3987e5; --neg:#d95926; --mid:#383835;
+  --pos:#4f93ea; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
   --glass:rgba(26,26,25,.72);
 }}
@@ -35,10 +39,12 @@
   --bg:#111110; --surface-1:#1a1a19; --surface-2:#222221; --surface-3:#2c2c2a;
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
-  --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
-  --accent:#7fa9de;
+  --series-1:#4f93ea; --series-2:#d95926; --series-3:#199e70;
+  --accent:#4f93ea;
+  --edge:color-mix(in srgb,#4f93ea 30%,var(--hair));
+  --edge-strong:color-mix(in srgb,#4f93ea 58%,var(--hair));
   --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
-  --pos:#3987e5; --neg:#d95926; --mid:#383835;
+  --pos:#4f93ea; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
   --glass:rgba(26,26,25,.72);
 }
@@ -63,9 +69,10 @@ a{color:var(--accent)}
 /* ══ §3 LAYOUT ══ */
 .wrap{max-width:1320px;margin:0 auto;padding:0 20px;min-width:0}
 .stack{display:flex;flex-direction:column;gap:22px}
-.card{min-width:0;background:var(--surface-1);border:1px solid var(--hair);border-radius:var(--r-lg);
+.card{min-width:0;background:var(--surface-1);border:1px solid var(--edge);border-radius:var(--r-lg);
   box-shadow:var(--shadow);overflow:hidden}
-.card-h{padding:16px 20px 12px;border-bottom:1px solid var(--hair)}
+.hero-p{border-color:var(--edge-strong)}
+.card-h{padding:16px 20px 12px;border-bottom:1px solid var(--edge)}
 .card-b{padding:18px 20px}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:22px}
 .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px}
@@ -98,9 +105,9 @@ select,input[type=search]{font:inherit;font-size:13px;background:var(--surface-1
   border:1px solid var(--hair-strong);border-radius:var(--r-sm);padding:6px 9px}
 
 /* ══ §6 STAT TILES ══ */
-.tile{background:var(--surface-1);border:1px solid var(--hair);border-radius:var(--r-lg);padding:18px 20px;
+.tile{background:var(--surface-1);border:1px solid var(--edge);border-radius:var(--r-lg);padding:18px 20px;
   box-shadow:var(--shadow)}
-.tile .k{font-size:11.5px;font-weight:640;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.tile .k{font-size:11.5px;font-weight:640;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
 .tile .v{font-size:34px;font-weight:660;letter-spacing:-.028em;margin:6px 0 2px;line-height:1.05}
 .tile .s{font-size:13px;color:var(--ink-2)}
 .tile .tname{display:block;font:inherit;font-size:17px;font-weight:640;letter-spacing:-.012em;
@@ -108,7 +115,7 @@ select,input[type=search]{font:inherit;font-size:13px;background:var(--surface-1
   max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tile .tname:hover{color:var(--accent)}
 .tile .tname:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;color:var(--accent)}
-.verdict{border-left:3px solid var(--series-2)}
+.verdict{border-color:var(--edge-strong);border-left:3px solid var(--accent)}
 
 /* ══ §7 TABLE ══ */
 .tscroll{overflow:auto;max-height:calc(100vh - var(--hdr,54px) - 14px);-webkit-overflow-scrolling:touch}
@@ -153,6 +160,26 @@ tr{cursor:pointer}
 .hero-p .prow .n{font-size:15px;font-weight:640}
 .hero-p .prow .m{font-weight:560;color:var(--ink-2)}
 .hero-p .prow .m b{color:var(--ink);font-weight:660}
+.sl{display:inline-block;width:9px;height:9px;border-radius:2.5px;margin-left:3px;
+  background:var(--good);vertical-align:baseline}
+.sl.off{background:var(--hair-strong)}
+.mx-card{grid-column:1/-1}
+.mx{display:grid;grid-template-columns:minmax(110px,auto) 1fr 1fr;gap:1px;background:var(--edge);
+  border:1px solid var(--edge);border-radius:var(--r-md);overflow:hidden;font-size:12.5px}
+.mx>div{background:var(--surface-1);padding:10px 12px;min-width:0}
+.mx .h{background:var(--surface-2);font-size:11px;font-weight:660;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--ink-2)}
+.mx .rl{background:var(--surface-2);font-size:11px;font-weight:660;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--ink-2);display:flex;align-items:center}
+.mx .cell-t{font-weight:660;margin-bottom:2px}
+.mx .cell-t .n{font-weight:450;color:var(--ink-3);margin-left:4px}
+.mx .cell-d{font-size:11.5px;color:var(--ink-3);margin-bottom:7px;line-height:1.4}
+.mx .chips{display:flex;flex-wrap:wrap;gap:5px}
+.mxn{font:inherit;font-size:12px;font-weight:560;color:var(--ink);background:var(--surface-2);
+  border:1px solid var(--hair);border-radius:99px;padding:2.5px 9px;cursor:pointer;white-space:nowrap}
+.mxn:hover{border-color:var(--accent);color:var(--accent)}
+.mxn .wf{color:var(--series-2);font-weight:660;margin-left:3px}
+.mx .alpha{box-shadow:inset 0 0 0 2px var(--accent)}
 figcaption{font-size:12px;color:var(--ink-3);margin-top:9px;line-height:1.5}
 svg{display:block;width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin-bottom:8px}
@@ -477,6 +504,36 @@ function derive(){
     else if(si>=2) revG = M.cagr(b.fy.revenue[si-2],b.fy.revenue[si],2);
     else if(si===1) revG = M.cagr(b.fy.revenue[0],b.fy.revenue[1],1);
     if(revG==null) revG = rev2;
+    /* Machine signature: the pattern only well-implemented AI produces over one
+       fiscal year — jaws positive (revenue growth beats expense growth), headcount
+       down, comp per head held (rules out wage suppression; outsourcing shifts
+       salaries to vendor opex, which breaks jaws instead), window clean of M&A.
+       The live snapshot uses the FY2024→FY2025 window: expenses have no TTM line. */
+    const j0 = si===5 ? 3 : si-1, j1 = si===5 ? 4 : si;
+    let jaws=null, sig=null, sigParts=null;
+    if(j0>=0){
+      const r0=b.fy.revenue[j0], r1=b.fy.revenue[j1];
+      const o0=b.fy.operatingExpense[j0], o1=b.fy.operatingExpense[j1];
+      const e0=b.fy.employees[j0], e1=b.fy.employees[j1];
+      const c0=(b.fy.salaries[j0]!=null&&e0>0)? b.fy.salaries[j0]/e0 : null;
+      const c1=(b.fy.salaries[j1]!=null&&e1>0)? b.fy.salaries[j1]/e1 : null;
+      if(r0>0&&r1!=null&&o0>0&&o1!=null) jaws=(r1/r0-1)-(o1/o0-1);
+      const headDown=(e0!=null&&e1!=null)? e1<e0 : null;
+      const compHeld=(c0!=null&&c1!=null)? c1>=c0*0.995 : null;
+      const cleanSig=!M.distorted(b,FY[j0],FY[j1]);
+      sigParts={jaws, headDown, compHeld, clean:cleanSig};
+      sig=(jaws!=null&&headDown!=null&&compHeld!=null)
+        ? (jaws>0&&headDown&&compHeld&&cleanSig) : null;
+    }
+    /* Conviction: consecutive ex-M&A fiscal years of declining headcount, ending
+       FY2025. Shrinking three years running outside a merger is a decision. */
+    let streak=0;
+    for(let i=4;i>=1;i--){
+      const e=b.fy.employees;
+      const fl=b.flags.some(f=>f.fy===FY[i]&&(f.kind==='ma'||f.kind==='oneoff'));
+      if(e[i]!=null&&e[i-1]!=null&&e[i]<e[i-1]&&!fl) streak++; else break;
+    }
+
     const clean2 = !M.distorted(b,FY[2],FY[4]);
     const clean3 = !M.distorted(b,FY[1],FY[4]);
     const cleanNow = !M.distorted(b, si===5?FY[4]:FY[Math.max(0,si-1)], si===5?FY[4]:FY[si]);
@@ -486,7 +543,7 @@ function derive(){
       rpe, pe, mcap:M.at(b,si,'mcap'),
       comp:M.at(b,si,'comp'), cr:M.at(b,si,'cr'), eff:M.at(b,si,'eff'),
       peBasis: si===5 ? M.livePeBasis(b) : 'fy',
-      thrust, accel, prevThrust, series,
+      thrust, accel, prevThrust, series, jaws, sig, sigParts, streak, signals:b.signals,
       rev2, head2, rev3, revG,
       mwl: (rev2!=null&&head2!=null)? rev2-head2 : null,
       ret1:M.ret(b,12), ret2:M.ret(b,24), ret3:M.ret(b,36),
@@ -592,6 +649,7 @@ const COLS=[
   {k:'mcap',  t:'Market cap',          dir:'desc', get:r=>r.mcap,  fmt:v=>U.money(v)},
   {k:'rpe',   t:'Rev / employee',      dir:'desc', get:r=>r.rpe,   fmt:v=>U.k(v), rank:'rankRpe'},
   {k:'thrust',t:'Thrust',              dir:'desc', get:r=>r.thrust,fmt:v=>U.pct(v), signed:true, chip:'accel'},
+  {k:'streak',t:'Conviction',          dir:'desc', get:r=>r.streak,fmt:v=>v==null?null:(v===0?'0':v+' yr')},
   {k:'comp',  t:'Comp / head',         dir:'desc', get:r=>r.comp,  fmt:v=>U.k(v)},
   {k:'eff',   t:'Efficiency ratio',    dir:'asc',  get:r=>r.eff,   fmt:v=>v==null?null:(v*100).toFixed(1)+'%', lowerBetter:true},
   {k:'pe',    t:'P / E',               dir:'desc', get:r=>r.pe,    fmt:v=>U.x(v), rank:'rankPe'},
@@ -1012,6 +1070,11 @@ function screenFalling(rows){
   return rows.filter(r=>r.cleanNow&&r.thrust!=null&&r.thrust<0)
     .sort((a,b)=>a.thrust-b.thrust);
 }
+/* Machine signature: full matches first (by jaws), then near-misses. */
+function screenSignature(rows){
+  return rows.filter(r=>r.sig!=null)
+    .sort((a,b)=> (b.sig?1:0)-(a.sig?1:0) || (b.jaws??-9)-(a.jaws??-9));
+}
 
 /* ══ §21 RENDER: TILES ══ */
 function renderTiles(dv){
@@ -1150,6 +1213,7 @@ function renderTable(dv){
     const th=U.el('th',{ 'data-k':c.k, scope:'col',
       'aria-sort': active?(state.sort.dir==='asc'?'ascending':'descending'):null,
       title: thrustLive ? 'TTM revenue per employee against FY2025 — the in-progress year'
+           : c.k==='streak' ? 'Consecutive fiscal years of declining headcount outside M&A, through FY2025. Shrinking on purpose is dedication.'
            : c.lowerBetter?'Lower is better':null,
       html: (thrustLive?'Thrust · since Day 1':c.t) + (c.lowerBetter?' ▾':'') +
         `<span class="ar">${active?(state.sort.dir==='asc'?'↑':'↓'):'⇅'}</span>` });
@@ -1272,7 +1336,8 @@ function renderPanels(dv){
     screenProgressing(R).slice(0,8),
     r=>`${U.pct(r.prevThrust)} → <b>${U.pct(r.thrust)}</b>`+
        (r.pe==null?'':` · ${U.x(r.pe)}`)+
-       (r.pe!=null&&medPe!=null&&r.pe<medPe?' <span class="chip up">still cheap</span>':''),
+       (r.pe!=null&&medPe!=null&&r.pe<medPe?' <span class="chip up">still cheap</span>':'')+
+       (r.streak>=2?` <span class="chip up">${r.streak} yr shrink</span>`:''),
     {hero:true, foot, empty:'Acceleration needs two consecutive Thrust readings — pick a later snapshot.'}));
 
   host.appendChild(panel('Falling behind',
@@ -1284,6 +1349,70 @@ function renderPanels(dv){
        (r.pe==null?'':` · ${U.x(r.pe)}`)+
        (r.rankRpe!=null&&r.K&&r.rankRpe>0.75*r.K?' <span class="chip dn">low level too</span>':''),
     {hero:true, foot, empty:'No clean-comparison bank is shrinking at this snapshot.'}));
+
+  /* ── the machine signature: the one-year pattern only real automation makes ── */
+  const sigWin = live ? 'FY2024→FY2025' : 'this fiscal year';
+  const sigRows = screenSignature(R);
+  const sigMatches = sigRows.filter(r=>r.sig).length;
+  const light=(on,lbl)=>`<span class="sl${on?'':' off'}" title="${lbl}: ${on?'yes':'no'}"></span>`;
+  host.appendChild(panel('The AI signature'+(sigMatches?` · ${sigMatches} match${sigMatches===1?'':'es'}`:''),
+    `Four lights over ${sigWin}: revenue growth beats expense growth (jaws), headcount down, comp per
+     employee held (rules out wage cuts and outsourcing), and no merger in the window. A rate cycle, a
+     divestiture, or an outsourcing deal each break a different light — all four together is what
+     well-implemented automation looks like in a bank's accounts. Sorted by jaws.`,
+    sigRows.slice(0,8),
+    r=>`<b>${U.pct(r.jaws)}</b> jaws`+
+       light(r.sigParts.jaws!=null&&r.sigParts.jaws>0,'Jaws positive')+
+       light(!!r.sigParts.headDown,'Headcount down')+
+       light(!!r.sigParts.compHeld,'Comp per head held')+
+       light(!!r.sigParts.clean,'Clean window')+
+       (r.streak>=2?` <span class="chip up">${r.streak} yr shrink</span>`:''),
+    {hero:true, empty:'Expense lines are unavailable for this window.'}));
+
+  /* ── say vs do: announcements against realized Thrust. The user's mechanism:
+     the numbers move first, THEN it goes public — to tout the AI program, or
+     because the layoffs start. The un-announced movers are the alpha cell. ── */
+  const base=R.filter(r=>r.cleanNow&&r.thrust!=null);
+  const said=r=>r.signals&&r.signals.ai.length>0;
+  const moving=r=>r.thrust>0.02;
+  const cells={
+    qd:base.filter(r=>moving(r)&&!said(r)), ld:base.filter(r=>moving(r)&&said(r)),
+    tk:base.filter(r=>!moving(r)&&said(r)), sl:base.filter(r=>!moving(r)&&!said(r))
+  };
+  for(const k in cells) cells[k].sort((a,b)=>b.thrust-a.thrust);
+  const chip=r=>{
+    const ai=r.signals.ai[0], wf=r.signals.workforce[0];
+    const tip=(ai?`${ai.date}: ${ai.summary}`:'No public AI announcement found in the curated sweep.')+
+      (wf?`\n↓ ${wf.date}: ${wf.summary}`:'');
+    return `<button class="mxn" data-t="${r.ticker}" title="${tip.replace(/"/g,'&quot;')}">${SHORT[r.ticker]||r.name}`+
+      ` <span class="muted">${U.pct(r.thrust)}</span>${wf?'<span class="wf" aria-label="workforce reduction on record">↓</span>':''}</button>`;
+  };
+  const cell=(k,t,d,alpha)=>`<div${alpha?' class="alpha"':''}><div class="cell-t">${t}<span class="n">${cells[k].length}</span></div>`+
+    `<div class="cell-d">${d}</div><div class="chips">${cells[k].map(chip).join('')||'<span class="muted">—</span>'}</div></div>`;
+  const mxCard=U.el('div',{class:'card hero-p mx-card'});
+  mxCard.appendChild(U.el('div',{class:'card-h'},[
+    U.el('h2',{text:'Say vs do'}),
+    U.el('div',{class:'small muted',html:
+      `Public AI announcements against realized Thrust. The thesis says the numbers move first and the
+       announcement follows — to tell the market about the AI program, or because the layoffs begin.
+       Hover a name for its latest announcement; <span class="wf" style="color:var(--series-2);font-weight:660">↓</span> marks a workforce reduction on record.`})]));
+  const mxBody=U.el('div',{class:'card-b'});
+  mxBody.innerHTML=`<div class="mx">
+    <div class="h"></div><div class="h">Quiet — no announcement found</div><div class="h">Announced</div>
+    <div class="rl">Moving<br>Thrust &gt; +2%</div>
+    ${cell('qd','Quiet doers','Thrust without a press release. If the thesis is right, these get announced later — own them first.',true)}
+    ${cell('ld','Loud doers','Saying it and showing it.')}
+    <div class="rl">Not moving<br>Thrust &le; +2%</div>
+    ${cell('sl','Silent','No movement, no announcement. In this cycle, standing still is the risk.')}
+    ${cell('tk','Talkers','Announced, not yet visible in revenue per employee. Watch, don\u2019t chase.')}
+  </div>
+  <div class="tiny muted" style="margin-top:8px">Announcements are a curated snapshot of public statements,
+  January 2025 – August 2026, one verified source per entry (kept in data/raw/news.tsv). \u201cQuiet\u201d means
+  the sweep found nothing public — never that nothing is happening. ${R.filter(r=>r.thrust!=null&&!r.cleanNow).length}
+  banks with a merger or one-off in the window are excluded.</div>`;
+  mxBody.querySelectorAll('.mxn').forEach(b=>b.addEventListener('click',()=>{ state.sel=b.dataset.t; render(); }));
+  mxCard.appendChild(mxBody);
+  host.appendChild(mxCard);
 
   const coil=R.filter(r=>r.coil!=null&&r.clean3).sort((a,b)=>b.coil-a.coil).slice(0,5);
   host.appendChild(panel('Coiled springs',
@@ -1472,7 +1601,21 @@ function selfTest(){
     const l=thrustLeader(rows);
     const tn=document.querySelector('#tiles .tile:nth-child(4) .tname');
     ok('greatest-thrust tile names the argmax of clean Thrust',
-       !l || (tn && tn.textContent===(SHORT[l.ticker]||l.name)), l?(SHORT[l.ticker]||l.name):'none'); }
+       !l || (tn && tn.textContent===(SHORT[l.ticker]||l.name)), l?(SHORT[l.ticker]||l.name):'none');
+    const byT=Object.fromEntries(rows.map(r=>[r.ticker,r]));
+    ok('conviction streak: WFC 4 consecutive ex-M&A shrink years', byT.WFC.streak===4, String(byT.WFC.streak));
+    ok('conviction streak: BNY 2', byT.BNY.streak===2, String(byT.BNY.streak));
+    ok('conviction streak: COF 0 (merger year breaks it)', byT.COF.streak===0, String(byT.COF.streak));
+    ok('streaks bounded to observable history', rows.every(r=>r.streak>=0&&r.streak<=4));
+    ok('a full signature implies all four lights',
+       rows.filter(r=>r.sig===true).every(r=>r.sigParts.jaws>0&&r.sigParts.headDown&&r.sigParts.compHeld&&r.sigParts.clean));
+    ok('a null signature never renders in the panel', screenSignature(rows).every(r=>r.sig!=null));
+    const mbase=rows.filter(r=>r.cleanNow&&r.thrust!=null);
+    const nchips=document.querySelectorAll('.mx .mxn').length;
+    ok('say-vs-do matrix partitions every clean bank exactly once', nchips===mbase.length,
+       `${nchips} chips vs ${mbase.length} banks`);
+    ok('announced means stored, dated, sourced signals — never inference',
+       rows.every(r=>!r.signals || r.signals.ai.every(a=>a.date&&a.summary&&a.url&&a.url.startsWith('http')))); }
 
   const pass=t.filter(x=>x.c).length;
   const box=U.el('div',{class:'card',style:'margin:22px 0'});

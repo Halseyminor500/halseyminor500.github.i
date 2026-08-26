@@ -32,6 +32,7 @@
     "sa_income": "https://stockanalysis.com/stocks/{t}/financials/income-statement/ — per-FY revenue before loan losses, salaries, operating expense, net income to common, diluted shares",
     "sa_stats": "https://stockanalysis.com/stocks/{t}/statistics/ — latest published headcount where the headcount series stops short",
     "mt_emp": "https://www.macrotrends.net/stocks/charts/{T}/{slug}/number-of-employees — annual headcount",
+    "exa_news": "curated web-search snapshot (Exa), Jan 2025 – Aug 2026 — public AI-deployment announcements and workforce-reduction statements, one verified source URL per row; see data/raw/news.tsv",
     "td_px": "Twelve Data get_time_series(symbol, 1month, 2021-12..2026-08) — unadjusted monthly closes",
     "derived": "computed from two sourced fields; the computation is named in the field description",
     "manual": "hand-curated: peer group assignment and the M&A / one-off / model flags in DATA.md"
@@ -53,6 +54,7 @@
     "live.netIncomeToCommonTTM": "sa_income",
     "live.dilutedShares": "sa_income, or derived = marketCap / closeAdjusted",
     "live.employees": "mt_emp / sa_stats (latest published)",
+    "signals": "exa_news — a curated snapshot, not a feed; \"none found\" means none found, not \"not doing it\"",
     "peerGroup": "manual",
     "flags": "manual"
   },
@@ -272,6 +274,28 @@
           356.69
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-03-06",
+            "summary": "Completes global LLM Suite rollout to 230,000 employees; ~$1.5B in AI business value targeted this year",
+            "url": "https://api.finexus.net/api/news/events/17dedc10-46e8-478f-93b2-c5fec9b32989/html"
+          },
+          {
+            "date": "2025-05-22",
+            "summary": "First big bank to roll out gen AI to nearly all employees: LLM Suite at 200,000 users by mid-2025",
+            "url": "https://www.americanbanker.com/news/how-jpmorganchase-democratized-employee-access-to-gen-ai"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-02-24",
+            "summary": "Dimon: \"huge redeployment plans... we have displaced people from AI\"; ops staff -4% while client-facing roles +4%",
+            "url": "https://www.cnbc.com/2026/02/24/jpm-ceo-jamie-dimon-ai-reshaping-workforce-redeployment.html"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -422,6 +446,28 @@
           56.98,
           61.95,
           62.43
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-21",
+            "summary": "EricaAssist gains gen AI for 18,000 service reps; cuts average call times by nearly a minute",
+            "url": "https://newsroom.bankofamerica.com/content/newsroom/press-releases/2026/07/bank-of-america-enhances-ericaassist-with-generative-ai-to-help-.html"
+          },
+          {
+            "date": "2025-04-08",
+            "summary": "AI adoption across global workforce: Erica for Employees used by >90% of 213,000 staff; gen AI coding and call-center tools",
+            "url": "https://newsroom.bankofamerica.com/content/newsroom/press-releases/2025/04/ai-adoption-by-bofa-s-global-workforce-improves-productivity--cl.html"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-01-15",
+            "summary": "Moynihan expects headcount to fall in 2026: \"work the headcount through operational excellence and... AI\"; attrition-based",
+            "url": "https://www.bankingdive.com/news/bank-of-america-citi-wells-fargo-headcount-banking-job-cuts-2026/809756/"
+          }
         ]
       },
       "flags": [
@@ -582,6 +628,28 @@
           216.77
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-02-11",
+            "summary": "Wealth head Jed Finn: building AI \"super agents\" from thousands of smaller agents to open accounts, move money, build portfolios",
+            "url": "https://www.financial-planning.com/news/behind-the-marvel-movie-inspired-ai-super-agents-coming-to-morgan-stanley"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-03-08",
+            "summary": "NY Post sources: the 3% layoff round was largely about replacing back-office workers with AI systems",
+            "url": "https://nypost.com/2026/03/07/business/wall-street-executives-say-morgan-stanleys-latest-layoffs-caused-by-ai-sources/"
+          },
+          {
+            "date": "2026-03-04",
+            "summary": "Laid off ~2,500 (3% of workforce) across all divisions despite record 2025 revenue; advisors spared",
+            "url": "https://www.reuters.com/business/world-at-work/morgan-stanley-lays-off-2500-employees-across-all-divisions-wsj-reports-2026-03-04/"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -732,6 +800,28 @@
           1011.37,
           1018.38,
           1058.88
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-07-25",
+            "summary": "GS AI platform firmwide to 46,000 staff; one million prompts a month; Devin agentic AI in developer teams",
+            "url": "https://www.americanbanker.com/news/goldman-sachs-staff-now-write-a-million-gen-ai-prompts-a-month"
+          },
+          {
+            "date": "2025-06-23",
+            "summary": "Firmwide launch of GS AI Assistant via internal memo; summarizes documents, drafts content, analyzes data",
+            "url": "https://www.reuters.com/business/goldman-sachs-launches-ai-assistant-firmwide-memo-shows-2025-06-23/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-10-14",
+            "summary": "OneGS 3.0 memo: \"limited reduction in roles\" and constrained headcount growth in AI-driven overhaul",
+            "url": "https://nypost.com/2025/10/14/business/goldman-sachs-warns-of-looming-layoffs-as-ai-reshapes-operations/"
+          }
         ]
       },
       "flags": [],
@@ -886,6 +976,33 @@
           84.79
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-15",
+            "summary": "Launched AI Teammate in Advisor Gateway for advisors and support teams",
+            "url": "https://newsroom.wf.com/news-releases/news-details/2026/Wells-Fargo-introduces-AI-Teammate-bringing--AI-powered-support-to-the-advisor-experience/default.aspx"
+          },
+          {
+            "date": "2025-08-05",
+            "summary": "Rolling out Google agentic AI (Agentspace, Gemini Deep Research, NotebookLM) to all 215,000 employees",
+            "url": "https://www.americanbanker.com/news/wells-fargo-plans-to-unleash-googles-agentic-ai-bank-wide"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-08-05",
+            "summary": "Scharf on CNBC: AI automation \"going to result in tens of thousands of fewer positions\" at the bank",
+            "url": "https://247wallst.com/investing/2026/08/05/wells-fargos-ceo-says-ai-will-erase-tens-of-thousands-of-jobs-heres-why-hes-still-not-worried-about-your-wallet/"
+          },
+          {
+            "date": "2026-07-15",
+            "summary": "Headcount down 24 straight quarters to 197k; CFO: tech and AI help run the company with less headcount",
+            "url": "https://www.charlotteobserver.com/news/business/article316519034.html"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -1036,6 +1153,28 @@
           338.25,
           336.25,
           335.95001
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-03-30",
+            "summary": "Squeri shareholder letter: \"hundreds\" of AI use cases; 11,000 engineers on AI tools, coding times down 30%+; \"a deliberate redesign of how we operate\"",
+            "url": "https://www.ciodive.com/news/amex-AI-tool-use-software/816150/"
+          },
+          {
+            "date": "2025-09-24",
+            "summary": "Gen AI live in servicing: real-time intelligence for Travel Counselors, Knowledge Assist chatbot at 98% answer accuracy",
+            "url": "https://americanexpress.io/how-gen-ai-is-elevating-the-human-connection-at-american-express/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-24",
+            "summary": "Squeri: service-rep count \"hasn't grown. Over time it will decrease from attrition\" as AI portal absorbs rising volume",
+            "url": "https://www.americanbanker.com/payments/news/amex-reports-earnings-in-line-with-analyst-expectations"
+          }
         ]
       },
       "flags": [],
@@ -1216,6 +1355,33 @@
           133.25
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-04-30",
+            "summary": "Launched Arc, an internal platform to build and scale governed AI agents; 180k staff already use Citi AI tools",
+            "url": "https://www.citigroup.com/global/news/perspectives/2026/introducing-ai-agents-next-phase-citi-artificial-intelligence-journey"
+          },
+          {
+            "date": "2025-09-22",
+            "summary": "Citi Stylus Workspaces upgraded with agentic AI; phased rollout starting with thousands of employees",
+            "url": "https://www.citigroup.com/global/news/press-release/2025/citi-unveils-citi-stylus-workspaces-agentic-ai-turbocharging-productivity"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-15",
+            "summary": "~$800M severance in H1 2026, headcount down 5% YoY to 219k; more severance possible as AI automation scales",
+            "url": "https://www.bankingdive.com/news/citi-severance-jobs-headcount-q2-earnings-fraser/825295/"
+          },
+          {
+            "date": "2026-01-14",
+            "summary": "Fraser memo: ~1,000 cuts proceeding within a multiyear overhaul that could eliminate up to 20,000 roles",
+            "url": "https://fortune.com/2026/01/14/citigroup-ceo-jane-fraser-job-cuts-ai-bad-old-ways-restructuring/"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -1368,6 +1534,28 @@
           112.27
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-05-15",
+            "summary": "AI Service Assistant transcribing ~60,000 daily client interactions; AI touted as biggest growth lever at investor day",
+            "url": "https://www.investmentnews.com/fintech/schwab-touts-ai-as-its-biggest-growth-lever-at-investor-day/266613"
+          },
+          {
+            "date": "2026-04-16",
+            "summary": "CEO Wurster: first client-facing AI assistants over chat and voice launching in June, with guardrails",
+            "url": "https://www.wealthmanagement.com/ria-news/schwab-makes-ai-push-with-client-facing-agents-to-roll-out-in-june"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-09-10",
+            "summary": "Small layoff round (under 40 employees) as periodic organizational adjustment; no broad layoffs planned",
+            "url": "https://citywire.com/ria/news/charles-schwab-conducts-small-round-of-layoffs-sources/a2473755"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -1518,6 +1706,28 @@
           200.62,
           209.0099945,
           216.24001
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-07-07",
+            "summary": "Production multi-agent AI live in the auto business; plans to scale agents across the enterprise",
+            "url": "https://venturebeat.com/business/how-capital-one-built-production-multi-agent-ai-workflows-to-power-enterprise-use-cases"
+          },
+          {
+            "date": "2025-03-06",
+            "summary": "Launched Chat Concierge, proprietary multi-agent AI assistant for car buying, built on customized Llama",
+            "url": "https://medium.com/capital-one-tech/driving-the-future-of-car-buying-with-agentic-ai-0be6be44db7c"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-03-05",
+            "summary": "Cutting 1,100+ Discover employees at Riverwoods HQ; 1,748 total layoffs filed with Illinois post-merger",
+            "url": "https://www.bankingdive.com/news/capital-one-discover-job-cuts-layoffs/813908/"
+          }
         ]
       },
       "flags": [
@@ -1676,6 +1886,28 @@
           144.61,
           156.33,
           163.64999
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-02-09",
+            "summary": "134 \"digital employees\" work alongside 48,100 humans; $3.8B tech spend, 19% of revenue",
+            "url": "https://www.cnbc.com/2026/02/09/digital-employees-ai-bootcamps-americas-oldest-bank-spends-billions-on-tech.html"
+          },
+          {
+            "date": "2025-09-29",
+            "summary": "CEO Vince unveils next-gen Eliza AI platform; 98% of employees trained, staff build bespoke agents",
+            "url": "https://fortune.com/2025/09/29/bny-unveils-updated-eliza-platform-as-it-touts-that-majority-of-employees-use-ai-tools-daily/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-15",
+            "summary": "Headcount fell 7% YoY amid rapid AI adoption; CFO calls it \"just an output,\" not a target",
+            "url": "https://www.americanbanker.com/news/bny-ai-bet-is-paying-off-client-impact-is-measurable"
+          }
         ]
       },
       "flags": [
@@ -1841,6 +2073,28 @@
           244.11
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-06-11",
+            "summary": "CEO Demchak: PNC building its own \"AI factory\" - own GPU compute, data centers, in-house language models",
+            "url": "https://www.americanbanker.com/news/why-pnc-is-building-its-own-ai-factory"
+          },
+          {
+            "date": "2026-01-17",
+            "summary": "Demchak: AI to add 40 pts of operating leverage 2025-30; 171 opportunities, $1.4B addressable spend",
+            "url": "https://www.pymnts.com/earnings/2026/pnc-says-automation-added-30-points-of-operating-leverage-since-2022/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-04-23",
+            "summary": "Cutting 777 jobs at acquired FirstBank Colorado HQ this summer, citing integration overlap",
+            "url": "https://www.bankingdive.com/news/pnc-777-job-cuts-firstbank-colorado-technology-lakewood-denver-integration/818330/"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2025,
@@ -2004,6 +2258,22 @@
           62.41
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-05-07",
+            "summary": "Expanded AWS deal: agentic gen-AI self-service across voice, chat, SMS via Bedrock and Nova Sonic",
+            "url": "https://press.aboutamazon.com/aws/2026/5/u-s-bank-expands-collaboration-with-aws-to-accelerate-progressive-technology-transformation-and-ai-driven-customer-experience-innovation"
+          },
+          {
+            "date": "2026-01-15",
+            "summary": "Launched gen AI assistant on its developer portal for embedded-banking API clients",
+            "url": "https://www.americanbanker.com/news/u-s-bank-gives-embedded-banking-clients-a-gen-ai-assistant"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [],
       "gaps": []
     },
@@ -2154,6 +2424,23 @@
           49.82,
           51.84,
           50.3
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-06-01",
+            "summary": "CIO Hagerman: 50+ AI use cases deployed in 2025; \"digital teammate\" agents to be formally hired into the org in 2026",
+            "url": "https://www.americanbanker.com/news/the-truist-cio-is-34-on-the-most-innovative-people-in-finance-ranking"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-01-21",
+            "summary": "Q4 hit by $63M severance; restructuring charges total $358M over two years, more expected in 2026",
+            "url": "https://www.americanbanker.com/news/truist-settles-15-year-old-legal-saga-causing-earnings-hit"
+          }
         ]
       },
       "flags": [
@@ -2330,6 +2617,28 @@
           192.95
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-06-15",
+            "summary": "CFO Woods: internal \"agentic platform and factory\" launching imminently so staff can build custom AI agents",
+            "url": "https://stpis.com/stp-knowledge-hub/in-the-news/state-street-to-imminently-launch-internal-ai-agent-factory/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-16",
+            "summary": "$1B cost-cut plan via restructuring and expanded AI; up to ~$500M severance to \"flow through to headcount\"",
+            "url": "https://www.americanbanker.com/news/state-street-touts-selection-by-treasury-1b-cost-cut-plan"
+          },
+          {
+            "date": "2025-07-16",
+            "summary": "Eliminated ~900 jobs in Q2 2025 with a $100M charge; CEO tied the efficiency drive to AI and platform scaling",
+            "url": "https://www.boston.com/news/business/2025/07/16/report-state-street-eliminated-900-jobs-last-quarter/"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -2480,6 +2789,28 @@
           56.37,
           56.5,
           54.89
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-17",
+            "summary": "Built AI tools monitoring the Comerica systems conversion in real time",
+            "url": "https://www.americanbanker.com/news/fifth-third-says-its-using-ai-to-track-comerica-conversion"
+          },
+          {
+            "date": "2026-03-11",
+            "summary": "CEO Spence: AI cost savings \"pretty remarkable\"; 40% of code written by AI in early 2026 after Copilot rollout",
+            "url": "https://news.bloomberglaw.com/banking-law/fifth-third-sees-pretty-remarkable-ai-ability-to-cut-costs-1"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-05-09",
+            "summary": "WARN: 502 permanent layoffs at former Comerica campus July-November, post-merger",
+            "url": "https://www.mlive.com/news/detroit/2026/05/fifth-third-bank-to-permanently-lay-off-502-employees-at-farmington-hills-site.html"
+          }
         ]
       },
       "flags": [
@@ -2639,6 +2970,17 @@
           545.84003,
           560.26001
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-27",
+            "summary": "Touts $1B annual tech/AI spend, embedding AI across advisor workflows, service, fraud prevention, virtual assistance",
+            "url": "https://ir.ameriprise.com/news/news-details/2026/Ameriprise-Advances-AI-Innovation-Across-the-Advisor-and-Client-Experience-with-1B-Annual-Spend-on-Technology-and-AI-Capabilities/default.aspx"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -2834,6 +3176,28 @@
           16.95
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-09-11",
+            "summary": "CFO Wasserman: 28 gen AI use cases live, targeting 10-15% cost cuts; agentic AI \"taking on jobs we used to hire people to do\"",
+            "url": "https://www.americanbanker.com/news/huntington-banks-plan-to-obtain-a-return-on-generative-ai"
+          },
+          {
+            "date": "2025-03-04",
+            "summary": "CFO leads AI strategy; gen AI copilots in code generation, knowledge management, staff efficiency - usage doubling yearly",
+            "url": "https://www.americanbanker.com/podcast/its-a-tremendous-priority-huntington-cfo-wasserman-on-ai"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-12-09",
+            "summary": "CEO Steinour: \"there'll be more layoffs\" at acquired Cadence Bank; 60+ jobs already cut in Veritex integration",
+            "url": "https://www.dispatch.com/story/business/finance/2025/12/09/huntington-bancshares-will-cut-jobs-layoffs-at-cadence-bank-in-texas/87684714007/"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2021,
@@ -2991,6 +3355,22 @@
           246.28999,
           240.41
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-05-28",
+            "summary": "Deploys RDC.AI explainable-AI credit monitoring at enterprise scale to 1,200+ relationship managers",
+            "url": "https://informaconnect.com/banking-tech-awards-usa/showcase-page-2026-mt-bank-rdcai/"
+          },
+          {
+            "date": "2025-09-18",
+            "summary": "CDO: Microsoft Copilot deployed to 16,000 of 22,000 employees for drafts, reports, call summaries, with data-lineage guardrails",
+            "url": "https://www.americanbanker.com/news/how-m-t-bank-ensures-data-quality-as-it-implements-gen-ai"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -3150,6 +3530,23 @@
           186.82001
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-04-15",
+            "summary": "Asset Servicing goes live with Dynamics Copilot gen AI internally: case summarization and knowledge chatbot",
+            "url": "https://www.reworked.co/digital-workplace/shaelyn-otikor-miller-on-rolling-out-dynamics-copilot-in-the-financial-industry/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-30",
+            "summary": "Q2 2026 10-Q: $51.0M severance charges in comp expense, on top of $58.8M in 2025",
+            "url": "https://www.stocktitan.net/sec-filings/NTRS/10-q-northern-trust-corp-quarterly-earnings-report-045dbccf392e.html"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -3301,6 +3698,22 @@
           175.98,
           174.71001
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-23",
+            "summary": "CEO Shoukry: AI agent companywide June 15, 6,500 users; \"advisors who use AI will replace advisors who do not\"",
+            "url": "https://www.connectmoney.com/stories/ai-wont-replace-fas-but-advisors-using-ai-will-raymond-james-ceo-says/"
+          },
+          {
+            "date": "2026-01-27",
+            "summary": "Launches proprietary AI operations agent Rai; 10,000+ associates already regular conversational-AI users",
+            "url": "https://www.raymondjames.com/news-and-media/press-releases/2026/01/27/raymond-james-launches-proprietary-digital-ai-agent-to-bolster-operational-excellence"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -3458,6 +3871,28 @@
           70.07,
           71.65,
           69.83
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-16",
+            "summary": "Targets $450M run-rate benefit by 2028; AI in card contact centers, back-office AI agents, enterprise HR chat agent",
+            "url": "https://www.pymnts.com/news/banking/2026/citizens-bank-mobilizes-ai-to-target-450-million-operational-savings-by-2028/"
+          },
+          {
+            "date": "2025-12-01",
+            "summary": "\"Reimagine the Bank\": CiZi assistant cut app-to-call-center calls 44%; agentic AI pilots in fraud and complaints",
+            "url": "https://www.americanbanker.com/news/inside-citizens-plan-to-reimagine-itself-with-ai"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-12-01",
+            "summary": "Amid AI adoption, \"released\" vendor staff (Infosys, Accenture, IBM, Cognizant) and let go legacy coders",
+            "url": "https://www.americanbanker.com/news/inside-citizens-plan-to-reimagine-itself-with-ai"
+          }
         ]
       },
       "flags": [
@@ -3618,6 +4053,17 @@
           30.63
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-01-16",
+            "summary": "CEO: AI expanding across Regions; 20% productivity boost expected; tech investment to offset headcount growth",
+            "url": "https://www.pymnts.com/earnings/2026/regions-says-ai-lifts-productivity-20percent-loan-growth-cools/"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [],
       "gaps": []
     },
@@ -3769,6 +4215,22 @@
           22.59,
           21.89
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-01-23",
+            "summary": "CEO Gorman: AI-handled calls cost ~$0.25 vs $9 human; ~$1B tech/ops spend with ~$100M annual savings found",
+            "url": "https://www.pymnts.com/news/artificial-intelligence/2026/keybank-taps-conversational-ai-cut-call-center-costs/"
+          },
+          {
+            "date": "2025-08-01",
+            "summary": "Piloting Personetics \"cognitive banking\" AI: enriched transactions and personalized real-time offers",
+            "url": "https://www.americanbanker.com/news/how-keybank-is-creating-cognitive-banking-with-ai"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -3934,6 +4396,28 @@
           80.77
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-08-17",
+            "summary": "Synchrony-OpenAI enterprise deal: latest models deployed internally via ChatGPT Work/Codex, plus consumer shopping plugin",
+            "url": "https://www.cnbc.com/2026/08/17/synchrony-openai.html"
+          },
+          {
+            "date": "2026-08-13",
+            "summary": "Names first Chief AI Officer; nearly 100% of professional workforce using AI tools including Synchrony GPT since 2024",
+            "url": "https://www.prnewswire.com/news-releases/synchrony-elevates-ai-strategy-hiring-nimrod-barak-as-chief-ai-officer-to-accelerate-innovation-302851423.html"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-01-27",
+            "summary": "Q4 2025 profit hit by $67M restructuring charge for a voluntary early-retirement program",
+            "url": "https://www.marketscreener.com/news/synchrony-financial-profit-hit-by-restructuring-charge-higher-costs-ce7e5bd8db81f120"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2024,
@@ -4091,6 +4575,17 @@
           2186.6499,
           2158.91992
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-02-04",
+            "summary": "CDAO: moving gen and agentic AI into production for cost efficiency and frontline service; internal AI University",
+            "url": "https://www.cdomagazine.tech/opinion-analysis/a-financial-cdao-playbook-frameworks-behind-first-citizens-banks-data-maturity-ai-readiness-and-workforce-alignment"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -4253,6 +4748,23 @@
           17.93,
           16.31,
           19
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-09-19",
+            "summary": "Konecta AI chatbot: 65% faster responses, 50% less chat abandonment, higher self-serve containment",
+            "url": "https://www.emarketer.com/content/sofi-chatbot-konecta-has-proven-value"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-07-29",
+            "summary": "CEO Noto: AI lets engineering squads shrink from 7 to 4 people for the same output; automating fraud and dispute work",
+            "url": "https://www.startuphub.ai/ai-news/public-companies/2026/sofi-ceo-noto-on-ai-rate-hikes-and-customer-behavior"
+          }
         ]
       },
       "flags": [
@@ -4454,6 +4966,11 @@
           129.42999
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2021,
@@ -4610,6 +5127,23 @@
           100.88,
           105.23,
           100.77
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-02-20",
+            "summary": "Post-Synovus merger, stands up AI & automation team; internal SynovusGPT gen AI tools extend to Pinnacle",
+            "url": "https://www.nashvillepost.com/business/meet-the-head-of-pinnacles-new-ai-team/article_34a0b66d-6e20-492f-9cba-9e3b23173ea5.html"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-07-25",
+            "summary": "CEO on Synovus merger: ~9% expense cut in 2027 means 500-600 redundant roles; ~5% workforce reduction planned",
+            "url": "http://edgar.secdatabase.com/965/114036125027384/filing-main.htm"
+          }
         ]
       },
       "flags": [
@@ -4791,6 +5325,23 @@
           42.6
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-07-23",
+            "summary": "Rolls out proprietary Ally.ai gen AI platform enterprise-wide to 10,000+ employees",
+            "url": "https://media.ally.com/2025-07-23-Ally-Financial-rolls-out-proprietary-AI-platform-enterprise-wide"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-11-06",
+            "summary": "Cuts ~2% of workforce (second round of 2025), mostly manager level and above, with separation packages",
+            "url": "https://www.bankingdive.com/news/ally-2-percent-workforce-cut-manager-wells-headcount-scharf-dimon-bofa-ai/804850/"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2021,
@@ -4948,6 +5499,17 @@
           77.22,
           77.57
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-05-21",
+            "summary": "Rolling out Microsoft Copilot at scale plus Snowflake, with data-security guardrails and AI prompt monitoring (vendor-published account)",
+            "url": "https://www.varonis.com/blog/webster-bank-ai-adoption"
+          }
+        ],
+        "workforce": []
       },
       "flags": [
         {
@@ -5112,6 +5674,17 @@
           24.42
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-06-01",
+            "summary": "Internal gen AI tool ChatFHN in production ~15 months for drafting, policy Q&A, RFP comparison",
+            "url": "https://www.americanbanker.com/news/first-horizons-cio-is-36-on-the-most-innovative-people-in-finance-ranking"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2021,
@@ -5268,6 +5841,23 @@
           69.77,
           82.91,
           79.58
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-04-23",
+            "summary": "CEO Kruszewski: seeing real benefit from AI investment enabling advisors, bankers, lenders; a productivity tailwind",
+            "url": "https://www.investmentnews.com/independent-broker-dealers/stifel-ceo-not-comfortable-with-ai-replacing-advisor-judgement/266281"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-10-06",
+            "summary": "Cuts St. Louis IT workforce by close to 60 in a technology-department restructuring",
+            "url": "https://www.stltoday.com/news/local/business/article_976dcf8b-c694-429c-82b5-0b1a9b988e8c.html"
+          }
         ]
       },
       "flags": [
@@ -5499,6 +6089,11 @@
           151.089996
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2021,
@@ -5655,6 +6250,23 @@
           142.75999,
           145.73,
           143.57001
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-04-29",
+            "summary": "CEO Kemper: machine learning being deployed across the whole organization to run more efficiently",
+            "url": "https://www.roic.ai/quote/UMBF/transcripts/2026-year/1-quarter"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-10-03",
+            "summary": "Lays off 38 legacy Heartland corporate administrators in Dubuque post-acquisition",
+            "url": "https://biztimes.biz/umb-bank-to-lay-off-38-htlf-employees-in-dubuque/"
+          }
         ]
       },
       "flags": [
@@ -5820,6 +6432,23 @@
           169.55
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-05-29",
+            "summary": "Tech chief details deployed digital AI agent aiding meetings, employee performance, call-center answers",
+            "url": "https://www.infobae.com/america/agencias/2026/05/29/una-colaboracion-global-clave-para-proteger-el-sector-bancario-de-casos-de-fraude-con-ia/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-05-18",
+            "summary": "Confirms 25 layoffs in Mortgage Servicing division, citing efficiency and market changes",
+            "url": "https://www.elvocero.com/economia/banco-popular-confirma-cesant-as-de-empleados/article_4d671b13-8ceb-4198-8f2d-98633a120ce4.html"
+          }
+        ]
+      },
       "flags": [],
       "gaps": []
     },
@@ -5970,6 +6599,23 @@
           69.19,
           69.7,
           67.57
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-09-24",
+            "summary": "56% of workforce uses gen AI (contracts, credit presentations); Zia knowledge base, banker copilots in build",
+            "url": "https://www.americanbanker.com/news/2025-the-most-powerful-women-to-watch-no-3-jennifer-smith-zions-bancorporation"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-01-20",
+            "summary": "Q4 call: FTEs below 9,300 vs 10,300 in 2019, to keep falling via AI, automation and outsourcing, per COO McLean",
+            "url": "https://www.roic.ai/quote/0M3L.L/transcripts/2025-year/4-quarter"
+          }
         ]
       },
       "flags": [
@@ -6128,6 +6774,17 @@
           25.9,
           26.64,
           25.66
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": [
+          {
+            "date": "2025-09-08",
+            "summary": "Permanently lays off 244 at Bremer Bank service center after the $1.4B merger; ~$111M cost-savings target",
+            "url": "https://www.startribune.com/following-merger-old-national-to-lay-off-244-from-bremer-bank-service-center-in-lake-elmo/601470256"
+          }
         ]
       },
       "flags": [
@@ -6303,6 +6960,23 @@
           106.12
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-08-21",
+            "summary": "CEO Brooks: formal program deploying AI across the organization to build scale",
+            "url": "https://www.bankdirector.com/article/local-decision-making-powers-southstate/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-02-07",
+            "summary": "To cut about one-third of the headquarters workforce inherited from Independent Financial in McKinney TX",
+            "url": "https://www.bizjournals.com/dallas/news/2025/02/07/southstate-mckinney-independent-layoffs-globe-life.html"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2025,
@@ -6466,6 +7140,17 @@
           163.38
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-01-29",
+            "summary": "Consumer banking/tech chief: AI gives employees knowledge to serve customers faster; cautious on customer-facing AI",
+            "url": "https://www.bankingdive.com/news/ai-mobile-banking-apps-digital-customer-experience-frost-bank/738610/"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2025,
@@ -6622,6 +7307,23 @@
           32.049999,
           31.27,
           30.53
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-09-03",
+            "summary": "Deployed Cisco AI Assistant in the contact center (internally first), per bank exec; conversational AI agents next",
+            "url": "https://blog.webex.com/customer-experience/how-ai-enhanced-customer-experience-at-umpqua-bank/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-06-27",
+            "summary": "Pacific Premier (merging into Columbia) filed WARN for 78 permanent Irvine HQ layoffs ahead of merger close",
+            "url": "https://www.ocregister.com/2025/06/27/pacific-premier-bancorp-in-irvine-eyes-layoffs-as-it-merges-with-columbia/"
+          }
         ]
       },
       "flags": [
@@ -6792,6 +7494,17 @@
           79.63
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-06-04",
+            "summary": "Exec details feeding log data into AI models including LLMs for fraud and threat detection",
+            "url": "https://www.americanbanker.com/news/how-truist-and-western-alliance-deploy-ai-to-fight-fraud"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2021,
@@ -6949,6 +7662,11 @@
           59.27,
           58.23
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
       },
       "flags": [
         {
@@ -7108,6 +7826,17 @@
           138.62
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": [
+          {
+            "date": "2025-10-21",
+            "summary": "Q3 call: transitional payments as it realigns and rightsizes workforce toward growth areas, Q3-Q4 2025",
+            "url": "https://finance.yahoo.com/news/bok-financial-corp-bokf-q3-230042881.html"
+          }
+        ]
+      },
       "flags": [
         {
           "fy": 2021,
@@ -7264,6 +7993,28 @@
           14.65,
           14.29,
           14.1
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-07-10",
+            "summary": "COO: replacing three vendor contracts with in-house AI; tiered employee AI access; efficiency and prospecting uses",
+            "url": "https://www.bankingdive.com/news/valley-bank-ai-strategy-roi-vendors-midsize-lenders/824927/"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2026-02-17",
+            "summary": "WARN notice: 96 layoffs at Morristown HQ May-September, citing restructuring of operations",
+            "url": "https://www.roi-nj.com/2026/02/17/economy/warn-update-early-february-workforce-changes-affect-hundreds-across-new-jersey/"
+          },
+          {
+            "date": "2025-09-04",
+            "summary": "Laid off 59 employees at Morristown NJ HQ June-August per state labor filings",
+            "url": "https://www.njherald.com/story/news/business/2025/09/04/valley-national-bank-layoffs-nj-novartis/85969455007/"
+          }
         ]
       },
       "flags": [
@@ -7429,6 +8180,11 @@
           72.53
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2025,
@@ -7586,6 +8342,11 @@
           32.8,
           32.66
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
       },
       "flags": [
         {
@@ -7926,6 +8687,22 @@
           18.37
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2025-09-18",
+            "summary": "Hires Director of AI and Innovation and Director of Data Science to develop and execute company AI strategy",
+            "url": "https://www.fnb-online.com/about-us/newsroom/press-releases/2025/fnb-hires-ai-and-data-science-directors-250918"
+          },
+          {
+            "date": "2025-07-24",
+            "summary": "Adds business deposits to AI-powered eStore Common app; CEO cites AI/automation for next-best-product recommendations",
+            "url": "https://www.prnewswire.com/news-releases/fnb-adds-business-platform-to-estore-common-application-302513464.html"
+          }
+        ],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2026,
@@ -8088,6 +8865,11 @@
           49.29,
           47.35
         ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
       },
       "flags": [
         {
@@ -8257,6 +9039,11 @@
           47.41
         ]
       },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [],
+        "workforce": []
+      },
       "flags": [
         {
           "fy": 2021,
@@ -8413,6 +9200,23 @@
           14.94,
           14.22,
           13.44
+        ]
+      },
+      "signals": {
+        "asOf": "2026-08-26",
+        "ai": [
+          {
+            "date": "2026-06-15",
+            "summary": "Announces StarIQ, patent-pending enterprise gen-AI orchestration system deployed early 2026 (Claude, Llama, Mistral on AWS)",
+            "url": "https://www.prnewswire.com/news-releases/flagstar-bank-announces-proprietary-technology-transformation-302799445.html"
+          }
+        ],
+        "workforce": [
+          {
+            "date": "2025-02-28",
+            "summary": "~400 more employees laid off after Mr. Cooper cut onboarding plans from the $1.3B mortgage-servicing sale",
+            "url": "https://www.freep.com/story/money/business/2025/02/28/flagstar-employees-jobs/80833986007/"
+          }
         ]
       },
       "flags": [
