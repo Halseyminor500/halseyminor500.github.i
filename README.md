@@ -50,11 +50,18 @@ productivity. See [DATA.md](./DATA.md) §3.1.
 
 ## Data honesty
 
-Nothing is imputed, averaged, or carried forward. 93.5% of fiscal-year cells are populated; the
-147 that are missing each carry a written reason, render as `—`, and drop their bank out of that
-ranking rather than being given a substitute number. 62 merger and one-off flags exclude distorted
-bank-years from every screen. The published P/E reconciles with market cap ÷ net income to common
-in 207 of 235 cells within 2%, which is an independent check on the transcription.
+Nothing is imputed, averaged, or carried forward. 97.1% of fiscal-year cells are populated; the
+65 that are missing each carry a written reason, render as `—`, and drop their bank out of that
+ranking rather than being given a substitute number. Headcount — the denominator the whole thesis
+rests on — is complete for all 250 bank-years, and all 50 issuers have a TTM net income and share
+count, so the current P/E is computed the same way for every bank. 70 merger and one-off flags
+exclude distorted bank-years from every screen.
+
+The published P/E reconciles with market cap ÷ net income to common in 181 of 235 cells within 2%
+and 231 within 8%, median residual 0.07%. That is a weaker-looking result than earlier builds
+reported, and deliberately so: net income used to be *derived* from the P/E in the gaps, so those
+cells agreed by construction. Every cell is now sourced independently, and the four that exceed 8%
+are share-count timing in merger years — each one traced and flagged.
 
 Full method, sources, and every known limit: **[DATA.md](./DATA.md)**.
 

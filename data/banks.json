@@ -60,12 +60,17 @@
     "peIdentity": {
       "description": "Independent check: does the per-year reported P/E reconcile with marketCap / netIncomeToCommon? Both sides come from different pages, so agreement validates the transcription.",
       "cellsChecked": 235,
-      "within2pct": 207,
+      "within2pct": 181,
+      "within4pct": 206,
+      "within8pct": 231,
+      "medianPct": 0.07,
       "beyond8pct": [
         "COF FY2025 — reported 60.14 vs marketCap/NIC 69.46 (15.5% apart)",
-        "HBAN FY2021 — reported 17.13 vs marketCap/NIC 19.23 (12.2% apart)"
+        "HBAN FY2021 — reported 17.13 vs marketCap/NIC 19.23 (12.2% apart)",
+        "GBCI FY2021 — reported 19.76 vs marketCap/NIC 22.04 (11.5% apart)",
+        "GBCI FY2025 — reported 22.14 vs marketCap/NIC 23.95 (8.2% apart)"
       ],
-      "note": "Residuals of a few percent are expected: market cap uses period-end shares while the published P/E is price / average-diluted EPS. Cells beyond 8% are merger years with discontinued operations and are M&A-flagged."
+      "note": "Residuals of a few percent are expected and benign: market cap uses period-end shares while the published P/E is price / average-diluted EPS, so any issuer whose share count moved during the year shows one. Every cell beyond 8% is a merger year where period-end shares diverged from average diluted by very nearly the size of the residual; all are M&A-flagged. Note this check only became meaningful once net income to common was sourced independently everywhere — cells previously derived as marketCap/P/E agreed with it by construction."
     },
     "priceBasis": {
       "description": "The source's per-year 'Last Close Price' is dividend-adjusted for some issuers and unadjusted for others, with no marker distinguishing them.",
@@ -78,10 +83,10 @@
     },
     "coverage": {
       "numericFyCells": 2250,
-      "nullCells": 147,
-      "pctPopulated": 93.5,
-      "banksFullyPopulated": 18,
-      "banksWithGaps": 32
+      "nullCells": 65,
+      "pctPopulated": 97.1,
+      "banksFullyPopulated": 41,
+      "banksWithGaps": 9
     }
   },
   "universeNote": "US-domiciled bank holding companies and savings & loan holding companies (Fed FR Y-9C filer population), ranked by equity market capitalisation. Excludes foreign issuers, payment networks (V, MA), and non-BHC brokers/fintechs (HOOD, IBKR, LPLA, JEF, AFRM, PYPL).",
@@ -1566,11 +1571,11 @@
           5306
         ],
         "employees": [
-          null,
-          null,
-          null,
-          null,
-          46500
+          49100,
+          51700,
+          53400,
+          51800,
+          48100
         ],
         "marketCap": [
           46705,
@@ -1607,8 +1612,8 @@
         "revenueTTM": 21367,
         "salariesTTM": 6400,
         "netIncomeToCommonTTM": 6024,
-        "dilutedShares": 688.2332672926178,
-        "employees": 46500
+        "dilutedShares": 717,
+        "employees": 48100
       },
       "px": {
         "start": "2021-12",
@@ -1678,30 +1683,14 @@
           "fy": 2025,
           "kind": "headcount-source",
           "note": "macrotrends returned no employee series for this issuer (ticker changed BK -> BNY). Only the latest published headcount is available, from the stockanalysis statistics page (a mid-2026 figure used as the FY2025 denominator). No headcount history, so Thrust and headcount CAGRs are unavailable."
+        },
+        {
+          "fy": 2025,
+          "kind": "headcount-source",
+          "note": "FY2025 headcount is 48,100 (10-K, 31 Dec 2025). An earlier build used 46,500 from the statistics page, which is a mid-2026 figure and not fiscal-year-end."
         }
       ],
-      "gaps": [
-        {
-          "path": "fy.employees[0]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2021."
-        },
-        {
-          "path": "fy.employees[1]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2022."
-        },
-        {
-          "path": "fy.employees[2]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2023."
-        },
-        {
-          "path": "fy.employees[3]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2024."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "PNC",
@@ -1738,8 +1727,8 @@
           13834
         ],
         "netIncomeToCommon": [
-          5408.296107211232,
-          5707.885304659498,
+          5409,
+          5708,
           5126,
           5496,
           6576
@@ -1785,8 +1774,8 @@
         "price": 244.11,
         "revenueTTM": 25026,
         "salariesTTM": 8382,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 401.36804942630187,
+        "netIncomeToCommonTTM": 7261,
+        "dilutedShares": 396,
         "employees": 55333
       },
       "px": {
@@ -1864,13 +1853,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+3.57% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "USB",
@@ -2385,11 +2368,11 @@
           5144
         ],
         "netIncomeToCommon": [
-          2651.647373107747,
-          2328.9555325749743,
-          2211.676082862524,
-          2154.3313069908813,
-          2376.4976958525344
+          2652,
+          2328,
+          2212,
+          2155,
+          2376
         ],
         "employees": [
           19113,
@@ -2432,8 +2415,8 @@
         "price": 54.89,
         "revenueTTM": 10766,
         "salariesTTM": 3127,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 671.7759444203213,
+        "netIncomeToCommonTTM": 2198,
+        "dilutedShares": 673,
         "employees": 18676
       },
       "px": {
@@ -2506,13 +2489,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+1.08% from 2021); the 2021 level itself was not listed."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "AMP",
@@ -3259,7 +3236,7 @@
         "revenueTTM": 15222,
         "salariesTTM": 9932,
         "netIncomeToCommonTTM": 2299,
-        "dilutedShares": 198.1402085747393,
+        "dilutedShares": 207,
         "employees": 19500
       },
       "px": {
@@ -3369,11 +3346,11 @@
           5337
         ],
         "netIncomeToCommon": [
-          2177.5109170305677,
-          2018.8541666666667,
-          1459.5845136921625,
-          1335.0415512465374,
-          1657.105089226702
+          2206,
+          1960,
+          1491,
+          1372,
+          1688
         ],
         "employees": [
           17462,
@@ -3416,8 +3393,8 @@
         "price": 69.83,
         "revenueTTM": 8726,
         "salariesTTM": 2796,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 429.2415682246191,
+        "netIncomeToCommonTTM": 1984,
+        "dilutedShares": 437,
         "employees": 17398
       },
       "px": {
@@ -3490,13 +3467,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+8.17% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "RF",
@@ -3533,11 +3504,11 @@
           4318
         ],
         "netIncomeToCommon": [
-          2399.7690531177827,
-          2145.5804046858357,
-          1976.4254385964914,
-          1773.9419087136928,
-          2060.971379011275
+          2400,
+          2146,
+          1976,
+          1774,
+          2061
         ],
         "employees": [
           19626,
@@ -3580,8 +3551,8 @@
         "price": 30.63,
         "revenueTTM": 7617,
         "salariesTTM": 2620,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 893.6818352764197,
+        "netIncomeToCommonTTM": 2150,
+        "dilutedShares": 896,
         "employees": 19969
       },
       "px": {
@@ -3648,13 +3619,7 @@
         ]
       },
       "flags": [],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "KEY",
@@ -3903,7 +3868,7 @@
         "revenueTTM": 15032,
         "salariesTTM": 2109,
         "netIncomeToCommonTTM": 3435,
-        "dilutedShares": 364.67233009708735,
+        "dilutedShares": 374,
         "employees": 20000
       },
       "px": {
@@ -4013,11 +3978,11 @@
           5909
         ],
         "netIncomeToCommon": [
-          528.961038961039,
-          977.8666666666667,
-          11383.425414364641,
-          2597.3118279569894,
-          2005.6197074672825
+          529,
+          1048,
+          11407,
+          2716,
+          2149
         ],
         "employees": [
           6846,
@@ -4060,8 +4025,8 @@
         "price": 2158.91992,
         "revenueTTM": 9639,
         "salariesTTM": 3379,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 12.139242747579422,
+        "netIncomeToCommonTTM": 2268,
+        "dilutedShares": 13,
         "employees": 18141
       },
       "px": {
@@ -4139,13 +4104,7 @@
           "note": "CIT Group merger closed Jan 2022: headcount +56.1% (6,846 -> 10,684)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "SOFI",
@@ -4532,18 +4491,18 @@
           677.81
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          660.1,
+          780,
+          887.77,
+          1035,
+          1146
         ],
         "netIncomeToCommon": [
-          513.922261484099,
-          548.046875,
-          547.9541734860884,
-          460.44815007816567,
-          null
+          512.13,
+          545.55,
+          546.96,
+          459.86,
+          626.67
         ],
         "employees": [
           2841,
@@ -4586,8 +4545,8 @@
         "price": 100.77,
         "revenueTTM": 3508,
         "salariesTTM": 1012,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": null,
+        "netIncomeToCommonTTM": 783.67,
+        "dilutedShares": 78,
         "employees": 8389
       },
       "px": {
@@ -4667,41 +4626,6 @@
       ],
       "gaps": [
         {
-          "path": "fy.netIncomeToCommon[4]",
-          "reason": "not_reported",
-          "detail": "Not published by the source for FY2025."
-        },
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        },
-        {
           "path": "fy.marketCap[4]",
           "reason": "pre_ipo",
           "detail": "Market cap for FY2025 predates this issuer's listing or is not meaningful."
@@ -4715,11 +4639,6 @@
           "path": "fy.closeAdjusted[4]",
           "reason": "not_reported",
           "detail": "Dividend-adjusted year-end close not published for FY2025."
-        },
-        {
-          "path": "fy.dilutedShares[4]",
-          "reason": "not_reported",
-          "detail": "Diluted share count not published and cannot be implied from market cap and year-end price."
         }
       ]
     },
@@ -4758,11 +4677,11 @@
           6018
         ],
         "netIncomeToCommon": [
-          3004.3715846994533,
-          1604.835164835165,
-          846.7041800643087,
-          558.1383519837233,
-          742.1276595744681
+          3003,
+          1604,
+          847,
+          558,
+          742
         ],
         "employees": [
           9500,
@@ -4805,8 +4724,8 @@
         "price": 42.6,
         "revenueTTM": 9697,
         "salariesTTM": 1741,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 314.5175834084761,
+        "netIncomeToCommonTTM": 1329,
+        "dilutedShares": 313,
         "employees": 10300
       },
       "px": {
@@ -4879,13 +4798,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+22.11% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "WBS",
@@ -4915,18 +4828,18 @@
           764.93
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          706.45,
+          1127,
+          1369,
+          1338,
+          1440
         ],
         "netIncomeToCommon": [
-          400.4750593824228,
-          647.1327572663,
-          844.4874274661508,
-          748.7341772151898,
-          950.9840674789128
+          398.69,
+          622.69,
+          843.27,
+          744.08,
+          974.86
         ],
         "employees": [
           3245,
@@ -4969,8 +4882,8 @@
         "price": 77.57,
         "revenueTTM": 2941,
         "salariesTTM": 811.5,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 161.21703209405783,
+        "netIncomeToCommonTTM": 991.5,
+        "dilutedShares": 165,
         "employees": 4601
       },
       "px": {
@@ -5048,38 +4961,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+29.21% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "FHN",
@@ -5116,11 +4998,11 @@
           2074
         ],
         "netIncomeToCommon": [
-          927.90202342918,
-          821.9237976264834,
-          861.044613710555,
-          712.964213369345,
-          906.6510172143976
+          962,
+          868,
+          865,
+          738,
+          956
         ],
         "employees": [
           7867,
@@ -5163,8 +5045,8 @@
         "price": 24.42,
         "revenueTTM": 3526,
         "salariesTTM": 1136,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 484.8117154811716,
+        "netIncomeToCommonTTM": 1028,
+        "dilutedShares": 511,
         "employees": 7404
       },
       "px": {
@@ -5237,13 +5119,7 @@
           "note": "Headcount derived from the source's stated 2022 change (-4.13% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "SF",
@@ -5280,11 +5156,11 @@
           null
         ],
         "netIncomeToCommon": [
-          789.1280947255113,
-          624.773413897281,
-          485.0756533700138,
-          694.2455242966752,
-          646.6024340770791
+          790.32,
+          624.8,
+          485.26,
+          694.1,
+          646.5
         ],
         "employees": [
           8600,
@@ -5327,7 +5203,7 @@
         "price": 79.58,
         "revenueTTM": 5919,
         "salariesTTM": null,
-        "netIncomeToCommonTTM": null,
+        "netIncomeToCommonTTM": 916.35,
         "dilutedShares": 165,
         "employees": 9000
       },
@@ -5404,14 +5280,19 @@
           "fy": 2021,
           "kind": "derived",
           "note": "Headcount derived from the source's stated 2022 change (+4.65% from 2021)."
+        },
+        {
+          "fy": 2021,
+          "kind": "derived",
+          "note": "Net income to common derived as diluted EPS x diluted shares. The standardised statement maps operating income into the net income line for FY2021-2022, producing a negative figure in a profitable year. The derivation reproduces the reported FY2023-2025 values to within 0.3%."
+        },
+        {
+          "fy": 2022,
+          "kind": "derived",
+          "note": "Net income to common derived as diluted EPS x diluted shares, same reason as FY2021."
         }
       ],
       "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
         {
           "path": "fy.salaries[0]",
           "reason": "model_mismatch",
@@ -5497,18 +5378,18 @@
           831.74
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          1133,
+          1177,
+          1312,
+          1403,
+          1512
         ],
         "netIncomeToCommon": [
-          437.9864636209814,
-          481.8011257035647,
-          594.7643979057591,
-          667.0957361222848,
-          773.8842975206612
+          438.19,
+          481.72,
+          594.66,
+          667.08,
+          774.15
         ],
         "employees": [
           5239,
@@ -5551,8 +5432,8 @@
         "price": 151.089996,
         "revenueTTM": 2861,
         "salariesTTM": 860.8,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 67.68830417811189,
+        "netIncomeToCommonTTM": 847.92,
+        "dilutedShares": 68,
         "employees": 5902
       },
       "px": {
@@ -5625,38 +5506,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+0.69% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "UMBF",
@@ -5686,18 +5536,18 @@
           846.14
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          833.64,
+          898.12,
+          999.14,
+          1027,
+          1623
         ],
         "netIncomeToCommon": [
-          352.888583218707,
-          431.55080213903744,
-          350.1727115716753,
-          441.26602564102564,
-          684.7962382445141
+          353.02,
+          431.68,
+          350.02,
+          441.24,
+          684.62
         ],
         "employees": [
           3529,
@@ -5740,8 +5590,8 @@
         "price": 143.57001,
         "revenueTTM": 2916,
         "salariesTTM": 855.97,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 76.49479121071522,
+        "netIncomeToCommonTTM": 917.3,
+        "dilutedShares": 74,
         "employees": 5222
       },
       "px": {
@@ -5819,38 +5669,7 @@
           "note": "macrotrends publishes UMBF headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page, which post-dates the Heartland acquisition."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "BPOP",
@@ -5887,11 +5706,11 @@
           1935
         ],
         "netIncomeToCommon": [
-          914.9441340782123,
-          1051.876379690949,
-          542.8047662694776,
-          600.2729754322111,
-          808.5968379446641
+          933.48,
+          1101,
+          539.93,
+          612.8,
+          831.75
         ],
         "employees": [
           8500,
@@ -5934,8 +5753,8 @@
         "price": 169.55,
         "revenueTTM": 3351,
         "salariesTTM": 882.77,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 65.71635078702217,
+        "netIncomeToCommonTTM": 967.69,
+        "dilutedShares": 68,
         "employees": 9238
       },
       "px": {
@@ -6002,13 +5821,7 @@
         ]
       },
       "flags": [],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "ZION",
@@ -6045,17 +5858,17 @@
           2149
         ],
         "netIncomeToCommon": [
-          1029.784946236559,
-          860.7773851590106,
-          644.1030723488602,
-          731.934306569343,
-          887.4743326488706
+          1088,
+          870,
+          642,
+          729,
+          884
         ],
         "employees": [
-          null,
-          null,
-          null,
-          null,
+          9685,
+          9989,
+          9679,
+          9406,
           9195
         ],
         "marketCap": [
@@ -6092,8 +5905,8 @@
         "price": 67.57,
         "revenueTTM": 3738,
         "salariesTTM": 1341,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 147.65971984967544,
+        "netIncomeToCommonTTM": 1152,
+        "dilutedShares": 147,
         "employees": 9195
       },
       "px": {
@@ -6166,33 +5979,7 @@
           "note": "macrotrends employee page failed to fetch. Latest published headcount only. No headcount history."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.employees[0]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2021."
-        },
-        {
-          "path": "fy.employees[1]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2022."
-        },
-        {
-          "path": "fy.employees[2]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2023."
-        },
-        {
-          "path": "fy.employees[3]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2024."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "ONB",
@@ -6222,18 +6009,18 @@
           685.8
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          494.61,
+          1027,
+          991.84,
+          1078,
+          1462
         ],
         "netIncomeToCommon": [
-          277.4699907663896,
-          413.9937106918239,
-          566.0939289805269,
-          522.8851963746223,
-          653.0337078651686
+          277.54,
+          414.17,
+          565.86,
+          523.05,
+          653.12
         ],
         "employees": [
           2374,
@@ -6276,8 +6063,8 @@
         "price": 25.66,
         "revenueTTM": 2791,
         "salariesTTM": 707.75,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 395.5535390199637,
+        "netIncomeToCommonTTM": 870.14,
+        "dilutedShares": 365,
         "employees": 4971
       },
       "px": {
@@ -6365,38 +6152,7 @@
           "note": "macrotrends publishes ONB headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page, which post-dates the Bremer acquisition."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "SSB",
@@ -6426,18 +6182,18 @@
           760.83
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          869.47,
+          898.81,
+          955.73,
+          977.51,
+          1407
         ],
         "netIncomeToCommon": [
-          465.1591289782245,
-          499.6542783059637,
-          491.2012241775057,
-          532.0953048353189,
-          780.1003344481604
+          475.54,
+          496.05,
+          494.31,
+          534.78,
+          798.67
         ],
         "employees": [
           4929,
@@ -6480,8 +6236,8 @@
         "price": 106.12,
         "revenueTTM": 2714,
         "salariesTTM": 775.75,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 99.13930506853681,
+        "netIncomeToCommonTTM": 950.21,
+        "dilutedShares": 101,
         "employees": 6190
       },
       "px": {
@@ -6559,38 +6315,7 @@
           "note": "Headcount derived from the source's stated 2022 change (-0.16% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "CFR",
@@ -6627,17 +6352,17 @@
           1419
         ],
         "netIncomeToCommon": [
-          432.54691689008047,
-          566.798418972332,
-          584.1442953020135,
-          569.2866578599735,
-          634.0642129992169
+          432.04,
+          567.27,
+          585.02,
+          569.63,
+          635.47
         ],
         "employees": [
-          null,
-          null,
-          null,
-          null,
+          4553,
+          4985,
+          5495,
+          5854,
           6008
         ],
         "marketCap": [
@@ -6674,8 +6399,8 @@
         "price": 163.38,
         "revenueTTM": 2299,
         "salariesTTM": 777.19,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 63.94219379294007,
+        "netIncomeToCommonTTM": 669.44,
+        "dilutedShares": 64,
         "employees": 6008
       },
       "px": {
@@ -6748,33 +6473,7 @@
           "note": "macrotrends employee page returned navigation chrome only. Latest published headcount only. No headcount history."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.employees[0]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2021."
-        },
-        {
-          "path": "fy.employees[1]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2022."
-        },
-        {
-          "path": "fy.employees[2]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2023."
-        },
-        {
-          "path": "fy.employees[3]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2024."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "COLB",
@@ -6804,18 +6503,18 @@
           639
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          745.27,
+          717.59,
+          1141,
+          1080,
+          1220
         ],
         "netIncomeToCommon": [
-          420.16129032258067,
-          336.5768896611642,
-          348.90282131661445,
-          533.867924528302,
-          548.9166119500985
+          420.3,
+          336.75,
+          349,
+          534,
+          549
         ],
         "employees": [
           2260,
@@ -6858,8 +6557,8 @@
         "price": 30.53,
         "revenueTTM": 2653,
         "salariesTTM": 728,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 306.5639897323066,
+        "netIncomeToCommonTTM": 709,
+        "dilutedShares": 239,
         "employees": 6005
       },
       "px": {
@@ -6942,38 +6641,7 @@
           "note": "Headcount derived from the source's stated 2022 change (-7.39% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "WAL",
@@ -7161,18 +6829,18 @@
           577.71
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          797.7,
+          848.78,
+          930.98,
+          941.23,
+          975.73
         ],
         "netIncomeToCommon": [
-          523.3228840125392,
-          460.3174603174603,
-          452.0435967302452,
-          520.8955223880597,
-          556.1728395061727
+          525.92,
+          483.95,
+          472.82,
+          521.42,
+          560.87
         ],
         "employees": [
           4537,
@@ -7215,8 +6883,8 @@
         "price": 58.23,
         "revenueTTM": 1900,
         "salariesTTM": 615.71,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 137.71494077187617,
+        "netIncomeToCommonTTM": 578.21,
+        "dilutedShares": 139,
         "employees": 4737
       },
       "px": {
@@ -7289,38 +6957,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+1.34% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "BOKF",
@@ -7350,18 +6987,18 @@
           855.27
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          1178,
+          1164,
+          1289,
+          1360,
+          1444
         ],
         "netIncomeToCommon": [
-          613.7404580152672,
-          516.6543301258328,
-          526.5917602996254,
-          521.8654434250765,
-          555.8049535603715
+          613.82,
+          516.47,
+          526.49,
+          518.58,
+          573.98
         ],
         "employees": [
           4711,
@@ -7404,8 +7041,8 @@
         "price": 138.62,
         "revenueTTM": 2282,
         "salariesTTM": 852.23,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 60.619618436603076,
+        "netIncomeToCommonTTM": 646.95,
+        "dilutedShares": 63,
         "employees": 5034
       },
       "px": {
@@ -7478,38 +7115,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+1.7% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "VLY",
@@ -7539,18 +7145,18 @@
           546.96
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          670.13,
+          1013,
+          1081,
+          1076,
+          1103
         ],
         "netIncomeToCommon": [
-          471.90553745928344,
-          577.3185483870968,
-          482.4146981627297,
-          385.60548362528556,
-          562.3702422145328
+          461.15,
+          555.71,
+          482.38,
+          358.9,
+          569
         ],
         "employees": [
           3370,
@@ -7593,8 +7199,8 @@
         "price": 14.1,
         "revenueTTM": 2098,
         "salariesTTM": 555.03,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 556.5924657534247,
+        "netIncomeToCommonTTM": 663.95,
+        "dilutedShares": 564,
         "employees": 3675
       },
       "px": {
@@ -7672,38 +7278,7 @@
           "note": "Headcount derived from the source's stated 2022 change (+13.53% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "PB",
@@ -7905,10 +7480,10 @@
           390.85
         ],
         "employees": [
-          null,
-          null,
-          null,
-          null,
+          2790,
+          2793,
+          2800,
+          2277,
           3036
         ],
         "marketCap": [
@@ -8042,6 +7617,16 @@
           "fy": 2025,
           "kind": "headcount-source",
           "note": "Listed Nov 2025; no headcount history exists as a public company. Latest published headcount only."
+        },
+        {
+          "fy": 2021,
+          "kind": "headcount-source",
+          "note": "Headcount FY2021-2024 comes from the IPO registration statement's employee disclosure, republished on the stockanalysis employees page. It counts full-time employees only."
+        },
+        {
+          "fy": 2024,
+          "kind": "data",
+          "note": "Headcount falls 18.7% (2,800 to 2,277) with no disclosed reorganisation, then rises 33.3% in 2025 when part-time staff (271) begin to be counted. The 2024 step is a definition artefact, not a workforce change; RPE change across 2023-2025 is not interpretable for this issuer."
         }
       ],
       "gaps": [
@@ -8099,26 +7684,6 @@
           "path": "fy.operatingExpense[1]",
           "reason": "model_mismatch",
           "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.employees[0]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2021."
-        },
-        {
-          "path": "fy.employees[1]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2022."
-        },
-        {
-          "path": "fy.employees[2]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2023."
-        },
-        {
-          "path": "fy.employees[3]",
-          "reason": "not_reported",
-          "detail": "No published headcount for FY2024."
         },
         {
           "path": "live.salariesTTM",
@@ -8294,7 +7859,7 @@
         "price": 18.37,
         "revenueTTM": 1828,
         "salariesTTM": 536.6,
-        "netIncomeToCommonTTM": null,
+        "netIncomeToCommonTTM": 603.72,
         "dilutedShares": 362,
         "employees": 4282
       },
@@ -8366,15 +7931,14 @@
           "fy": 2026,
           "kind": "data",
           "note": "The source's TTM net-income-to-common cell (318) is inconsistent with the FY2025 value (565) and the TTM pretax/tax figures; the TTM value is recorded as unavailable rather than carried through."
+        },
+        {
+          "fy": 2025,
+          "kind": "data",
+          "note": "The source's TTM net-income-to-common cell reads 318 against TTM net income of 604 with no preferred dividends outstanding, and contradicts its own TTM diluted EPS. The TTM figure used here is net income (603.72), corroborated by diluted EPS x diluted shares = 604.8."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "GBCI",
@@ -8404,18 +7968,18 @@
           385.22
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          419.62,
+          504.73,
+          518.57,
+          566.27,
+          645.87
         ],
         "netIncomeToCommon": [
-          317.61133603238864,
-          303.49223946784923,
-          222.85992217898834,
-          190.53195048511208,
-          258.5817524841915
+          284.76,
+          303.2,
+          222.93,
+          190.14,
+          239.03
         ],
         "employees": [
           3559,
@@ -8458,8 +8022,8 @@
         "price": 47.35,
         "revenueTTM": 1185,
         "salariesTTM": 427.05,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 129.96594778660614,
+        "netIncomeToCommonTTM": 311.69,
+        "dilutedShares": 120,
         "employees": 4139
       },
       "px": {
@@ -8530,40 +8094,19 @@
           "fy": 2025,
           "kind": "headcount-source",
           "note": "FY2025 headcount from the stockanalysis statistics page; macrotrends stops at 2024."
+        },
+        {
+          "fy": 2021,
+          "kind": "ma",
+          "note": "Altabancorp acquisition closed October 2021: partial-year revenue against a full year-end headcount, and 110.7M period-end shares against 99M average diluted. The share-count gap is the whole of the 11.5% P/E-identity residual for this year."
+        },
+        {
+          "fy": 2025,
+          "kind": "ma",
+          "note": "Bank of Idaho and Guaranty Bancshares acquisitions: headcount +15.1% and revenue +23.3% in one year. Period-end shares 130.0M against 120M average diluted, which accounts for the 8.2% P/E-identity residual."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "UBSI",
@@ -8586,25 +8129,25 @@
           1237
         ],
         "salaries": [
-          null,
-          null,
-          null,
-          null,
-          null
+          325.82,
+          278.47,
+          266.71,
+          276.11,
+          291.84
         ],
         "operatingExpense": [
-          null,
-          null,
-          null,
-          null,
-          null
+          581.34,
+          555.09,
+          560.22,
+          545.03,
+          594.45
         ],
         "netIncomeToCommon": [
-          366.69144981412643,
-          378.62116991643455,
-          365.43745480838754,
-          372.226304188097,
-          463.7068965517241
+          366.7,
+          378.62,
+          365.43,
+          372.16,
+          463.57
         ],
         "employees": [
           2966,
@@ -8646,9 +8189,9 @@
         "asOf": "2026-08-26",
         "price": 47.41,
         "revenueTTM": 1282,
-        "salariesTTM": null,
-        "netIncomeToCommonTTM": null,
-        "dilutedShares": 142.6412092283214,
+        "salariesTTM": 304.2,
+        "netIncomeToCommonTTM": 514.23,
+        "dilutedShares": 142,
         "employees": 2694
       },
       "px": {
@@ -8721,68 +8264,7 @@
           "note": "Headcount derived from the source's stated 2022 change (-6.78% from 2021)."
         }
       ],
-      "gaps": [
-        {
-          "path": "live.netIncomeToCommonTTM",
-          "reason": "not_reported",
-          "detail": "Trailing-twelve-month net income to common not usable from the source."
-        },
-        {
-          "path": "fy.salaries[0]",
-          "reason": "model_mismatch",
-          "detail": "This issuer's income statement does not break out salaries and employee benefits for FY2021."
-        },
-        {
-          "path": "fy.salaries[1]",
-          "reason": "model_mismatch",
-          "detail": "This issuer's income statement does not break out salaries and employee benefits for FY2022."
-        },
-        {
-          "path": "fy.salaries[2]",
-          "reason": "model_mismatch",
-          "detail": "This issuer's income statement does not break out salaries and employee benefits for FY2023."
-        },
-        {
-          "path": "fy.salaries[3]",
-          "reason": "model_mismatch",
-          "detail": "This issuer's income statement does not break out salaries and employee benefits for FY2024."
-        },
-        {
-          "path": "fy.salaries[4]",
-          "reason": "model_mismatch",
-          "detail": "This issuer's income statement does not break out salaries and employee benefits for FY2025."
-        },
-        {
-          "path": "fy.operatingExpense[0]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2021."
-        },
-        {
-          "path": "fy.operatingExpense[1]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2022."
-        },
-        {
-          "path": "fy.operatingExpense[2]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2023."
-        },
-        {
-          "path": "fy.operatingExpense[3]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2024."
-        },
-        {
-          "path": "fy.operatingExpense[4]",
-          "reason": "model_mismatch",
-          "detail": "Total noninterest / operating expense not cleanly available for FY2025."
-        },
-        {
-          "path": "live.salariesTTM",
-          "reason": "model_mismatch",
-          "detail": "No trailing-twelve-month salaries line for this issuer."
-        }
-      ]
+      "gaps": []
     },
     {
       "ticker": "FLG",
@@ -8867,7 +8349,7 @@
         "revenueTTM": 2090,
         "salariesTTM": 878,
         "netIncomeToCommonTTM": 48,
-        "dilutedShares": 415.9650516282764,
+        "dilutedShares": 415,
         "employees": 5631
       },
       "px": {

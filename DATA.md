@@ -109,13 +109,28 @@ Nothing is imputed, averaged, or carried forward. A missing value renders as `�
 on hover, and its bank drops out of that ranking — the effective `K` shrinks rather than the bank
 being given a substitute number.
 
-**Coverage: 93.5% of 2,250 fiscal-year cells populated; 147 null, every one explained.**
+**Coverage: 97.1% of 2,250 fiscal-year cells populated; 65 null, every one explained.**
 
-Two derivations are used and are labelled as such in `src`:
-- **Net income to common** — where an income-statement fetch was truncated, derived as
-  `marketCap ÷ reported P/E`. Both inputs are sourced; the identity is verified below.
+The 65 remaining nulls sit in nine issuers and fall into six reasons: `model_mismatch` 25
+(AMP and SF file non-bank income statements with no salaries line; SF's expense lines are
+internally inconsistent), `not_reported` 17, `pre_ipo` 12 (CBC, listed Nov 2025),
+`negative_earnings` 10 (no P/E where earnings are ≤ 0), `outside_fetch_window` 4, and
+`insufficient_history` 1. **Headcount is complete: 250 of 250 bank-years.** So is the live
+snapshot — all 50 issuers have a TTM net income to common and a diluted share count, so the
+current P/E is computed on the same basis for every bank in the universe.
+
+Two derivations remain and are labelled as such in `src`:
+- **Net income to common, SF FY2021–FY2022** — derived as diluted EPS × diluted shares, because
+  the standardised statement maps operating income into the net income line for those two years
+  and returns a negative figure in a profitable year. The derivation reproduces SF's *reported*
+  FY2023–FY2025 net income to within 0.3%, which is what justifies it.
 - **Headcount for FY2021** on some issuers — derived from the source's own stated
   percentage change for 2022 where the 2021 level itself was not listed. Flagged `derived`.
+
+Earlier builds derived net income to common as `marketCap ÷ reported P/E` wherever an
+income-statement fetch had been truncated. Every one of those cells is now sourced directly from
+the income statement. That removes a circularity as well as a gap: a derived cell agreed with the
+P/E identity below *by construction* and so could not be checked by it.
 
 ---
 
@@ -127,11 +142,27 @@ For each bank-year, the published P/E was reconciled against `marketCap ÷ netIn
 The two sides come from **different pages**, so agreement is evidence the numbers were
 transcribed correctly.
 
-**207 of 235 checkable cells agree within 2%; the median residual is 0.01%.**
+**181 of 235 checkable cells agree within 2%, 206 within 4%, 231 within 8%; the median residual
+is 0.07%.**
+
+Those figures are *worse* than earlier builds reported (207 of 235) and that is the point: the
+cells that used to pass came from net income derived as `marketCap ÷ P/E`, so they agreed with the
+identity by definition. Now that every cell is independently sourced, the check finally tests
+something.
 
 Residuals of a few percent are expected and benign: market cap uses period-end shares while the
-published P/E is price ÷ *average diluted* EPS. Two cells exceed 8% — COF FY2025 (15.5%) and
-HBAN FY2021 (12.2%) — both merger years with discontinued operations, both already flagged.
+published P/E is price ÷ *average diluted* EPS, so any issuer whose share count moves during the
+year shows a residual of roughly that size. AMP sits at 7.1–7.6% in **every** year, which is the
+signature of a steady buyback rather than a transcription error.
+
+Four cells exceed 8%, all four explained by that same mechanism and all four flagged:
+
+| Cell | Residual | Cause |
+|---|---|---|
+| COF FY2025 | 15.5% | Discover merger, discontinued operations |
+| HBAN FY2021 | 12.2% | merger year |
+| GBCI FY2021 | 11.5% | Altabancorp closed Oct 2021 — 110.7M period-end shares vs 99M average diluted (+11.8%), which is the entire residual |
+| GBCI FY2025 | 8.2% | Bank of Idaho and Guaranty — 130.0M period-end shares vs 120M average diluted (+8.3%), likewise |
 
 ### Two-source headcount agreement
 
@@ -145,7 +176,7 @@ the denominator the entire thesis rests on. M&T FY2025: **22,278 from both sourc
 
 ---
 
-## 6. Distortion flags — 62 across 26 banks
+## 6. Distortion flags — 70 across 30 banks
 
 Mergers and one-offs move headcount and revenue for reasons that have nothing to do with
 productivity. Flagged bank-years are **excluded from every screen** and marked in the table.
@@ -171,16 +202,25 @@ The ones that would most distort the thesis if left unflagged:
   salaries line. Total revenue is used as the numerator and expense derived as revenue minus
   operating income. Comp-per-employee is unavailable for them.
 - **SF (Stifel)**: the standardised income statement is internally inconsistent (SG&A
-  double-counts cost of revenue; operating income is reported negative in profitable years).
-  Expense and salary lines are recorded unavailable; net income to common is derived.
+  double-counts cost of revenue; operating income is reported negative in profitable years, and
+  for FY2021–FY2022 that negative figure is what lands in the net income line). Expense and salary
+  lines are recorded unavailable; net income to common for those two years is derived from diluted
+  EPS × diluted shares, validated against the three years the source reports correctly.
 - **CBC (Central Bancompany)** listed November 2025. It has ten months of price history and no
   pre-listing fundamentals. Its pre-2025 "market cap" on the source reflects a pre-IPO share
   structure and is recorded as unavailable rather than transcribed. It is retained because it is
   genuinely in the top 50 by market cap today; dropping it would be survivorship bias.
 - **RJF** runs an **October–September fiscal year**. Its "FY2025" ends 30 Sep 2025, not 31 Dec.
   Recorded in `fiscalYearEnd` and not silently aligned to the others.
-- **BNY, ZION, CFR** have only a latest headcount, not a series — so Thrust and headcount CAGRs
-  are unavailable for them.
+- **FNB FY2025 (TTM)**: the source's TTM net-income-to-common cell reads 318 against a TTM net
+  income of 604 with no preferred shares outstanding, and contradicts its own TTM diluted EPS.
+  The figure used here is 603.72, corroborated by diluted EPS × diluted shares = 604.8.
+- **CBC headcount** is a definition artefact, not a workforce: part-time staff are counted only
+  from FY2025 (271 of 3,036), and FY2024 drops 18.7% with no disclosed reorganisation. Its
+  headcount change across 2023–2025 should not be read as productivity.
+- **BNY FY2025 headcount is 48,100** (10-K, 31 Dec 2025). An earlier build used 46,500 from the
+  statistics page — a mid-2026 figure, and so not comparable to the fiscal-year-end counts used
+  for the other 49 issuers.
 
 ---
 
@@ -196,7 +236,7 @@ node scripts/verify.mjs     # drives index.html in Chromium; 23 assertions
 to every FY array** — they are index-aligned, and `build.mjs` fails the build on a partial append.
 Restated prior-year figures are expected and should be reviewed in the diff, not auto-accepted.
 
-Open `index.html?selftest=1` for the 27 in-page assertions, including values pinned to
+Open `index.html?selftest=1` for the 29 in-page assertions, including values pinned to
 hand-verified figures (`RPE(MTB, 2025) = $434,958`, `efficiency ratio = 56.69%`, `P/E = 11.47`).
 
 ---

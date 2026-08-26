@@ -61,3 +61,11 @@ BAC	2025	headcount-source	macrotrends publishes BAC headcount only through 2024.
 UMBF	2025	headcount-source	macrotrends publishes UMBF headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page, which post-dates the Heartland acquisition.
 PB	2025	headcount-source	FY2025 headcount from the stockanalysis statistics page; macrotrends stops at 2024.
 GBCI	2025	headcount-source	FY2025 headcount from the stockanalysis statistics page; macrotrends stops at 2024.
+CBC	2021	headcount-source	Headcount FY2021-2024 comes from the IPO registration statement's employee disclosure, republished on the stockanalysis employees page. It counts full-time employees only.
+CBC	2024	data	Headcount falls 18.7% (2,800 to 2,277) with no disclosed reorganisation, then rises 33.3% in 2025 when part-time staff (271) begin to be counted. The 2024 step is a definition artefact, not a workforce change; RPE change across 2023-2025 is not interpretable for this issuer.
+SF	2021	derived	Net income to common derived as diluted EPS x diluted shares. The standardised statement maps operating income into the net income line for FY2021-2022, producing a negative figure in a profitable year. The derivation reproduces the reported FY2023-2025 values to within 0.3%.
+SF	2022	derived	Net income to common derived as diluted EPS x diluted shares, same reason as FY2021.
+FNB	2025	data	The source's TTM net-income-to-common cell reads 318 against TTM net income of 604 with no preferred dividends outstanding, and contradicts its own TTM diluted EPS. The TTM figure used here is net income (603.72), corroborated by diluted EPS x diluted shares = 604.8.
+BNY	2025	headcount-source	FY2025 headcount is 48,100 (10-K, 31 Dec 2025). An earlier build used 46,500 from the statistics page, which is a mid-2026 figure and not fiscal-year-end.
+GBCI	2021	ma	Altabancorp acquisition closed October 2021: partial-year revenue against a full year-end headcount, and 110.7M period-end shares against 99M average diluted. The share-count gap is the whole of the 11.5% P/E-identity residual for this year.
+GBCI	2025	ma	Bank of Idaho and Guaranty Bancshares acquisitions: headcount +15.1% and revenue +23.3% in one year. Period-end shares 130.0M against 120M average diluted, which accounts for the 8.2% P/E-identity residual.

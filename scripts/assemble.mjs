@@ -211,6 +211,7 @@ for (const [ticker, name, , peerGroup] of universe.members) {
 // ── cross-checks ──────────────────────────────────────────────────────────────
 const checks = [];
 let peChecked = 0, peTight = 0, basisDivergent = 0;
+const peResiduals = [];
 const chk = (name, ok, detail) => checks.push({ name, ok, detail });
 
 for (const b of banks) {
@@ -220,7 +221,7 @@ for (const b of banks) {
     if (marketCap[i] != null && peReported[i] != null && netIncomeToCommon[i] != null && netIncomeToCommon[i] > 0) {
       const implied = marketCap[i] / netIncomeToCommon[i];
       const err = Math.abs(implied - peReported[i]) / peReported[i];
-      peChecked++; if (err <= 0.02) peTight++;
+      peChecked++; if (err <= 0.02) peTight++; peResiduals.push(err);
       if (err > 0.08) chk(`pe-identity ${b.ticker} FY${FY[i]}`, false,
         `reported ${peReported[i]} vs marketCap/NIC ${implied.toFixed(2)} (${(err * 100).toFixed(1)}% apart)`);
     }
@@ -239,8 +240,11 @@ const dataQuality = {
     description: 'Independent check: does the per-year reported P/E reconcile with marketCap / netIncomeToCommon? Both sides come from different pages, so agreement validates the transcription.',
     cellsChecked: peChecked,
     within2pct: peTight,
+    within4pct: peResiduals.filter((e) => e <= 0.04).length,
+    within8pct: peResiduals.filter((e) => e <= 0.08).length,
+    medianPct: Number((peResiduals.slice().sort((a, b) => a - b)[Math.floor((peResiduals.length - 1) / 2)] * 100).toFixed(2)),
     beyond8pct: failed.filter((f) => f.name.startsWith('pe-identity')).map((f) => f.name.replace('pe-identity ', '') + ' \u2014 ' + f.detail),
-    note: 'Residuals of a few percent are expected: market cap uses period-end shares while the published P/E is price / average-diluted EPS. Cells beyond 8% are merger years with discontinued operations and are M&A-flagged.',
+    note: 'Residuals of a few percent are expected and benign: market cap uses period-end shares while the published P/E is price / average-diluted EPS, so any issuer whose share count moved during the year shows one. Every cell beyond 8% is a merger year where period-end shares diverged from average diluted by very nearly the size of the residual; all are M&A-flagged. Note this check only became meaningful once net income to common was sourced independently everywhere — cells previously derived as marketCap/P/E agreed with it by construction.',
   },
   priceBasis: {
     description: "The source's per-year 'Last Close Price' is dividend-adjusted for some issuers and unadjusted for others, with no marker distinguishing them.",

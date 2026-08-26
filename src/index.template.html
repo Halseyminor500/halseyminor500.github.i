@@ -1039,10 +1039,23 @@ function rhoSpark(){
     g.appendChild(txt(cx,H-3,r.label,{'text-anchor':'middle','font-size':9}));
   });
   box.appendChild(g);
-  const dir = last.rho>first.rho ? 'turning positive' : last.rho<first.rho ? 'drifting negative' : 'flat';
+  /* Endpoint-to-endpoint direction, stated separately from where the endpoint
+     actually sits. A series can rise 0.22 and still end below zero, and saying
+     "turning positive" over a negative endpoint is the kind of overclaim this
+     whole tile exists to avoid. */
+  const rose = last.rho>first.rho, fell = last.rho<first.rho;
+  const dir = !rose && !fell ? 'flat'
+    : rose ? (last.rho>0 ? 'rising, and now positive' : 'rising, but still at or below zero')
+           : (last.rho<0 ? 'falling, and now negative' : 'falling, though still positive');
+  /* If the high point is interior, the endpoints alone misdescribe the path. */
+  const peak = ser.reduce((a,b)=> b.rho>a.rho ? b : a, ser[0]);
+  const interior = peak!==first && peak!==last && peak.rho>last.rho;
+  const allInBand = ser.every(r=> Math.abs(r.rho) < (r.crit||0));
   box.appendChild(U.el('div',{class:'tiny muted',style:'margin-top:5px;line-height:1.45',
     html:`ρ by snapshot. Shaded band = not distinguishable from noise. `+
-      `<b>${first.label} ${first.rho.toFixed(2)} → ${last.label} ${last.rho.toFixed(2)}</b> — ${dir}.`}));
+      `<b>${first.label} ${first.rho.toFixed(2)} → ${last.label} ${last.rho.toFixed(2)}</b> — ${dir}`+
+      (interior ? `, peaking at ${peak.label} ${peak.rho.toFixed(2)}` : '')+
+      (allInBand ? '. Every point sits inside the band.' : '.')}));
   return box;
 }
 
@@ -1232,8 +1245,11 @@ function renderQuality(){
       <p class="small dim" style="margin-top:6px">The published P/E for each bank-year was reconciled against
       market cap ÷ net income to common — two figures taken from different pages, so agreement is an
       independent check on the transcription.
-      <b>${q.peIdentity.within2pct} of ${q.peIdentity.cellsChecked} cells agree within 2%.</b>
-      ${q.peIdentity.beyond8pct.length? 'The '+q.peIdentity.beyond8pct.length+' that do not are merger years with discontinued operations, and are flagged.':''}</p>
+      <b>${q.peIdentity.within2pct} of ${q.peIdentity.cellsChecked} cells agree within 2%</b>,
+      ${q.peIdentity.within8pct} within 8%, median residual ${q.peIdentity.medianPct}%.
+      A residual of a few percent is expected and benign: market cap uses period-end shares while the
+      published P/E uses <i>average diluted</i> EPS, so any issuer whose share count moved during the year
+      shows one.${q.peIdentity.beyond8pct.length? ' All '+q.peIdentity.beyond8pct.length+' cells beyond 8% are merger years where period-end shares diverged from average diluted by very nearly the size of the residual. Each is flagged.':''}</p>
       <p class="small dim" style="margin-top:8px"><b>Coverage.</b>
       ${q.coverage.pctPopulated}% of ${q.coverage.numericFyCells} fiscal-year cells are populated;
       ${q.coverage.nullCells} are missing and every one of them carries a written reason.
