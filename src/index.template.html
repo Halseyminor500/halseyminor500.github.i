@@ -9,7 +9,7 @@
   --hair:#dedcd6; --hair-strong:#c9c7c0;
   --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837c;
   --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
-  --good:#1baf7a; --bad:#e34948; --warn:#eda100;
+  --good:#0c7549; --bad:#c8332f; --warn:#875a00;
   --pos:#2a78d6; --neg:#eb6834; --mid:#f0efec;
   --grid:rgba(11,11,11,.07); --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.18);
   --glass:rgba(252,252,251,.72);
@@ -23,7 +23,7 @@
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
   --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
-  --good:#199e70; --bad:#e66767; --warn:#c98500;
+  --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
   --pos:#3987e5; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
   --glass:rgba(26,26,25,.72);
@@ -34,7 +34,7 @@
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
   --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
-  --good:#199e70; --bad:#e66767; --warn:#c98500;
+  --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
   --pos:#3987e5; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
   --glass:rgba(26,26,25,.72);
@@ -1334,6 +1334,12 @@ function selfTest(){
   ok('every rendered path has length', paths.length>0 && paths.every(p=>{
     try{ return p.getTotalLength()>0; }catch(e){ return true; } }), paths.length+' paths');
   /* table integrity */
+  { const cs=getComputedStyle(document.documentElement);
+    const gv=k=>cs.getPropertyValue(k).trim().toLowerCase();
+    const series=[gv('--series-1'),gv('--series-2'),gv('--series-3')];
+    const status=[gv('--good'),gv('--bad'),gv('--warn')];
+    ok('status colours are reserved, never reused as a series hue',
+       status.every(c=>!series.includes(c)), `status ${status.join(' ')}`); }
   const hh=document.querySelector('header.top').getBoundingClientRect().height;
   const so=parseFloat(getComputedStyle(document.querySelector('#thr th')).top);
   ok('sticky table header clears the masthead', so>=hh-1, `offset ${so}px vs masthead ${hh.toFixed(1)}px`);
