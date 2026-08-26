@@ -50,7 +50,7 @@ ok('makes zero external network requests', external.length === 0, external.slice
 ok('renders 50 table rows', await page.locator('#tb tr').count() === 50);
 ok('renders all three charts', await page.locator('#c1 svg, #c2 svg, #c3 svg').count() === 3);
 ok('renders four stat tiles', await page.locator('#tiles .tile').count() === 4);
-ok('renders eight highlight panels', await page.locator('#panels .card').count() === 8);
+ok('renders nine highlight panels', await page.locator('#panels .card').count() === 9);
 
 /* ── 2. NaN sweep across every rendered SVG attribute ── */
 const nan = await page.evaluate(() => {
@@ -75,8 +75,12 @@ const pinned = await page.evaluate(() => {
 });
 ok('table header stays pinned while the table scrolls under it', pinned < 2, pinned.toFixed(1) + 'px');
 await page.evaluate(() => { document.querySelector('.tscroll').scrollTop = 0; });
-ok('the watchlist panels lead with Progressing and Falling behind',
-  (await page.locator('#panels .card h2').allTextContents()).slice(0, 2).join('|') === 'Progressing|Falling behind');
+ok('the panels lead with Nitro 8, Progressing and Falling behind',
+  (await page.locator('#panels .card h2').allTextContents()).slice(0, 3).join('|') === 'Nitro 8|Progressing|Falling behind');
+const trends = await page.locator('#panels a.btn').first();
+ok('the Google Trends hand-off opens a new tab safely',
+  (await trends.getAttribute('target')) === '_blank' && /noopener/.test(await trends.getAttribute('rel') || '') &&
+  /^https:\/\/trends\.google\.com\/trends\/explore\?/.test(await trends.getAttribute('href')));
 ok('the AI-signature panel renders its four-light strips',
   await page.locator('#panels .sl').count() >= 16);
 ok('the say-vs-do matrix renders with populated cells',

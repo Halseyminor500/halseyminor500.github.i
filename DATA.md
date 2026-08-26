@@ -205,6 +205,25 @@ decisions" the thesis says full dedication requires. **Blind spot:** the flag se
 mergers and disclosed one-offs, not every small divestiture; and a streak says nothing about
 *why* headcount fell until read next to revenue (which is what Thrust is for).
 
+### Nitro — the strongest-signal composite
+
+`nitro = 0.35·pctRank(thrust) + 0.35·pctRank(accel) + 0.15·(signature lights ÷ 4)
++ 0.15·(min(streak, 3) ÷ 3)`, in [0,1]. Realized go-fast evidence — Thrust and its
+acceleration — carries 70%; the corroborating machine-signature pattern and the conviction
+streak 15% each. Null whenever any component is null, same no-imputation rule as the other
+composites. The top eight are the **Nitro 8** panel. **Blind spot:** a weighted blend is a
+judgment, not a measurement — the weights are stated so they can be argued with.
+
+### The Google Trends hand-off
+
+The Nitro 8 panel links out to Google Trends with a pre-built comparison — colloquial bank
+names ("wells fargo ai", "jpmorgan chase ai") from a hand-curated 50-ticker map, United
+States, past 12 months, web search. This is deliberately **outbound**: search interest is
+Google's data, normalised within the query by Google — a secondary source this project neither
+collects, stores, nor maintains, so it carries no consistency burden here. **Blind spot:**
+search interest mixes customers, job-seekers and news cycles; it is a mining lens for the
+short-listed names, never a ranking input.
+
 ### The announcement flag (say vs do)
 
 A hand-curated snapshot of public statements, January 2025 – August 2026: `kind=ai` rows are
