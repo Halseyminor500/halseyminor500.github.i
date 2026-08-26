@@ -218,7 +218,9 @@ judgment, not a measurement — the weights are stated so they can be argued wit
 
 The Nitro 8 panel links out to Google Trends with a pre-built comparison — colloquial bank
 names ("wells fargo ai", "jpmorgan chase ai") from a hand-curated 50-ticker map, United
-States, past 12 months, web search. This is deliberately **outbound**: search interest is
+States, past 12 months, web search. Trends compares at most five terms per chart, so the eight
+ship as two links that both include the №1 name — a shared yardstick that keeps the two
+normalised scales comparable. This is deliberately **outbound**: search interest is
 Google's data, normalised within the query by Google — a secondary source this project neither
 collects, stores, nor maintains, so it carries no consistency burden here. **Blind spot:**
 search interest mixes customers, job-seekers and news cycles; it is a mining lens for the

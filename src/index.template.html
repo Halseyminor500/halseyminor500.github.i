@@ -1393,12 +1393,21 @@ function renderPanels(dv){
       nList.appendChild(row);
     });
     nBody.appendChild(nList);
+    /* Google Trends compares at most FIVE terms per chart, so the eight ship as
+       two charts that both include the No.1 name — a shared yardstick that keeps
+       the two normalised scales comparable. */
+    const t8=nitro8.map(r=>r.ticker);
+    const groupA=t8.slice(0,5), groupB=[t8[0],...t8.slice(5)];
     nBody.appendChild(U.el('div',{style:'margin-top:13px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center'},[
-      U.el('a',{class:'btn',target:'_blank',rel:'noopener',href:trendsUrl(nitro8.map(r=>r.ticker)),
-        html:'Compare the Nitro 8 on Google Trends \u2197'}),
+      U.el('a',{class:'btn',target:'_blank',rel:'noopener',href:trendsUrl(groupA),
+        html:'Nitro 1\u20135 on Google Trends \u2197'}),
+      U.el('a',{class:'btn',target:'_blank',rel:'noopener',href:trendsUrl(groupB),
+        html:'Nitro 6\u20138 \u00b7 vs \u2116\u20091 \u2197'}),
       U.el('div',{class:'tiny muted',html:
-        `Opens Google in a new tab \u00b7 United States \u00b7 past 12 months \u00b7 web search.<br>`+
-        `Search interest is Google\u2019s data, normalised within the query \u2014 a secondary source we neither build nor maintain.`})
+        `Opens Google in a new tab \u00b7 United States \u00b7 past 12 months \u00b7 web search. Trends compares at
+         most five terms per chart, so the eight ship as two \u2014 both include ${SHORT[t8[0]]}, the \u2116\u20091 name,
+         as a shared yardstick.<br>Search interest is Google\u2019s data, normalised within the query \u2014 a
+         secondary source we neither build nor maintain.`})
     ]));
   }
   nCard.appendChild(nBody);
@@ -1697,10 +1706,12 @@ function selfTest(){
     ok('nitro stays inside [0,1]', rows.every(r=>r.nitro==null||(r.nitro>=0&&r.nitro<=1.000001)));
     const n8=screenNitro(rows).slice(0,8);
     ok('the Nitro 8 are all clean-window banks', n8.every(r=>r.cleanNow));
-    const ta=document.querySelector('#panels a.btn');
-    ok('trends hand-off carries the hand-checked settings and 8 clean terms',
-       !!ta && /geo=US/.test(ta.href) && /date=today%2012-m/.test(ta.href) &&
-       ta.href.split('q=')[1].split(',').length===8 && !/undefined/.test(ta.href)); }
+    const tas=[...document.querySelectorAll('#panels a.btn')];
+    ok('trends hand-off ships as two charts of at most five terms each',
+       tas.length===2 && tas.every(a=>{const t=a.href.split('q=')[1].split(',');return t.length<=5&&!/undefined/.test(a.href);}));
+    ok('both trends charts carry the hand-checked settings and share the \u2116\u20091 yardstick',
+       tas.length===2 && tas.every(a=>/geo=US/.test(a.href)&&/date=today%2012-m/.test(a.href)) &&
+       tas[0].href.split('q=')[1].split(',')[0]===tas[1].href.split('q=')[1].split(',')[0]); }
 
   const pass=t.filter(x=>x.c).length;
   const box=U.el('div',{class:'card',style:'margin:22px 0'});

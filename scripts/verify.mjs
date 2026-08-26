@@ -77,10 +77,16 @@ ok('table header stays pinned while the table scrolls under it', pinned < 2, pin
 await page.evaluate(() => { document.querySelector('.tscroll').scrollTop = 0; });
 ok('the panels lead with Nitro 8, Progressing and Falling behind',
   (await page.locator('#panels .card h2').allTextContents()).slice(0, 3).join('|') === 'Nitro 8|Progressing|Falling behind');
-const trends = await page.locator('#panels a.btn').first();
-ok('the Google Trends hand-off opens a new tab safely',
-  (await trends.getAttribute('target')) === '_blank' && /noopener/.test(await trends.getAttribute('rel') || '') &&
-  /^https:\/\/trends\.google\.com\/trends\/explore\?/.test(await trends.getAttribute('href')));
+const trendsBtns = await page.locator('#panels a.btn').all();
+let trendsOK = trendsBtns.length === 2;
+for (const t of trendsBtns) {
+  const href = await t.getAttribute('href');
+  trendsOK = trendsOK && (await t.getAttribute('target')) === '_blank' &&
+    /noopener/.test(await t.getAttribute('rel') || '') &&
+    /^https:\/\/trends\.google\.com\/trends\/explore\?/.test(href) &&
+    href.split('q=')[1].split(',').length <= 5;   // Trends' hard comparison cap
+}
+ok('the Google Trends hand-off is two charts of \u22645 terms, opening new tabs safely', trendsOK);
 ok('the AI-signature panel renders its four-light strips',
   await page.locator('#panels .sl').count() >= 16);
 ok('the say-vs-do matrix renders with populated cells',
