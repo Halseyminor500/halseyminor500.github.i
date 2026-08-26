@@ -1367,21 +1367,21 @@ function renderPanels(dv){
   const foot=excluded?`${excluded} banks with a merger or one-off in the window are excluded.`:'';
 
   /* ── Nitro 8: the strongest combined signals, and the hand-off to Google ── */
-  const nitro8=screenNitro(R).slice(0,8);
+  const nitro10=screenNitro(R).slice(0,10);
   const nCard=U.el('div',{class:'card hero-p'});
   nCard.appendChild(U.el('div',{class:'card-h'},[
-    U.el('h2',{text:'Nitro 8'}),
+    U.el('h2',{text:'Nitro 10'}),
     U.el('div',{class:'small muted',html:
-      `The eight strongest combined signals: Thrust and its acceleration carry 70%, the
+      `The ten strongest combined signals: Thrust and its acceleration carry 70%, the
        machine-signature lights and the conviction streak 15% each. These are the names to mine
        everywhere else \u2014 starting with what the public is searching for.`})]));
   const nBody=U.el('div',{class:'card-b'});
-  if(!nitro8.length){
+  if(!nitro10.length){
     nBody.appendChild(U.el('div',{class:'note',
       text:'Nitro needs Thrust, its acceleration and the signature window \u2014 pick a later snapshot.'}));
   } else {
     const nList=U.el('div',{class:'plist'});
-    nitro8.forEach((r,i)=>{
+    nitro10.forEach((r,i)=>{
       const row=U.el('div',{class:'prow','data-t':r.ticker});
       row.innerHTML=`<div class="r">${i+1}</div>`+
         `<div class="n"><span class="tk">${r.ticker}</span>${SHORT[r.ticker]||r.name}</div>`+
@@ -1393,20 +1393,19 @@ function renderPanels(dv){
       nList.appendChild(row);
     });
     nBody.appendChild(nList);
-    /* Google Trends compares at most FIVE terms per chart, so the eight ship as
-       two charts that both include the No.1 name — a shared yardstick that keeps
-       the two normalised scales comparable. */
-    const t8=nitro8.map(r=>r.ticker);
-    const groupA=t8.slice(0,5), groupB=[t8[0],...t8.slice(5)];
+    /* Google Trends compares at most FIVE terms per chart, so the ten ship as
+       two clean charts of five. */
+    const t10=nitro10.map(r=>r.ticker);
+    const groupA=t10.slice(0,5), groupB=t10.slice(5,10);
     nBody.appendChild(U.el('div',{style:'margin-top:13px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center'},[
       U.el('a',{class:'btn',target:'_blank',rel:'noopener',href:trendsUrl(groupA),
         html:'Nitro 1\u20135 on Google Trends \u2197'}),
       U.el('a',{class:'btn',target:'_blank',rel:'noopener',href:trendsUrl(groupB),
-        html:'Nitro 6\u20138 \u00b7 vs \u2116\u20091 \u2197'}),
+        html:'Nitro 6\u201310 \u2197'}),
       U.el('div',{class:'tiny muted',html:
         `Opens Google in a new tab \u00b7 United States \u00b7 past 12 months \u00b7 web search. Trends compares at
-         most five terms per chart, so the eight ship as two \u2014 both include ${SHORT[t8[0]]}, the \u2116\u20091 name,
-         as a shared yardstick.<br>Search interest is Google\u2019s data, normalised within the query \u2014 a
+         most five terms per chart, so the ten ship as two charts of five; each chart is normalised to its
+         own strongest term.<br>Search interest is Google\u2019s data, normalised within the query \u2014 a
          secondary source we neither build nor maintain.`})
     ]));
   }
@@ -1704,14 +1703,15 @@ function selfTest(){
     ok('nitro is null whenever a component is', rows.every(r=>r.nitro==null ||
        (r.thrust!=null && r.accel!=null && r.sigParts && r.sigParts.headDown!=null)));
     ok('nitro stays inside [0,1]', rows.every(r=>r.nitro==null||(r.nitro>=0&&r.nitro<=1.000001)));
-    const n8=screenNitro(rows).slice(0,8);
-    ok('the Nitro 8 are all clean-window banks', n8.every(r=>r.cleanNow));
+    const n10=screenNitro(rows).slice(0,10);
+    ok('the Nitro 10 are all clean-window banks', n10.every(r=>r.cleanNow));
     const tas=[...document.querySelectorAll('#panels a.btn')];
-    ok('trends hand-off ships as two charts of at most five terms each',
-       tas.length===2 && tas.every(a=>{const t=a.href.split('q=')[1].split(',');return t.length<=5&&!/undefined/.test(a.href);}));
-    ok('both trends charts carry the hand-checked settings and share the \u2116\u20091 yardstick',
-       tas.length===2 && tas.every(a=>/geo=US/.test(a.href)&&/date=today%2012-m/.test(a.href)) &&
-       tas[0].href.split('q=')[1].split(',')[0]===tas[1].href.split('q=')[1].split(',')[0]); }
+    ok('trends hand-off ships as two clean charts of five',
+       tas.length===2 && tas.every(a=>{const t=a.href.split('q=')[1].split(',');return t.length===5&&!/undefined/.test(a.href);}));
+    { const A=tas.length===2?tas[0].href.split('q=')[1].split(','):[], B=tas.length===2?tas[1].href.split('q=')[1].split(','):[];
+      ok('the two charts carry the hand-checked settings and split the ten without overlap',
+         tas.length===2 && tas.every(a=>/geo=US/.test(a.href)&&/date=today%2012-m/.test(a.href)) &&
+         new Set([...A,...B]).size===10); } }
 
   const pass=t.filter(x=>x.c).length;
   const box=U.el('div',{class:'card',style:'margin:22px 0'});

@@ -211,16 +211,16 @@ mergers and disclosed one-offs, not every small divestiture; and a streak says n
 + 0.15·(min(streak, 3) ÷ 3)`, in [0,1]. Realized go-fast evidence — Thrust and its
 acceleration — carries 70%; the corroborating machine-signature pattern and the conviction
 streak 15% each. Null whenever any component is null, same no-imputation rule as the other
-composites. The top eight are the **Nitro 8** panel. **Blind spot:** a weighted blend is a
+composites. The top ten are the **Nitro 10** panel. **Blind spot:** a weighted blend is a
 judgment, not a measurement — the weights are stated so they can be argued with.
 
 ### The Google Trends hand-off
 
-The Nitro 8 panel links out to Google Trends with a pre-built comparison — colloquial bank
+The Nitro 10 panel links out to Google Trends with a pre-built comparison — colloquial bank
 names ("wells fargo ai", "jpmorgan chase ai") from a hand-curated 50-ticker map, United
-States, past 12 months, web search. Trends compares at most five terms per chart, so the eight
-ship as two links that both include the №1 name — a shared yardstick that keeps the two
-normalised scales comparable. This is deliberately **outbound**: search interest is
+States, past 12 months, web search. Trends compares at most five terms per chart, so the ten
+ship as two clean charts of five (ranks 1–5 and 6–10); each chart is normalised to its own
+strongest term, so levels compare within a chart, not across the pair. This is deliberately **outbound**: search interest is
 Google's data, normalised within the query by Google — a secondary source this project neither
 collects, stores, nor maintains, so it carries no consistency burden here. **Blind spot:**
 search interest mixes customers, job-seekers and news cycles; it is a mining lens for the
