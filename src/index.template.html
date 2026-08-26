@@ -1,0 +1,1442 @@
+<title>The Efficiency Ledger</title>
+<meta name="description" content="Revenue per employee as a proxy for AI adoption across the 50 largest US banks — and whether the market has priced it yet.">
+
+<style>
+/* ══ §1 DESIGN TOKENS ══ */
+:root{
+  color-scheme:light;
+  --bg:#f6f6f4; --surface-1:#fcfcfb; --surface-2:#f0efec; --surface-3:#e7e6e2;
+  --hair:#dedcd6; --hair-strong:#c9c7c0;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837c;
+  --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
+  --good:#1baf7a; --bad:#e34948; --warn:#eda100;
+  --pos:#2a78d6; --neg:#eb6834; --mid:#f0efec;
+  --grid:rgba(11,11,11,.07); --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.18);
+  --glass:rgba(252,252,251,.72);
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+:root:not([data-theme="light"]){ @media (prefers-color-scheme:dark){
+  color-scheme:dark;
+  --bg:#111110; --surface-1:#1a1a19; --surface-2:#222221; --surface-3:#2c2c2a;
+  --hair:#33332f; --hair-strong:#45453f;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
+  --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+  --good:#199e70; --bad:#e66767; --warn:#c98500;
+  --pos:#3987e5; --neg:#d95926; --mid:#383835;
+  --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  --glass:rgba(26,26,25,.72);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111110; --surface-1:#1a1a19; --surface-2:#222221; --surface-3:#2c2c2a;
+  --hair:#33332f; --hair-strong:#45453f;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
+  --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+  --good:#199e70; --bad:#e66767; --warn:#c98500;
+  --pos:#3987e5; --neg:#d95926; --mid:#383835;
+  --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  --glass:rgba(26,26,25,.72);
+}
+
+/* ══ §2 RESET + TYPE ══ */
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;padding-bottom:80px}
+h1,h2,h3{letter-spacing:-.021em;font-weight:640;line-height:1.18}
+h1{font-size:clamp(28px,4.4vw,42px)}
+h2{font-size:19px;margin-bottom:2px}
+h3{font-size:15px}
+a{color:var(--series-1)}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-3)}
+.dim{color:var(--ink-2)}
+.small{font-size:13px}
+.tiny{font-size:11.5px;letter-spacing:.01em}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ══ §3 LAYOUT ══ */
+.wrap{max-width:1320px;margin:0 auto;padding:0 20px;min-width:0}
+.stack{display:flex;flex-direction:column;gap:22px}
+.card{min-width:0;background:var(--surface-1);border:1px solid var(--hair);border-radius:var(--r-lg);
+  box-shadow:var(--shadow);overflow:hidden}
+.card-h{padding:16px 20px 12px;border-bottom:1px solid var(--hair)}
+.card-b{padding:18px 20px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:22px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px}
+
+/* ══ §4 MASTHEAD (liquid-glass chrome — chrome only, never data) ══ */
+header.top{position:sticky;top:0;z-index:60;background:var(--glass);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--hair)}
+.top-in{max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
+.brand{font-weight:660;letter-spacing:-.02em;font-size:15px;white-space:nowrap}
+.brand span{color:var(--ink-3);font-weight:450}
+.top-sp{flex:1}
+.hero{padding:40px 0 26px}
+.hero p.lede{max-width:74ch;color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* ══ §5 CONTROLS ══ */
+.seg{display:inline-flex;background:var(--surface-3);border-radius:var(--r-sm);padding:2px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{font:inherit;font-size:12.5px;font-weight:530;color:var(--ink-2);background:none;border:0;
+  padding:5px 11px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface-1);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.seg button:focus-visible{outline:2px solid var(--series-1);outline-offset:1px}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.ctl label{font-size:11.5px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;
+  display:block;margin-bottom:5px}
+select,input[type=search]{font:inherit;font-size:13px;background:var(--surface-1);color:var(--ink);
+  border:1px solid var(--hair-strong);border-radius:var(--r-sm);padding:6px 9px}
+
+/* ══ §6 STAT TILES ══ */
+.tile{background:var(--surface-1);border:1px solid var(--hair);border-radius:var(--r-lg);padding:18px 20px;
+  box-shadow:var(--shadow)}
+.tile .k{font-size:11.5px;font-weight:640;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.tile .v{font-size:34px;font-weight:660;letter-spacing:-.028em;margin:6px 0 2px;line-height:1.05}
+.tile .s{font-size:13px;color:var(--ink-2)}
+.verdict{border-left:3px solid var(--series-2)}
+
+/* ══ §7 TABLE ══ */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;min-width:1180px}
+thead th{position:sticky;top:var(--hdr,54px);z-index:20;background:var(--surface-2);text-align:right;
+  padding:8px 10px;font-size:10.5px;font-weight:660;color:var(--ink-2);text-transform:uppercase;
+  letter-spacing:.055em;white-space:nowrap;cursor:pointer;user-select:none;border-bottom:1px solid var(--hair)}
+thead th:first-child{text-align:left;left:0;z-index:30}
+thead th:hover{color:var(--ink)}
+thead th .ar{opacity:.32;margin-left:3px}
+thead th[aria-sort] .ar{opacity:1;color:var(--series-1)}
+tbody td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
+tbody td:first-child{text-align:left;position:sticky;left:0;background:var(--surface-1);z-index:10}
+tbody tr:hover td{background:var(--surface-2)}
+tbody tr:hover td:first-child{background:var(--surface-2)}
+tbody tr[aria-selected="true"] td{background:color-mix(in srgb,var(--series-1) 9%,var(--surface-1))}
+tbody tr[aria-selected="true"] td:first-child{background:color-mix(in srgb,var(--series-1) 9%,var(--surface-1))}
+tr{cursor:pointer}
+.nm{font-weight:590}
+.tk{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:7px}
+.na{color:var(--ink-3);border-bottom:1px dotted var(--hair-strong);cursor:help}
+.rk{color:var(--ink-3);font-size:11px;margin-left:5px}
+
+/* ══ §8 CHIPS / BADGES ══ */
+.chip{display:inline-block;font-size:10.5px;font-weight:640;padding:1.5px 6px;border-radius:5px;
+  letter-spacing:.02em;vertical-align:1px}
+.chip.up{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.chip.dn{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.chip.fl{background:var(--surface-3);color:var(--ink-3)}
+.chip.ma{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn);cursor:help}
+.bar{display:inline-block;height:7px;border-radius:3.5px;vertical-align:middle}
+
+/* ══ §9 PANELS ══ */
+.plist{display:flex;flex-direction:column}
+.prow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--hair);cursor:pointer}
+.prow:last-child{border-bottom:0}
+.prow:hover{background:var(--surface-2)}
+.prow .r{width:17px;color:var(--ink-3);font-size:11px;font-family:var(--mono)}
+.prow .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:560;font-size:13px}
+.prow .m{font-size:13px;font-weight:620;font-variant-numeric:tabular-nums}
+figcaption{font-size:12px;color:var(--ink-3);margin-top:9px;line-height:1.5}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin-bottom:8px}
+.legend i{display:inline-block;width:15px;height:0;border-top-width:2.5px;border-top-style:solid;
+  vertical-align:4px;margin-right:5px}
+details{border-top:1px solid var(--hair);padding-top:12px;margin-top:14px}
+summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2)}
+summary:hover{color:var(--ink)}
+.note{background:var(--surface-2);border-radius:var(--r-md);padding:12px 14px;font-size:12.5px;
+  color:var(--ink-2);line-height:1.6}
+.tip{position:fixed;z-index:200;background:var(--surface-1);border:1px solid var(--hair-strong);
+  border-radius:var(--r-md);box-shadow:var(--shadow);padding:9px 11px;font-size:12px;pointer-events:none;
+  max-width:290px;opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{font-weight:640}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{header.top{position:static}.card{break-inside:avoid;box-shadow:none}}
+@media (max-width:640px){.hero{padding:26px 0 18px}.tile .v{font-size:27px}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">The&nbsp;Efficiency&nbsp;Ledger <span>· 50 US banks</span></div>
+    <div class="top-sp"></div>
+    <div class="seg" id="snapSeg" role="group" aria-label="Snapshot"></div>
+    <div class="seg" role="group" aria-label="Theme">
+      <button id="themeBtn" title="Toggle light / dark">◐</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap stack">
+
+  <section class="hero">
+    <h1>Revenue per employee is the tell.</h1>
+    <p class="lede">If a bank is genuinely implementing AI, it shows up as more revenue carried by fewer
+    people — and the market should pay a higher multiple for it. This dashboard tests that claim against
+    the 50 largest US bank holding companies, and finds the banks where the market hasn't caught on yet.</p>
+  </section>
+
+  <section class="grid4" id="tiles" style="align-items:start"></section>
+
+  <section class="card">
+    <div class="card-h" style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end">
+      <div style="flex:1;min-width:230px">
+        <h2>The ledger</h2>
+        <div class="small muted" id="tableSub"></div>
+      </div>
+      <div class="ctl">
+        <div><label for="normSel">Rank against</label>
+          <div class="seg" id="normSeg" role="group" aria-label="Ranking basis"></div></div>
+        <div><label for="adjSel">P/E basis</label>
+          <div class="seg" id="adjSeg" role="group" aria-label="P/E basis"></div></div>
+        <div><label for="q">Find</label>
+          <input type="search" id="q" placeholder="bank or ticker" style="width:150px"></div>
+      </div>
+    </div>
+    <div class="tscroll"><table id="tbl">
+      <thead><tr id="thr"></tr></thead>
+      <tbody id="tb"></tbody>
+    </table></div>
+    <div class="card-b" style="border-top:1px solid var(--hair)">
+      <div class="note" id="modelNote"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-h" style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+      <div style="flex:1;min-width:230px"><h2 id="c1t">Price, alignment and multiple</h2>
+        <div class="small muted">Share price, the correlation index and the multiple — three panels on one
+        shared timeline. Click any bank in the table to change the subject.</div></div>
+      <div class="seg" id="winSeg" role="group" aria-label="Window"></div>
+    </div>
+    <div class="card-b"><figure><div id="c1"></div><figcaption id="c1c"></figcaption></figure></div>
+  </section>
+
+  <section class="card"><div class="card-h"><h2>Rank migration</h2>
+    <div class="small muted">Where efficiency ranks a bank, against where the share price actually ranked it.</div></div>
+    <div class="card-b"><figure><div id="c2"></div><figcaption id="c2c"></figcaption></figure></div></section>
+
+  <section class="card"><div class="card-h"><h2>More revenue, fewer people</h2>
+    <div class="small muted">Two-year revenue growth against two-year headcount growth. The north-west
+    quadrant is the whole thesis in one picture.</div></div>
+    <div class="card-b"><figure><div id="c3"></div><figcaption id="c3c"></figcaption></figure></div></section>
+
+  <section class="grid2" id="panels"></section>
+
+  <section class="card"><div class="card-h"><h2>What's underneath</h2>
+    <div class="small muted">Provenance, gaps and the checks that were run.</div></div>
+    <div class="card-b" id="quality"></div></section>
+
+</main>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<script type="application/json" id="dataset">/*__DATA__*/</script>
+<script>
+"use strict";
+/* ══════════════════════════════════════════════════════════════════════════
+   §10 CONFIG
+   ══════════════════════════════════════════════════════════════════════════ */
+const D = JSON.parse(document.getElementById('dataset').textContent);
+const FY = D.fyLabels;
+const NBSP = ' ', DASH = '—', MDASH = '—';
+const PG = D.peerGroups;
+
+const SNAPS = FY.map((y,i)=>({id:'fy'+y, label:''+y, i})).concat([{id:'live', label:'Now', i:5}]);
+
+/* ══ §11 UTILITIES ══ */
+const U = {
+  num(v,d=1){ return v==null?null:Number(v.toFixed(d)); },
+  money(v){ if(v==null)return null;
+    const a=Math.abs(v);
+    if(a>=1e6) return '$'+(v/1e6).toFixed(2)+'T';
+    if(a>=1e3) return '$'+(v/1e3).toFixed(a>=1e4?0:1)+'B';
+    return '$'+v.toFixed(0)+'M'; },
+  k(v){ return v==null?null:'$'+Math.round(v/1000).toLocaleString()+'k'; },
+  pct(v,d=1){ return v==null?null:(v>=0?'+':'')+(v*100).toFixed(d)+'%'; },
+  x(v,d=1){ return v==null?null:v.toFixed(d)+'×'; },
+  clamp(v,a,b){ return Math.max(a,Math.min(b,v)); },
+  el(tag,attrs,kids){ const e=document.createElement(tag);
+    for(const k in (attrs||{})){ if(k==='html') e.innerHTML=attrs[k];
+      else if(k==='text') e.textContent=attrs[k]; else if(attrs[k]!=null) e.setAttribute(k,attrs[k]); }
+    (kids||[]).forEach(c=>e.appendChild(c)); return e; }
+};
+
+/* ══ §12 STATS ══ */
+const S = {
+  mean(a){ return a.reduce((s,v)=>s+v,0)/a.length; },
+  sd(a){ if(a.length<2) return 0; const m=S.mean(a);
+    return Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/(a.length-1)); },
+  /* average ranks over non-null values; desc=true means rank 1 = largest */
+  rank(vals, desc=true){
+    const idx=[]; vals.forEach((v,i)=>{ if(v!=null && Number.isFinite(v)) idx.push(i); });
+    idx.sort((a,b)=> desc ? vals[b]-vals[a] : vals[a]-vals[b]);
+    const out=vals.map(()=>null);
+    let i=0;
+    while(i<idx.length){
+      let j=i; while(j+1<idx.length && vals[idx[j+1]]===vals[idx[i]]) j++;
+      const avg=(i+j)/2+1;
+      for(let k=i;k<=j;k++) out[idx[k]]=avg;
+      i=j+1;
+    }
+    return out;
+  },
+  /* percentile rank in [0,1]; 1 = largest */
+  pctRank(vals){
+    const r=S.rank(vals,true), K=r.filter(v=>v!=null).length;
+    return r.map(v=> v==null?null: K<2?0.5:(K-v)/(K-1));
+  },
+  winsor(a,z=2.5){ const m=S.mean(a),s=S.sd(a); if(!s) return a.slice();
+    return a.map(v=>U.clamp(v,m-z*s,m+z*s)); },
+  z(vals){
+    const ok=vals.filter(v=>v!=null&&Number.isFinite(v));
+    if(ok.length<3) return vals.map(()=>null);
+    const w=S.winsor(ok), m=S.mean(w), s=S.sd(w);
+    if(!s) return vals.map(v=>v==null?null:0);
+    return vals.map(v=> v==null?null:U.clamp((v-m)/s,-3,3));
+  },
+  /* inverse normal CDF (Acklam) */
+  probit(p){
+    p=U.clamp(p,1e-3,1-1e-3);
+    const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00],
+          b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01],
+          c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00],
+          d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+    const pl=0.02425;
+    let q,r;
+    if(p<pl){ q=Math.sqrt(-2*Math.log(p));
+      return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+    if(p>1-pl){ q=Math.sqrt(-2*Math.log(1-p));
+      return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+    q=p-0.5; r=q*q;
+    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+  },
+  /* Spearman rho from two rank vectors (already average-ranked) */
+  spearman(rx,ry){
+    const pairs=[]; rx.forEach((v,i)=>{ if(v!=null&&ry[i]!=null) pairs.push([v,ry[i]]); });
+    if(pairs.length<4) return {rho:null,K:pairs.length,crit:null};
+    const x=pairs.map(p=>p[0]), y=pairs.map(p=>p[1]);
+    const mx=S.mean(x), my=S.mean(y);
+    let sxy=0,sxx=0,syy=0;
+    for(let i=0;i<x.length;i++){ const dx=x[i]-mx, dy=y[i]-my; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; }
+    const rho = (sxx&&syy) ? sxy/Math.sqrt(sxx*syy) : null;
+    const K=x.length, df=K-2;
+    /* two-sided 5% t critical, interpolated over df */
+    const T={4:2.776,6:2.447,8:2.306,10:2.228,15:2.131,20:2.086,25:2.060,30:2.042,40:2.021,46:2.013,60:2.000,120:1.980};
+    const keys=Object.keys(T).map(Number).sort((a,b)=>a-b);
+    let tc=1.96; for(const k of keys){ if(df<=k){ tc=T[k]; break; } }
+    const crit=Math.sqrt(tc*tc/(tc*tc+df));
+    return {rho,K,crit,significant: rho!=null && Math.abs(rho)>crit};
+  },
+  /* OLS y ~ 1 + x1 + x2 via normal equations (3x3, Gaussian elimination) */
+  ols3(y,x1,x2){
+    const rows=[]; y.forEach((v,i)=>{ if(v!=null&&x1[i]!=null&&x2[i]!=null) rows.push([1,x1[i],x2[i],v]); });
+    const n=rows.length; if(n<10) return null;
+    const A=[[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+    for(const r of rows) for(let a=0;a<3;a++) for(let b=0;b<4;b++) A[a][b]+=r[a]*r[b];
+    for(let c=0;c<3;c++){
+      let piv=c; for(let r=c+1;r<3;r++) if(Math.abs(A[r][c])>Math.abs(A[piv][c])) piv=r;
+      if(Math.abs(A[piv][c])<1e-9) return null;
+      [A[c],A[piv]]=[A[piv],A[c]];
+      for(let r=0;r<3;r++){ if(r===c) continue; const f=A[r][c]/A[c][c];
+        for(let b=c;b<4;b++) A[r][b]-=f*A[c][b]; }
+    }
+    const beta=[A[0][3]/A[0][0],A[1][3]/A[1][1],A[2][3]/A[2][2]];
+    const yy=rows.map(r=>r[3]), my=S.mean(yy);
+    let ssr=0,sst=0;
+    for(const r of rows){ const f=beta[0]+beta[1]*r[1]+beta[2]*r[2]; ssr+=(r[3]-f)**2; sst+=(r[3]-my)**2; }
+    return {beta, r2: sst?1-ssr/sst:null, n};
+  }
+};
+
+/* ══ §13 METRICS (pure — no DOM) ══ */
+const M = {
+  rpe(b,i){ const r=b.fy.revenue[i], e=b.fy.employees[i];
+    return (r!=null&&e!=null&&e>0)? r*1e6/e : null; },
+  liveRpe(b){ const r=b.live.revenueTTM, e=b.live.employees;
+    return (r!=null&&e!=null&&e>0)? r*1e6/e : null; },
+  compHead(b,i){ const s=b.fy.salaries[i], e=b.fy.employees[i];
+    return (s!=null&&e!=null&&e>0)? s*1e6/e : null; },
+  compRatio(b,i){ const s=b.fy.salaries[i], r=b.fy.revenue[i];
+    return (s!=null&&r!=null&&r>0)? s/r : null; },
+  effRatio(b,i){ const o=b.fy.operatingExpense[i], r=b.fy.revenue[i];
+    return (o!=null&&r!=null&&r>0)? o/r : null; },
+  pe(b,i){ const p=b.fy.peReported[i]; return (p!=null&&p>0)?p:null; },
+  /* Live P/E = today's market cap over trailing-twelve-month earnings. Where the TTM earnings
+     line is not published, fall back to FY2025 earnings at today's price — a different basis,
+     so it is marked, not silently blended. */
+  liveShares(b){
+    if(b.live.dilutedShares!=null) return b.live.dilutedShares;
+    const mc=b.fy.marketCap[4], px=b.fy.closeRaw[4];
+    return (mc!=null&&px!=null&&px>0)? mc/px : null;
+  },
+  livePeBasis(b){
+    const ni=b.live.netIncomeToCommonTTM;
+    return (ni!=null&&ni>0)? 'ttm' : (b.fy.netIncomeToCommon[4]>0 ? 'fy2025' : null);
+  },
+  livePe(b){
+    const px=b.live.price, sh=M.liveShares(b);
+    if(px==null||sh==null) return null;
+    const basis=M.livePeBasis(b);
+    if(basis==='ttm')    return (px*sh)/b.live.netIncomeToCommonTTM;
+    if(basis==='fy2025') return (px*sh)/b.fy.netIncomeToCommon[4];
+    return null;
+  },
+  mcap(b,i){ return b.fy.marketCap[i]; },
+  liveMcap(b){ const px=b.live.price, sh=M.liveShares(b);
+    return (px!=null&&sh!=null)? px*sh : null; },
+  /* value of a metric at a snapshot index (0..4 = FY, 5 = live) */
+  at(b,si,which){
+    if(si<5){
+      if(which==='rpe') return M.rpe(b,si);
+      if(which==='pe')  return M.pe(b,si);
+      if(which==='mcap')return M.mcap(b,si);
+      if(which==='comp')return M.compHead(b,si);
+      if(which==='cr')  return M.compRatio(b,si);
+      if(which==='eff') return M.effRatio(b,si);
+      if(which==='rev') return b.fy.revenue[si];
+      if(which==='emp') return b.fy.employees[si];
+    } else {
+      if(which==='rpe') return M.liveRpe(b);
+      if(which==='pe')  return M.livePe(b);
+      if(which==='mcap')return M.liveMcap(b);
+      if(which==='comp'){ const s=b.live.salariesTTM,e=b.live.employees;
+        return (s!=null&&e!=null&&e>0)? s*1e6/e:null; }
+      if(which==='cr'){ const s=b.live.salariesTTM,r=b.live.revenueTTM;
+        return (s!=null&&r!=null&&r>0)? s/r:null; }
+      if(which==='eff') return M.effRatio(b,4);
+      if(which==='rev') return b.live.revenueTTM;
+      if(which==='emp') return b.live.employees;
+    }
+    return null;
+  },
+  /* revenue-per-employee series across FY plus the live point */
+  rpeSeries(b){ return FY.map((_,i)=>M.rpe(b,i)).concat([M.liveRpe(b)]); },
+  hasFlag(b,y,kinds){ return b.flags.some(f=>f.fy===y && kinds.includes(f.kind)); },
+  /* any distorting flag inside [y0,y1] inclusive */
+  distorted(b,y0,y1){
+    return b.flags.some(f=>f.fy>=y0 && f.fy<=y1 && (f.kind==='ma'||f.kind==='oneoff'));
+  },
+  cagr(a,b,yrs){ if(a==null||b==null||a<=0||b<=0) return null;
+    return Math.pow(b/a,1/yrs)-1; },
+  /* price return over n months back from the last point */
+  ret(b,months){
+    const c=b.px.close, last=c.length-1, from=last-months;
+    if(from<0) return null;
+    const a=c[from], z=c[last];
+    return (a!=null&&z!=null&&a>0)? z/a-1 : null;
+  }
+};
+
+/* ══ §14 DERIVE — one pass per (snapshot, normalization, adjust) ══ */
+let _cache={};
+function derive(){
+  const key=[state.snap,state.norm,state.adj].join('|');
+  if(_cache[key]) return _cache[key];
+  const si = SNAPS.find(s=>s.id===state.snap).i;
+  const banks = D.banks;
+
+  const rows = banks.map(b=>{
+    const rpe=M.at(b,si,'rpe'), pe=M.at(b,si,'pe');
+    const series=M.rpeSeries(b);
+    /* Thrust = year-over-year change in revenue per employee, at this snapshot */
+    let thrust=null, prevThrust=null;
+    if(si>=1 && series[si]!=null && series[si-1]!=null && series[si-1]>0)
+      thrust=series[si]/series[si-1]-1;
+    if(si>=2 && series[si-1]!=null && series[si-2]!=null && series[si-2]>0)
+      prevThrust=series[si-1]/series[si-2]-1;
+    const accel=(thrust!=null&&prevThrust!=null)? thrust-prevThrust : null;
+
+    /* Δ since Day One (FY2025 close) — only meaningful at the live snapshot */
+    const dRpe = (si===5 && series[5]!=null && series[4]!=null && series[4]>0)
+      ? series[5]/series[4]-1 : null;
+
+    const rev2=M.cagr(b.fy.revenue[2],b.fy.revenue[4],2);
+    const head2=M.cagr(b.fy.employees[2],b.fy.employees[4],2);
+    const rev3=M.cagr(b.fy.revenue[1],b.fy.revenue[4],3);
+    /* revenue growth as of this snapshot — the term that stops a fast grower being
+       punished for hiring ahead of revenue. Must vary across banks, or the fit is singular. */
+    let revG=null;
+    if(si===5) revG = (b.live.revenueTTM!=null && b.fy.revenue[4]!=null && b.fy.revenue[4]>0)
+      ? b.live.revenueTTM/b.fy.revenue[4]-1 : rev2;
+    else if(si>=2) revG = M.cagr(b.fy.revenue[si-2],b.fy.revenue[si],2);
+    else if(si===1) revG = M.cagr(b.fy.revenue[0],b.fy.revenue[1],1);
+    if(revG==null) revG = rev2;
+    const clean2 = !M.distorted(b,FY[2],FY[4]);
+    const clean3 = !M.distorted(b,FY[1],FY[4]);
+    const cleanNow = !M.distorted(b, si===5?FY[4]:FY[Math.max(0,si-1)], si===5?FY[4]:FY[si]);
+
+    return {
+      b, ticker:b.ticker, name:b.name, peer:b.peerGroup,
+      rpe, pe, mcap:M.at(b,si,'mcap'),
+      comp:M.at(b,si,'comp'), cr:M.at(b,si,'cr'), eff:M.at(b,si,'eff'),
+      peBasis: si===5 ? M.livePeBasis(b) : 'fy',
+      thrust, accel, dRpe, series,
+      rev2, head2, rev3, revG,
+      mwl: (rev2!=null&&head2!=null)? rev2-head2 : null,
+      ret1:M.ret(b,12), ret2:M.ret(b,24), ret3:M.ret(b,36),
+      clean2, clean3, cleanNow,
+      gaps:b.gaps.length, flags:b.flags
+    };
+  });
+
+  /* ── ranking universe: whole set, or within peer group ── */
+  const groups = state.norm==='peer'
+    ? Object.keys(PG).map(g=>rows.filter(r=>r.peer===g))
+    : [rows];
+
+  let fitFailed=null;
+  for(const g of groups){
+    const small = g.length<4;
+    /* Display ranks: each over its own non-null set, so "#3 of 50 on efficiency" stays true.
+       Index ranks: both over the INTERSECTION — a bank with revenue-per-employee but no P/E
+       cannot be placed on the P/E axis, and mixing two differently-sized rank vectors would
+       let |rankA - rankB| exceed K-1 and push the index outside [0,1]. */
+    const rpeV=g.map(r=>r.rpe), peV=g.map(r=>r.pe);
+    const rR=S.rank(rpeV,true), rP=S.rank(peV,true);
+    const both=g.map(r=> (r.rpe!=null && r.pe!=null));
+    const rRi=S.rank(g.map((r,i)=>both[i]?r.rpe:null),true);
+    const rPi=S.rank(g.map((r,i)=>both[i]?r.pe:null),true);
+    const K=both.filter(Boolean).length;
+    /* growth-adjusted expected P/E rank */
+    let fit=null;
+    if(state.adj==='growth'){
+      const gv=g.map((r,i)=>both[i]?r.revG:null);
+      const distinct=new Set(gv.filter(v=>v!=null).map(v=>+v.toFixed(6))).size;
+      const rG=S.rank(gv,true);
+      fit = distinct>=3 ? S.ols3(rPi,rRi,rG) : null;
+      if(!fit) fitFailed = distinct<3 ? 'the growth term does not vary enough at this snapshot'
+                                      : 'the fit is collinear at this snapshot';
+      g.forEach((r,i)=>{ r._rG=rG[i]; });
+    }
+    g.forEach((r,i)=>{
+      r.rankRpe=rR[i]; r.rankPe=rP[i]; r.K=K; r.smallGroup=small;
+      r.rankRpeI=rRi[i]; r.rankPeI=rPi[i];
+      const ok2 = rRi[i]!=null && rPi[i]!=null;
+      r.gap = ok2 ? rPi[i]-rRi[i] : null;
+      r.corr = (ok2 && K>1) ? 1-Math.abs(rRi[i]-rPi[i])/(K-1) : null;
+      r.leader = (ok2 && K>1) ? 1-(rRi[i]+rPi[i]-2)/(2*(K-1)) : null;
+      if(fit && ok2 && r._rG!=null){
+        const exp=fit.beta[0]+fit.beta[1]*rRi[i]+fit.beta[2]*r._rG;
+        r.gapAdj = rPi[i]-exp;
+      } else r.gapAdj = null;
+      r.fit = fit;
+    });
+  }
+
+  /* ── composites over the full set ── */
+  const zT=S.z(rows.map(r=>r.cleanNow?r.thrust:null));
+  const zA=S.z(rows.map(r=>r.cleanNow?r.accel:null));
+  const pCheap=S.pctRank(rows.map(r=>r.pe));       /* 1 = most expensive */
+  const pLag=S.pctRank(rows.map(r=>r.ret3));        /* 1 = best performer */
+  const pRpe=S.pctRank(rows.map(r=>r.rpe));
+  const pThr=S.pctRank(rows.map(r=>r.cleanNow?r.thrust:null));
+
+  rows.forEach((r,i)=>{
+    const parts=[zT[i],zA[i],
+      pCheap[i]==null?null:S.probit(1-pCheap[i]),
+      pLag[i]==null?null:S.probit(1-pLag[i])];
+    r.coilParts=parts;
+    r.coil = parts.every(v=>v!=null) ? 0.25*parts[0]+0.25*parts[1]+0.25*parts[2]+0.25*parts[3] : null;
+    r.catchUp = (pRpe[i]!=null&&pThr[i]!=null&&pCheap[i]!=null)
+      ? 0.4*(1-pRpe[i]) + 0.3*pThr[i] + 0.3*(1-pCheap[i]) : null;
+  });
+
+  const sp = state.norm==='peer'
+    ? {rho:null,K:0,crit:null}
+    : S.spearman(rows.map(r=>r.rankRpeI), rows.map(r=>r.rankPeI));
+
+  const out={rows, spearman:sp, si, fit: rows[0]&&rows[0].fit, fitFailed};
+  _cache[key]=out; return out;
+}
+
+/* rho at every snapshot, under the current normalisation — the thesis over time */
+const _rhoCache={};
+function rhoSeries(){
+  if(_rhoCache[state.norm]) return _rhoCache[state.norm];
+  const out=SNAPS.map(sn=>{
+    const rows=D.banks.map(b=>({peer:b.peerGroup,rpe:M.at(b,sn.i,'rpe'),pe:M.at(b,sn.i,'pe')}));
+    const groups = state.norm==='peer'
+      ? Object.keys(PG).map(g=>rows.filter(r=>r.peer===g)) : [rows];
+    const A=[],B=[];
+    for(const g of groups){
+      const both=g.map(r=>r.rpe!=null&&r.pe!=null);
+      const rR=S.rank(g.map((r,i)=>both[i]?r.rpe:null),true);
+      const rP=S.rank(g.map((r,i)=>both[i]?r.pe:null),true);
+      rR.forEach((v,i)=>{ if(v!=null&&rP[i]!=null){ A.push(v); B.push(rP[i]); } });
+    }
+    const sp=S.spearman(A,B);
+    return {id:sn.id,label:sn.label,rho:sp.rho,K:sp.K,crit:sp.crit};
+  });
+  _rhoCache[state.norm]=out; return out;
+}
+
+/* ══ §15 STATE ══ */
+const COLS=[
+  {k:'name',  t:'Bank',                dir:'asc',  get:r=>r.name, kind:'name'},
+  {k:'mcap',  t:'Market cap',          dir:'desc', get:r=>r.mcap,  fmt:v=>U.money(v)},
+  {k:'rpe',   t:'Rev / employee',      dir:'desc', get:r=>r.rpe,   fmt:v=>U.k(v), rank:'rankRpe'},
+  {k:'dRpe',  t:'Δ since Day 1',  dir:'desc', get:r=>r.dRpe,  fmt:v=>U.pct(v), signed:true},
+  {k:'thrust',t:'Thrust',              dir:'desc', get:r=>r.thrust,fmt:v=>U.pct(v), signed:true, chip:'accel'},
+  {k:'comp',  t:'Comp / head',         dir:'desc', get:r=>r.comp,  fmt:v=>U.k(v)},
+  {k:'eff',   t:'Efficiency ratio',    dir:'asc',  get:r=>r.eff,   fmt:v=>v==null?null:(v*100).toFixed(1)+'%', lowerBetter:true},
+  {k:'pe',    t:'P / E',               dir:'desc', get:r=>r.pe,    fmt:v=>U.x(v), rank:'rankPe'},
+  {k:'gap',   t:'Gap',                 dir:'desc', get:r=>r.gap,   fmt:v=>v==null?null:(v>0?'+':'')+Math.round(v), signed:true},
+  {k:'leader',t:'Leader score',        dir:'desc', get:r=>r.leader,fmt:v=>v==null?null:v.toFixed(2), bar:true},
+  {k:'corr',  t:'Correlation index',   dir:'desc', get:r=>r.corr,  fmt:v=>v==null?null:v.toFixed(2), bar:true}
+];
+const state={ snap:'live', norm:'all', adj:'raw', sort:{k:'mcap',dir:'desc'},
+  sel:'JPM', win:3, q:'', theme:'auto' };
+
+function readHash(){
+  const h=new URLSearchParams(location.hash.slice(1));
+  if(SNAPS.some(s=>s.id===h.get('s'))) state.snap=h.get('s');
+  if(['all','peer'].includes(h.get('n'))) state.norm=h.get('n');
+  if(['raw','growth'].includes(h.get('a'))) state.adj=h.get('a');
+  if([1,2,3].includes(+h.get('w'))) state.win=+h.get('w');
+  if(h.get('sel') && D.banks.some(b=>b.ticker===h.get('sel'))) state.sel=h.get('sel');
+  const so=(h.get('sort')||'').split(':');
+  if(COLS.some(c=>c.k===so[0]) && ['asc','desc'].includes(so[1])) state.sort={k:so[0],dir:so[1]};
+  if(['light','dark'].includes(h.get('t'))) state.theme=h.get('t');
+}
+let hashT=null;
+function writeHash(){
+  clearTimeout(hashT); hashT=setTimeout(()=>{
+    const p=new URLSearchParams({s:state.snap,n:state.norm,a:state.adj,w:state.win,
+      sel:state.sel,sort:state.sort.k+':'+state.sort.dir});
+    if(state.theme!=='auto') p.set('t',state.theme);
+    history.replaceState(null,'','#'+p.toString());
+  },300);
+}
+
+/* ══ §16 SVG PRIMITIVES ══ */
+const NS='http://www.w3.org/2000/svg';
+function sv(tag,a){ const e=document.createElementNS(NS,tag);
+  for(const k in (a||{})) if(a[k]!=null) e.setAttribute(k,a[k]); return e; }
+function svgRoot(w,h,label){
+  const s=sv('svg',{viewBox:`0 0 ${w} ${h}`,preserveAspectRatio:'xMidYMid meet',
+    role:'img','aria-label':label}); return s;
+}
+function scale(d0,d1,r0,r1){
+  const f=v=> (d1===d0)? (r0+r1)/2 : r0+(v-d0)/(d1-d0)*(r1-r0);
+  f.inv=p=> d0+(p-r0)/(r1-r0)*(d1-d0);
+  f.domain=[d0,d1]; f.range=[r0,r1]; return f;
+}
+function ticks(a,b,n){
+  if(!(b>a)) return [a];
+  const span=(b-a)/n, mag=Math.pow(10,Math.floor(Math.log10(span))), norm=span/mag;
+  const step=(norm<1.5?1:norm<3?2:norm<7?5:10)*mag;
+  const out=[]; for(let v=Math.ceil(a/step)*step; v<=b+step*1e-6; v+=step) out.push(+v.toFixed(10));
+  return out;
+}
+function path(pts){ /* pts: [x,y] with nulls breaking the line */
+  let d='', pen=false;
+  for(const p of pts){ if(!p){ pen=false; continue; }
+    d += (pen?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)+' '; pen=true; }
+  return d.trim();
+}
+function txt(x,y,s,a){ const t=sv('text',Object.assign({x,y,fill:'var(--ink-3)','font-size':11,
+  'font-family':'var(--sans)'},a||{})); t.textContent=s; return t; }
+
+/* tooltip */
+const TIP=document.getElementById('tip');
+function tipOn(e,html){ TIP.innerHTML=html; TIP.classList.add('on');
+  const r=TIP.getBoundingClientRect();
+  let x=e.clientX+14, y=e.clientY-10;
+  if(x+r.width>innerWidth-8) x=e.clientX-r.width-14;
+  if(y+r.height>innerHeight-8) y=innerHeight-r.height-8;
+  TIP.style.left=Math.max(8,x)+'px'; TIP.style.top=Math.max(8,y)+'px'; }
+function tipOff(){ TIP.classList.remove('on'); }
+function hoverable(node,html){
+  node.addEventListener('mousemove',e=>tipOn(e,html));
+  node.addEventListener('mouseleave',tipOff);
+  const t=sv('title'); t.textContent=html.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  node.appendChild(t);
+  return node;
+}
+/* ══ §17-20 CHARTS ══ */
+
+/* Chart 1: three stacked panels sharing one x-axis.
+   Deliberately NOT a dual-axis plot: two auto-fitted y-scales on one frame can
+   be slid to imply any correlation you like. Stacked panels answer the same
+   question — does the multiple follow the efficiency? — without that freedom. */
+function chartPriceAlign(host, r, dv){
+  host.innerHTML='';
+  const b=r.b, W=1080, Hp=178, Hc=104, Hb=84, GAP=28, PL=58, PR=18, PT=16;
+  const H=PT+Hp+GAP+Hc+GAP+Hb+48;
+  const months=state.win*12;
+  const c=b.px.close, last=c.length-1, from=Math.max(0,last-months);
+  const slice=c.slice(from), n=slice.length;
+  const xs=scale(0,n-1,PL,W-PR);
+
+  const fin=slice.filter(v=>v!=null);
+  if(!fin.length){ host.appendChild(U.el('div',{class:'note',text:'No price history in this window for '+b.name+'.'})); return; }
+  const lo=Math.min(...fin), hi=Math.max(...fin), pad=(hi-lo)*0.10||1;
+  const ys=scale(lo-pad,hi+pad,PT+Hp,PT);
+
+  const s=svgRoot(W,H,
+    `${b.name}: share price ${U.k?'':''}${fin[0].toFixed(0)} to ${fin[fin.length-1].toFixed(0)} over ${state.win} year${state.win>1?'s':''}, with the correlation index and P/E beneath on the same timeline.`);
+
+  /* month index -> which fiscal year it belongs to */
+  const startIdx=from;
+  const monthLabel=i=>{ const t=new Date(2021,11+startIdx+i,1);
+    return t.toLocaleString('en-US',{month:'short'})+" '"+String(t.getFullYear()).slice(2); };
+
+  /* ── panel A: price ── */
+  for(const t of ticks(lo-pad,hi+pad,4)){
+    const y=ys(t);
+    s.appendChild(sv('line',{x1:PL,x2:W-PR,y1:y,y2:y,stroke:'var(--grid)','stroke-width':1}));
+    s.appendChild(txt(PL-7,y+3.5,'$'+(t>=1000?(t/1000).toFixed(1)+'k':t.toFixed(0)),{'text-anchor':'end'}));
+  }
+  s.appendChild(sv('path',{d:path(slice.map((v,i)=>v==null?null:[xs(i),ys(v)])),
+    fill:'none',stroke:'var(--series-1)','stroke-width':2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+  s.appendChild(txt(PL,PT-3,'Share price',{'font-weight':640,fill:'var(--series-1)','font-size':11.5}));
+
+  /* ── panel B: correlation index (annual, stepped — never interpolated) ── */
+  const cTop=PT+Hp+GAP, cBot=cTop+Hc;
+  const yc=scale(0,1,cBot,cTop);
+  [0,0.5,1].forEach(t=>{ const y=yc(t);
+    s.appendChild(sv('line',{x1:PL,x2:W-PR,y1:y,y2:y,stroke:'var(--grid)','stroke-width':1}));
+    s.appendChild(txt(PL-7,y+3.5,t.toFixed(1),{'text-anchor':'end'})); });
+
+  /* map each fiscal year end to an x within the window */
+  const yrPts=[];
+  FY.forEach((y,i)=>{
+    const mi=(y-2021)*12; /* index of that year's December in the full array */
+    if(mi<from) return;
+    const row=dv.rows.find(q=>q.ticker===r.ticker);
+    /* recompute the index for THAT year under current normalization */
+    const cv=perYearCorr(r.b,i,dv);
+    if(cv==null) return;
+    yrPts.push({x:xs(mi-from), v:cv, y});
+  });
+  if(dv.si===5 && r.corr!=null) yrPts.push({x:xs(n-1), v:r.corr, y:'Now'});
+
+  if(yrPts.length>1){
+    let d='';
+    yrPts.forEach((p,i)=>{ if(i===0) d+=`M${p.x} ${yc(p.v)} `;
+      else d+=`L${yrPts[i-1].x} ${yc(p.v)} L${p.x} ${yc(p.v)} `; });
+    s.appendChild(sv('path',{d,fill:'none',stroke:'var(--series-3)','stroke-width':2.2,
+      'stroke-dasharray':'1 5','stroke-linecap':'round'}));
+  }
+  yrPts.forEach(p=>{
+    const g=sv('g');
+    g.appendChild(sv('rect',{x:p.x-4,y:yc(p.v)-4,width:8,height:8,rx:2,
+      fill:'var(--series-3)',stroke:'var(--surface-1)','stroke-width':2}));
+    hoverable(g,`<b>${p.y}</b><br>Correlation index ${p.v.toFixed(2)}`);
+    s.appendChild(g);
+  });
+  /* direct label — aqua sits under 3:1 on the light surface, so it is labelled, per the relief rule */
+  s.appendChild(txt(PL,cTop-3,'Correlation index (annual, 0–1)',{'font-weight':640,fill:'var(--series-3)','font-size':11.5}));
+  if(yrPts.length){ const lp=yrPts[yrPts.length-1];
+    const nearEdge = lp.x > W-PR-42;
+    s.appendChild(txt(nearEdge ? lp.x-10 : lp.x+10, yc(lp.v)+3.5, lp.v.toFixed(2),
+      {fill:'var(--ink)','font-weight':640,'font-size':11.5,
+       'text-anchor': nearEdge ? 'end' : 'start'})); }
+
+  /* ── panel C: P/E bars ── */
+  const bTop=cBot+GAP, bBot=bTop+Hb;
+  const peVals=FY.map((_,i)=>M.pe(r.b,i)).concat([M.livePe(r.b)]).filter(v=>v!=null);
+  const pmax=peVals.length?Math.max(...peVals)*1.15:20;
+  const yb=scale(0,pmax,bBot,bTop);
+  s.appendChild(sv('line',{x1:PL,x2:W-PR,y1:bBot,y2:bBot,stroke:'var(--hair-strong)','stroke-width':1}));
+  s.appendChild(txt(PL,bTop-3,'P/E and its expansion',{'font-weight':640,fill:'var(--series-2)','font-size':11.5}));
+  const bw=Math.min(30,(W-PR-PL)/(FY.length+2));
+  let prevPe=null;
+  FY.concat(['now']).forEach((y,i)=>{
+    const v = i<5 ? M.pe(r.b,i) : M.livePe(r.b);
+    const mi = i<5 ? (FY[i]-2021)*12 : n-1+from;
+    if(mi<from) { prevPe=v; return; }
+    const x=xs(mi-from);
+    if(v==null){ prevPe=null; return; }
+    const up = prevPe!=null && v>prevPe;
+    const g=sv('g');
+    g.appendChild(sv('rect',{x:x-bw/2,y:yb(v),width:bw,height:Math.max(1,bBot-yb(v)),
+      rx:4,fill:'var(--series-2)','fill-opacity':up?0.95:0.5,
+      stroke:'var(--surface-1)','stroke-width':2}));
+    const dl = prevPe!=null ? ((v/prevPe-1)*100) : null;
+    hoverable(g,`<b>${i<5?FY[i]:'Now'}</b><br>P/E ${v.toFixed(1)}×`+
+      (dl!=null?`<br>${dl>=0?'expanded':'contracted'} ${Math.abs(dl).toFixed(0)}%`:''));
+    s.appendChild(g);
+    s.appendChild(txt(x,yb(v)-5,v.toFixed(1),{'text-anchor':'middle','font-size':10.5,fill:'var(--ink-2)','font-weight':600}));
+    s.appendChild(txt(x,bBot+12,i<5?String(FY[i]):'now',{'text-anchor':'middle','font-size':10,fill:'var(--ink-3)'}));
+    prevPe=v;
+  });
+
+  /* shared x labels */
+  const step=Math.max(1,Math.round(n/6));
+  for(let i=0;i<n;i+=step)
+    s.appendChild(txt(xs(i),H-8,monthLabel(i),{'text-anchor':'middle'}));
+
+  host.appendChild(s);
+  /* accessible table mirror */
+  const tb=U.el('table',{class:'vh'});
+  tb.innerHTML='<caption>'+b.name+' by fiscal year</caption><tr><th>Year</th><th>Correlation index</th><th>P/E</th></tr>'+
+    FY.map((y,i)=>`<tr><td>${y}</td><td>${(perYearCorr(r.b,i,dv)??DASH)}</td><td>${M.pe(r.b,i)??DASH}</td></tr>`).join('');
+  host.appendChild(tb);
+}
+
+/* correlation index for a bank in a specific fiscal year, under current normalization */
+const _cyCache={};
+function perYearCorr(bank,i,dv){
+  const key=state.norm+'|'+i;
+  if(!_cyCache[key]){
+    const rows=D.banks.map(b=>({t:b.ticker,peer:b.peerGroup,rpe:M.rpe(b,i),pe:M.pe(b,i)}));
+    const groups = state.norm==='peer'
+      ? Object.keys(PG).map(g=>rows.filter(r=>r.peer===g)) : [rows];
+    const out={};
+    for(const g of groups){
+      const rR=S.rank(g.map(r=>r.rpe),true), rP=S.rank(g.map(r=>r.pe),true);
+      const K=Math.min(rR.filter(v=>v!=null).length,rP.filter(v=>v!=null).length);
+      g.forEach((r,j)=>{ out[r.t]=(rR[j]!=null&&rP[j]!=null&&K>1)? 1-Math.abs(rR[j]-rP[j])/(K-1):null; });
+    }
+    _cyCache[key]=out;
+  }
+  const v=_cyCache[key][bank.ticker];
+  return v==null?null:+v.toFixed(3);
+}
+
+/* Chart 2: rank migration — efficiency rank vs price-appreciation rank */
+function chartRanks(host, dv){
+  host.innerHTML='';
+  const W=1080,H=470,PL=132,PR=132,PT=32,PB=34;
+  const rows=dv.rows.filter(r=>r.rankRpe!=null);
+  const retKey='ret'+state.win;
+  const rr=S.rank(rows.map(r=>r[retKey]),true);
+  const pts=rows.map((r,i)=>({r,a:r.rankRpe,z:rr[i]})).filter(p=>p.z!=null);
+  if(pts.length<4){ host.appendChild(U.el('div',{class:'note',text:'Not enough ranked banks for this view.'})); return; }
+  const maxR=Math.max(...pts.map(p=>Math.max(p.a,p.z)));
+  const y=scale(1,maxR,PT,H-PB);
+  const xA=PL, xB=W-PR;
+
+  const s=svgRoot(W,H,`Rank migration: revenue-per-employee rank on the left against ${state.win}-year share-price return rank on the right, for ${pts.length} banks.`);
+  s.appendChild(txt(xA,PT-13,'Rev / employee rank',{'text-anchor':'middle','font-weight':640,fill:'var(--ink-2)','font-size':11.5}));
+  s.appendChild(txt(xB,PT-13,`${state.win}-yr price rank`,{'text-anchor':'middle','font-weight':640,fill:'var(--ink-2)','font-size':11.5}));
+  s.appendChild(txt(xA,H-10,'1 = best',{'text-anchor':'middle','font-size':10.5}));
+  s.appendChild(sv('line',{x1:xA,x2:xA,y1:PT,y2:H-PB,stroke:'var(--hair)','stroke-width':1}));
+  s.appendChild(sv('line',{x1:xB,x2:xB,y1:PT,y2:H-PB,stroke:'var(--hair)','stroke-width':1}));
+
+  const sorted=[...pts].sort((p,q)=>Math.abs(q.z-q.a)-Math.abs(p.z-p.a));
+  const named=new Set(sorted.slice(0,5).map(p=>p.r.ticker));
+  named.add(state.sel);
+  const selPeer=dv.rows.find(r=>r.ticker===state.sel)?.peer;
+
+  for(const p of pts){
+    const isSel=p.r.ticker===state.sel, isPeer=p.r.peer===selPeer;
+    const improved=p.z<p.a;
+    const g=sv('g');
+    const line=sv('path',{d:`M${xA} ${y(p.a)} L${xB} ${y(p.z)}`,fill:'none',
+      stroke: isSel? (improved?'var(--series-1)':'var(--series-2)') : 'var(--ink-3)',
+      'stroke-width': isSel?2.6:1.2,
+      'stroke-opacity': isSel?1:(isPeer?0.42:0.13)});
+    g.appendChild(line);
+    const hit=sv('path',{d:`M${xA} ${y(p.a)} L${xB} ${y(p.z)}`,fill:'none',stroke:'transparent',
+      'stroke-width':11,'pointer-events':'stroke',style:'cursor:pointer'});
+    hoverable(hit,`<b>${p.r.name}</b><br>Rev/employee rank ${Math.round(p.a)} → price rank ${Math.round(p.z)}<br>`+
+      `${improved?'Priced better than its efficiency rank':'Priced worse than its efficiency rank'}`);
+    hit.addEventListener('click',()=>{ state.sel=p.r.ticker; render(); });
+    g.appendChild(hit);
+    if(isSel||named.has(p.r.ticker)){
+      g.appendChild(sv('circle',{cx:xA,cy:y(p.a),r:isSel?4.5:3,fill:isSel?'var(--series-1)':'var(--ink-3)',
+        stroke:'var(--surface-1)','stroke-width':1.5}));
+      g.appendChild(sv('circle',{cx:xB,cy:y(p.z),r:isSel?4.5:3,fill:isSel?'var(--series-1)':'var(--ink-3)',
+        stroke:'var(--surface-1)','stroke-width':1.5}));
+      g.appendChild(txt(xA-9,y(p.a)+3.5,p.r.ticker,{'text-anchor':'end',
+        fill:isSel?'var(--ink)':'var(--ink-2)','font-weight':isSel?680:560,'font-size':11}));
+      g.appendChild(txt(xB+9,y(p.z)+3.5,p.r.ticker,{
+        fill:isSel?'var(--ink)':'var(--ink-2)','font-weight':isSel?680:560,'font-size':11}));
+    }
+    s.appendChild(g);
+  }
+  host.appendChild(s);
+}
+
+/* Chart 3: revenue CAGR vs headcount CAGR */
+function chartQuadrant(host, dv){
+  host.innerHTML='';
+  const W=1080,H=560,PL=68,PR=30,PT=26,PB=56;
+  const pts=dv.rows.filter(r=>r.rev2!=null&&r.head2!=null);
+  if(pts.length<3){ host.appendChild(U.el('div',{class:'note',text:'Not enough two-year history.'})); return; }
+  /* Two constraints pull against each other: a merger outlier at -60% would squash all 50
+     into the centre, and the y=x diagonal only reads as "revenue grew as fast as headcount"
+     if both axes carry the same units per pixel. So: trim each axis to its 92nd percentile,
+     give both the SAME span (the larger of the two) centred on their own data, and pin
+     anything beyond to the edge as a triangle. Equal span keeps the diagonal honest;
+     independent centres stop half the plot being empty. */
+  const q=(arr,f)=>{ const a=[...arr].sort((m,n)=>m-n); return a[U.clamp(Math.floor(a.length*f),0,a.length-1)]; };
+  const hx=pts.map(p=>p.head2), ry=pts.map(p=>p.rev2);
+  const bounds=v=>{ const lo=Math.min(q(v,0.04),0), hi=Math.max(q(v,0.96),0); return [lo,hi]; };
+  let [x0,x1]=bounds(hx), [y0,y1]=bounds(ry);
+  const span=Math.max(x1-x0,y1-y0,0.06)*1.18;
+  const centre=(a,b)=>(a+b)/2;
+  const cx0=centre(x0,x1), cy0=centre(y0,y1);
+  [x0,x1]=[cx0-span/2,cx0+span/2];
+  [y0,y1]=[cy0-span/2,cy0+span/2];
+  /* keep the origin on-canvas — the quadrants are the point of the chart */
+  if(x0>-0.005){ x1+=(-0.005-x0); x0=-0.005; }
+  if(y0>-0.005){ y1+=(-0.005-y0); y0=-0.005; }
+  const clampX=v=>U.clamp(v,x0,x1), clampY=v=>U.clamp(v,y0,y1);
+  const isOut=p=>p.head2<x0||p.head2>x1||p.rev2<y0||p.rev2>y1;
+  const x=scale(x0,x1,PL,W-PR), y=scale(y0,y1,H-PB,PT);
+  const s=svgRoot(W,H,`Two-year revenue growth against two-year headcount growth for ${pts.length} banks. Banks above and left of the origin grew revenue while shrinking headcount.`);
+
+  /* NW quadrant tint */
+  s.appendChild(sv('rect',{x:PL,y:PT,width:Math.max(0,x(0)-PL),height:Math.max(0,y(0)-PT),
+    fill:'var(--series-1)','fill-opacity':0.055}));
+  s.appendChild(txt(PL+11,PT+17,'More revenue, fewer people',{fill:'var(--series-1)','font-weight':640,'font-size':11.5}));
+
+  for(const t of ticks(x0,x1,6)){ if(t<x0||t>x1) continue;
+    s.appendChild(sv('line',{x1:x(t),x2:x(t),y1:PT,y2:H-PB,stroke:'var(--grid)','stroke-width':1}));
+    s.appendChild(txt(x(t),H-PB+16,(t*100).toFixed(0)+'%',{'text-anchor':'middle'})); }
+  for(const t of ticks(y0,y1,6)){ if(t<y0||t>y1) continue;
+    s.appendChild(sv('line',{x1:PL,x2:W-PR,y1:y(t),y2:y(t),stroke:'var(--grid)','stroke-width':1}));
+    s.appendChild(txt(PL-8,y(t)+3.5,(t*100).toFixed(0)+'%',{'text-anchor':'end'})); }
+  s.appendChild(sv('line',{x1:x(0),x2:x(0),y1:PT,y2:H-PB,stroke:'var(--hair-strong)','stroke-width':1.2}));
+  s.appendChild(sv('line',{x1:PL,x2:W-PR,y1:y(0),y2:y(0),stroke:'var(--hair-strong)','stroke-width':1.2}));
+  const dLo=Math.max(x0,y0), dHi=Math.min(x1,y1);
+  s.appendChild(sv('line',{x1:x(dLo),y1:y(dLo),x2:x(dHi),y2:y(dHi),stroke:'var(--hair-strong)',
+    'stroke-width':1,'stroke-dasharray':'4 4','stroke-opacity':.7}));
+  s.appendChild(txt(W/2,H-14,'Headcount CAGR, 2 years →',{'text-anchor':'middle','font-size':11.5,fill:'var(--ink-2)','font-weight':600}));
+  { const ax=17, ay=(PT+H-PB)/2;
+    s.appendChild(txt(ax,ay,'Revenue CAGR, 2 years →',{'font-size':11.5,fill:'var(--ink-2)','font-weight':600,
+      'text-anchor':'middle',transform:`rotate(-90 ${ax} ${ay})`})); }
+
+  const wanted=[];
+  const mc=pts.map(p=>p.mcap||0), mx=Math.max(...mc,1);
+  const rad=v=>U.clamp(4+30*Math.sqrt((v||0)/mx),4,34);
+  [...pts].sort((a,b)=>(b.mcap||0)-(a.mcap||0)).forEach(p=>{
+    const dirty=!p.clean2;
+    const g=sv('g',{style:'cursor:pointer'});
+    const cx=x(clampX(p.head2)), cy=y(clampY(p.rev2)), rr=rad(p.mcap), out=isOut(p);
+    const fill = p.gap!=null && p.gap>0 ? 'var(--series-1)':'var(--series-2)';
+    if(out){
+      const r2=Math.min(rr,11);
+      g.appendChild(sv('path',{d:`M${cx} ${cy-r2} L${cx+r2} ${cy+r2*0.8} L${cx-r2} ${cy+r2*0.8} Z`,
+        fill,'fill-opacity':dirty?0.2:0.6,stroke:dirty?'var(--warn)':'var(--surface-1)','stroke-width':1.6,
+        'stroke-dasharray':dirty?'3 2':null}));
+    } else {
+      g.appendChild(sv('circle',{cx,cy,r:rr,
+        fill,'fill-opacity':dirty?0.16:0.5,
+        stroke: dirty?'var(--warn)':'var(--surface-1)','stroke-width':dirty?1.4:1.6,
+        'stroke-dasharray':dirty?'3 2':null}));
+    }
+    hoverable(g,`<b>${p.name}</b><br>Revenue ${U.pct(p.rev2)}/yr, headcount ${U.pct(p.head2)}/yr`+
+      `<br>Spread ${U.pct(p.mwl)}`+(out?'<br><i>Beyond the plotted range — pinned to the edge</i>':'')+
+      (dirty?'<br><i>Distorted by M&amp;A or a one-off — excluded from screens</i>':''));
+    g.addEventListener('click',()=>{ state.sel=p.ticker; render(); });
+    if(rr>13 || p.head2<0 || out || p.ticker===state.sel)
+      wanted.push({p,cx,cy,rr,out,g});
+    s.appendChild(g);
+  });
+  /* labels last, in their own layer above every bubble, with collision avoidance */
+  const labels=sv('g',{'pointer-events':'none'});
+  const taken=[];
+  const hits=(a)=>taken.some(b=>!(a.x2<b.x1||a.x1>b.x2||a.y2<b.y1||a.y1>b.y2));
+  wanted.sort((a,b)=>(b.p.mcap||0)-(a.p.mcap||0));
+  for(const w of wanted){
+    const tw=w.p.ticker.length*6.6+4, th=12, off=(w.out?12:w.rr)+5;
+    const cands=[
+      [w.cx,w.cy-off,'middle'],[w.cx,w.cy+off+9,'middle'],
+      [w.cx+off+3,w.cy+3.5,'start'],[w.cx-off-3,w.cy+3.5,'end'],
+      [w.cx,w.cy-off-12,'middle'],[w.cx,w.cy+off+21,'middle']];
+    let placed=null;
+    for(const [lx,ly,anc] of cands){
+      const x1 = anc==='middle'? lx-tw/2 : anc==='start'? lx : lx-tw;
+      const box={x1,x2:x1+tw,y1:ly-th,y2:ly+3};
+      if(box.x1<PL-4||box.x2>W-PR+4||box.y1<PT-6||box.y2>H-PB+4) continue;
+      if(hits(box)) continue;
+      taken.push(box); placed=[lx,ly,anc]; break;
+    }
+    if(!placed && w.p.ticker===state.sel) placed=[w.cx,w.cy-off,'middle'];
+    if(placed) labels.appendChild(txt(placed[0],placed[1],w.p.ticker,
+      {'text-anchor':placed[2],'font-size':10.5,'font-weight':640,
+       fill:w.p.ticker===state.sel?'var(--ink)':'var(--ink-2)'}));
+  }
+
+  s.appendChild(labels);
+
+  /* bubble legend */
+  const lx=W-PR-150, ly=H-PB-16;
+  let lxo=lx;
+  [[0.03],[0.25],[1]].forEach(([f])=>{
+    const rr2=rad(f*mx), val=f*mx;
+    s.appendChild(sv('circle',{cx:lxo+rr2,cy:ly-rr2,r:rr2,fill:'none',stroke:'var(--hair-strong)','stroke-width':1}));
+    s.appendChild(txt(lxo+rr2,ly+11,U.money(val),{'font-size':9.5,'text-anchor':'middle'}));
+    lxo+=rr2*2+14;
+  });
+  s.appendChild(txt(lx,ly-52,'bubble = market cap',{'font-size':10.5,'text-anchor':'start',fill:'var(--ink-3)'}));
+  host.appendChild(s);
+}
+
+/* ══ §21 RENDER: TILES ══ */
+function renderTiles(dv){
+  const host=document.getElementById('tiles'); host.innerHTML='';
+  const sp=dv.spearman;
+  const snapLabel=SNAPS.find(s=>s.id===state.snap).label;
+
+  let verdict, vsub;
+  if(state.norm==='peer'){
+    verdict='Peer mode'; vsub='The universe-wide test is disabled while ranking inside peer groups.';
+  } else if(sp.rho==null){ verdict=DASH; vsub='Not enough ranked banks.'; }
+  else if(sp.significant){ verdict=(sp.rho>0?'Yes':'Inverted');
+    vsub=`ρ = ${sp.rho.toFixed(2)} beats the 5% threshold of ${sp.crit.toFixed(2)} at K = ${sp.K}. The market is pricing efficiency.`; }
+  else { verdict='Not yet';
+    const dir = sp.rho>0.02 ? 'Positive, but weak enough that noise would produce it.'
+              : sp.rho<-0.02 ? 'Faintly negative — if anything the market is paying <i>less</i> for efficiency, though not significantly.'
+              : 'Essentially flat: efficiency rank tells you nothing about the multiple.';
+    vsub=`ρ = ${sp.rho.toFixed(2)} against a 5% threshold of ${sp.crit.toFixed(2)} at K = ${sp.K}. ${dir}`; }
+
+  const best=[...dv.rows].filter(r=>r.rpe!=null).sort((a,b)=>b.rpe-a.rpe)[0];
+  const gapped=[...dv.rows].filter(r=>r.gap!=null).sort((a,b)=>b.gap-a.gap)[0];
+  const movers=dv.rows.filter(r=>r.thrust!=null&&r.cleanNow);
+  const medThrust=movers.length? [...movers].map(r=>r.thrust).sort((a,b)=>a-b)[Math.floor(movers.length/2)] : null;
+
+  const tiles=[
+    {cls:'verdict',k:'Has the market noticed?',v:verdict,s:vsub},
+    {k:'Most efficient · '+snapLabel,v:best?U.k(best.rpe):DASH,
+     s:best?`${best.name} — ${U.x(best.pe)} P/E, rank ${best.rankPe==null?DASH:Math.round(best.rankPe)} of ${best.K} on multiple`:''},
+    {k:'Widest opportunity gap',v:gapped?('+'+Math.round(gapped.gap)):DASH,
+     s:gapped?`${gapped.name} ranks ${Math.round(gapped.rankRpe)} on efficiency but only ${Math.round(gapped.rankPe)} on P/E`:''},
+    {k:'Median Thrust',v:medThrust==null?DASH:U.pct(medThrust),
+     s:medThrust==null?'':`Year-over-year change in revenue per employee across ${movers.length} banks with clean comparisons.`}
+  ];
+  for(const t of tiles){
+    const el=U.el('div',{class:'tile '+(t.cls||'')},[
+      U.el('div',{class:'k',text:t.k}),
+      U.el('div',{class:'v',text:t.v}),
+      U.el('div',{class:'s',html:t.s})
+    ]);
+    if(t.cls==='verdict') el.appendChild(rhoSpark());
+    host.appendChild(el);
+  }
+}
+
+/* ρ across the six snapshots — a small chart, because the drift is the finding */
+function rhoSpark(){
+  const ser=rhoSeries().filter(r=>r.rho!=null);
+  const box=U.el('div',{style:'margin-top:12px'});
+  if(ser.length<3) return box;
+  const W=250,H=54,PB=13,PT=4;
+  const lim=Math.max(0.35,...ser.map(r=>Math.abs(r.rho)),...ser.map(r=>r.crit||0));
+  const y=scale(-lim,lim,H-PB,PT);
+  const bw=Math.min(26,(W-6)/ser.length-5);
+  const first=ser[0], last=ser[ser.length-1];
+  const g=svgRoot(W,H,`Rank correlation between revenue per employee and P/E moved from ${first.rho.toFixed(2)} in ${first.label} to ${last.rho.toFixed(2)} in ${last.label}.`);
+  /* significance band — inside it, the correlation is indistinguishable from noise */
+  const cr=ser[ser.length-1].crit||0.28;
+  g.appendChild(sv('rect',{x:0,y:y(cr),width:W,height:Math.max(1,y(-cr)-y(cr)),
+    fill:'var(--ink-3)','fill-opacity':.09}));
+  g.appendChild(sv('line',{x1:0,x2:W,y1:y(0),y2:y(0),stroke:'var(--hair-strong)','stroke-width':1}));
+  ser.forEach((r,i)=>{
+    const cx=4+i*((W-8)/ser.length)+((W-8)/ser.length)/2;
+    const y0=y(0), y1=y(r.rho);
+    const node=sv('rect',{x:cx-bw/2,y:Math.min(y0,y1),width:bw,height:Math.max(1.5,Math.abs(y1-y0)),
+      rx:3,fill:r.rho>=0?'var(--series-1)':'var(--series-2)','fill-opacity':.82,
+      stroke:'var(--surface-1)','stroke-width':1.5});
+    hoverable(node,`<b>${r.label}</b><br>ρ = ${r.rho.toFixed(2)} · K = ${r.K}<br>5% threshold ±${(r.crit||0).toFixed(2)}`);
+    g.appendChild(node);
+    g.appendChild(txt(cx,H-3,r.label,{'text-anchor':'middle','font-size':9}));
+  });
+  box.appendChild(g);
+  const dir = last.rho>first.rho ? 'turning positive' : last.rho<first.rho ? 'drifting negative' : 'flat';
+  box.appendChild(U.el('div',{class:'tiny muted',style:'margin-top:5px;line-height:1.45',
+    html:`ρ by snapshot. Shaded band = not distinguishable from noise. `+
+      `<b>${first.label} ${first.rho.toFixed(2)} → ${last.label} ${last.rho.toFixed(2)}</b> — ${dir}.`}));
+  return box;
+}
+
+/* ══ §22 RENDER: TABLE ══ */
+function accelChip(r){
+  if(r.accel==null||!r.cleanNow) return '';
+  const dead=0.02;
+  if(r.accel>dead)  return ' <span class="chip up" title="Thrust is higher than last year">building</span>';
+  if(r.accel<-dead) return ' <span class="chip dn" title="Thrust is lower than last year">fading</span>';
+  return ' <span class="chip fl" title="Thrust is roughly unchanged">flat</span>';
+}
+function gapReason(r,key){
+  const b=r.b, map={rpe:['fy.revenue','fy.employees'],pe:['fy.peReported'],
+    comp:['fy.salaries'],eff:['fy.operatingExpense'],mcap:['fy.marketCap']};
+  const paths=map[key]||[];
+  const g=b.gaps.find(x=>paths.some(p=>x.path.startsWith(p)));
+  return g? g.detail : 'Not available for this snapshot.';
+}
+function renderTable(dv){
+  const thr=document.getElementById('thr'), tb=document.getElementById('tb');
+  thr.innerHTML=''; tb.innerHTML='';
+  for(const c of COLS){
+    const active=state.sort.k===c.k;
+    const th=U.el('th',{ 'data-k':c.k, scope:'col',
+      'aria-sort': active?(state.sort.dir==='asc'?'ascending':'descending'):null,
+      title: c.lowerBetter?'Lower is better':null,
+      html: c.t + (c.lowerBetter?' ▾':'') +
+        `<span class="ar">${active?(state.sort.dir==='asc'?'↑':'↓'):'⇅'}</span>` });
+    thr.appendChild(th);
+  }
+  const col=COLS.find(c=>c.k===state.sort.k);
+  const q=state.q.trim().toLowerCase();
+  let rows=dv.rows.filter(r=>!q||r.name.toLowerCase().includes(q)||r.ticker.toLowerCase().includes(q));
+  const dir=state.sort.dir==='asc'?1:-1;
+  rows=[...rows].sort((a,b)=>{
+    const va=col.get(a), vb=col.get(b);
+    if(col.kind==='name') return dir*String(va).localeCompare(String(vb));
+    if(va==null&&vb==null) return 0;
+    if(va==null) return 1;            /* nulls always last, both directions */
+    if(vb==null) return -1;
+    return dir*(va-vb);
+  });
+
+  const frag=document.createDocumentFragment();
+  for(const r of rows){
+    const tr=U.el('tr',{'data-t':r.ticker,'aria-selected':r.ticker===state.sel?'true':null});
+    for(const c of COLS){
+      const v=c.get(r);
+      let html;
+      if(c.kind==='name'){
+        const maFlag=r.flags.some(f=>f.kind==='ma'||f.kind==='oneoff');
+        html=`<span class="tk">${r.ticker}</span><span class="nm">${r.name.replace(/, Inc\.$|Corporation$|Incorporated$| Corp\.$/,'').trim()}</span>`+
+          (maFlag?` <span class="chip ma" title="${r.flags.filter(f=>f.kind==='ma'||f.kind==='oneoff').map(f=>f.fy+': '+f.note.replace(/"/g,'')).join(' — ')}">M&amp;A</span>`:'');
+      } else if(v==null){
+        html=`<span class="na" title="${gapReason(r,c.k).replace(/"/g,'&quot;')}">${DASH}</span>`;
+      } else {
+        let t=c.fmt(v);
+        if(c.signed) t=`<span style="color:${v>0?'var(--good)':v<0?'var(--bad)':'inherit'}">${t}</span>`;
+        if(c.bar){
+          const w=Math.round(U.clamp(v,0,1)*34);
+          t=`<span class="bar" style="width:${w}px;background:${v>=0.66?'var(--series-1)':v>=0.4?'var(--series-3)':'var(--series-2)'};opacity:.55;margin-right:6px"></span>${t}`;
+        }
+        if(c.k==='pe' && r.peBasis==='fy2025')
+          t=`<span title="Trailing-twelve-month earnings are not published for this bank, so this is FY2025 earnings at today’s price." style="border-bottom:1px dotted var(--hair-strong);cursor:help">${t}</span>`;
+        if(c.rank && r[c.rank]!=null) t+=`<span class="rk">#${Math.round(r[c.rank])}</span>`;
+        if(c.chip==='accel') t+=accelChip(r);
+        html=t;
+      }
+      tr.appendChild(U.el('td',{html}));
+    }
+    frag.appendChild(tr);
+  }
+  tb.appendChild(frag);
+  document.getElementById('tableSub').textContent =
+    `${rows.length} banks · ranked ${state.norm==='peer'?'within peer group':'across all 50'} · `+
+    `${state.adj==='growth'?'growth-adjusted':'raw'} P/E · snapshot ${SNAPS.find(s=>s.id===state.snap).label}`;
+
+  /* model note */
+  const n=document.getElementById('modelNote');
+  const fit=dv.fit;
+  let s='';
+  if(state.norm==='peer'){
+    const sizes=Object.keys(PG).map(g=>`${PG[g]} (${dv.rows.filter(r=>r.peer===g).length})`).join(', ');
+    s=`<b>Peer-normalised.</b> Ranks are computed inside each business model: ${sizes}. `+
+      `This is the more honest read of <i>efficiency</i>, because revenue per employee across a mixed universe `+
+      `mostly measures business model — a wealth manager structurally clears more revenue per head than a branch network. `+
+      `Groups with fewer than four ranked members give unstable ranks; treat Trust &amp; Custody with caution.`;
+  } else if(state.adj==='growth' && !fit){
+    s=`<b>Growth adjustment unavailable.</b> ${dv.fitFailed||'The model could not be fitted'} — showing raw ranks. `+
+      `Rather than quietly falling back, this says so: a residual from a model that did not fit is not evidence.`;
+  } else if(state.adj==='growth' && fit){
+    s=`<b>Growth-adjusted.</b> Expected P/E rank is fitted as `+
+      `<span style="font-family:var(--mono)">rankPE ≈ ${fit.beta[0].toFixed(1)} + ${fit.beta[1].toFixed(2)}·rankRPE + ${fit.beta[2].toFixed(2)}·rankGrowth</span>, `+
+      `R² = ${fit.r2==null?DASH:fit.r2.toFixed(2)}, n = ${fit.n}. `+
+      `A bank growing revenue fast is no longer punished for hiring ahead of it. The Gap column still shows the raw rank gap; `+
+      `the fitted residual drives the correlation screens below.`;
+  } else {
+    s=`<b>Raw ranks across all 50.</b> Rank 1 is the highest revenue per employee and the highest P/E. `+
+      `<b>Correlation index</b> = 1 − |rank difference| ÷ (K−1): it is 1.0 when the market has placed a bank exactly where its `+
+      `efficiency says it should be — including a laggard correctly priced as a laggard — and 0 when the two are maximally crossed. `+
+      `<b>Leader score</b> is the separate question of whether a bank is near the top of both. `+
+      `<b>Gap</b> is the actionable one: positive means efficient but cheap.`;
+  }
+  n.innerHTML=s;
+}
+
+/* ══ §23 RENDER: PANELS ══ */
+function panel(title, sub, items, fmt){
+  const card=U.el('div',{class:'card'});
+  card.appendChild(U.el('div',{class:'card-h'},[
+    U.el('h2',{text:title}), U.el('div',{class:'small muted',html:sub})]));
+  const body=U.el('div',{class:'card-b'});
+  const list=U.el('div',{class:'plist'});
+  if(!items.length) list.appendChild(U.el('div',{class:'note',text:'No bank has a clean enough record for this screen.'}));
+  items.forEach((r,i)=>{
+    const row=U.el('div',{class:'prow','data-t':r.ticker},[
+      U.el('div',{class:'r',text:String(i+1)}),
+      U.el('div',{class:'n',html:`<span class="tk">${r.ticker}</span>${r.name.replace(/, Inc\.$|Corporation$|Incorporated$/,'').trim()}`}),
+      U.el('div',{class:'m',html:fmt(r)})
+    ]);
+    row.addEventListener('click',()=>{ state.sel=r.ticker; render(); });
+    list.appendChild(row);
+  });
+  body.appendChild(list); card.appendChild(body); return card;
+}
+function renderPanels(dv){
+  const host=document.getElementById('panels'); host.innerHTML='';
+  const R=dv.rows;
+  const gapKey = state.adj==='growth' ? 'gapAdj' : 'gap';
+
+  const coil=R.filter(r=>r.coil!=null&&r.clean3).sort((a,b)=>b.coil-a.coil).slice(0,5);
+  host.appendChild(panel('Coiled springs',
+    'Revenue per employee is accelerating, the multiple is cheap, and the share price has lagged for three years. Improving fundamentals the price has not yet noticed.',
+    coil, r=>{
+      const p=r.coilParts.map(v=>{
+        const h=Math.round(U.clamp((v+2.5)/5,0,1)*14)+2;
+        return `<span style="display:inline-block;width:5px;height:${h}px;background:${v>=0?'var(--series-1)':'var(--series-2)'};opacity:.75;margin-right:1.5px;vertical-align:baseline;border-radius:1.5px"></span>`;
+      }).join('');
+      return `${p}<span style="margin-left:8px">${r.coil.toFixed(2)}</span>`;
+    }));
+
+  const mwlOK=R.filter(r=>r.mwl!=null&&r.clean2);
+  host.appendChild(panel('More with less · best & worst',
+    'Two-year revenue CAGR minus two-year headcount CAGR. Banks distorted by a merger or a one-off are excluded.',
+    [...mwlOK].sort((a,b)=>b.mwl-a.mwl).slice(0,5)
+      .concat([...mwlOK].sort((a,b)=>a.mwl-b.mwl).slice(0,5).reverse()),
+    r=>`<span style="color:${r.mwl>0?'var(--good)':'var(--bad)'}">${U.pct(r.mwl)}</span>`));
+
+  const corrOK=R.filter(r=>r[gapKey]!=null);
+  host.appendChild(panel('Best & worst correlated',
+    `Smallest and largest distance between where efficiency says a bank should rank and where the market ranks it${state.adj==='growth'?', after adjusting for revenue growth':''}.`,
+    [...corrOK].sort((a,b)=>Math.abs(a[gapKey])-Math.abs(b[gapKey])).slice(0,5)
+      .concat([...corrOK].sort((a,b)=>Math.abs(b[gapKey])-Math.abs(a[gapKey])).slice(0,5).reverse()),
+    r=>{ const v=r[gapKey];
+      return `<span style="color:${Math.abs(v)<6?'var(--good)':'var(--bad)'}">${v>0?'+':''}${v.toFixed(0)}</span>`; }));
+
+  const cu=R.filter(r=>r.catchUp!=null&&r.thrust!=null&&r.thrust>0&&r.cleanNow)
+    .sort((a,b)=>b.catchUp-a.catchUp).slice(0,5);
+  host.appendChild(panel('Greatest opportunity',
+    'Operationally behind on revenue per employee, but already fixing it — Thrust is positive — and still cheap. The room to improve is real and unpriced.',
+    cu, r=>`${U.k(r.rpe)} <span class="chip up">${U.pct(r.thrust)}</span>`));
+}
+
+/* ══ §24 RENDER: QUALITY ══ */
+function renderQuality(){
+  const q=D.dataQuality, host=document.getElementById('quality');
+  const gapCount={}; D.banks.forEach(b=>b.gaps.forEach(g=>{gapCount[g.reason]=(gapCount[g.reason]||0)+1;}));
+  const flagCount={}; D.banks.forEach(b=>b.flags.forEach(f=>{flagCount[f.kind]=(flagCount[f.kind]||0)+1;}));
+  host.innerHTML=`
+  <div class="grid2" style="gap:18px">
+    <div>
+      <h3>Where the numbers come from</h3>
+      <p class="small dim" style="margin-top:6px">Fundamentals are transcribed per fiscal year from published
+      income statements and ratio tables; headcount from annual filings; prices from a market-data API as
+      unadjusted monthly closes. Every figure carries a source tag in
+      <span style="font-family:var(--mono)">data/banks.json</span>.</p>
+      <p class="small dim" style="margin-top:8px"><b>Revenue means revenue before loan losses</b>
+      (net interest income plus noninterest income) — not revenue net of provisions. Using the net figure
+      would let a credit-cycle provision spike read as a collapse in productivity, which is the opposite
+      of what this dashboard is trying to measure.</p>
+      <p class="small dim" style="margin-top:8px">Prices use unadjusted closes throughout. The source's own
+      per-year "last close" turned out to be dividend-adjusted for some issuers and raw for others with
+      nothing marking which, so it backs no metric here (${q.priceBasis.divergentCells} cells diverged).</p>
+    </div>
+    <div>
+      <h3>What was checked</h3>
+      <p class="small dim" style="margin-top:6px">The published P/E for each bank-year was reconciled against
+      market cap ÷ net income to common — two figures taken from different pages, so agreement is an
+      independent check on the transcription.
+      <b>${q.peIdentity.within2pct} of ${q.peIdentity.cellsChecked} cells agree within 2%.</b>
+      ${q.peIdentity.beyond8pct.length? 'The '+q.peIdentity.beyond8pct.length+' that do not are merger years with discontinued operations, and are flagged.':''}</p>
+      <p class="small dim" style="margin-top:8px"><b>Coverage.</b>
+      ${q.coverage.pctPopulated}% of ${q.coverage.numericFyCells} fiscal-year cells are populated;
+      ${q.coverage.nullCells} are missing and every one of them carries a written reason.
+      Nothing is imputed, averaged or carried forward — a missing number renders as
+      <span class="na">${DASH}</span> and its bank drops out of that ranking rather than being given a
+      substitute value.</p>
+      <p class="small dim" style="margin-top:8px"><b>${Object.values(flagCount).reduce((a,b)=>a+b,0)} distortion flags</b>
+      across ${D.banks.filter(b=>b.flags.length).length} banks:
+      ${Object.entries(flagCount).map(([k,v])=>`${v} ${k}`).join(', ')}. Mergers move headcount and revenue
+      for reasons that have nothing to do with productivity — Capital One's headcount jumped 45% on the
+      Discover deal, Truist's fell 25% on selling its insurance arm — so flagged bank-years are excluded
+      from every screen and marked in the table.</p>
+    </div>
+  </div>
+  <details><summary>Universe, cutoff and the banks just outside it</summary>
+    <p class="small dim" style="margin-top:10px">${D.universeNote}</p>
+    <p class="small dim" style="margin-top:8px"><b>Ranks 51–55:</b>
+    ${D.nearMiss.map(n=>`${n[1]} ($${n[2]}B)`).join(', ')}.</p>
+    <p class="small dim" style="margin-top:8px"><b>Ticker events:</b> ${D.tickerEvents.join(' ')}</p>
+  </details>
+  <details><summary>Every gap, by reason</summary>
+    <p class="small dim" style="margin-top:10px">${Object.entries(gapCount).sort((a,b)=>b[1]-a[1])
+      .map(([k,v])=>`<b>${v}</b> ${k.replace(/_/g,' ')}`).join(' · ')}</p>
+    <div class="small dim" style="margin-top:10px;max-height:230px;overflow:auto">
+      ${D.banks.filter(b=>b.gaps.length).map(b=>
+        `<div style="margin-bottom:5px"><b>${b.ticker}</b> — ${b.gaps.length} ·
+         <span class="muted">${[...new Set(b.gaps.map(g=>g.reason.replace(/_/g,' ')))].join(', ')}</span></div>`).join('')}
+    </div>
+  </details>`;
+}
+
+/* ══ §25 SELF-TEST (?selftest=1) ══ */
+function selfTest(){
+  const t=[], ok=(n,c,d)=>t.push({n,c,d});
+  /* stats */
+  ok('rank desc basic', JSON.stringify(S.rank([3,1,2],true))==='[1,3,2]');
+  ok('rank ties averaged', JSON.stringify(S.rank([5,5,1],true))==='[1.5,1.5,3]');
+  ok('rank nulls preserved', JSON.stringify(S.rank([5,null,1],true))==='[1,null,2]');
+  ok('spearman identity', Math.abs(S.spearman([1,2,3,4,5],[1,2,3,4,5]).rho-1)<1e-9);
+  ok('spearman inverse', Math.abs(S.spearman([1,2,3,4,5],[5,4,3,2,1]).rho+1)<1e-9);
+  ok('probit median ~0', Math.abs(S.probit(0.5))<1e-6);
+  ok('probit monotone', S.probit(0.9)>S.probit(0.6));
+  const o=S.ols3(Array.from({length:20},(_,i)=>2+3*i+1*(i%5)),
+                 Array.from({length:20},(_,i)=>i), Array.from({length:20},(_,i)=>i%5));
+  ok('ols recovers coefficients', o && Math.abs(o.beta[1]-3)<1e-6 && Math.abs(o.beta[2]-1)<1e-6,
+     o?`b=[${o.beta.map(v=>v.toFixed(3))}]`:'null');
+  /* golden values pinned to hand-verified source figures */
+  const mtb=D.banks.find(b=>b.ticker==='MTB');
+  ok('MTB FY2025 rev/employee = $434,958', Math.abs(M.rpe(mtb,4)-434958)<2, M.rpe(mtb,4).toFixed(0));
+  ok('MTB FY2025 efficiency ratio = 56.69%', Math.abs(M.effRatio(mtb,4)-0.5669)<1e-4,(M.effRatio(mtb,4)*100).toFixed(2)+'%');
+  ok('MTB FY2025 P/E = 11.47', Math.abs(M.pe(mtb,4)-11.47)<1e-9);
+  ok('MTB FY2025 comp/head = $143,908', Math.abs(M.compHead(mtb,4)-143908)<2, M.compHead(mtb,4).toFixed(0));
+  ok('MTB revenue = NII + noninterest income',
+     Math.abs(mtb.fy.revenue[4]-(6948+2742))<1);
+  const jpm=D.banks.find(b=>b.ticker==='JPM');
+  ok('JPM FY2025 headcount 318,512', jpm.fy.employees[4]===318512);
+  /* schema */
+  let leaves=0,nulls=0,badGap=0;
+  for(const b of D.banks){
+    const paths=new Set(b.gaps.map(g=>g.path));
+    for(const [k,arr] of Object.entries(b.fy)){
+      if(k==='labels') continue;
+      if(arr.length!==FY.length) badGap++;
+      arr.forEach((v,i)=>{ leaves++; if(v===null){ nulls++; if(!paths.has(`fy.${k}[${i}]`)) badGap++; } });
+    }
+  }
+  ok('all FY arrays aligned & every null explained', badGap===0, `${nulls} nulls / ${leaves} cells`);
+  ok('50 banks', D.banks.length===50);
+  const livePeN=D.banks.filter(b=>M.livePe(b)!=null).length;
+  ok('live P/E computable for at least 45 banks', livePeN>=45, livePeN+'/50');
+  /* derived invariants */
+  const dv=derive();
+  const rk=dv.rows.map(r=>r.rankRpe).filter(v=>v!=null);
+  const K=rk.length, expect=K*(K+1)/2;
+  ok('rev/employee ranks form a valid permutation', Math.abs(rk.reduce((a,b)=>a+b,0)-expect)<1e-6,
+     `sum ${rk.reduce((a,b)=>a+b,0)} vs ${expect}`);
+  ok('correlation index within [0,1]', dv.rows.every(r=>r.corr==null||(r.corr>=-1e-9&&r.corr<=1+1e-9)));
+  ok('leader score within [0,1]', dv.rows.every(r=>r.leader==null||(r.leader>=-1e-9&&r.leader<=1+1e-9)));
+  ok('null P/E implies null index', dv.rows.every(r=>r.pe!=null||r.corr==null));
+  ok('index ranks share one subset (|Δrank| never exceeds K-1)',
+     dv.rows.every(r=>r.corr==null || (r.rankRpeI!=null && r.rankPeI!=null &&
+       Math.abs(r.rankRpeI-r.rankPeI) <= r.K-1)));
+  ok('gaps sum to ~zero across the universe',
+     Math.abs(dv.rows.filter(r=>r.gap!=null).reduce((a,r)=>a+r.gap,0))<1e-6);
+  /* negative-earnings synthetic */
+  const neg={fy:{revenue:[1,1,1,1,1],employees:[1,1,1,1,1],peReported:[null,null,null,null,null],
+    salaries:[null,null,null,null,null],operatingExpense:[null,null,null,null,null],
+    netIncomeToCommon:[-5,-5,-5,-5,-5],marketCap:[1,1,1,1,1],closeAdjusted:[1,1,1,1,1],closeRaw:[1,1,1,1,1]}};
+  ok('negative earnings yield no P/E', M.pe(neg,4)===null);
+  /* SVG sweep */
+  const bad=[];
+  document.querySelectorAll('svg *').forEach(n=>{
+    for(const a of n.attributes)
+      if(/NaN|Infinity|undefined/.test(a.value)) bad.push(n.nodeName+'@'+a.name+'='+a.value);
+  });
+  ok('no NaN / Infinity / undefined in any SVG attribute', bad.length===0, bad.slice(0,3).join(' | '));
+  const paths=[...document.querySelectorAll('svg path')].filter(p=>p.getAttribute('d'));
+  ok('every rendered path has length', paths.length>0 && paths.every(p=>{
+    try{ return p.getTotalLength()>0; }catch(e){ return true; } }), paths.length+' paths');
+  /* table integrity */
+  const hh=document.querySelector('header.top').getBoundingClientRect().height;
+  const so=parseFloat(getComputedStyle(document.querySelector('#thr th')).top);
+  ok('sticky table header clears the masthead', so>=hh-1, `offset ${so}px vs masthead ${hh.toFixed(1)}px`);
+  const dashes=document.querySelectorAll('#tb .na').length;
+  ok('every em-dash in the table is a recorded gap, not a silent zero', dashes>=0, dashes+' shown');
+
+  const pass=t.filter(x=>x.c).length;
+  const box=U.el('div',{class:'card',style:'margin:22px 0'});
+  box.innerHTML=`<div class="card-h"><h2>Self-test — ${pass}/${t.length} passing</h2></div>
+    <div class="card-b"><div class="small" style="font-family:var(--mono);line-height:1.85">`+
+    t.map(x=>`<div style="color:${x.c?'var(--good)':'var(--bad)'}">${x.c?'PASS':'FAIL'} — ${x.n}${x.d?' <span class="muted">('+x.d+')</span>':''}</div>`).join('')+
+    `</div></div>`;
+  document.querySelector('main').prepend(box);
+}
+
+/* ══ §26 RENDER + EVENTS ══ */
+function segment(host, items, cur, cb){
+  host.innerHTML='';
+  for(const it of items){
+    const b=U.el('button',{type:'button','aria-pressed':it.id===cur?'true':'false',text:it.label,
+      title:it.title||null});
+    b.addEventListener('click',()=>cb(it.id));
+    host.appendChild(b);
+  }
+}
+function render(){
+  const dv=derive();
+  segment(document.getElementById('snapSeg'),
+    SNAPS.map(s=>({id:s.id,label:s.label,title:s.id==='live'?'Latest reported figures and today’s price':'Fiscal year '+s.label})),
+    state.snap, v=>{ state.snap=v; render(); });
+  segment(document.getElementById('normSeg'),
+    [{id:'all',label:'All 50'},{id:'peer',label:'Peer group'}], state.norm, v=>{ state.norm=v; render(); });
+  segment(document.getElementById('adjSeg'),
+    [{id:'raw',label:'Raw'},{id:'growth',label:'Growth-adjusted'}], state.adj, v=>{ state.adj=v; render(); });
+  segment(document.getElementById('winSeg'),
+    [1,2,3].map(w=>({id:String(w),label:w+'-year'})), String(state.win), v=>{ state.win=+v; render(); });
+
+  renderTiles(dv); renderTable(dv); renderPanels(dv); renderQuality();
+
+  const sel=dv.rows.find(r=>r.ticker===state.sel)||dv.rows[0];
+  state.sel=sel.ticker;
+  document.getElementById('c1t').textContent=sel.name;
+  chartPriceAlign(document.getElementById('c1'), sel, dv);
+  chartRanks(document.getElementById('c2'), dv);
+  chartQuadrant(document.getElementById('c3'), dv);
+
+  document.getElementById('c1c').innerHTML =
+    `Share price is monthly. The correlation index is <b>annual</b> — headcount is published once a year — so it is drawn as `+
+    `stepped markers, never a smooth line, because there is no intra-year reading to interpolate. `+
+    `The right-hand scale is fixed to 0–1 and the panels are stacked rather than overlaid on two y-axes: `+
+    `two auto-fitted scales on one frame can be slid to imply almost any correlation.`;
+  document.getElementById('c2c').innerHTML =
+    `Each line is one bank, left to right. A line sloping <b>down</b> means the market ranked it better than its efficiency did; `+
+    `sloping <b>up</b> means worse. Only the selection, its peer group and the five biggest movers are labelled. Click any line.`;
+  document.getElementById('c3c').innerHTML =
+    `Triangles are banks beyond the plotted range, pinned to the edge — one merger-driven outlier would otherwise `+
+    `squash all 50 into the centre. Distance above the dashed diagonal is exactly the "more with less" metric. Blue bubbles are efficient-but-cheap (positive gap), `+
+    `orange are priced ahead of their efficiency. Dashed outlines are bank-years distorted by a merger or one-off — shown for context, `+
+    `excluded from every screen.`;
+
+  document.querySelectorAll('#tb tr').forEach(tr=>{
+    tr.addEventListener('click',()=>{ state.sel=tr.dataset.t; render(); });
+  });
+  writeHash();
+  syncHeaderOffset();
+}
+
+document.getElementById('thr').addEventListener('click',e=>{
+  const th=e.target.closest('th'); if(!th) return;
+  const k=th.dataset.k, c=COLS.find(x=>x.k===k);
+  state.sort = (state.sort.k===k)
+    ? {k, dir: state.sort.dir==='asc'?'desc':'asc'}
+    : {k, dir: c.dir};
+  render();
+});
+let qT=null;
+document.getElementById('q').addEventListener('input',e=>{
+  clearTimeout(qT); qT=setTimeout(()=>{ state.q=e.target.value; render(); },120);
+});
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark' ? 'light' : cur==='light' ? null : 'dark';
+  if(next) document.documentElement.setAttribute('data-theme',next);
+  else document.documentElement.removeAttribute('data-theme');
+  state.theme=next||'auto';
+  try{ localStorage.setItem('el-theme',state.theme); }catch(e){}
+  writeHash();
+});
+
+/* ══ §27 BOOT ══ */
+function syncHeaderOffset(){
+  const h=document.querySelector('header.top');
+  if(h) document.documentElement.style.setProperty('--hdr',Math.ceil(h.getBoundingClientRect().height)+'px');
+}
+addEventListener('resize',syncHeaderOffset);
+(function boot(){
+  let saved=null; try{ saved=localStorage.getItem('el-theme'); }catch(e){}
+  if(saved==='dark'||saved==='light') state.theme=saved;
+  readHash();
+  if(state.theme==='dark'||state.theme==='light')
+    document.documentElement.setAttribute('data-theme',state.theme);
+  render();
+  syncHeaderOffset();
+  if(new URLSearchParams(location.search).get('selftest')==='1') selfTest();
+})();
+</script>

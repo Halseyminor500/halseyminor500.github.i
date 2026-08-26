@@ -1,0 +1,218 @@
+# Data: sources, method, and every known limit
+
+Everything the dashboard shows comes from `data/banks.json`. That file is the source of truth;
+`index.html` is generated from it and contains no numbers of its own.
+
+---
+
+## 1. The universe
+
+**Top 50 US bank holding companies and savings & loan holding companies by equity market
+capitalisation** — effectively the Federal Reserve's FR Y-9C filer population, ranked by market cap.
+
+Built by taking four industry lists (`banks-diversified`, `banks-regional`, `capital-markets`,
+`credit-services`), dropping non-US issuers, dropping non-BHC names, and taking the top 50 by
+market cap. No single published list works: the "banks" list omits Goldman, Morgan Stanley,
+Schwab, Amex and Capital One — five of the seven peer groups — while including roughly thirty
+foreign issuers.
+
+**Included** because they are Fed-supervised holding companies: GS, MS, SCHW, AXP, COF, SYF,
+ALLY, SOFI, BK/BNY, STT, NTRS, RJF, SF, AMP.
+**Excluded**: payment networks (V, MA — not banks), non-BHC brokers and fintechs (HOOD, IBKR,
+LPLA, JEF, AFRM, PYPL), and all foreign issuers.
+
+Ranks 51–55, just outside the cut: Hancock Whitney $6.07B, Ameris $6.06B, Atlantic Union $6.05B,
+Home BancShares $5.79B, Bank OZK $5.64B.
+
+**Ticker events.** DFS (Discover) merged into COF, May 2025 — Discover's pre-merger history is
+*not* attributed to COF. NYCB renamed FLG (Flagstar Financial), 2024 — same issuer, continuous
+history. COOP (Mr. Cooper) delisted Oct 2025, excluded.
+
+### Peer groups (hand-assigned; no source publishes this taxonomy)
+
+| Group | n | Members |
+|---|---|---|
+| Universal / GSIB | 4 | JPM BAC WFC C |
+| Capital Markets & Wealth | 6 | MS GS SCHW RJF SF AMP |
+| Trust & Custody | 3 | BNY STT NTRS |
+| Consumer Finance & Digital | 5 | AXP COF SYF ALLY SOFI |
+| Super-Regional | 10 | PNC USB TFC FITB HBAN MTB CFG RF KEY FCNCA |
+| Regional | 22 | the remainder |
+
+Trust & Custody has only three members, so peer-normalised ranks for those three are unstable.
+The dashboard says so in the model note.
+
+---
+
+## 2. Sources
+
+| Tag | Source | Fields |
+|---|---|---|
+| `sa_ratios` | `stockanalysis.com/stocks/{t}/financials/ratios/` | per-FY market cap, year-end close, P/E |
+| `sa_income` | `stockanalysis.com/stocks/{t}/financials/income-statement/` | per-FY revenue before loan losses, salaries & benefits, total noninterest/operating expense, net income to common, diluted shares, plus the TTM column |
+| `sa_stats` | `stockanalysis.com/stocks/{t}/statistics/` | latest published headcount, where the headcount series stops short |
+| `mt_emp` | `macrotrends.net/stocks/charts/{T}/{slug}/number-of-employees` | annual headcount |
+| `td_px` | Twelve Data `get_time_series(symbol, 1month, 2021-12 → 2026-08)` | unadjusted monthly closes |
+| `manual` | hand-curated | peer group, M&A / one-off / model flags |
+
+Direct access to SEC EDGAR, Stooq and Yahoo is blocked by this environment's egress policy,
+so those were not used.
+
+---
+
+## 3. Three decisions that materially change the numbers
+
+### 3.1 Revenue means revenue *before* loan losses
+
+The aggregator's headline "Revenue" line for a bank is **net of the provision for loan losses**.
+For M&T in FY2025: `Revenues Before Loan Losses 9,690 − Provision 505 = Revenue 9,185`.
+
+Using the net figure as the revenue-per-employee numerator would let a credit-cycle provision
+spike read as a collapse in productivity — the opposite of what this dashboard measures. So the
+numerator is **Revenues Before Loan Losses = net interest income + noninterest income**
+(6,948 + 2,742 = 9,690 ✓), which is also the standard definition of bank total revenue.
+
+Worth 5.5% on M&T alone, which is enough to move ranks.
+
+### 3.2 Prices are unadjusted throughout
+
+The aggregator's per-year "Last Close Price" turned out to be **dividend-adjusted for some
+issuers and raw for others**, with nothing marking which. It therefore backs no computed metric
+here. Every return, price chart and price-derived rank uses `closeRaw` — unadjusted monthly
+closes from one API, internally consistent across all 50 issuers. `closeAdjusted` is stored only
+so the divergence is visible and auditable.
+
+Consequence: reported returns are **price returns, not total returns**. Dividends are not
+reinvested. For a sector yielding 2–4%, that understates long-run performance roughly uniformly,
+so ranks are affected far less than levels.
+
+### 3.3 Revenue per employee is annual, and cannot be otherwise
+
+Headcount is published once a year in the 10-K. There is no quarterly series. So the
+revenue-per-employee series is **annual (FY2021–FY2025) plus one current point**, and the
+correlation index is drawn as stepped markers rather than a line — there is no intra-year
+reading to interpolate.
+
+---
+
+## 4. The missing-data contract
+
+Enforced by `scripts/assemble.mjs` and re-checked by `build.mjs`; the build fails if violated.
+
+1. Every numeric leaf is `number | null`. Never `0`, never `"n/a"`, never omitted.
+2. **Every `null` carries an entry in that bank's `gaps[]`** with a written reason drawn from a
+   closed enum: `not_reported · negative_earnings · insufficient_history · fetch_failed ·
+   source_conflict · model_mismatch · pre_ipo · outside_fetch_window · delisted`.
+3. Every numeric path has an entry in `src` naming where it came from.
+
+Nothing is imputed, averaged, or carried forward. A missing value renders as `—` with its reason
+on hover, and its bank drops out of that ranking — the effective `K` shrinks rather than the bank
+being given a substitute number.
+
+**Coverage: 93.5% of 2,250 fiscal-year cells populated; 147 null, every one explained.**
+
+Two derivations are used and are labelled as such in `src`:
+- **Net income to common** — where an income-statement fetch was truncated, derived as
+  `marketCap ÷ reported P/E`. Both inputs are sourced; the identity is verified below.
+- **Headcount for FY2021** on some issuers — derived from the source's own stated
+  percentage change for 2022 where the 2021 level itself was not listed. Flagged `derived`.
+
+---
+
+## 5. Cross-checks
+
+### P/E identity — an independent check on the transcription
+
+For each bank-year, the published P/E was reconciled against `marketCap ÷ netIncomeToCommon`.
+The two sides come from **different pages**, so agreement is evidence the numbers were
+transcribed correctly.
+
+**207 of 235 checkable cells agree within 2%; the median residual is 0.01%.**
+
+Residuals of a few percent are expected and benign: market cap uses period-end shares while the
+published P/E is price ÷ *average diluted* EPS. Two cells exceed 8% — COF FY2025 (15.5%) and
+HBAN FY2021 (12.2%) — both merger years with discontinued operations, both already flagged.
+
+### Two-source headcount agreement
+
+Where both the headcount series and the statistics page publish a current figure, they agree on
+the denominator the entire thesis rests on. M&T FY2025: **22,278 from both sources.**
+
+### Internal identities
+
+`revenueBeforeLoanLosses − provision = revenue` and
+`netInterestIncome + noninterestIncome = revenueBeforeLoanLosses` were checked per bank-year.
+
+---
+
+## 6. Distortion flags — 62 across 26 banks
+
+Mergers and one-offs move headcount and revenue for reasons that have nothing to do with
+productivity. Flagged bank-years are **excluded from every screen** and marked in the table.
+The full list with per-bank notes is in `data/raw/FLAGS.tsv` and travels into `banks.json`.
+
+The ones that would most distort the thesis if left unflagged:
+
+| Bank | Year | What happened |
+|---|---|---|
+| COF | 2025 | Discover merger — headcount +45%, a $20.7B provision build, and a P/E of 60× that is merger accounting, not valuation |
+| TFC | 2024 | Sold Truist Insurance — headcount −25% by divestiture, not productivity; revenue also carries a −$6.7B securities repositioning loss |
+| PNFP | 2025 | Synovus merger — headcount +135% |
+| COLB | 2023, 2025 | Umpqua (+144% headcount), then Pacific Premier |
+| FCNCA | 2022, 2023 | CIT (+56%), then Silicon Valley Bridge Bank with a $9.8B bargain-purchase gain and a P/E of 1.8× |
+| FLG | 2022–2024 | Flagstar merger (+166%), Signature Bank purchase, then the CRE crisis and a reverse split |
+| KEY | 2024 | Securities repositioning: a −$1.86B loss cut revenue-before-provision from ~$7.2B to $4.6B |
+| MTB | 2022 | People's United — headcount +29.8% |
+| UMBF, SSB, ONB, WBS, VLY | various | acquisitions of 13–63% of revenue |
+
+### Known model mismatches
+
+- **AMP, CBC** file non-bank income statements: no revenue-before-provision line and no separate
+  salaries line. Total revenue is used as the numerator and expense derived as revenue minus
+  operating income. Comp-per-employee is unavailable for them.
+- **SF (Stifel)**: the standardised income statement is internally inconsistent (SG&A
+  double-counts cost of revenue; operating income is reported negative in profitable years).
+  Expense and salary lines are recorded unavailable; net income to common is derived.
+- **CBC (Central Bancompany)** listed November 2025. It has ten months of price history and no
+  pre-listing fundamentals. Its pre-2025 "market cap" on the source reflects a pre-IPO share
+  structure and is recorded as unavailable rather than transcribed. It is retained because it is
+  genuinely in the top 50 by market cap today; dropping it would be survivorship bias.
+- **RJF** runs an **October–September fiscal year**. Its "FY2025" ends 30 Sep 2025, not 31 Dec.
+  Recorded in `fiscalYearEnd` and not silently aligned to the others.
+- **BNY, ZION, CFR** have only a latest headcount, not a series — so Thrust and headcount CAGRs
+  are unavailable for them.
+
+---
+
+## 7. Regenerating
+
+```bash
+node scripts/assemble.mjs   # data/raw/*.tsv + data/raw/px/*.txt  ->  data/banks.json
+node build.mjs              # data/banks.json + src/index.template.html  ->  index.html
+node scripts/verify.mjs     # drives index.html in Chromium; 23 assertions
+```
+
+`data/raw/SCHEMA.md` documents every raw column. To add a fiscal year: append to `fyLabels` **and
+to every FY array** — they are index-aligned, and `build.mjs` fails the build on a partial append.
+Restated prior-year figures are expected and should be reviewed in the diff, not auto-accepted.
+
+Open `index.html?selftest=1` for the 27 in-page assertions, including values pinned to
+hand-verified figures (`RPE(MTB, 2025) = $434,958`, `efficiency ratio = 56.69%`, `P/E = 11.47`).
+
+---
+
+## 8. What this dashboard cannot tell you
+
+- **Revenue per employee is not a direct measure of AI adoption.** It is a proxy. A bank can lift
+  it by selling a low-margin business, outsourcing staff to a vendor, or a favourable rate cycle —
+  none of which is AI. The Thrust and comp-per-employee columns exist to help separate those
+  cases, not to settle them.
+- **Level is mostly business model.** A wealth manager structurally clears more revenue per head
+  than a branch network. That is why peer-normalisation is one click away and why *change*
+  (Thrust) carries more signal than level.
+- **Five annual points is a short series.** Second differences from three numbers, one of which
+  may be merger-contaminated, carry little information — which is why acceleration renders as a
+  three-state chip with a wide dead band, never a decimal.
+- **Headcount is a blunt denominator.** Full-time-equivalents, contractors and offshore staff are
+  counted differently across issuers, and definitions change between filings.
+- Not investment advice.

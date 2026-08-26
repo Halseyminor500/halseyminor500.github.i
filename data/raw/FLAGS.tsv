@@ -1,0 +1,63 @@
+ticker	fy	kind	note
+COF	2025	ma	Discover acquisition closed May 2025: headcount, revenue and a $20.7B provision build all step-change. FY2025 P/E of 60.1 is merger accounting, not valuation.
+MTB	2022	ma	People's United acquisition closed Apr 2022: headcount +29.8% (17,569 -> 22,808).
+TFC	2024	oneoff	Revenue depressed by a -$6,651M securities repositioning loss; also sold Truist Insurance Holdings. FY2024 revenue-before-provision of 13,278 is not comparable to adjacent years.
+TFC	2023	oneoff	Goodwill impairment drove net income to common to -$1,452M; no meaningful P/E.
+FLG	2024	oneoff	Former NYCB: CRE credit crisis, large loss, capital raise and 1:3 reverse split. No meaningful P/E.
+CBC	2021	preipo	Central Bancompany listed Nov 2025. Pre-listing market cap and P/E on the source page reflect a pre-IPO share structure and are not meaningful; recorded as unavailable.
+CBC	2022	preipo	see CBC 2021
+CBC	2023	preipo	see CBC 2021
+CBC	2024	preipo	see CBC 2021
+FCNCA	2023	oneoff	Silicon Valley Bridge Bank acquisition (Mar 2023) produced a $9.8B bargain-purchase gain; FY2023 P/E of 1.81 and the headcount step-up are acquisition artifacts.
+KEY	2024	oneoff	Securities repositioning: a -$1,856M loss on investment sales cut noninterest income to $809M and revenue-before-provision to $4,574M vs ~$7,2xxM in adjacent years. Net income to common was -$304M, so no meaningful P/E.
+AMP	2021	model	Ameriprise files a non-bank income statement: no "revenues before loan losses" and no separate salaries line. Total revenue is used as the RPE numerator and expense is derived as revenue minus operating income. Comp-per-employee is unavailable.
+TFC	2024	ma	Truist Insurance Holdings sold May 2024: headcount fell 24.6% (50,832 -> 38,335) by divestiture, not productivity. Revenue-per-employee for FY2024/FY2025 is not comparable to FY2021-2023.
+SYF	2024	oneoff	A +$1,069M gain on the sale of Pets Best inflates FY2024 revenue before provision.
+FITB	2021	derived	Headcount derived from the source's stated 2022 change (+1.08% from 2021); the 2021 level itself was not listed.
+AMP	2021	derived	Headcount derived from the source's stated 2022 change (+12.5% from 2021).
+HBAN	2021	derived	Headcount derived from the source's stated 2022 change (+8.01% from 2021).
+RJF	2021	derived	Headcount derived from the source's stated 2022 change (+13.33% from 2021).
+CFG	2021	derived	Headcount derived from the source's stated 2022 change (+8.17% from 2021).
+PNFP	2025	ma	Synovus merger: headcount +135.3% (3,565 -> 8,389) and revenue-before-provision +18%. FY2025 efficiency metrics are not comparable to prior years.
+FCNCA	2022	ma	CIT Group merger closed Jan 2022: headcount +56.1% (6,846 -> 10,684).
+WBS	2022	ma	Sterling Bancorp merger closed Feb 2022: headcount +29.2% (3,245 -> 4,193).
+SF	2021	model	stockanalysis's standardized income statement for Stifel is internally inconsistent (SG&A double-counts cost of revenue; operating income is reported negative in profitable years). Expense lines and salaries are recorded as unavailable; net income to common is derived from market cap / reported P/E.
+SOFI	2021	derived	Headcount derived from the source's stated 2022 change (+68% from 2021).
+EWBC	2021	derived	Headcount derived from the source's stated 2022 change (+1.77% from 2021).
+PNFP	2021	derived	Headcount derived from the source's stated 2022 change (+14.11% from 2021).
+ALLY	2021	derived	Headcount derived from the source's stated 2022 change (+22.11% from 2021).
+WBS	2021	derived	Headcount derived from the source's stated 2022 change (+29.21% from 2021).
+UMBF	2025	ma	Heartland Financial USA acquisition closed Jan 2025: revenue before provision +63% (1,629 -> 2,652) and salaries +48%. FY2025 headcount not yet published by the source.
+ONB	2022	ma	First Midwest Bancorp merger closed Feb 2022: revenue before provision more than doubled (804 -> 1,717).
+ONB	2025	ma	Bremer Financial acquisition closed 2025: revenue before provision +33% (1,872 -> 2,498).
+FHN	2021	derived	Headcount derived from the source's stated 2022 change (-4.13% from 2021).
+SF	2021	derived	Headcount derived from the source's stated 2022 change (+4.65% from 2021).
+WTFC	2021	derived	Headcount derived from the source's stated 2022 change (+0.69% from 2021).
+SSB	2025	ma	Independent Financial Group acquisition closed Jan 2025: headcount +24.2% (4,986 -> 6,190) and revenue before provision +56%.
+COLB	2023	ma	Umpqua Holdings merger closed Feb 2023: headcount +144.3% (2,093 -> 5,114) and revenue before provision +57%.
+COLB	2025	ma	Pacific Premier Bancorp acquisition closed 2025: headcount +27.2% (4,721 -> 6,005).
+SSB	2021	derived	Headcount derived from the source's stated 2022 change (-0.16% from 2021).
+COLB	2021	derived	Headcount derived from the source's stated 2022 change (-7.39% from 2021).
+WAL	2021	derived	Headcount derived from the source's stated 2022 change (+7.2% from 2021).
+CBSH	2021	derived	Headcount derived from the source's stated 2022 change (+1.34% from 2021).
+BOKF	2021	derived	Headcount derived from the source's stated 2022 change (+1.7% from 2021).
+FLG	2022	ma	Legacy NYCB completed the Flagstar Bancorp merger Dec 2022: headcount +166.3% (2,815 -> 7,497).
+FLG	2023	ma	Purchased substantially all Signature Bank deposits and loans from the FDIC (Mar 2023): revenue before provision +145% and headcount +16.9%. FY2023-2025 are not comparable to FY2021-2022.
+VLY	2022	ma	Bank Leumi USA acquisition closed Apr 2022: headcount +13.5% and revenue before provision +37%.
+CBC	2025	model	Central Bancompany files a non-bank income statement with no revenue-before-provision or salaries line. Total revenue is used as the RPE numerator; expense is derived as revenue minus operating income. FY2021-2022 are not published by the source.
+FNB	2026	data	The source's TTM net-income-to-common cell (318) is inconsistent with the FY2025 value (565) and the TTM pretax/tax figures; the TTM value is recorded as unavailable rather than carried through.
+VLY	2021	derived	Headcount derived from the source's stated 2022 change (+13.53% from 2021).
+UBSI	2021	derived	Headcount derived from the source's stated 2022 change (-6.78% from 2021).
+FLG	2021	derived	Headcount derived from the source's stated 2022 change (+166.32% from 2021).
+BNY	2025	headcount-source	macrotrends returned no employee series for this issuer (ticker changed BK -> BNY). Only the latest published headcount is available, from the stockanalysis statistics page (a mid-2026 figure used as the FY2025 denominator). No headcount history, so Thrust and headcount CAGRs are unavailable.
+PNC	2025	headcount-source	macrotrends employee page failed to fetch on repeated attempts. Latest published headcount only, from the stockanalysis statistics page. No headcount history.
+ZION	2025	headcount-source	macrotrends employee page failed to fetch. Latest published headcount only. No headcount history.
+ONB	2025	headcount-source	macrotrends employee page not retrieved. Latest published headcount only. No headcount history.
+CFR	2025	headcount-source	macrotrends employee page returned navigation chrome only. Latest published headcount only. No headcount history.
+CBC	2025	headcount-source	Listed Nov 2025; no headcount history exists as a public company. Latest published headcount only.
+PNC	2021	derived	Headcount derived from the source's stated 2022 change (+3.57% from 2021).
+ONB	2025	headcount-source	macrotrends publishes ONB headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page, which post-dates the Bremer acquisition.
+BAC	2025	headcount-source	macrotrends publishes BAC headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page (213,000, unchanged from 2024).
+UMBF	2025	headcount-source	macrotrends publishes UMBF headcount only through 2024. FY2025 uses the latest published count from the stockanalysis statistics page, which post-dates the Heartland acquisition.
+PB	2025	headcount-source	FY2025 headcount from the stockanalysis statistics page; macrotrends stops at 2024.
+GBCI	2025	headcount-source	FY2025 headcount from the stockanalysis statistics page; macrotrends stops at 2024.
