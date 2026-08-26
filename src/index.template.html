@@ -1,4 +1,4 @@
-<title>The Efficiency Ledger</title>
+<title>Steadfast AI Efficiency Monitor — Banking</title>
 <meta name="description" content="Revenue per employee as a proxy for AI adoption across the 50 largest US banks — and whether the market has priced it yet.">
 
 <style>
@@ -9,6 +9,7 @@
   --hair:#dedcd6; --hair-strong:#c9c7c0;
   --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837c;
   --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
+  --accent:#3066ae;
   --good:#0c7549; --bad:#c8332f; --warn:#875a00;
   --pos:#2a78d6; --neg:#eb6834; --mid:#f0efec;
   --grid:rgba(11,11,11,.07); --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.18);
@@ -23,6 +24,7 @@
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
   --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+  --accent:#7fa9de;
   --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
   --pos:#3987e5; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
@@ -34,6 +36,7 @@
   --hair:#33332f; --hair-strong:#45453f;
   --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8d8c83;
   --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+  --accent:#7fa9de;
   --good:#35c48c; --bad:#e66767; --warn:#d99a1a;
   --pos:#3987e5; --neg:#d95926; --mid:#383835;
   --grid:rgba(255,255,255,.09); --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
@@ -49,7 +52,7 @@ h1,h2,h3{letter-spacing:-.021em;font-weight:640;line-height:1.18}
 h1{font-size:clamp(28px,4.4vw,42px)}
 h2{font-size:19px;margin-bottom:2px}
 h3{font-size:15px}
-a{color:var(--series-1)}
+a{color:var(--accent)}
 .num{font-variant-numeric:tabular-nums}
 .muted{color:var(--ink-3)}
 .dim{color:var(--ink-2)}
@@ -74,9 +77,12 @@ header.top{position:sticky;top:0;z-index:60;background:var(--glass);
 .top-in{max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
 .brand{font-weight:660;letter-spacing:-.02em;font-size:15px;white-space:nowrap}
 .brand span{color:var(--ink-3);font-weight:450}
+@media (max-width:700px){.brand span{display:none}}
 .top-sp{flex:1}
 .hero{padding:40px 0 26px}
 .hero p.lede{max-width:74ch;color:var(--ink-2);font-size:16.5px;margin-top:12px}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-weight:680;
+  font-size:12px;margin-bottom:8px}
 
 /* ══ §5 CONTROLS ══ */
 .seg{display:inline-flex;background:var(--surface-3);border-radius:var(--r-sm);padding:2px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
@@ -84,7 +90,7 @@ header.top{position:sticky;top:0;z-index:60;background:var(--glass);
 .seg button{font:inherit;font-size:12.5px;font-weight:530;color:var(--ink-2);background:none;border:0;
   padding:5px 11px;border-radius:6px;cursor:pointer;white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--surface-1);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
-.seg button:focus-visible{outline:2px solid var(--series-1);outline-offset:1px}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .ctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
 .ctl label{font-size:11.5px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;
   display:block;margin-bottom:5px}
@@ -97,24 +103,29 @@ select,input[type=search]{font:inherit;font-size:13px;background:var(--surface-1
 .tile .k{font-size:11.5px;font-weight:640;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
 .tile .v{font-size:34px;font-weight:660;letter-spacing:-.028em;margin:6px 0 2px;line-height:1.05}
 .tile .s{font-size:13px;color:var(--ink-2)}
+.tile .tname{display:block;font:inherit;font-size:17px;font-weight:640;letter-spacing:-.012em;
+  color:var(--ink);background:none;border:0;padding:0;margin:1px 0 4px;cursor:pointer;text-align:left;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile .tname:hover{color:var(--accent)}
+.tile .tname:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;color:var(--accent)}
 .verdict{border-left:3px solid var(--series-2)}
 
 /* ══ §7 TABLE ══ */
-.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll{overflow:auto;max-height:calc(100vh - var(--hdr,54px) - 14px);-webkit-overflow-scrolling:touch}
 table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;min-width:1180px}
-thead th{position:sticky;top:var(--hdr,54px);z-index:20;background:var(--surface-2);text-align:right;
+thead th{position:sticky;top:0;z-index:20;background:var(--surface-2);text-align:right;
   padding:8px 10px;font-size:10.5px;font-weight:660;color:var(--ink-2);text-transform:uppercase;
   letter-spacing:.055em;white-space:nowrap;cursor:pointer;user-select:none;border-bottom:1px solid var(--hair)}
 thead th:first-child{text-align:left;left:0;z-index:30}
 thead th:hover{color:var(--ink)}
 thead th .ar{opacity:.32;margin-left:3px}
-thead th[aria-sort] .ar{opacity:1;color:var(--series-1)}
+thead th[aria-sort] .ar{opacity:1;color:var(--accent)}
 tbody td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
 tbody td:first-child{text-align:left;position:sticky;left:0;background:var(--surface-1);z-index:10}
 tbody tr:hover td{background:var(--surface-2)}
 tbody tr:hover td:first-child{background:var(--surface-2)}
-tbody tr[aria-selected="true"] td{background:color-mix(in srgb,var(--series-1) 9%,var(--surface-1))}
-tbody tr[aria-selected="true"] td:first-child{background:color-mix(in srgb,var(--series-1) 9%,var(--surface-1))}
+tbody tr[aria-selected="true"] td{background:color-mix(in srgb,var(--accent) 9%,var(--surface-1))}
+tbody tr[aria-selected="true"] td:first-child{background:color-mix(in srgb,var(--accent) 9%,var(--surface-1))}
 tr{cursor:pointer}
 .nm{font-weight:590}
 .tk{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-right:7px}
@@ -138,6 +149,10 @@ tr{cursor:pointer}
 .prow .r{width:17px;color:var(--ink-3);font-size:11px;font-family:var(--mono)}
 .prow .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:560;font-size:13px}
 .prow .m{font-size:13px;font-weight:620;font-variant-numeric:tabular-nums}
+.hero-p .prow{padding:10px 0}
+.hero-p .prow .n{font-size:15px;font-weight:640}
+.hero-p .prow .m{font-weight:560;color:var(--ink-2)}
+.hero-p .prow .m b{color:var(--ink);font-weight:660}
 figcaption{font-size:12px;color:var(--ink-3);margin-top:9px;line-height:1.5}
 svg{display:block;width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink-2);margin-bottom:8px}
@@ -160,7 +175,7 @@ summary:hover{color:var(--ink)}
 
 <header class="top">
   <div class="top-in">
-    <div class="brand">The&nbsp;Efficiency&nbsp;Ledger <span>· 50 US banks</span></div>
+    <div class="brand">Steadfast&nbsp;AI&nbsp;Efficiency&nbsp;Monitor <span>· Banking · 50 US banks</span></div>
     <div class="top-sp"></div>
     <div class="seg" id="snapSeg" role="group" aria-label="Snapshot"></div>
     <div class="seg" role="group" aria-label="Theme">
@@ -172,10 +187,13 @@ summary:hover{color:var(--ink)}
 <main class="wrap stack">
 
   <section class="hero">
-    <h1>Revenue per employee is the tell.</h1>
-    <p class="lede">If a bank is genuinely implementing AI, it shows up as more revenue carried by fewer
-    people — and the market should pay a higher multiple for it. This dashboard tests that claim against
-    the 50 largest US bank holding companies, and finds the banks where the market hasn't caught on yet.</p>
+    <div class="eyebrow">Steadfast</div>
+    <h1>AI Efficiency Monitor — Banking</h1>
+    <p class="lede">Revenue per employee is the tell. If a bank is genuinely implementing AI, it shows up
+    as more revenue carried by fewer people — and the market should pay a higher multiple for it. This
+    monitor ranks the 50 largest US bank holding companies by that tell and names, first, the banks where
+    implementation is already showing up in the numbers — and second, the ones standing still. Averages
+    don't tell you who to watch; names do.</p>
   </section>
 
   <section class="grid4" id="tiles" style="align-items:start"></section>
@@ -448,10 +466,6 @@ function derive(){
       prevThrust=series[si-1]/series[si-2]-1;
     const accel=(thrust!=null&&prevThrust!=null)? thrust-prevThrust : null;
 
-    /* Δ since Day One (FY2025 close) — only meaningful at the live snapshot */
-    const dRpe = (si===5 && series[5]!=null && series[4]!=null && series[4]>0)
-      ? series[5]/series[4]-1 : null;
-
     const rev2=M.cagr(b.fy.revenue[2],b.fy.revenue[4],2);
     const head2=M.cagr(b.fy.employees[2],b.fy.employees[4],2);
     const rev3=M.cagr(b.fy.revenue[1],b.fy.revenue[4],3);
@@ -472,7 +486,7 @@ function derive(){
       rpe, pe, mcap:M.at(b,si,'mcap'),
       comp:M.at(b,si,'comp'), cr:M.at(b,si,'cr'), eff:M.at(b,si,'eff'),
       peBasis: si===5 ? M.livePeBasis(b) : 'fy',
-      thrust, accel, dRpe, series,
+      thrust, accel, prevThrust, series,
       rev2, head2, rev3, revG,
       mwl: (rev2!=null&&head2!=null)? rev2-head2 : null,
       ret1:M.ret(b,12), ret2:M.ret(b,24), ret3:M.ret(b,36),
@@ -577,7 +591,6 @@ const COLS=[
   {k:'name',  t:'Bank',                dir:'asc',  get:r=>r.name, kind:'name'},
   {k:'mcap',  t:'Market cap',          dir:'desc', get:r=>r.mcap,  fmt:v=>U.money(v)},
   {k:'rpe',   t:'Rev / employee',      dir:'desc', get:r=>r.rpe,   fmt:v=>U.k(v), rank:'rankRpe'},
-  {k:'dRpe',  t:'Δ since Day 1',  dir:'desc', get:r=>r.dRpe,  fmt:v=>U.pct(v), signed:true},
   {k:'thrust',t:'Thrust',              dir:'desc', get:r=>r.thrust,fmt:v=>U.pct(v), signed:true, chip:'accel'},
   {k:'comp',  t:'Comp / head',         dir:'desc', get:r=>r.comp,  fmt:v=>U.k(v)},
   {k:'eff',   t:'Efficiency ratio',    dir:'asc',  get:r=>r.eff,   fmt:v=>v==null?null:(v*100).toFixed(1)+'%', lowerBetter:true},
@@ -969,6 +982,37 @@ function chartQuadrant(host, dv){
   host.appendChild(s);
 }
 
+/* ══ §20b NAMES + WATCHLIST SCREENS (pure) ══ */
+/* Short display names for tiles and panels; the table keeps full legal names. */
+const SHORT={JPM:'JPMorgan Chase',BAC:'Bank of America',MS:'Morgan Stanley',GS:'Goldman Sachs',
+  WFC:'Wells Fargo',AXP:'American Express',C:'Citigroup',SCHW:'Charles Schwab',COF:'Capital One',
+  BNY:'BNY',PNC:'PNC Financial',USB:'U.S. Bancorp',TFC:'Truist',STT:'State Street',
+  FITB:'Fifth Third',AMP:'Ameriprise',HBAN:'Huntington',MTB:'M&T Bank',NTRS:'Northern Trust',
+  RJF:'Raymond James',CFG:'Citizens Financial',RF:'Regions Financial',KEY:'KeyCorp',
+  SYF:'Synchrony',FCNCA:'First Citizens',SOFI:'SoFi',EWBC:'East West',PNFP:'Pinnacle Financial',
+  ALLY:'Ally',WBS:'Webster',FHN:'First Horizon',SF:'Stifel',WTFC:'Wintrust',UMBF:'UMB Financial',
+  BPOP:'Popular',ZION:'Zions',ONB:'Old National',SSB:'SouthState',CFR:'Cullen/Frost',
+  COLB:'Columbia Banking',WAL:'Western Alliance',CBSH:'Commerce Bancshares',BOKF:'BOK Financial',
+  VLY:'Valley National',PB:'Prosperity',CBC:'Central Bancompany',FNB:'F.N.B.',GBCI:'Glacier',
+  UBSI:'United Bankshares',FLG:'Flagstar'};
+
+function cleanMovers(rows){ return rows.filter(r=>r.cleanNow&&r.thrust!=null); }
+function thrustLeader(rows){
+  const m=cleanMovers(rows);
+  return m.length? m.reduce((a,b)=>b.thrust>a.thrust?b:a) : null;
+}
+/* Progressing: Thrust positive AND rising — this year's gain beats last year's.
+   Ranked by the acceleration, because a rise that BEGINS to show is the signal. */
+function screenProgressing(rows){
+  return rows.filter(r=>r.cleanNow&&r.thrust!=null&&r.accel!=null&&r.thrust>0&&r.accel>0)
+    .sort((a,b)=>b.accel-a.accel);
+}
+/* Falling behind: revenue per employee is shrinking, worst first. */
+function screenFalling(rows){
+  return rows.filter(r=>r.cleanNow&&r.thrust!=null&&r.thrust<0)
+    .sort((a,b)=>a.thrust-b.thrust);
+}
+
 /* ══ §21 RENDER: TILES ══ */
 function renderTiles(dv){
   const host=document.getElementById('tiles'); host.innerHTML='';
@@ -977,7 +1021,18 @@ function renderTiles(dv){
 
   let verdict, vsub;
   if(state.norm==='peer'){
-    verdict='Peer mode'; vsub='The universe-wide test is disabled while ranking inside peer groups.';
+    /* Pooled within-peer-group ranks — the stronger test under the business-model
+       confound: a custody bank is no longer compared with a card lender. */
+    const cur=rhoSeries().find(x=>x.id===state.snap);
+    if(!cur||cur.rho==null){ verdict=DASH; vsub='Not enough ranked banks within peer groups.'; }
+    else{
+      const sig=Math.abs(cur.rho)>=(cur.crit||Infinity);
+      verdict = sig ? (cur.rho>0?'Within peers, yes':'Within peers, inverted') : 'Not yet';
+      const dir = cur.rho>0.02 ? 'Positive: inside a business model, efficiency and the multiple move together more than they do universe-wide.'
+                : cur.rho<-0.02 ? 'Faintly negative even inside peer groups.'
+                : 'Essentially flat inside peer groups.';
+      vsub=`Pooled within-peer-group ranks: ρ = ${cur.rho.toFixed(2)} against an approximate 5% threshold of ${(cur.crit||0).toFixed(2)} at K = ${cur.K}. ${dir}`;
+    }
   } else if(sp.rho==null){ verdict=DASH; vsub='Not enough ranked banks.'; }
   else if(sp.significant){ verdict=(sp.rho>0?'Yes':'Inverted');
     vsub=`ρ = ${sp.rho.toFixed(2)} beats the 5% threshold of ${sp.crit.toFixed(2)} at K = ${sp.K}. The market is pricing efficiency.`; }
@@ -989,24 +1044,36 @@ function renderTiles(dv){
 
   const best=[...dv.rows].filter(r=>r.rpe!=null).sort((a,b)=>b.rpe-a.rpe)[0];
   const gapped=[...dv.rows].filter(r=>r.gap!=null).sort((a,b)=>b.gap-a.gap)[0];
-  const movers=dv.rows.filter(r=>r.thrust!=null&&r.cleanNow);
-  const medThrust=movers.length? [...movers].map(r=>r.thrust).sort((a,b)=>a-b)[Math.floor(movers.length/2)] : null;
+  const movers=cleanMovers(dv.rows).sort((a,b)=>b.thrust-a.thrust);
+  const lead=movers[0]||null;
+  const medThrust=movers.length? movers.map(r=>r.thrust).sort((a,b)=>a-b)[Math.floor(movers.length/2)] : null;
+  const live=dv.si===5;
+  const nm=r=>SHORT[r.ticker]||r.name;
 
   const tiles=[
     {cls:'verdict',k:'Has the market noticed?',v:verdict,s:vsub},
-    {k:'Most efficient · '+snapLabel,v:best?U.k(best.rpe):DASH,
-     s:best?`${best.name} — ${U.x(best.pe)} P/E, rank ${best.rankPe==null?DASH:Math.round(best.rankPe)} of ${best.K} on multiple`:''},
-    {k:'Widest opportunity gap',v:gapped?('+'+Math.round(gapped.gap)):DASH,
-     s:gapped?`${gapped.name} ranks ${Math.round(gapped.rankRpe)} on efficiency but only ${Math.round(gapped.rankPe)} on P/E`:''},
-    {k:'Median Thrust',v:medThrust==null?DASH:U.pct(medThrust),
-     s:medThrust==null?'':`Year-over-year change in revenue per employee across ${movers.length} banks with clean comparisons.`}
+    {k:'Most efficient · '+snapLabel,v:best?U.k(best.rpe):DASH,name:best,
+     s:best?`revenue per employee — ${U.x(best.pe)} P/E, rank ${best.rankPe==null?DASH:Math.round(best.rankPe)} of ${best.K} on the multiple`:''},
+    {k:'Widest opportunity gap',v:gapped?('+'+Math.round(gapped.gap)):DASH,name:gapped,
+     s:gapped?`ranks ${Math.round(gapped.rankRpe)} on efficiency but only ${Math.round(gapped.rankPe)} on P/E`:''},
+    {k:'Greatest Thrust'+(live?' · since Day 1':''),v:lead?U.pct(lead.thrust):DASH,name:lead,
+     s:lead?((movers[1]?`then ${nm(movers[1])} ${U.pct(movers[1].thrust)}`:'')+
+             (movers[2]?`, ${nm(movers[2])} ${U.pct(movers[2].thrust)}`:'')+
+             (medThrust==null?'':` · median ${U.pct(medThrust)} across ${movers.length} clean comparisons`))
+      :'No bank has a clean comparison at this snapshot.'}
   ];
   for(const t of tiles){
     const el=U.el('div',{class:'tile '+(t.cls||'')},[
       U.el('div',{class:'k',text:t.k}),
-      U.el('div',{class:'v',text:t.v}),
-      U.el('div',{class:'s',html:t.s})
+      U.el('div',{class:'v',text:t.v})
     ]);
+    if(t.name){
+      const nb=U.el('button',{class:'tname',type:'button',text:nm(t.name),
+        title:t.name.name+' — show in the charts'});
+      nb.addEventListener('click',()=>{ state.sel=t.name.ticker; render(); });
+      el.appendChild(nb);
+    }
+    el.appendChild(U.el('div',{class:'s',html:t.s}));
     if(t.cls==='verdict') el.appendChild(rhoSpark());
     host.appendChild(el);
   }
@@ -1079,10 +1146,12 @@ function renderTable(dv){
   thr.innerHTML=''; tb.innerHTML='';
   for(const c of COLS){
     const active=state.sort.k===c.k;
+    const thrustLive = c.k==='thrust' && state.snap==='live';
     const th=U.el('th',{ 'data-k':c.k, scope:'col',
       'aria-sort': active?(state.sort.dir==='asc'?'ascending':'descending'):null,
-      title: c.lowerBetter?'Lower is better':null,
-      html: c.t + (c.lowerBetter?' ▾':'') +
+      title: thrustLive ? 'TTM revenue per employee against FY2025 — the in-progress year'
+           : c.lowerBetter?'Lower is better':null,
+      html: (thrustLive?'Thrust · since Day 1':c.t) + (c.lowerBetter?' ▾':'') +
         `<span class="ar">${active?(state.sort.dir==='asc'?'↑':'↓'):'⇅'}</span>` });
     thr.appendChild(th);
   }
@@ -1163,28 +1232,58 @@ function renderTable(dv){
 }
 
 /* ══ §23 RENDER: PANELS ══ */
-function panel(title, sub, items, fmt){
-  const card=U.el('div',{class:'card'});
+function panel(title, sub, items, fmt, opts={}){
+  const card=U.el('div',{class:'card'+(opts.hero?' hero-p':'')});
   card.appendChild(U.el('div',{class:'card-h'},[
     U.el('h2',{text:title}), U.el('div',{class:'small muted',html:sub})]));
   const body=U.el('div',{class:'card-b'});
   const list=U.el('div',{class:'plist'});
-  if(!items.length) list.appendChild(U.el('div',{class:'note',text:'No bank has a clean enough record for this screen.'}));
+  if(!items.length) list.appendChild(U.el('div',{class:'note',
+    text:opts.empty||'No bank has a clean enough record for this screen.'}));
   items.forEach((r,i)=>{
     const row=U.el('div',{class:'prow','data-t':r.ticker},[
       U.el('div',{class:'r',text:String(i+1)}),
-      U.el('div',{class:'n',html:`<span class="tk">${r.ticker}</span>${r.name.replace(/, Inc\.$|Corporation$|Incorporated$/,'').trim()}`}),
+      U.el('div',{class:'n',html:`<span class="tk">${r.ticker}</span>${SHORT[r.ticker]||r.name}`}),
       U.el('div',{class:'m',html:fmt(r)})
     ]);
     row.addEventListener('click',()=>{ state.sel=r.ticker; render(); });
     list.appendChild(row);
   });
-  body.appendChild(list); card.appendChild(body); return card;
+  body.appendChild(list);
+  if(opts.foot) body.appendChild(U.el('div',{class:'tiny muted',style:'margin-top:8px',text:opts.foot}));
+  card.appendChild(body); return card;
 }
 function renderPanels(dv){
   const host=document.getElementById('panels'); host.innerHTML='';
   const R=dv.rows;
   const gapKey = state.adj==='growth' ? 'gapAdj' : 'gap';
+
+  /* ── the watchlist: who is moving, who is standing still — names first ── */
+  const live=dv.si===5;
+  const pes=R.map(r=>r.pe).filter(v=>v!=null).sort((a,b)=>a-b);
+  const medPe=pes.length? pes[Math.floor(pes.length/2)] : null;
+  const excluded=R.filter(r=>r.thrust!=null&&!r.cleanNow).length;
+  const foot=excluded?`${excluded} banks with a merger or one-off in the window are excluded.`:'';
+
+  host.appendChild(panel('Progressing',
+    `Thrust is positive and rising — this ${live?'year-to-date':'year\u2019s'} gain in revenue per employee is
+     bigger than last year\u2019s. This is what the first months of an implementation look like in the numbers.
+     Ranked by the acceleration; P/E shown so you can see what the market is charging for it.`,
+    screenProgressing(R).slice(0,8),
+    r=>`${U.pct(r.prevThrust)} → <b>${U.pct(r.thrust)}</b>`+
+       (r.pe==null?'':` · ${U.x(r.pe)}`)+
+       (r.pe!=null&&medPe!=null&&r.pe<medPe?' <span class="chip up">still cheap</span>':''),
+    {hero:true, foot, empty:'Acceleration needs two consecutive Thrust readings — pick a later snapshot.'}));
+
+  host.appendChild(panel('Falling behind',
+    `Revenue per employee is shrinking. In this cycle standing still compounds against you — laggards in
+     banking rarely get a decade to catch up; they get absorbed. P/E shown so you can see whether the
+     market has repriced them yet.`,
+    screenFalling(R).slice(0,8),
+    r=>`<b style="color:var(--bad)">${U.pct(r.thrust)}</b>`+
+       (r.pe==null?'':` · ${U.x(r.pe)}`)+
+       (r.rankRpe!=null&&r.K&&r.rankRpe>0.75*r.K?' <span class="chip dn">low level too</span>':''),
+    {hero:true, foot, empty:'No clean-comparison bank is shrinking at this snapshot.'}));
 
   const coil=R.filter(r=>r.coil!=null&&r.clean3).sort((a,b)=>b.coil-a.coil).slice(0,5);
   host.appendChild(panel('Coiled springs',
@@ -1356,11 +1455,24 @@ function selfTest(){
     const status=[gv('--good'),gv('--bad'),gv('--warn')];
     ok('status colours are reserved, never reused as a series hue',
        status.every(c=>!series.includes(c)), `status ${status.join(' ')}`); }
-  const hh=document.querySelector('header.top').getBoundingClientRect().height;
-  const so=parseFloat(getComputedStyle(document.querySelector('#thr th')).top);
-  ok('sticky table header clears the masthead', so>=hh-1, `offset ${so}px vs masthead ${hh.toFixed(1)}px`);
+  { const sc=document.querySelector('.tscroll'), th0=document.querySelector('#thr th');
+    const d=Math.abs(th0.getBoundingClientRect().top - sc.getBoundingClientRect().top);
+    ok('table header sits at the top of its scroller, not displaced into the rows', d<2, d.toFixed(1)+'px');
+    ok('the table scrolls inside its own container so the header can pin',
+       getComputedStyle(sc).overflowY!=='visible' && sc.scrollHeight>=sc.clientHeight); }
   const dashes=document.querySelectorAll('#tb .na').length;
   ok('every em-dash in the table is a recorded gap, not a silent zero', dashes>=0, dashes+' shown');
+  /* names-first surface */
+  ok('every ticker has a short display name', D.banks.every(b=>!!SHORT[b.ticker]));
+  { const rows=derive().rows;
+    const p=screenProgressing(rows), f=screenFalling(rows);
+    ok('progressing and falling-behind screens are disjoint', !p.some(r=>f.includes(r)));
+    ok('no flagged bank enters either watchlist screen', p.concat(f).every(r=>r.cleanNow),
+       `${p.length} progressing, ${f.length} falling`);
+    const l=thrustLeader(rows);
+    const tn=document.querySelector('#tiles .tile:nth-child(4) .tname');
+    ok('greatest-thrust tile names the argmax of clean Thrust',
+       !l || (tn && tn.textContent===(SHORT[l.ticker]||l.name)), l?(SHORT[l.ticker]||l.name):'none'); }
 
   const pass=t.filter(x=>x.c).length;
   const box=U.el('div',{class:'card',style:'margin:22px 0'});

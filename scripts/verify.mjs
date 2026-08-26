@@ -50,7 +50,7 @@ ok('makes zero external network requests', external.length === 0, external.slice
 ok('renders 50 table rows', await page.locator('#tb tr').count() === 50);
 ok('renders all three charts', await page.locator('#c1 svg, #c2 svg, #c3 svg').count() === 3);
 ok('renders four stat tiles', await page.locator('#tiles .tile').count() === 4);
-ok('renders four highlight panels', await page.locator('#panels .card').count() === 4);
+ok('renders six highlight panels', await page.locator('#panels .card').count() === 6);
 
 /* ── 2. NaN sweep across every rendered SVG attribute ── */
 const nan = await page.evaluate(() => {
@@ -62,6 +62,21 @@ const nan = await page.evaluate(() => {
   return bad;
 });
 ok('no NaN / Infinity / undefined in any SVG attribute', nan.length === 0, nan.slice(0, 3).join(' | '));
+
+/* ── 2a. the names-first surface ── */
+const tname = (await page.locator('#tiles .tile:nth-child(4) .tname').textContent().catch(() => '')).trim();
+ok('the Greatest Thrust tile names a bank', tname.length > 0, tname);
+ok('Thrust column reads "since Day 1" at the live snapshot',
+  /Day 1/.test(await page.textContent('#thr th[data-k="thrust"]')));
+await page.evaluate(() => { document.querySelector('.tscroll').scrollTop = 300; });
+const pinned = await page.evaluate(() => {
+  const sc = document.querySelector('.tscroll'), th = document.querySelector('#thr th');
+  return Math.abs(th.getBoundingClientRect().top - sc.getBoundingClientRect().top);
+});
+ok('table header stays pinned while the table scrolls under it', pinned < 2, pinned.toFixed(1) + 'px');
+await page.evaluate(() => { document.querySelector('.tscroll').scrollTop = 0; });
+ok('the watchlist panels lead with Progressing and Falling behind',
+  (await page.locator('#panels .card h2').allTextContents()).slice(0, 2).join('|') === 'Progressing|Falling behind');
 
 /* ── 2b. the controls a human reaches for are genuinely clickable at rest ── */
 await page.evaluate(() => window.scrollTo(0, 0));

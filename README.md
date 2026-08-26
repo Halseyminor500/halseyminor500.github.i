@@ -1,4 +1,4 @@
-# The Efficiency Ledger
+# Steadfast AI Efficiency Monitor — Banking
 
 **Revenue per employee, across the 50 largest US banks — and whether the market has priced it yet.**
 
