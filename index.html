@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-embed="inline">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -189,6 +189,18 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .chip.today { background: var(--ink); color: #FFFFFF }
 .chip.met { border-color: #1F6F43; color: #1F6F43 }
 
+/* Halsey Minor: his two videos, shown like embedded players (picture and title first; the player loads on a tap) */
+.vids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 clamp(36px, 5vw, 60px) }
+@media (max-width: 759px) { .vids { grid-template-columns: minmax(0, 1fr) } }
+.vid { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; color: #FFFFFF; text-decoration: none; box-shadow: 0 18px 40px -24px rgba(21, 23, 26, .55) }
+.vid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease }
+.vid:hover img { transform: scale(1.02) }
+.vid .vt { position: absolute; left: 0; right: 0; top: 0; padding: 14px 18px 30px; font: 700 clamp(.98rem, 1.6vw, 1.15rem)/1.25 var(--display); background: linear-gradient(rgba(0,0,0,.62), transparent); text-wrap: balance }
+.vid .vp { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: var(--blue); box-shadow: 0 6px 24px rgba(0,0,0,.35); transition: transform .2s ease }
+.vid .vp::after { content: ""; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #FFFFFF }
+.vid:hover .vp, .vid:focus-visible .vp { transform: scale(1.08) }
+.vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
+.h2-next { margin-top: 0 }
 /* Halsey Minor */
 .me-statement { max-width: 62rem; margin: 0 0 clamp(28px, 4vw, 44px) }
 .me-statement blockquote { font: 500 clamp(1.2rem, 2.2vw, 1.7rem)/1.42 var(--display); color: var(--blue) }
@@ -236,7 +248,7 @@ footer .wrap { display: grid; gap: 4px }
         <h1 data-who="halsey">LOS ANGELES COUNTY AND BEVERLY HILLS <span class="q">“JUSTICE”</span>. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?</h1>
         <p class="lede"><b class="h">Halsey Minor</b> warned <b class="p">the Beverly Hills police and city officials</b>, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.</p>
         <ul class="stats">
-          <li><b data-since="2026-03-19">211</b><span>days since the District Attorney's office rejected the case</span></li>
+          <li><b data-since="2026-03-19">212</b><span>days since the District Attorney's office rejected the case</span></li>
           <li><b>0</b><span>letters telling him of the decision</span></li>
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
         </ul>
@@ -464,7 +476,7 @@ footer .wrap { display: grid; gap: 4px }
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">0 of 4</span>
-          <p>public records requests decided. <span class="live"><b data-since="2026-04-16">183</b> days since the first was due.</span><a class="fn" href="#n11">11</a></p>
+          <p>public records requests decided. <span class="live"><b data-since="2026-04-16">184</b> days since the first was due.</span><a class="fn" href="#n11">11</a></p>
         </article>
         <article class="tile p">
           <span class="tag">City</span>
@@ -501,7 +513,20 @@ footer .wrap { display: grid; gap: 4px }
 
   <section class="sec" id="halsey">
     <div class="wrap">
-      <h2>A passionate cause that began before this case. The case only hardened it.</h2>
+      <h2>California Just Can't Stop Thanking Me.</h2>
+      <div class="vids">
+        <a class="vid" href="https://vimeo.com/1236709009" target="_blank" rel="noopener" data-vimeo="1236709009" aria-label="Play the video: California’s Betrayal The Hypocrisy of Insolvency">
+          <img src="poster-1.jpg" width="960" height="540" alt="" loading="lazy" decoding="async">
+          <span class="vt">California’s Betrayal The Hypocrisy of Insolvency</span>
+          <span class="vp" aria-hidden="true"></span>
+        </a>
+        <a class="vid" href="https://vimeo.com/1236709068" target="_blank" rel="noopener" data-vimeo="1236709068" aria-label="Play the video: The Asymmetric Ledger California and the Architect’s Exile">
+          <img src="poster-2.jpg" width="960" height="540" alt="" loading="lazy" decoding="async">
+          <span class="vt">The Asymmetric Ledger California and the Architect’s Exile</span>
+          <span class="vp" aria-hidden="true"></span>
+        </a>
+      </div>
+      <h2 class="h2-next">A passionate cause that began before this case. The case only hardened it.</h2>
       <div class="me-statement" data-who="halsey">
         <blockquote>
           <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to never let any American be deprived of our freedoms by power, money, fame, or prestige.</p>
@@ -590,7 +615,7 @@ footer .wrap { display: grid; gap: 4px }
 <footer>
   <div class="wrap">
     <span>Halsey Minor, the victim · Beverly Hills Police Department case 2025-14983 · California Attorney General PIU #1564601</span>
-    <span>Updated October 16, 2026.</span>
+    <span>Updated October 17, 2026.</span>
   </div>
 </footer>
 
@@ -603,6 +628,21 @@ footer .wrap { display: grid; gap: 4px }
     var n = Math.round((t - day(el.getAttribute('data-since'))) / 86400000);
     if (n >= 0) el.textContent = n.toLocaleString('en-US');
   });
+  // his videos: on halseyminor.com a tap puts Vimeo's player in place of the picture; on the claude.ai page the link opens Vimeo
+  if (document.documentElement.getAttribute('data-embed') === 'inline') {
+    Array.prototype.forEach.call(document.querySelectorAll('.vid[data-vimeo]'), function (a) {
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var f = document.createElement('iframe');
+        f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?autoplay=1&dnt=1&title=1&byline=0&portrait=0';
+        f.allow = 'autoplay; fullscreen; picture-in-picture';
+        f.setAttribute('allowfullscreen', '');
+        f.title = a.querySelector('.vt').textContent;
+        var box = document.createElement('div'); box.className = 'vid'; box.appendChild(f);
+        a.parentNode.replaceChild(box, a);
+      });
+    });
+  }
   // the meter: the needle rests where the record puts it and strains toward justice; it never leaves the red zone (120 to 180 degrees)
   var needle = document.getElementById('needle');
   var LIFTS = [132, 148, 156, 162];
