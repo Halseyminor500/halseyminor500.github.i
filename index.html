@@ -201,6 +201,14 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .vid:hover .vp, .vid:focus-visible .vp { transform: scale(1.08) }
 .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
 .h2-next { margin-top: 0 }
+/* his invitation: the same card as his quotations, filled in his blue */
+.say.invite { background: var(--blue); border-color: var(--blue); color: #FFFFFF }
+.say.invite .inv-text { margin: 0; font: 600 clamp(1.08rem, 1.8vw, 1.32rem)/1.32 var(--display); text-wrap: pretty }
+.say.invite .inv-mail { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center }
+.say.invite .inv-mail a { color: #FFFFFF; font: 700 clamp(1.18rem, 2.1vw, 1.55rem)/1.2 var(--display); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; overflow-wrap: anywhere; min-width: 0 }
+.say.invite .copy { flex: none; font: 600 13px/1 var(--body); padding: 8px 14px; border-radius: 999px; border: 1.5px solid #FFFFFF; background: transparent; color: #FFFFFF; cursor: pointer }
+.say.invite .copy:hover { background: rgba(255, 255, 255, .16) }
+.say.invite :focus-visible { outline-color: #FFFFFF }
 /* Halsey Minor */
 .me-statement { max-width: 62rem; margin: 0 0 clamp(28px, 4vw, 44px) }
 .me-statement blockquote { font: 500 clamp(1.2rem, 2.2vw, 1.7rem)/1.42 var(--display); color: var(--blue) }
@@ -544,6 +552,10 @@ footer .wrap { display: grid; gap: 4px }
         <div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, wanting to help others, not help me, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n16">16</a></blockquote></div>
+          <div class="say h invite" data-who="halsey">
+            <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
+            <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+          </div>
         </div>
       </div>
       <div class="videos">
@@ -643,6 +655,19 @@ footer .wrap { display: grid; gap: 4px }
       });
     });
   }
+  // his invitation: Copy puts the address on the clipboard; if the browser refuses, the address is selected instead
+  var copyBtn = document.getElementById('inv-copy');
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var addr = copyBtn.getAttribute('data-copy');
+    var selectIt = function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('inv-addr'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected';
+    };
+    try {
+      navigator.clipboard.writeText(addr).then(function () { copyBtn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2400);
+  });
   // the meter: the needle rests where the record puts it and strains toward justice; it never leaves the red zone (120 to 180 degrees)
   var needle = document.getElementById('needle');
   var LIFTS = [132, 148, 156, 162];
