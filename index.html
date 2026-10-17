@@ -229,6 +229,30 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .videos a::before { content: "▶"; color: var(--blue); font-size: .85rem }
 .videos a span { font: 400 13px/1.4 var(--body); color: var(--muted) }
 
+/* the laws he contends were broken, by code: his, so in his blue */
+.codes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px }
+.codes li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 12px; padding: 14px 18px; display: grid; gap: 4px; align-content: start }
+.codes b { font: 700 1.15rem/1.25 var(--display) }
+.codes span { font: 500 .95rem/1.3 var(--body); color: var(--muted) }
+.codes-note { margin: 14px 0 0; font-size: 1rem; color: var(--muted) }
+/* the end, as it begins: the flag and the glass, with the evidence where the meter stands at the top */
+.hero.end { border-top: 1px solid var(--line) }
+.endline { margin: 0; max-width: none; font: 700 clamp(2rem, 4.6vw, 4.1rem)/1.02 var(--display); letter-spacing: -.005em; text-wrap: balance }
+.hero.end .hl { margin-top: 22px }
+.shot { margin: 0; display: grid; justify-items: center; gap: 14px }
+.shot img { display: block; width: 100%; max-width: 340px; height: auto; border-radius: 24px; border: 7px solid var(--band); box-shadow: 0 30px 60px -28px rgba(21, 23, 26, .6) }
+.shot figcaption { max-width: 26rem; font: 600 clamp(1rem, 1.4vw, 1.12rem)/1.35 var(--display); text-align: center; text-wrap: pretty }
+@media (max-width: 899px) { .shot img { max-width: 300px } }
+/* the District Attorney, at the end, as the Attorney General is at the top */
+.daend { padding-bottom: clamp(44px, 6vw, 84px) }
+.daend .say { max-width: 62rem }
+.daend .say blockquote { font-size: clamp(1.2rem, 2.2vw, 1.7rem) }
+.facts { margin: 24px 0 0; font: 600 clamp(1.15rem, 2vw, 1.5rem)/1.3 var(--display) }
+.ask { margin: 10px 0 0; max-width: none; font: 800 clamp(2.4rem, 6vw, 5rem)/1 var(--display); letter-spacing: -.01em }
+.cta { margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; font: 600 clamp(1.1rem, 1.8vw, 1.35rem)/1.3 var(--display) }
+.share { flex: none; font: 600 15px/1 var(--body); padding: 13px 20px; border-radius: 999px; border: 0; background: var(--ink); color: #FFFFFF; cursor: pointer }
+.share:hover { background: #2A2E33 }
+
 /* notes, at the end */
 .notes { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line) }
 .notes h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin-bottom: 14px }
@@ -346,11 +370,11 @@ footer .wrap { display: grid; gap: 4px }
   <section class="sec" id="reported">
     <div class="wrap">
       <h2>$1,134,000, moved in five transfers he did not authorize. <b class="p">The police</b> sent it to the <b class="d">District Attorney</b> as grand theft.</h2>
-      <p class="dek">A California tax refund paid to him, moved November 15 to December 15, 2022. He reported it to the Beverly Hills police in person on March 24 and 25, 2025.</p>
+      <p class="dek">A California tax refund paid to him, moved November 15 to December 15, 2022. He reported it to the Beverly Hills police in person on March 24 and 25, 2025. It was not the first: he has told the police and the District Attorney of a theft in 2015, about $450,000 moved to hidden accounts, which he now estimates at about $1.5 million.<a class="fn" href="#n3">3</a></p>
       <div class="grid3">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff did not consent to, authorize, or know of the transfers.”<a class="fn" href="#n3">3</a></blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <b class="s">Shannon Minor</b> initiated or directed each transfer.”<a class="fn" href="#n3">3</a></blockquote></div>
-        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and subsequently rejected on March 19, 2026.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff did not consent to, authorize, or know of the transfers.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <b class="s">Shannon Minor</b> initiated or directed each transfer.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and subsequently rejected on March 19, 2026.”<a class="fn" href="#n5">5</a></blockquote></div>
       </div>
     </div>
   </section>
@@ -362,7 +386,7 @@ footer .wrap { display: grid; gap: 4px }
         <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. I already told you I submitted your case to the DA.”</blockquote></div>
         <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026</span><blockquote>“We are not in receipt of any letter however the case you refer to is not in our system.”</blockquote></div>
       </div>
-      <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. No one told him for nearly six months.<a class="fn" href="#n5">5</a></p>
+      <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. No one told him for nearly six months.<a class="fn" href="#n6">6</a></p>
     </div>
   </section>
 
@@ -371,7 +395,7 @@ footer .wrap { display: grid; gap: 4px }
       <h2>Thirteen times, in writing, he warned that the case would be sent unprepared and dumped.</h2>
       <div class="warn-head">
         <span class="count">13</span>
-        <p>warnings, November 5, 2025 to March 11, 2026, to <b class="p">the detective, his superiors, the Chief and the City</b>, and to the <b class="d">District Attorney</b>.<a class="fn" href="#n6">6</a></p>
+        <p>warnings, November 5, 2025 to March 11, 2026, to <b class="p">the detective, his superiors, the Chief and the City</b>, and to the <b class="d">District Attorney</b>.<a class="fn" href="#n7">7</a></p>
       </div>
       <p class="hl h" data-who="halsey">November 19, 2025: “…framing it in a way that the case might be prematurely rejected…”</p>
       <div class="outcome">
@@ -388,39 +412,48 @@ footer .wrap { display: grid; gap: 4px }
       <h2>The law did not stop this case. The justice system did.</h2>
       <p class="dek">The <b class="d">District Attorney's office</b> rejected it as <span data-who="da">“beyond a statute of limitations.”</span> Count the time either way.</p>
       <div class="clock" data-who="chart">
-        <svg viewBox="0 0 1000 300" role="img" aria-label="Timeline, November 2022 to December 2026. Five transfers in November and December 2022. Reported to the Beverly Hills police March 24 and 25, 2025. The District Attorney's count of 3 years ends November 15 to December 15, 2025, while the case is with the police; on December 2, 2025 he writes: Do not let it die on the vine. Sent to the District Attorney February 9, 2026. Rejected March 19, 2026, as beyond a statute of limitations. The victim learns on September 8, 2026. Four years after the transfers, the earliest end of the time under Penal Code section 801.5, is November 15 to December 15, 2026.">
-        <line x1="40" y1="200" x2="960" y2="200" stroke="#15171A" stroke-width="2"/>
-        <line x1="76.9" y1="200" x2="76.9" y2="210" stroke="#15171A" stroke-width="1.5"/>
-        <text x="76.9" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2023</text>
-        <line x1="297.7" y1="200" x2="297.7" y2="210" stroke="#15171A" stroke-width="1.5"/>
-        <text x="297.7" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2024</text>
-        <line x1="519.1" y1="200" x2="519.1" y2="210" stroke="#15171A" stroke-width="1.5"/>
-        <text x="519.1" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2025</text>
-        <line x1="739.8" y1="200" x2="739.8" y2="210" stroke="#15171A" stroke-width="1.5"/>
-        <text x="739.8" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2026</text>
-        <rect x="573.5" y="190" width="189.9" height="20" fill="#F9E4E8" stroke="#BA0C2F" stroke-width="1.5"/>
-        <text x="763.4" y="286" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#BA0C2F" text-anchor="end">With the Beverly Hills police: Apr 1, 2025 – Feb 9, 2026, then sent to the DA</text>
-        <rect x="48.5" y="186" width="18.1" height="28" fill="#737A84"/>
-        <rect x="711.4" y="104" width="18.1" height="110" fill="#F2C200" stroke="#B88F00" stroke-width="1"/>
-        <rect x="932.2" y="142" width="18.1" height="72" fill="#E9EBEE" stroke="#15171A" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <text x="48.5" y="172" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#737A84" text-anchor="start">Five transfers move $1,134,000 · Nov–Dec 2022</text>
-        <text x="729.5" y="96" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">The District Attorney's 3 years end · Nov 15 – Dec 15, 2025</text>
-        <text x="703.4" y="122" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1F56C3" text-anchor="end">Dec 2, 2025: “Do not let it die on the vine.”</text>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="Timeline. 2015: the first theft he reported, about $450,000, moved to hidden accounts; about $1.5 million today, by his estimate. Then, to scale, November 2022 to December 2026. Five transfers in November and December 2022. Reported to the Beverly Hills police March 24 and 25, 2025. The District Attorney's count of 3 years ends November 15 to December 15, 2025, while the case is with the police; on December 2, 2025 he writes: Do not let it die on the vine. Sent to the District Attorney February 9, 2026. Rejected March 19, 2026, as beyond a statute of limitations. The victim learns on September 8, 2026. Four years after the transfers, the earliest end of the time under Penal Code section 801.5, is November 15 to December 15, 2026.">
+        <line x1="142" y1="200" x2="960" y2="200" stroke="#15171A" stroke-width="2"/>
+        <line x1="182.5" y1="200" x2="182.5" y2="210" stroke="#15171A" stroke-width="1.5"/>
+        <text x="182.5" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2023</text>
+        <line x1="376.9" y1="200" x2="376.9" y2="210" stroke="#15171A" stroke-width="1.5"/>
+        <text x="376.9" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2024</text>
+        <line x1="571.8" y1="200" x2="571.8" y2="210" stroke="#15171A" stroke-width="1.5"/>
+        <text x="571.8" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2025</text>
+        <line x1="766.2" y1="200" x2="766.2" y2="210" stroke="#15171A" stroke-width="1.5"/>
+        <text x="766.2" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2026</text>
+        <rect x="619.7" y="190" width="167.2" height="20" fill="#F9E4E8" stroke="#BA0C2F" stroke-width="1.5"/>
+        <text x="786.9" y="286" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#BA0C2F" text-anchor="end">With the Beverly Hills police: Apr 1, 2025 – Feb 9, 2026, then sent to the DA</text>
+        <rect x="157.5" y="186" width="16.0" height="28" fill="#737A84"/>
+        <rect x="741.1" y="104" width="16.0" height="110" fill="#F2C200" stroke="#B88F00" stroke-width="1"/>
+        <rect x="935.5" y="142" width="16.0" height="72" fill="#E9EBEE" stroke="#15171A" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <line x1="40" y1="200" x2="116" y2="200" stroke="#15171A" stroke-width="2"/>
+        <line x1="118" y1="209" x2="126" y2="191" stroke="#15171A" stroke-width="2"/>
+        <line x1="127" y1="209" x2="135" y2="191" stroke="#15171A" stroke-width="2"/>
+        <rect x="60" y="186" width="20" height="28" fill="#737A84"/>
+        <text x="70" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2015</text>
+        <text x="44.0" y="130" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#737A84" text-anchor="start">About $450,000 · 2015</text>
+        <text x="44.0" y="148" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#737A84" text-anchor="start">now about $1.5 million, his estimate</text>
+        <line x1="70" y1="156" x2="70" y2="184" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="157.5" y="172" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#737A84" text-anchor="start">Five transfers move $1,134,000 · Nov–Dec 2022</text>
+        <text x="757.1" y="96" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">The District Attorney's 3 years end · Nov 15 – Dec 15, 2025</text>
+        <text x="733.1" y="122" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1F56C3" text-anchor="end">Dec 2, 2025: “Do not let it die on the vine.”</text>
         <text x="960.0" y="96" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">4 years · §801.5</text>
         <text x="960.0" y="114" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="500" fill="#15171A" text-anchor="end">Nov–Dec 2026</text>
         <text x="960.0" y="132" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#565B62" text-anchor="end">at the earliest</text>
-        <circle cx="568.7" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
-        <line x1="568.7" y1="156" x2="568.7" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="568.7" y="150" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">Reported in person · Mar 24–25, 2025</text>
-        <circle cx="763.4" cy="200" r="6.5" fill="#BA0C2F" stroke="#FFFFFF" stroke-width="2"/>
-        <circle cx="786.4" cy="200" r="6.5" fill="#F2C200" stroke="#15171A" stroke-width="2"/>
-        <line x1="786.4" y1="46" x2="786.4" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="786.4" y="40" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">Rejected: “beyond a statute of limitations” · Mar 19, 2026</text>
-        <circle cx="891.0" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
-        <line x1="891.0" y1="208" x2="891.0" y2="238" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="891.0" y="254" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">He learns · Sep 8, 2026</text>
+        <circle cx="615.4" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
+        <line x1="615.4" y1="156" x2="615.4" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="615.4" y="150" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">Reported in person · Mar 24–25, 2025</text>
+        <circle cx="786.9" cy="200" r="6.5" fill="#BA0C2F" stroke="#FFFFFF" stroke-width="2"/>
+        <circle cx="807.2" cy="200" r="6.5" fill="#F2C200" stroke="#15171A" stroke-width="2"/>
+        <line x1="807.2" y1="46" x2="807.2" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="807.2" y="40" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">Rejected: “beyond a statute of limitations” · Mar 19, 2026</text>
+        <circle cx="899.3" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
+        <line x1="899.3" y1="208" x2="899.3" y2="238" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="899.3" y="254" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">He learns · Sep 8, 2026</text>
         </svg>
         <ol class="clock-list">
+          <li class="s"><span class="t">2015</span><span>The first theft he reported: about $450,000, moved to hidden accounts. About $1.5 million today, by his estimate.</span></li>
           <li class="s"><span class="t">Nov 15 – Dec 15, 2022</span><span>Five online transfers move $1,134,000.</span></li>
           <li class="h"><span class="t">Mar 24–25, 2025</span><span>He reports the crime, in person.</span></li>
           <li class="p"><span class="t">Apr 1, 2025</span><span>The police assign a detective.</span></li>
@@ -438,7 +471,7 @@ footer .wrap { display: grid; gap: 4px }
           <p class="hl p" data-who="record">December 2, 2025, inside that count: “Do not let it die on the vine.” The police held the case ten more weeks.</p>
         </div>
         <div>
-          <div class="say law" data-who="law"><span class="tag" style="background:var(--ink)">The four-year rule</span><blockquote>Penal Code §801.5: four years from discovery, or from the last transfer, whichever is later.<a class="fn" href="#n7">7</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
+          <div class="say law" data-who="law"><span class="tag" style="background:var(--ink)">The four-year rule</span><blockquote>Penal Code §801.5: four years from discovery, or from the last transfer, whichever is later.<a class="fn" href="#n8">8</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to District Attorney Hochman, September 21, 2026</span><blockquote>“Was the discovery rule part of the analysis?”</blockquote><p class="rule">No answer.</p></div>
         </div>
       </div>
@@ -455,14 +488,14 @@ footer .wrap { display: grid; gap: 4px }
         </div>
         <div>
           <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on community property would also not support a filing of this case.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n6">6</a></blockquote></div>
+          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n7">7</a></blockquote></div>
         </div>
       </div>
       <div class="grid2" style="margin-top:16px">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n3">3</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
         <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
       </div>
-      <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer.<a class="fn" href="#n8">8</a></p>
+      <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer.<a class="fn" href="#n9">9</a></p>
     </div>
   </section>
 
@@ -473,35 +506,35 @@ footer .wrap { display: grid; gap: 4px }
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">0</span>
-          <p>letters telling him of the decision. The law requires one within 30 days, when the victim asks.<a class="fn" href="#n9">9</a></p>
+          <p>letters telling him of the decision. The law requires one within 30 days, when the victim asks.<a class="fn" href="#n10">10</a></p>
         </article>
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">0 of 8</span>
-          <p>requests to be heard, a right in California's Constitution.<a class="fn" href="#n10">10</a></p>
+          <p>requests to be heard, a right in California's Constitution.<a class="fn" href="#n11">11</a></p>
           <p class="hl d" data-who="record">No one conferred with him, before the decision or after it.</p>
         </article>
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">0 of 4</span>
-          <p>public records requests decided. <span class="live"><b data-since="2026-04-16">184</b> days since the first was due.</span><a class="fn" href="#n11">11</a></p>
+          <p>public records requests decided. <span class="live"><b data-since="2026-04-16">184</b> days since the first was due.</span><a class="fn" href="#n12">12</a></p>
         </article>
         <article class="tile p">
           <span class="tag">City</span>
           <span class="big">203</span>
-          <p>days to a first decision on his records request.<a class="fn" href="#n12">12</a></p>
+          <p>days to a first decision on his records request.<a class="fn" href="#n13">13</a></p>
           <p class="hl p" data-who="city">His request “was quarantined by the city emailing system.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
           <span class="big">13</span>
-          <p>requests to have Google save his email evidence.<a class="fn" href="#n13">13</a></p>
+          <p>requests to have Google save his email evidence.<a class="fn" href="#n14">14</a></p>
           <p class="hl p" data-who="police">The police asked Google once, 104 days after the first. Later: “there is no further action that will be taken on your case.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
           <span class="big">0</span>
-          <p>replies from either police chief.<a class="fn" href="#n14">14</a></p>
+          <p>replies from either police chief.<a class="fn" href="#n15">15</a></p>
         </article>
       </div>
     </div>
@@ -514,7 +547,7 @@ footer .wrap { display: grid; gap: 4px }
         <li class="p" data-due="2026-10-17"><span class="dt">Oct 17</span><span class="txt">The police Records Bureau's promised answers.</span><span class="chip">Due</span></li>
         <li class="p" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's next update.</span><span class="chip">Due</span></li>
         <li class="p" data-due="2026-10-24"><span class="dt">Oct 24</span><span class="txt">The answer to his request for the facts of the incident.</span><span class="chip">Due</span></li>
-        <li class="p" data-due="2026-10-28"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out. Neither <b class="p">the police</b> nor the <b class="d">District Attorney's office</b> has answered his questions about it.<a class="fn" href="#n15">15</a></span><span class="chip">Due</span></li>
+        <li class="p" data-due="2026-10-28"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out. Neither <b class="p">the police</b> nor the <b class="d">District Attorney's office</b> has answered his questions about it.<a class="fn" href="#n16">16</a></span><span class="chip">Due</span></li>
       </ul>
     </div>
   </section>
@@ -545,13 +578,13 @@ footer .wrap { display: grid; gap: 4px }
       <div class="me-grid">
         <figure class="me-cover" data-who="halsey">
           <img src="lja-cover.jpg" loading="lazy" decoding="async" width="790" height="1024" alt="The cover of Legal Justice AI, his plan: a line drawing of a courthouse. Printed on it: August 14, 2024. A new industry emerges.">
-          <figcaption><b>August 14, 2024:</b> his plan, Legal Justice AI, seven months before he reported the crime.<a class="fn" href="#n16">16</a>
+          <figcaption><b>August 14, 2024:</b> his plan, Legal Justice AI, seven months before he reported the crime.<a class="fn" href="#n17">17</a>
             <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
           </figcaption>
         </figure>
         <div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, wanting to help others, not help me, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n16">16</a></blockquote></div>
+          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
           <div class="say h invite" data-who="halsey">
             <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
             <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
@@ -578,27 +611,78 @@ footer .wrap { display: grid; gap: 4px }
     </div>
   </section>
 
+  <section class="sec" id="contend">
+    <div class="wrap">
+      <h2>The laws he contends were broken, by code.<a class="fn" href="#n18">18</a></h2>
+      <ul class="codes" data-who="halsey">
+        <li><b>Grand theft</b><span>Penal Code §487(a)</span></li>
+        <li><b>Attempted murder, premeditated</b><span>Penal Code §§664(a), 187(a)</span></li>
+        <li><b>Extortion by written threat</b><span>Penal Code §523</span></li>
+        <li><b>Computer intrusion</b><span>Penal Code §502(c)</span></li>
+        <li><b>Evidence destruction</b><span>Penal Code §135</span></li>
+        <li><b>Insurance fraud</b><span>Penal Code §550</span></li>
+        <li><b>Conspiracy</b><span>Penal Code §182</span></li>
+      </ul>
+      <p class="codes-note">His characterizations, not legal determinations.</p>
+    </div>
+  </section>
+
+  <section class="hero end" id="phone" aria-labelledby="phone-h">
+    <div class="flag" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="glass">
+        <div>
+          <h2 class="endline" id="phone-h">THE EVIDENCE IS STILL IN THE VICTIM’S HANDS.</h2>
+          <p class="hl p" data-who="police">He asked the police for a written procedure to take custody of the phone. The answer: “has to be requested by means of a PRA request”.<a class="fn" href="#n19">19</a></p>
+          <ul class="stats">
+            <li><b data-since="2023-09-12">1131</b><span>days since the messages, September 12, 2023</span></li>
+            <li><b data-since="2026-09-26">21</b><span>days since he asked how to hand over the phone</span></li>
+            <li><b>0</b><span>times anyone has examined it</span></li>
+          </ul>
+        </div>
+        <figure class="shot" data-who="record">
+          <img src="phone-deleted.jpg" loading="lazy" decoding="async" width="717" height="1160" alt="His WhatsApp chat on September 12, 2023: fifteen messages in a row, from 8:47 to 9:11 pm, each one now reading This message was deleted.">
+          <figcaption>September 12, 2023, while he was in critical condition in the hospital: fifteen messages to him, every one deleted by the sender.<a class="fn" href="#n20">20</a></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="daend" id="challenge">
+    <div class="wrap">
+      <div class="say d" data-who="da"><span class="tag">District Attorney Nathan Hochman · December 3, 2024</span><blockquote>“District attorneys must have only two things as their North Stars: the facts and the law.”<a class="fn" href="#n21">21</a></blockquote></div>
+      <p class="facts">The facts are on this phone. No one has looked.</p>
+      <h2 class="ask">WORDS, OR <b class="d">POLITICS?</b></h2>
+      <p class="cta"><span>The police investigate. The District Attorney prosecutes. Take the phone.</span><button type="button" class="share" id="share">Share this page</button></p>
+    </div>
+  </section>
+
   <section class="notes" id="notes" data-who="notes">
     <div class="wrap">
       <h2>Notes</h2>
       <ol>
         <li id="n1">California Attorney General, Public Inquiry Unit, file PIU #1564601, on Beverly Hills Police Department case 2025-14983. The California Constitution, article V, §13, gives the Attorney General the duty “to see that the laws of the State are uniformly and adequately enforced”, and “direct supervision over every district attorney”.</li>
         <li id="n2">Attorney General Rob Bonta, April 26, 2024, in his office's release for National Crime Victims' Rights Week (oag.ca.gov). The portrait is his official one, from the California Department of Justice.</li>
-        <li id="n3">His civil complaint, filed August 7, 2026, paragraphs 17 to 19.</li>
-        <li id="n4">The Beverly Hills Police Department's answer to his records request, October 9, 2026.</li>
-        <li id="n5">He learned of the rejection on September 8, 2026. The District Attorney's office later explained: “The original case number that was provided was an incorrect number which resulted in a showing of the case not being in our system.” Its own number for the case, ECR #719953, first reached him on September 16, 2026. In his letter to the Attorney General he writes: “I do not say that either message to me was false.”</li>
-        <li id="n6">His letter to the Attorney General of October 15, 2026 lists all thirteen warnings, with their dates and recipients. Five of his warnings named the premarital agreement: November 5, 6 and 19, December 2, 2025, and February 13, 2026. His lawyer had sent the police the agreement on March 27, 2025.</li>
-        <li id="n7">Penal Code §801.5: prosecution “shall be commenced within four years after discovery of the commission of the offense, or within four years after the completion of the offense, whichever is later.” It applies to crimes described in §803(c), including those of which fraud or breach of a fiduciary obligation is a material element. He asked the District Attorney's office on September 16, 2026 and District Attorney Hochman on September 21. Only automatic receipts came back.</li>
-        <li id="n8">Asked on September 16, 18 and 21, and October 13, 2026.</li>
-        <li id="n9">Penal Code §11116.10: on the victim's request, the prosecutor must, “within 30 days of the final disposition of the case, inform the victim or witness by letter”.</li>
-        <li id="n10">California Constitution, article I, §28(b)(6): the victim's right “to reasonably confer with the prosecuting agency, upon request”. He asked twice before the decision and six times after, March 11 to April 17, 2026. In his words: “No one in the office conferred with me, before the decision or after it.”</li>
-        <li id="n11">Government Code §7922.535(a): a decision “within 10 days from receipt of the request”. Asked April 6, April 27, May 4 and September 13, 2026.</li>
-        <li id="n12">First request March 20, 2026; first decision October 9, 2026. The quarantine message was the Records Bureau's first reply, on July 25, 2026, to his request of April 27. The City withholds the record of what was sent, under Government Code §7923.600.</li>
-        <li id="n13">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
-        <li id="n14">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
-        <li id="n15">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
-        <li id="n16">Legal Justice AI, written by him. The cover carries the date August 14, 2024, and he emailed the plan that day. The vision line is from Draft 30, a PDF created August 27, 2024; the CNET line is from Draft 32, last saved March 15, 2026. The video titles and dates are as Vimeo gives them.</li>
-        <li id="n17">Every quotation on this page is word for word from the written record: his letter to the Attorney General and the messages it quotes, the District Attorney's office's message of September 8, 2026, his letter to District Attorney Hochman of September 21, 2026, his civil complaint, the Penal Code, the Attorney General's release, and Halsey Minor's own statements of October 11 and 16, 2026.</li>
+        <li id="n3">His messages to the detective of January 12 and 13, 2026, and to the District Attorney's office, the U.S. Attorney and the FBI of March 30 and April 6, 2026, one of them copied to the Attorney General's Public Inquiry Unit. They put its value at about $1.3 million; his estimate today is about $1.5 million.</li>
+        <li id="n4">His civil complaint, filed August 7, 2026, paragraphs 17 to 19.</li>
+        <li id="n5">The Beverly Hills Police Department's answer to his records request, October 9, 2026.</li>
+        <li id="n6">He learned of the rejection on September 8, 2026. The District Attorney's office later explained: “The original case number that was provided was an incorrect number which resulted in a showing of the case not being in our system.” Its own number for the case, ECR #719953, first reached him on September 16, 2026. In his letter to the Attorney General he writes: “I do not say that either message to me was false.”</li>
+        <li id="n7">His letter to the Attorney General of October 15, 2026 lists all thirteen warnings, with their dates and recipients. Five of his warnings named the premarital agreement: November 5, 6 and 19, December 2, 2025, and February 13, 2026. His lawyer had sent the police the agreement on March 27, 2025.</li>
+        <li id="n8">Penal Code §801.5: prosecution “shall be commenced within four years after discovery of the commission of the offense, or within four years after the completion of the offense, whichever is later.” It applies to crimes described in §803(c), including those of which fraud or breach of a fiduciary obligation is a material element. He asked the District Attorney's office on September 16, 2026 and District Attorney Hochman on September 21. Only automatic receipts came back.</li>
+        <li id="n9">Asked on September 16, 18 and 21, and October 13, 2026.</li>
+        <li id="n10">Penal Code §11116.10: on the victim's request, the prosecutor must, “within 30 days of the final disposition of the case, inform the victim or witness by letter”.</li>
+        <li id="n11">California Constitution, article I, §28(b)(6): the victim's right “to reasonably confer with the prosecuting agency, upon request”. He asked twice before the decision and six times after, March 11 to April 17, 2026. In his words: “No one in the office conferred with me, before the decision or after it.”</li>
+        <li id="n12">Government Code §7922.535(a): a decision “within 10 days from receipt of the request”. Asked April 6, April 27, May 4 and September 13, 2026.</li>
+        <li id="n13">First request March 20, 2026; first decision October 9, 2026. The quarantine message was the Records Bureau's first reply, on July 25, 2026, to his request of April 27. The City withholds the record of what was sent, under Government Code §7923.600.</li>
+        <li id="n14">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
+        <li id="n15">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
+        <li id="n16">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
+        <li id="n17">Legal Justice AI, written by him. The cover carries the date August 14, 2024, and he emailed the plan that day. The vision line is from Draft 30, a PDF created August 27, 2024; the CNET line is from Draft 32, last saved March 15, 2026. The video titles and dates are as Vimeo gives them.</li>
+        <li id="n18">His message of March 30, 2026 to the District Attorney's office, the U.S. Attorney and the FBI listed these by code; extortion is in his report to the Chief of Police of September 8, 2026. Section 664(a) is the provision for an attempt found willful, deliberate and premeditated.</li>
+        <li id="n19">His request of September 26, 2026 to Professional Standards and Chief Subin: “A written procedure for taking custody of my telephone, so that I could deliver it.” Sergeant Leber answered on October 7. He made that records request the same day; it has not been acknowledged.</li>
+        <li id="n20">His screenshot, cropped to the date and the messages; nothing else is changed.</li>
+        <li id="n21">Los Angeles County District Attorney's Office, news release of December 3, 2024, on his swearing-in (da.lacounty.gov).</li>
+        <li id="n22">Every quotation on this page is word for word from the written record: his letter to the Attorney General and the messages it quotes, the District Attorney's office's message of September 8, 2026, his letter to District Attorney Hochman of September 21, 2026, his civil complaint, the Penal Code, the Attorney General's release, and Halsey Minor's own statements of October 11 and 16, 2026.</li>
       </ol>
       <details class="full">
         <summary>Every request and every answer, from his letter to the Attorney General</summary>
@@ -667,6 +751,17 @@ footer .wrap { display: grid; gap: 4px }
       navigator.clipboard.writeText(addr).then(function () { copyBtn.textContent = 'Copied'; }, selectIt);
     } catch (e) { selectIt(); }
     setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2400);
+  });
+  // share: the phone's own share sheet where there is one; otherwise the address is copied, or shown if copying is refused
+  var shareBtn = document.getElementById('share');
+  if (shareBtn) shareBtn.addEventListener('click', function () {
+    var url = 'https://halseyminor.com/';
+    var done = function (msg) { shareBtn.textContent = msg; setTimeout(function () { shareBtn.textContent = 'Share this page'; }, 2600); };
+    var copyLink = function () {
+      try { navigator.clipboard.writeText(url).then(function () { done('Link copied'); }, function () { done(url); }); } catch (e) { done(url); }
+    };
+    if (navigator.share) { navigator.share({ title: document.title, url: url }).catch(function (e) { if (!e || e.name !== 'AbortError') copyLink(); }); return; }
+    copyLink();
   });
   // the meter: the needle rests where the record puts it and strains toward justice; it never leaves the red zone (120 to 180 degrees)
   var needle = document.getElementById('needle');
