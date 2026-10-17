@@ -185,7 +185,8 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 /* deadlines */
 .due { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px }
 .due li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c, var(--line)); border-radius: 14px; padding: 16px 20px; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) auto; gap: 8px 22px; align-items: center }
-.due li.p { --c: var(--red) } .due li.law { --c: var(--ink) }
+.due li.p { --c: var(--red) } .due li.d { --c: var(--yellow) } .due li.law { --c: var(--ink) }
+.due-count { margin: -6px 0 18px; max-width: 44rem; font-size: 1.1rem }
 @media (max-width: 759px) { .due li { grid-template-columns: minmax(0, 1fr) auto } .due .txt { grid-column: 1 / -1; order: 3 } }
 .due .dt { font: 700 1.35rem/1.1 var(--display) }
 .chip { justify-self: end; white-space: nowrap; font: 600 13px/1 var(--body); padding: 9px 12px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: var(--card) }
@@ -558,11 +559,16 @@ footer .wrap { display: grid; gap: 4px }
   <section class="sec" id="watch">
     <div class="wrap">
       <h2>The next deadlines. Each one shows, live, whether it is met.</h2>
+      <p class="due-count"><b>8</b> requests still unanswered: 5 to <b class="p">the police and the City</b>, 3 to the <b class="d">District Attorney</b>.</p>
       <ul class="due">
-        <li class="p" data-due="2026-10-17" data-met="Oct 17"><span class="dt">Oct 17</span><span class="txt">The police Records Bureau's promised answers.</span><span class="chip met">Answered Oct 17</span></li>
-        <li class="p" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's next update.</span><span class="chip">Due in 6 days</span></li>
+        <li class="d" data-due="2026-10-07"><span class="dt">Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip over">Overdue 10 days</span></li>
+        <li class="d" data-due="2026-10-13"><span class="dt">Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21.</span><span class="chip over">Overdue 4 days</span></li>
+        <li class="p" data-due="2026-10-17" data-met="Oct 17"><span class="dt">Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip met">Answered Oct 17</span></li>
+        <li class="p" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The police on the extortion counts: which were presented, and whether the rest will go to the District Attorney by October 28.</span><span class="chip">Due in 4 days</span></li>
+        <li class="d" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The District Attorney's office on whether the extortion counts were before the deputy.</span><span class="chip">Due in 4 days</span></li>
+        <li class="p" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.</span><span class="chip">Due in 6 days</span></li>
         <li class="p" data-due="2026-10-24"><span class="dt">Oct 24</span><span class="txt">The answer to his request for the facts of the incident.</span><span class="chip">Due in 7 days</span></li>
-        <li class="p" data-due="2026-10-28" data-kind="limit"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out. Neither <b class="p">the police</b> nor the <b class="d">District Attorney's office</b> has answered his questions about it.<a class="fn" href="#n16">16</a></span><span class="chip">11 days left</span></li>
+        <li class="p" data-due="2026-10-28" data-kind="limit"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out.<a class="fn" href="#n16">16</a></span><span class="chip">11 days left</span></li>
         <li class="law" data-due="2026-11-15" data-end="2026-12-15" data-kind="limit"><span class="dt">Nov 15</span><span class="txt">Through December 15: four years after the transfers, the earliest end under Penal Code §801.5.</span><span class="chip">29 days left</span></li>
       </ul>
     </div>
