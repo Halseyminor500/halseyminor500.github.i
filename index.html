@@ -201,6 +201,9 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .vid:hover .vp, .vid:focus-visible .vp { transform: scale(1.08) }
 .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
 .h2-next { margin-top: 0 }
+.vids.more { margin: 0 }
+.vid.pre { background: linear-gradient(135deg, var(--band) 0%, #1B2F5E 100%) }
+.vid .vd { position: absolute; left: 18px; bottom: 14px; font: 500 13px/1.2 var(--body); color: rgba(255, 255, 255, .82) }
 /* his invitation: the same card as his quotations, filled in his blue */
 .say.invite { background: var(--blue); border-color: var(--blue); color: #FFFFFF }
 .say.invite .inv-text { margin: 0; font: 600 clamp(1.08rem, 1.8vw, 1.32rem)/1.32 var(--display); text-wrap: pretty }
@@ -209,6 +212,14 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .say.invite .copy { flex: none; font: 600 13px/1 var(--body); padding: 8px 14px; border-radius: 999px; border: 1.5px solid #FFFFFF; background: transparent; color: #FFFFFF; cursor: pointer }
 .say.invite .copy:hover { background: rgba(255, 255, 255, .16) }
 .say.invite :focus-visible { outline-color: #FFFFFF }
+/* three ways in: the same mailbox, the subject saying who is writing; solid and plain, white on his blue */
+.say.invite .inv-ways { margin: 18px 0 2px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
+@media (max-width: 639px) { .say.invite .inv-ways { grid-template-columns: minmax(0, 1fr) } }
+.say.invite .way { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 12px 16px; border-radius: 12px; background: #FFFFFF; color: var(--blue); text-decoration: none; text-align: center;
+  font: 700 clamp(1.02rem, 1.5vw, 1.15rem)/1.2 var(--display); box-shadow: 0 12px 24px -14px rgba(0, 0, 0, .55); transition: transform .15s ease, box-shadow .15s ease }
+.say.invite .way::after { content: "\2192"; font-weight: 600 }
+.say.invite .way:hover { transform: translateY(-2px); box-shadow: 0 16px 28px -14px rgba(0, 0, 0, .6) }
+.say.invite .way:active { transform: none }
 /* Halsey Minor */
 .me-statement { max-width: 62rem; margin: 0 0 clamp(28px, 4vw, 44px) }
 .me-statement blockquote { font: 500 clamp(1.2rem, 2.2vw, 1.7rem)/1.42 var(--display); color: var(--blue) }
@@ -224,10 +235,10 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .videos h3 { margin: 0 0 4px; font: 700 clamp(1.3rem, 2.2vw, 1.7rem)/1.2 var(--display) }
 .videos h4 { margin: 18px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
 .videos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 12px }
-.videos a { display: grid; gap: 6px; align-content: start; height: 100%; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; font: 600 1.02rem/1.3 var(--display); overflow-wrap: anywhere }
-.videos a:hover { border-color: var(--blue) }
-.videos a::before { content: "▶"; color: var(--blue); font-size: .85rem }
-.videos a span { font: 400 13px/1.4 var(--body); color: var(--muted) }
+.videos li a { display: grid; gap: 6px; align-content: start; height: 100%; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; font: 600 1.02rem/1.3 var(--display); overflow-wrap: anywhere }
+.videos li a:hover { border-color: var(--blue) }
+.videos li a::before { content: "▶"; color: var(--blue); font-size: .85rem }
+.videos li a span { font: 400 13px/1.4 var(--body); color: var(--muted) }
 
 /* the laws he contends were broken, by code: his, so in his blue */
 .codes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px }
@@ -588,19 +599,39 @@ footer .wrap { display: grid; gap: 4px }
           <div class="say h invite" data-who="halsey">
             <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
             <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+            <div class="inv-ways" aria-label="Write to him">
+              <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
+              <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
+              <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
+            </div>
           </div>
         </div>
       </div>
       <div class="videos">
         <h3>His videos, on Vimeo</h3>
         <h4>Made with Google Gemini, each in answer to a question</h4>
-        <ul>
-          <li><a href="https://vimeo.com/1191263031" target="_blank" rel="noopener">Halsey Minor’s Restraint, Not Moving Silicon Valley Out Of California<span>May 11, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1201944057" target="_blank" rel="noopener">The Builders Paradox Architecting the Open Web and the Closed<span>June 16, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1171557421" target="_blank" rel="noopener">The Trillionaire Ghost and Builder vs The Reaper<span>March 8, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1200593847" target="_blank" rel="noopener">The Trillion-Dollar Gift<span>June 11, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1190231998" target="_blank" rel="noopener">The Infrastructure Blueprint Of Halsey Minor<span>May 7, 2026</span></a></li>
-        </ul>
+        <div class="vids more">
+          <a class="vid pre" href="https://vimeo.com/1200593847" target="_blank" rel="noopener" data-vimeo="1200593847" aria-label="Play the video: The Trillion-Dollar Gift">
+            <span class="vt">The Trillion-Dollar Gift</span>
+            <span class="vd">June 11, 2026</span>
+            <span class="vp" aria-hidden="true"></span>
+          </a>
+          <a class="vid pre" href="https://vimeo.com/1201944057" target="_blank" rel="noopener" data-vimeo="1201944057" aria-label="Play the video: The Builders Paradox Architecting the Open Web and the Closed">
+            <span class="vt">The Builders Paradox Architecting the Open Web and the Closed</span>
+            <span class="vd">June 16, 2026</span>
+            <span class="vp" aria-hidden="true"></span>
+          </a>
+          <a class="vid pre" href="https://vimeo.com/1211863204" target="_blank" rel="noopener" data-vimeo="1211863204" aria-label="Play the video: The Salesforce for Social Justice">
+            <span class="vt">The Salesforce for Social Justice</span>
+            <span class="vd">July 21, 2026</span>
+            <span class="vp" aria-hidden="true"></span>
+          </a>
+          <a class="vid pre" href="https://vimeo.com/1171557421" target="_blank" rel="noopener" data-vimeo="1171557421" aria-label="Play the video: The Trillionaire Ghost and Builder vs The Reaper">
+            <span class="vt">The Trillionaire Ghost and Builder vs The Reaper</span>
+            <span class="vd">March 8, 2026</span>
+            <span class="vp" aria-hidden="true"></span>
+          </a>
+        </div>
         <h4>The companies he built at operatingequity.ai</h4>
         <ul>
           <li><a href="https://vimeo.com/1218683867" target="_blank" rel="noopener">CIVIC — Rebuilding Trust Through a Creator Driven Network<span>August 16, 2026</span></a></li>
@@ -726,17 +757,20 @@ footer .wrap { display: grid; gap: 4px }
   });
   // his videos: on halseyminor.com a tap puts Vimeo's player in place of the picture; on the claude.ai page the link opens Vimeo
   if (document.documentElement.getAttribute('data-embed') === 'inline') {
+    var player = function (a, autoplay) {
+      var f = document.createElement('iframe');
+      f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?' + (autoplay ? 'autoplay=1&' : '') + 'dnt=1&title=1&byline=0&portrait=0';
+      f.allow = 'autoplay; fullscreen; picture-in-picture';
+      f.setAttribute('allowfullscreen', '');
+      if (!autoplay) f.setAttribute('loading', 'lazy');
+      f.title = a.querySelector('.vt').textContent;
+      var box = document.createElement('div'); box.className = 'vid'; box.appendChild(f);
+      a.parentNode.replaceChild(box, a);
+    };
     Array.prototype.forEach.call(document.querySelectorAll('.vid[data-vimeo]'), function (a) {
-      a.addEventListener('click', function (ev) {
-        ev.preventDefault();
-        var f = document.createElement('iframe');
-        f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?autoplay=1&dnt=1&title=1&byline=0&portrait=0';
-        f.allow = 'autoplay; fullscreen; picture-in-picture';
-        f.setAttribute('allowfullscreen', '');
-        f.title = a.querySelector('.vt').textContent;
-        var box = document.createElement('div'); box.className = 'vid'; box.appendChild(f);
-        a.parentNode.replaceChild(box, a);
-      });
+      // his four videos have no picture of their own on this page: Vimeo's player takes their place at once, with its picture
+      if (a.classList.contains('pre')) { player(a, false); return; }
+      a.addEventListener('click', function (ev) { ev.preventDefault(); player(a, true); });
     });
   }
   // his invitation: Copy puts the address on the clipboard; if the browser refuses, the address is selected instead
