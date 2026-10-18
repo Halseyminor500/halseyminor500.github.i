@@ -193,6 +193,38 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .chip.over { background: var(--band); border-color: var(--band); color: #FFFFFF }
 .chip.today { background: var(--ink); color: #FFFFFF }
 .chip.met { border-color: #1F6F43; color: #1F6F43 }
+/* a reply that does not give what the law requires: a Fail, in the black of what should never happen; the edge shows who */
+.chip.fail { background: var(--band); border-color: var(--band); color: #FFFFFF; font-weight: 700; letter-spacing: .03em }
+/* his response follows the Fail, in his color: the button opens his letters in place */
+.due li.h { --c: var(--blue) }
+.due li.resp { background: var(--blue-soft) }
+.resp-btn { justify-self: end; white-space: nowrap; font: 700 14px/1 var(--body); color: #FFFFFF; background: var(--blue); border: 0; border-radius: 999px;
+  padding: 14px 18px; min-height: 44px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .2) }
+.resp-btn:hover { filter: brightness(1.1) }
+.resp-btn[aria-expanded="true"] { background: var(--ink) }
+/* the page splits: his letters wipe in from one side to the other while everything below moves down; Close puts it back */
+.due li.resp-panel { display: block; padding: 0; border: 0; border-radius: 0; background: none; overflow: hidden }
+.due li.resp-panel[hidden] { display: none }
+.resp-wipe { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 0 22px 22px }
+.resp-panel.opening .resp-wipe { animation: resp-wipe .6s cubic-bezier(.3, 0, .2, 1) both }
+.resp-panel.closing .resp-wipe { animation: resp-wipe .4s cubic-bezier(.3, 0, .2, 1) reverse both }
+@keyframes resp-wipe { from { clip-path: inset(0 100% 0 0) } to { clip-path: inset(0 0 0 0) } }
+.resp-head { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px 0 12px; background: var(--card); border-bottom: 1px solid var(--line) }
+.resp-title { margin: 0; font: 700 clamp(1.05rem, 2vw, 1.25rem)/1.2 var(--display); color: var(--blue) }
+.resp-close { flex: none; font: 700 15px/1 var(--body); color: var(--blue); background: var(--card); border: 2px solid var(--blue); border-radius: 999px;
+  padding: 12px 18px; min-height: 44px; cursor: pointer }
+.resp-close:hover { background: var(--blue); color: #FFFFFF }
+.resp-foot { display: flex; justify-content: flex-end; margin-top: 20px }
+.letter { margin-top: 18px; max-width: 46rem }
+.letter + .letter { border-top: 1px dashed var(--line); padding-top: 18px }
+.letter p, .letter li { margin: 0 0 10px; line-height: 1.55; overflow-wrap: anywhere }
+.letter ul { margin: 0 0 10px; padding-left: 1.2rem }
+.letter .meta { margin-bottom: 14px; font: 600 13px/1.45 var(--body); color: var(--muted) }
+.letter .cut { color: var(--muted); font-style: italic }
+.letter .sig { margin-top: 14px; font-weight: 700 }
+@media (prefers-reduced-motion: reduce) { .resp-panel .resp-wipe { animation: none !important } }
+.meter-note { margin: -4px 0 0; max-width: 24rem; text-align: center; font: 500 13px/1.45 var(--body); color: var(--ink) }
 
 /* Halsey Minor: his two videos, shown like embedded players (picture and title first; the player loads on a tap) */
 .vids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 clamp(36px, 5vw, 60px) }
@@ -343,9 +375,10 @@ footer .wrap { display: grid; gap: 4px }
           <text x="150" y="218" fill="#FFFFFF" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" font-weight="500" letter-spacing="2.2">LIVE</text>
           <text x="160" y="240" fill="#B9BDC3" font-family="IBM Plex Mono, Menlo, monospace" font-size="10.5" letter-spacing="1.6" text-anchor="middle">MEASURED AGAINST</text>
           <text x="160" y="257" fill="#B9BDC3" font-family="IBM Plex Mono, Menlo, monospace" font-size="10.5" letter-spacing="1.6" text-anchor="middle">CALIFORNIA LAW</text>
-          <!-- the needle: its resting angle is set once, in data-angle (0 = justice, 180 = injustice) -->
+          <!-- the needle: its resting angle (data-angle; 0 = justice, 180 = injustice) and how far it strains toward justice
+               (data-lifts) come from the record, meter.json, by the rule in meter.py -->
           <g filter="url(#m-shadow)">
-            <g class="needle" id="needle" data-angle="177" style="transform-origin: 160px 160px; transform: rotate(177deg)">
+            <g class="needle" id="needle" data-angle="177" data-lifts="135.2,150,157.5,163.1" style="transform-origin: 160px 160px; transform: rotate(177deg)">
               <g class="tremor">
                 <polygon points="160,153 38,160 160,167" fill="#BA0C2F"/>
                 <polygon points="160,156 182,160 160,164" fill="#BA0C2F"/>
@@ -358,6 +391,7 @@ footer .wrap { display: grid; gap: 4px }
           <path d="M30 128 A132 132 0 0 1 196 30 A150 150 0 0 0 30 128 Z" fill="url(#m-sheen)" opacity=".55" pointer-events="none"/>
         </svg>
         <figcaption>Only the Attorney General can turn it to justice.</figcaption>
+        <p class="meter-note">It strains a little less toward justice with each failure to answer as the law requires. Last moved October 18, 2026.</p>
       </figure>
     </div>
   </div>
@@ -563,7 +597,9 @@ footer .wrap { display: grid; gap: 4px }
       <ul class="due">
         <li class="d" data-due="2026-10-07"><span class="dt">Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip over">Overdue 11 days</span></li>
         <li class="d" data-due="2026-10-13"><span class="dt">Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21.</span><span class="chip over">Overdue 5 days</span></li>
-        <li class="p" data-due="2026-10-17" data-met="Oct 17"><span class="dt">Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip met">Answered Oct 17</span></li>
+        <li class="p" data-due="2026-10-17" data-fail="Oct 17" title="Her answer did not give what the law requires. See My Response."><span class="dt">Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip fail">Fail</span></li>
+        <li class="h resp"><span class="dt">Oct 18</span><span class="txt"><b class="h">My Response</b> · my two letters, copied to the Attorney General and the District Attorney.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-18">Read my response</button></li>
+        <li class="resp-panel" id="resp-2026-10-18" data-who="h"><div class="resp-wipe"><div class="resp-head"><p class="resp-title">My Response · October 18, 2026</p><button class="resp-close" type="button">Close <span aria-hidden="true">✕</span></button></div><article class="letter"><p class="meta">October 18, 2026, 8:38 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>PD-2026-677 has not yet given me what the law requires the Department to give the victim. Five points, each with the law that requires it.</p><p>1. The records your letter of 9 October says were attached. It says: "BHPD has identified records responsive to your 13-part amended request, which are attached herein as part of the City's initial production." The email carried the Marsy's Law pamphlet and the Policy Manual and no other record. Please send the records.</p><p>2. The items still being searched.</p><ul><li>On 9 October, items 2(b), 3(d), 5(a)–(d), 7, 8(e), 10, 11 and 13(b) were answered that the search continues, with no date.</li><li>The record of the quarantine and filter action, which you wrote on 25 September "will be added as part of your PD-2026-677 request," has no answer at all.</li><li>PD-2026-677 was received on 25 July. Government Code section 7922.535(a) requires a determination within 10 days and, for disclosable records, "the estimated date and time when the records will be made available."</li><li>Your notice of 25 September set 9 October, and section 7922.535(b) allows no extension beyond 14 days.</li></ul><p>Please give the determination and the date for each with your update of 23 October.</p><p class="cut">3. [This point is not shown on this page.]</p><p>4. The facts of the incident, owed to the victim. My request of 14 October, items (g) to (l), is made under Government Code section 7923.605(a), and your answer is due on 24 October. That section applies "Notwithstanding Section 7923.600," the section your letter of 9 October cited for the investigative records. Its exceptions are the safety of a witness and "the successful completion of the investigation or a related investigation." They do not reach a case in which the Department wrote to me on 30 September that "there is no further action that will be taken on your case," and in which the District Attorney's "evaluation was completed on 03/19/2026." Any withholding must state its ground for each item.</p><p>5. Items (d) and (e) of 7 October.</p><ul><li>Government Code section 7922.525(b): "Any reasonably segregable portion of a record shall be available for inspection by any person requesting the record after deletion of the portions that are exempted by law."</li><li>Penal Code section 832.7(c): "Notwithstanding subdivisions (a) and (b), a department or agency shall release to the complaining party a copy of the complaining party’s own statements at the time the complaint is filed."</li><li>POST wrote to me on 30 September that "Complaints received from the public will be forwarded to the employing agency for further investigation and disposition." Please send me my statements as the Department received them.</li></ul><p>Government Code section 7923.000 lets a requester ask the court to enforce these rights. Under section 7923.115(a), "the court shall award court costs and reasonable attorney’s fees to the requester" who prevails.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><article class="letter"><p class="meta">October 18, 2026, 8:59 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>One point from your email of 17 October that my letter this morning left out. You wrote that Policy 807 "was not included as part of the response for (f) since the policy is related to procedures for the seizure and storage of computer and digital evidence versus (f) asked for electronic devices delivered by a victim."</p><p>Policy 807.1 also covers "the preservation and storage of digital evidence," and 807.4 provides that cell phones "must be handled with care to preserve evidence that may be on the device including messages, stored data and/or images." Neither excludes a device delivered by a victim. Policy 802 does not mention electronic or digital evidence at all.</p><p>My telephone holds the evidence in case 2025-14983. Please state in writing, with your response of 24 October, which written procedure the Department applies to preserve the digital evidence on a telephone a victim delivers, or that there is none.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><div class="resp-foot"><button class="resp-close" type="button">Close</button></div></div></li>
         <li class="p" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The police on the extortion counts: which were presented, and whether the rest will go to the District Attorney by October 28.</span><span class="chip">Due in 3 days</span></li>
         <li class="d" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The District Attorney's office on whether the extortion counts were before the deputy.</span><span class="chip">Due in 3 days</span></li>
         <li class="p" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.</span><span class="chip">Due in 5 days</span></li>
@@ -753,7 +789,7 @@ footer .wrap { display: grid; gap: 4px }
 <footer>
   <div class="wrap">
     <span>Halsey Minor, the victim · Beverly Hills Police Department case 2025-14983 · California Attorney General PIU #1564601</span>
-    <span>Record updated October 17, 2026. Counts as of <span id="asof">October 18, 2026</span>.</span>
+    <span>Record updated October 18, 2026. Counts as of <span id="asof">October 18, 2026</span>.</span>
   </div>
 </footer>
 
@@ -810,7 +846,7 @@ footer .wrap { display: grid; gap: 4px }
   });
   // the meter: the needle rests where the record puts it and strains toward justice; it never leaves the red zone (120 to 180 degrees)
   var needle = document.getElementById('needle');
-  var LIFTS = [132, 148, 156, 162];
+  var LIFTS = needle ? (needle.getAttribute('data-lifts') || '132,148,156,162').split(',').map(Number) : [];
   if (needle) {
     var rest = +needle.getAttribute('data-angle') || 180;
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -834,8 +870,11 @@ footer .wrap { display: grid; gap: 4px }
   Array.prototype.forEach.call(document.querySelectorAll('[data-due]'), function (li) {
     var chip = li.querySelector('.chip'); if (!chip) return;
     var set = function (txt, cls) { chip.textContent = txt; chip.className = cls; };
+    if (li.getAttribute('data-fail')) { set('Fail', 'chip fail'); return; }
     var met = li.getAttribute('data-met');
     if (met) { set('Answered ' + met, 'chip met'); return; }
+    var replied = li.getAttribute('data-replied');
+    if (replied) { set('Replied ' + replied, 'chip'); return; }
     var due = day(li.getAttribute('data-due')), n = Math.round((due - t) / 86400000);
     if (li.getAttribute('data-kind') === 'limit') {
       var end = li.getAttribute('data-end') ? day(li.getAttribute('data-end')) : due, m = Math.round((end - t) / 86400000);
@@ -849,6 +888,42 @@ footer .wrap { display: grid; gap: 4px }
     else if (n === 1) set('Due tomorrow', 'chip');
     else if (n === 0) set('Due today', 'chip today');
     else set('Overdue ' + (-n) + (n === -1 ? ' day' : ' days'), 'chip over');
+  });
+  // his response to a Fail: the blue button opens his letters in place; the page splits and everything below moves down.
+  // Close (top or bottom), Esc, or the button again puts the page back as it was, at the same place. Without this script the letters simply show.
+  var still2 = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('.resp-btn'), function (btn) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls')); if (!panel) return;
+    var y0 = 0, label = btn.textContent;
+    panel.hidden = true;
+    var open = function (fromLink) {
+      if (!panel.hidden) return;
+      y0 = window.pageYOffset;
+      panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); btn.textContent = 'Close my response';
+      if (!still2 && panel.animate) {
+        panel.classList.add('opening');
+        panel.animate([{ height: '0px' }, { height: panel.scrollHeight + 'px' }], { duration: 600, easing: 'cubic-bezier(.3, 0, .2, 1)' })
+          .onfinish = function () { panel.classList.remove('opening'); };
+      }
+      if (!fromLink) panel.querySelector('.resp-close').focus({ preventScroll: true });
+    };
+    var close = function () {
+      if (panel.hidden) return;
+      var done = function () {
+        panel.hidden = true; panel.classList.remove('closing');
+        btn.setAttribute('aria-expanded', 'false'); btn.textContent = label;
+        window.scrollTo(0, y0); btn.focus({ preventScroll: true });
+        if (location.hash === '#' + panel.id && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+      };
+      if (!still2 && panel.animate) {
+        panel.classList.add('closing');
+        panel.animate([{ height: panel.offsetHeight + 'px' }, { height: '0px' }], { duration: 400, easing: 'cubic-bezier(.3, 0, .2, 1)' }).onfinish = done;
+      } else done();
+    };
+    btn.addEventListener('click', function () { if (panel.hidden) open(); else close(); });
+    Array.prototype.forEach.call(panel.querySelectorAll('.resp-close'), function (c) { c.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+    if (location.hash === '#' + panel.id) { open(true); y0 = 0; btn.scrollIntoView({ block: 'start' }); }
   });
   var asof = document.getElementById('asof');
   if (asof) asof.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
