@@ -184,10 +184,10 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 
 /* deadlines */
 .due { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px }
-.due li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c, var(--line)); border-radius: 14px; padding: 16px 20px; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) auto; gap: 8px 22px; align-items: center }
-.due li.p { --c: var(--red) } .due li.d { --c: var(--yellow) } .due li.law { --c: var(--ink) }
+.due > li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c, var(--line)); border-radius: 14px; padding: 16px 20px; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) auto; gap: 8px 22px; align-items: center }
+.due > li.p { --c: var(--red) } .due > li.d { --c: var(--yellow) } .due > li.law { --c: var(--ink) }
 .due-count { margin: -6px 0 18px; max-width: 44rem; font-size: 1.1rem }
-@media (max-width: 759px) { .due li { grid-template-columns: minmax(0, 1fr) auto } .due .txt { grid-column: 1 / -1; order: 3 } }
+@media (max-width: 759px) { .due > li { grid-template-columns: minmax(0, 1fr) auto } .due > li > .txt { grid-column: 1 / -1; order: 3 } }
 .due .dt { font: 700 1.35rem/1.1 var(--display) }
 .chip { justify-self: end; white-space: nowrap; font: 600 13px/1 var(--body); padding: 9px 12px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: var(--card) }
 .chip.over { background: var(--band); border-color: var(--band); color: #FFFFFF }
@@ -196,30 +196,25 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 /* a reply that does not give what the law requires: a Fail, in the black of what should never happen; the edge shows who */
 .chip.fail { background: var(--band); border-color: var(--band); color: #FFFFFF; font-weight: 700; letter-spacing: .03em }
 /* his response follows the Fail, in his color: the button opens his letters in place */
-.due li.h { --c: var(--blue) }
-.due li.resp { background: var(--blue-soft) }
+.due > li.h { --c: var(--blue) }
+.due > li.resp { background: var(--blue-soft) }
 .resp-btn { justify-self: end; white-space: nowrap; font: 700 14px/1 var(--body); color: #FFFFFF; background: var(--blue); border: 0; border-radius: 999px;
   padding: 14px 18px; min-height: 44px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .2) }
 .resp-btn:hover { filter: brightness(1.1) }
-.resp-btn[aria-expanded="true"] { background: var(--ink) }
-/* the page splits: his letters wipe in from one side to the other while everything below moves down; Close puts it back */
-.due li.resp-panel { display: block; padding: 0; border: 0; border-radius: 0; background: none; overflow: hidden }
-.due li.resp-panel[hidden] { display: none }
-.resp-wipe { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 0 22px 22px }
+/* open, the button reads Close and stays in view while the letters are read */
+.resp-btn[aria-expanded="true"] { background: var(--ink); position: sticky; top: 12px; z-index: 2; box-shadow: 0 6px 18px rgba(21, 23, 26, .3) }
+/* the item splits: his letters wipe in from one side to the other inside it while everything below moves down; Close puts it back */
+.resp-panel { grid-column: 1 / -1; order: 4; overflow: hidden }
+.resp-panel[hidden] { display: none }
+.resp-wipe { background: var(--card); border-radius: 10px; padding: 2px 22px 18px }
+@media (max-width: 759px) { .resp-wipe { padding: 2px 14px 14px } }
 .resp-panel.opening .resp-wipe { animation: resp-wipe .6s cubic-bezier(.3, 0, .2, 1) both }
 .resp-panel.closing .resp-wipe { animation: resp-wipe .4s cubic-bezier(.3, 0, .2, 1) reverse both }
 @keyframes resp-wipe { from { clip-path: inset(0 100% 0 0) } to { clip-path: inset(0 0 0 0) } }
-.resp-head { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  padding: 16px 0 12px; background: var(--card); border-bottom: 1px solid var(--line) }
-.resp-title { margin: 0; font: 700 clamp(1.05rem, 2vw, 1.25rem)/1.2 var(--display); color: var(--blue) }
-.resp-close { flex: none; font: 700 15px/1 var(--body); color: var(--blue); background: var(--card); border: 2px solid var(--blue); border-radius: 999px;
-  padding: 12px 18px; min-height: 44px; cursor: pointer }
-.resp-close:hover { background: var(--blue); color: #FFFFFF }
-.resp-foot { display: flex; justify-content: flex-end; margin-top: 20px }
 .letter { margin-top: 18px; max-width: 46rem }
 .letter + .letter { border-top: 1px dashed var(--line); padding-top: 18px }
 .letter p, .letter li { margin: 0 0 10px; line-height: 1.55; overflow-wrap: anywhere }
-.letter ul { margin: 0 0 10px; padding-left: 1.2rem }
+.letter ul { margin: 0 0 10px; padding-left: 1.2rem; list-style: disc }
 .letter .meta { margin-bottom: 14px; font: 600 13px/1.45 var(--body); color: var(--muted) }
 .letter .cut { color: var(--muted); font-style: italic }
 .letter .sig { margin-top: 14px; font-weight: 700 }
@@ -598,8 +593,7 @@ footer .wrap { display: grid; gap: 4px }
         <li class="d" data-due="2026-10-07"><span class="dt">Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip over">Overdue 11 days</span></li>
         <li class="d" data-due="2026-10-13"><span class="dt">Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21.</span><span class="chip over">Overdue 5 days</span></li>
         <li class="p" data-due="2026-10-17" data-fail="Oct 17" title="Her answer did not give what the law requires. See My Response."><span class="dt">Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip fail">Fail</span></li>
-        <li class="h resp"><span class="dt">Oct 18</span><span class="txt"><b class="h">My Response</b> · my two letters, copied to the Attorney General and the District Attorney.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-18">Read my response</button></li>
-        <li class="resp-panel" id="resp-2026-10-18" data-who="h"><div class="resp-wipe"><div class="resp-head"><p class="resp-title">My Response · October 18, 2026</p><button class="resp-close" type="button">Close <span aria-hidden="true">✕</span></button></div><article class="letter"><p class="meta">October 18, 2026, 8:38 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>PD-2026-677 has not yet given me what the law requires the Department to give the victim. Five points, each with the law that requires it.</p><p>1. The records your letter of 9 October says were attached. It says: "BHPD has identified records responsive to your 13-part amended request, which are attached herein as part of the City's initial production." The email carried the Marsy's Law pamphlet and the Policy Manual and no other record. Please send the records.</p><p>2. The items still being searched.</p><ul><li>On 9 October, items 2(b), 3(d), 5(a)–(d), 7, 8(e), 10, 11 and 13(b) were answered that the search continues, with no date.</li><li>The record of the quarantine and filter action, which you wrote on 25 September "will be added as part of your PD-2026-677 request," has no answer at all.</li><li>PD-2026-677 was received on 25 July. Government Code section 7922.535(a) requires a determination within 10 days and, for disclosable records, "the estimated date and time when the records will be made available."</li><li>Your notice of 25 September set 9 October, and section 7922.535(b) allows no extension beyond 14 days.</li></ul><p>Please give the determination and the date for each with your update of 23 October.</p><p class="cut">3. [This point is not shown on this page.]</p><p>4. The facts of the incident, owed to the victim. My request of 14 October, items (g) to (l), is made under Government Code section 7923.605(a), and your answer is due on 24 October. That section applies "Notwithstanding Section 7923.600," the section your letter of 9 October cited for the investigative records. Its exceptions are the safety of a witness and "the successful completion of the investigation or a related investigation." They do not reach a case in which the Department wrote to me on 30 September that "there is no further action that will be taken on your case," and in which the District Attorney's "evaluation was completed on 03/19/2026." Any withholding must state its ground for each item.</p><p>5. Items (d) and (e) of 7 October.</p><ul><li>Government Code section 7922.525(b): "Any reasonably segregable portion of a record shall be available for inspection by any person requesting the record after deletion of the portions that are exempted by law."</li><li>Penal Code section 832.7(c): "Notwithstanding subdivisions (a) and (b), a department or agency shall release to the complaining party a copy of the complaining party’s own statements at the time the complaint is filed."</li><li>POST wrote to me on 30 September that "Complaints received from the public will be forwarded to the employing agency for further investigation and disposition." Please send me my statements as the Department received them.</li></ul><p>Government Code section 7923.000 lets a requester ask the court to enforce these rights. Under section 7923.115(a), "the court shall award court costs and reasonable attorney’s fees to the requester" who prevails.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><article class="letter"><p class="meta">October 18, 2026, 8:59 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>One point from your email of 17 October that my letter this morning left out. You wrote that Policy 807 "was not included as part of the response for (f) since the policy is related to procedures for the seizure and storage of computer and digital evidence versus (f) asked for electronic devices delivered by a victim."</p><p>Policy 807.1 also covers "the preservation and storage of digital evidence," and 807.4 provides that cell phones "must be handled with care to preserve evidence that may be on the device including messages, stored data and/or images." Neither excludes a device delivered by a victim. Policy 802 does not mention electronic or digital evidence at all.</p><p>My telephone holds the evidence in case 2025-14983. Please state in writing, with your response of 24 October, which written procedure the Department applies to preserve the digital evidence on a telephone a victim delivers, or that there is none.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><div class="resp-foot"><button class="resp-close" type="button">Close</button></div></div></li>
+        <li class="h resp"><span class="dt">Oct 18</span><span class="txt"><b class="h">My Response</b> · my two letters, copied to the Attorney General and the District Attorney.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-18">Read my response</button><div class="resp-panel" id="resp-2026-10-18" role="region" aria-label="My Response, October 18, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 18, 2026, 8:38 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>PD-2026-677 has not yet given me what the law requires the Department to give the victim. Five points, each with the law that requires it.</p><p>1. The records your letter of 9 October says were attached. It says: "BHPD has identified records responsive to your 13-part amended request, which are attached herein as part of the City's initial production." The email carried the Marsy's Law pamphlet and the Policy Manual and no other record. Please send the records.</p><p>2. The items still being searched.</p><ul><li>On 9 October, items 2(b), 3(d), 5(a)–(d), 7, 8(e), 10, 11 and 13(b) were answered that the search continues, with no date.</li><li>The record of the quarantine and filter action, which you wrote on 25 September "will be added as part of your PD-2026-677 request," has no answer at all.</li><li>PD-2026-677 was received on 25 July. Government Code section 7922.535(a) requires a determination within 10 days and, for disclosable records, "the estimated date and time when the records will be made available."</li><li>Your notice of 25 September set 9 October, and section 7922.535(b) allows no extension beyond 14 days.</li></ul><p>Please give the determination and the date for each with your update of 23 October.</p><p class="cut">3. [This point is not shown on this page.]</p><p>4. The facts of the incident, owed to the victim. My request of 14 October, items (g) to (l), is made under Government Code section 7923.605(a), and your answer is due on 24 October. That section applies "Notwithstanding Section 7923.600," the section your letter of 9 October cited for the investigative records. Its exceptions are the safety of a witness and "the successful completion of the investigation or a related investigation." They do not reach a case in which the Department wrote to me on 30 September that "there is no further action that will be taken on your case," and in which the District Attorney's "evaluation was completed on 03/19/2026." Any withholding must state its ground for each item.</p><p>5. Items (d) and (e) of 7 October.</p><ul><li>Government Code section 7922.525(b): "Any reasonably segregable portion of a record shall be available for inspection by any person requesting the record after deletion of the portions that are exempted by law."</li><li>Penal Code section 832.7(c): "Notwithstanding subdivisions (a) and (b), a department or agency shall release to the complaining party a copy of the complaining party’s own statements at the time the complaint is filed."</li><li>POST wrote to me on 30 September that "Complaints received from the public will be forwarded to the employing agency for further investigation and disposition." Please send me my statements as the Department received them.</li></ul><p>Government Code section 7923.000 lets a requester ask the court to enforce these rights. Under section 7923.115(a), "the court shall award court costs and reasonable attorney’s fees to the requester" who prevails.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><article class="letter"><p class="meta">October 18, 2026, 8:59 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>One point from your email of 17 October that my letter this morning left out. You wrote that Policy 807 "was not included as part of the response for (f) since the policy is related to procedures for the seizure and storage of computer and digital evidence versus (f) asked for electronic devices delivered by a victim."</p><p>Policy 807.1 also covers "the preservation and storage of digital evidence," and 807.4 provides that cell phones "must be handled with care to preserve evidence that may be on the device including messages, stored data and/or images." Neither excludes a device delivered by a victim. Policy 802 does not mention electronic or digital evidence at all.</p><p>My telephone holds the evidence in case 2025-14983. Please state in writing, with your response of 24 October, which written procedure the Department applies to preserve the digital evidence on a telephone a victim delivers, or that there is none.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
         <li class="p" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The police on the extortion counts: which were presented, and whether the rest will go to the District Attorney by October 28.</span><span class="chip">Due in 3 days</span></li>
         <li class="d" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The District Attorney's office on whether the extortion counts were before the deputy.</span><span class="chip">Due in 3 days</span></li>
         <li class="p" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.</span><span class="chip">Due in 5 days</span></li>
@@ -889,14 +883,15 @@ footer .wrap { display: grid; gap: 4px }
     else if (n === 0) set('Due today', 'chip today');
     else set('Overdue ' + (-n) + (n === -1 ? ' day' : ' days'), 'chip over');
   });
-  // his response to a Fail: the blue button opens his letters in place; the page splits and everything below moves down.
-  // Close (top or bottom), Esc, or the button again puts the page back as it was, at the same place. Without this script the letters simply show.
+  // his response to a Fail: the blue button opens his letters inside the same item; it splits and everything below moves down.
+  // The button turns to Close and stays in view while the letters are read; it, or Esc, puts the page back as it was, at the same place.
+  // Without this script the letters simply show.
   var still2 = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   Array.prototype.forEach.call(document.querySelectorAll('.resp-btn'), function (btn) {
     var panel = document.getElementById(btn.getAttribute('aria-controls')); if (!panel) return;
     var y0 = 0, label = btn.textContent;
     panel.hidden = true;
-    var open = function (fromLink) {
+    var open = function () {
       if (!panel.hidden) return;
       y0 = window.pageYOffset;
       panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); btn.textContent = 'Close my response';
@@ -905,7 +900,6 @@ footer .wrap { display: grid; gap: 4px }
         panel.animate([{ height: '0px' }, { height: panel.scrollHeight + 'px' }], { duration: 600, easing: 'cubic-bezier(.3, 0, .2, 1)' })
           .onfinish = function () { panel.classList.remove('opening'); };
       }
-      if (!fromLink) panel.querySelector('.resp-close').focus({ preventScroll: true });
     };
     var close = function () {
       if (panel.hidden) return;
@@ -921,9 +915,8 @@ footer .wrap { display: grid; gap: 4px }
       } else done();
     };
     btn.addEventListener('click', function () { if (panel.hidden) open(); else close(); });
-    Array.prototype.forEach.call(panel.querySelectorAll('.resp-close'), function (c) { c.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
-    if (location.hash === '#' + panel.id) { open(true); y0 = 0; btn.scrollIntoView({ block: 'start' }); }
+    if (location.hash === '#' + panel.id) { open(); y0 = 0; btn.scrollIntoView({ block: 'start' }); }
   });
   var asof = document.getElementById('asof');
   if (asof) asof.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
