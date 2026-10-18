@@ -143,8 +143,11 @@ h1 .q { color: var(--red) }
 .sec { padding-block: clamp(44px, 6vw, 84px); border-top: 1px solid var(--line) }
 h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1.08 var(--display); text-wrap: balance }
 .dek { margin: -6px 0 26px; max-width: 44rem; font-size: 1.1rem }
-.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start }
-.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch }
+/* side-by-side cards end level: a column of cards lets its last card take up the difference, so no gap opens under it */
+.grid2 > div:not([class]), .grid3 > div:not([class]) { display: flex; flex-direction: column }
+.grid2 > div:not([class]) > div.say:last-of-type, .grid3 > div:not([class]) > div.say:last-of-type { flex: 1 0 auto }
 @media (max-width: 899px) { .grid3 { grid-template-columns: minmax(0, 1fr) } }
 @media (max-width: 759px) { .grid2 { grid-template-columns: minmax(0, 1fr) } }
 
@@ -276,7 +279,9 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 /* Halsey Minor */
 /* his statement: a signed statement in the page's text face, the same card as his other words; not a slogan */
 .me-statement { max-width: 50rem; margin: 0 0 clamp(24px, 3vw, 36px) }
-.say.me-statement blockquote { margin: 12px 0 0; max-width: 44rem; font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body); color: var(--ink) }
+.say.me-statement blockquote { margin: 12px 0 0; max-width: 44rem; font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body); color: var(--blue) }
+/* his own story and his record follow it in black, quieter than his statement */
+.me-grid > .me-q1 blockquote, .me-grid > .me-q2 blockquote { font: 400 clamp(.98rem, 1.2vw, 1.04rem)/1.6 var(--body); color: var(--ink) }
 .me-statement blockquote p { margin: 0 0 .7em; text-wrap: pretty }
 .me-statement blockquote p.q { margin: 0; font-weight: 600 }
 .me-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); grid-template-rows: auto auto auto 1fr; gap: 16px; align-items: start;
@@ -284,9 +289,9 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .me-grid > *, .me-grid > .say { margin: 0 }
 .me-grid > .me-statement { grid-area: stmt; max-width: none } .me-grid > .me-q1 { grid-area: q1 } .me-grid > .me-q2 { grid-area: q2 } .me-grid > .invite { grid-area: inv }
 .me-docs { grid-area: docs; display: grid; gap: 16px; align-items: start }
-@media (max-width: 899px) { .me-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "stmt" "docs" "q1" "q2" "inv" } .me-docs { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 899px) { .me-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "stmt" "docs" "q1" "q2" "inv" } .me-docs { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch } }
 @media (max-width: 599px) { .me-docs { grid-template-columns: minmax(0, 1fr) } }
-.me-cover { margin: 0; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 16px; display: grid; gap: 12px }
+.me-cover { margin: 0; align-content: start; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 16px; display: grid; gap: 12px }
 .me-cover img { display: block; width: 100%; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid var(--line) }
 .me-cover figcaption { font-size: 1rem }
 .me-cover blockquote { margin: 4px 0 0; font: 600 1.02rem/1.35 var(--display); color: var(--blue) }
@@ -560,15 +565,13 @@ footer .wrap { display: grid; gap: 4px }
         <div>
           <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was beyond a statute of limitations.”</blockquote></div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“Do not let it die on the vine.”</blockquote></div>
+          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
         </div>
         <div>
           <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on community property would also not support a filing of this case.”</blockquote></div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n7">7</a></blockquote></div>
+          <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
         </div>
-      </div>
-      <div class="grid2" style="margin-top:16px">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
       </div>
       <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer.<a class="fn" href="#n9">9</a></p>
     </div>
@@ -661,13 +664,13 @@ footer .wrap { display: grid; gap: 4px }
           <figure class="me-cover" data-who="halsey">
             <img src="plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
             <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, eight months before he reported the crime.<a class="fn" href="#n17">17</a>
-              <span class="qd">His plan, August 27, 2024</span>
+              <span class="qd">From his plan</span>
               <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
             </figcaption>
           </figure>
           <figure class="me-cover" data-who="halsey">
             <img src="ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
-            <figcaption><b>August 10, 2024:</b> his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
+            <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
               <span class="qd">The role, as he wrote it</span>
               <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
             </figcaption>
@@ -786,7 +789,7 @@ footer .wrap { display: grid; gap: 4px }
         <li id="n14">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
         <li id="n15">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
         <li id="n16">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
-        <li id="n17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024: his company description, last saved July 16, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30, a PDF created August 27, 2024; the CNET line is from Draft 32, last saved March 15, 2026. The video titles and dates are as Vimeo gives them.</li>
+        <li id="n17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
         <li id="n18">His message of March 30, 2026 to the District Attorney's office, the U.S. Attorney and the FBI listed these by code; extortion is in his report to the Chief of Police of September 8, 2026. Section 664(a) is the provision for an attempt found willful, deliberate and premeditated.</li>
         <li id="n19">His request of September 26, 2026 to Professional Standards and Chief Subin: “A written procedure for taking custody of my telephone, so that I could deliver it.” Sergeant Leber answered on October 7. He made that records request the same day. On October 17 the Records Bureau answered it, pointing to the Department's Policy 802, Property and Evidence, and sending its Policy Manual.</li>
         <li id="n20">His screenshot, cropped to the date and the messages; nothing else is changed.</li>
