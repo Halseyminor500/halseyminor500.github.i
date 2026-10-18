@@ -279,12 +279,18 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .say.me-statement blockquote { margin: 12px 0 0; max-width: 44rem; font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body); color: var(--ink) }
 .me-statement blockquote p { margin: 0 0 .7em; text-wrap: pretty }
 .me-statement blockquote p.q { margin: 0; font-weight: 600 }
-.me-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px; align-items: start }
-@media (max-width: 899px) { .me-grid { grid-template-columns: minmax(0, 1fr) } }
+.me-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); grid-template-rows: auto auto auto 1fr; gap: 16px; align-items: start;
+  grid-template-areas: "stmt docs" "q1 docs" "q2 docs" "inv docs" }
+.me-grid > *, .me-grid > .say { margin: 0 }
+.me-grid > .me-statement { grid-area: stmt; max-width: none } .me-grid > .me-q1 { grid-area: q1 } .me-grid > .me-q2 { grid-area: q2 } .me-grid > .invite { grid-area: inv }
+.me-docs { grid-area: docs; display: grid; gap: 16px; align-items: start }
+@media (max-width: 899px) { .me-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "stmt" "docs" "q1" "q2" "inv" } .me-docs { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 599px) { .me-docs { grid-template-columns: minmax(0, 1fr) } }
 .me-cover { margin: 0; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 16px; display: grid; gap: 12px }
 .me-cover img { display: block; width: 100%; max-width: 300px; height: auto; border-radius: 8px; border: 1px solid var(--line) }
 .me-cover figcaption { font-size: 1rem }
-.me-cover blockquote { margin: 8px 0 0; font: 600 1.15rem/1.3 var(--display); color: var(--blue) }
+.me-cover blockquote { margin: 4px 0 0; font: 600 1.02rem/1.35 var(--display); color: var(--blue) }
+.me-cover .qd { display: block; margin-top: 12px; font: 600 12px/1.3 var(--body); color: var(--muted) }
 .videos { margin-top: clamp(28px, 4vw, 44px) }
 .videos h3 { margin: 0 0 4px; font: 700 clamp(1.3rem, 2.2vw, 1.7rem)/1.2 var(--display) }
 .videos h4 { margin: 18px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
@@ -643,31 +649,39 @@ footer .wrap { display: grid; gap: 4px }
           <span class="vp" aria-hidden="true"></span>
         </a>
       </div>
-      <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
-        <blockquote>
-          <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to never let any American be deprived of our freedoms by power, money, fame, or prestige.</p>
-          <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that I literally pray for those who endure worse. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
-          <p class="q">As a victim, when the system designed to protect you becomes adversarial, where do you go? That's the question I will spend my life answering.”</p>
-        </blockquote>
-      </div>
       <div class="me-grid">
-        <figure class="me-cover" data-who="halsey">
-          <img src="lja-cover.jpg" loading="lazy" decoding="async" width="790" height="1024" alt="The cover of Legal Justice AI, his plan: a line drawing of a courthouse. Printed on it: August 14, 2024. A new industry emerges.">
-          <figcaption><b>August 14, 2024:</b> his plan, Legal Justice AI, seven months before he reported the crime.<a class="fn" href="#n17">17</a>
-            <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
-          </figcaption>
-        </figure>
-        <div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, wanting to help others, not help me, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
-          <div class="say h invite" data-who="halsey">
-            <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
-            <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
-            <div class="inv-ways" aria-label="Write to him">
-              <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
-              <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
-              <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
-            </div>
+        <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
+          <blockquote>
+            <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to never let any American be deprived of our freedoms by power, money, fame, or prestige.</p>
+            <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that I literally pray for those who endure worse. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
+            <p class="q">As a victim, when the system designed to protect you becomes adversarial, where do you go? That's the question I will spend my life answering.”</p>
+          </blockquote>
+        </div>
+        <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
+          <figure class="me-cover" data-who="halsey">
+            <img src="plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
+            <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, eight months before he reported the crime.<a class="fn" href="#n17">17</a>
+              <span class="qd">His plan, August 27, 2024</span>
+              <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
+            </figcaption>
+          </figure>
+          <figure class="me-cover" data-who="halsey">
+            <img src="ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
+            <figcaption><b>August 10, 2024:</b> his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
+              <span class="qd">The role, as he wrote it</span>
+              <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
+            </figcaption>
+          </figure>
+        </aside>
+        <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, wanting to help others, not help me, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
+        <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
+        <div class="say h invite" data-who="halsey">
+          <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
+          <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+          <div class="inv-ways" aria-label="Write to him">
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
           </div>
         </div>
       </div>
@@ -772,7 +786,7 @@ footer .wrap { display: grid; gap: 4px }
         <li id="n14">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
         <li id="n15">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
         <li id="n16">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
-        <li id="n17">Legal Justice AI, written by him. The cover carries the date August 14, 2024, and he emailed the plan that day. The vision line is from Draft 30, a PDF created August 27, 2024; the CNET line is from Draft 32, last saved March 15, 2026. The video titles and dates are as Vimeo gives them.</li>
+        <li id="n17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024: his company description, last saved July 16, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30, a PDF created August 27, 2024; the CNET line is from Draft 32, last saved March 15, 2026. The video titles and dates are as Vimeo gives them.</li>
         <li id="n18">His message of March 30, 2026 to the District Attorney's office, the U.S. Attorney and the FBI listed these by code; extortion is in his report to the Chief of Police of September 8, 2026. Section 664(a) is the provision for an attempt found willful, deliberate and premeditated.</li>
         <li id="n19">His request of September 26, 2026 to Professional Standards and Chief Subin: “A written procedure for taking custody of my telephone, so that I could deliver it.” Sergeant Leber answered on October 7. He made that records request the same day. On October 17 the Records Bureau answered it, pointing to the Department's Policy 802, Property and Evidence, and sending its Policy Manual.</li>
         <li id="n20">His screenshot, cropped to the date and the messages; nothing else is changed.</li>
