@@ -254,7 +254,6 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .vid .vp::after { content: ""; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #FFFFFF }
 .vid:hover .vp, .vid:focus-visible .vp { transform: scale(1.08) }
 .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
-.h2-next { margin-top: 0 }
 .vids.more { margin: 0 }
 .vid.pre { background: linear-gradient(135deg, var(--band) 0%, #1B2F5E 100%) }
 .vid .vd { position: absolute; left: 18px; bottom: 14px; font: 500 13px/1.2 var(--body); color: rgba(255, 255, 255, .82) }
@@ -275,10 +274,11 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .say.invite .way:hover { transform: translateY(-2px); box-shadow: 0 16px 28px -14px rgba(0, 0, 0, .6) }
 .say.invite .way:active { transform: none }
 /* Halsey Minor */
-.me-statement { max-width: 62rem; margin: 0 0 clamp(28px, 4vw, 44px) }
-.me-statement blockquote { font: 500 clamp(1.2rem, 2.2vw, 1.7rem)/1.42 var(--display); color: var(--blue) }
-.me-statement blockquote p { margin: 0 0 .8em; text-wrap: pretty }
-.me-statement blockquote p.q { margin: 0; font-weight: 700; font-size: 1.12em }
+/* his statement: a signed statement in the page's text face, the same card as his other words; not a slogan */
+.me-statement { max-width: 50rem; margin: 0 0 clamp(24px, 3vw, 36px) }
+.say.me-statement blockquote { margin: 12px 0 0; max-width: 44rem; font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body); color: var(--ink) }
+.me-statement blockquote p { margin: 0 0 .7em; text-wrap: pretty }
+.me-statement blockquote p.q { margin: 0; font-weight: 600 }
 .me-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px; align-items: start }
 @media (max-width: 899px) { .me-grid { grid-template-columns: minmax(0, 1fr) } }
 .me-cover { margin: 0; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 14px; padding: 16px; display: grid; gap: 12px }
@@ -643,8 +643,7 @@ footer .wrap { display: grid; gap: 4px }
           <span class="vp" aria-hidden="true"></span>
         </a>
       </div>
-      <h2 class="h2-next">A passionate cause that began before this case. The case only hardened it.</h2>
-      <div class="me-statement" data-who="halsey">
+      <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
         <blockquote>
           <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to never let any American be deprived of our freedoms by power, money, fame, or prestige.</p>
           <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that I literally pray for those who endure worse. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
