@@ -16,9 +16,11 @@ def long(d):
 def chip(a, today):
     """A request is due, due today, then overdue; a time limit (data-kind="limit") has days left, a last day, then has
     passed; a window (data-end) is "ending now" from its first day to its last; an answer (data-met) ends it. A reply not
-    yet weighed (data-replied) says so; a reply that does not give what the law requires (data-fail) is a Fail."""
+    yet weighed (data-replied) says so; a reply that does not give what the law requires (data-fail) is a Fail, which tolls
+    from its date until a later reply is weighed Answered."""
     if a.get('data-fail'):
-        return 'chip fail', 'Fail'
+        n = (today - datetime.date.fromisoformat(a['data-fail'])).days
+        return 'chip fail', ('Fail · %d %s' % (n, 'day' if n == 1 else 'days')) if n > 0 else 'Fail'
     if a.get('data-met'):
         return 'chip met', 'Answered ' + a['data-met']
     if a.get('data-replied'):
