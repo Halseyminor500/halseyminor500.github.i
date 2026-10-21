@@ -113,12 +113,13 @@ b.s { color: var(--gray); font-weight: 700 }
 h1 { margin: 0; font: 700 clamp(2rem, 4.6vw, 4.1rem)/1.02 var(--display); letter-spacing: -.005em; text-wrap: balance; color: var(--ink) }
 h1 .q { color: var(--red) }
 .lede { margin: 22px 0 0; max-width: 40rem; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--ink) }
-.stats { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink) }
+.stats { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; border-top: 2px solid var(--ink) }
 .stats li { padding: 14px 14px 0 0; display: grid; gap: 6px; align-content: start }
 .stats li + li { padding-left: 14px; border-left: 1px solid rgba(21,23,26,.18) }
-.stats b { justify-self: start; font: 700 clamp(1.7rem, 3.2vw, 2.6rem)/1 var(--display); font-variant-numeric: tabular-nums; background: linear-gradient(transparent 62%, var(--yellow) 62%) }
+.stats li > b { justify-self: start; font: 700 clamp(1.7rem, 3.2vw, 2.6rem)/1 var(--display); font-variant-numeric: tabular-nums; background: linear-gradient(transparent 62%, var(--yellow) 62%) }
 .stats span { font-size: .9rem; line-height: 1.35; color: var(--ink) }
-@media (max-width: 520px) { .stats { grid-template-columns: minmax(0, 1fr) } .stats li, .stats li + li { padding: 12px 0; border-left: 0; border-bottom: 1px solid rgba(21,23,26,.14); grid-template-columns: 5.5rem minmax(0,1fr); align-items: baseline } }
+.stats span span { font-size: inherit }
+@media (max-width: 520px) { .stats { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr) } .stats li, .stats li + li { padding: 12px 0; border-left: 0; border-bottom: 1px solid rgba(21,23,26,.14); grid-template-columns: 5.5rem minmax(0,1fr); align-items: baseline } }
 .meter { margin: 0; display: grid; justify-items: center }
 .meter svg { width: min(100%, 400px); height: auto; display: block; overflow: visible }
 .meter { gap: 14px }
@@ -152,6 +153,17 @@ h1 .q { color: var(--red) }
 .sec { padding-block: clamp(44px, 6vw, 84px); border-top: 1px solid var(--line) }
 h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1.08 var(--display); text-wrap: balance }
 .dek { margin: -6px 0 26px; max-width: 44rem; font-size: 1.1rem }
+/* glass, as at the top: a block that floats above the page. The page's own colors glow faintly behind it, so the glass reads */
+.sec:has(.pane) { position: relative; isolation: isolate }
+.pane { position: relative; padding: clamp(14px, 3vw, 36px); border-radius: 26px; border: 1px solid rgba(255, 255, 255, .95);
+  background: linear-gradient(115deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 30%), linear-gradient(165deg, rgba(255, 255, 255, .76), rgba(255, 255, 255, .46) 55%, rgba(255, 255, 255, .66));
+  box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .5), 0 1px 2px rgba(21, 23, 26, .06), 0 22px 44px -26px rgba(21, 23, 26, .34), 0 60px 110px -50px rgba(21, 23, 26, .36) }
+.pane::before { content: ""; position: absolute; z-index: -1; inset: 3% -1.2% -2.5%; border-radius: 40px; pointer-events: none; filter: blur(28px);
+  background: radial-gradient(48% 58% at 10% 30%, rgba(31, 86, 195, .42), transparent 70%), radial-gradient(42% 52% at 90% 22%, rgba(186, 12, 47, .3), transparent 70%),
+    radial-gradient(55% 60% at 58% 100%, rgba(242, 194, 0, .42), transparent 72%) }
+.pane > :last-child { margin-bottom: 0 }
+.pane + .hl { margin-top: 22px } .pane + .grid2 { margin-top: 22px }
+@media (max-width: 759px) { .pane { border-radius: 20px } }
 .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch }
 .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch }
 /* side-by-side cards end level: a column of cards lets its last card take up the difference, so no gap opens under it */
@@ -169,6 +181,8 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .say.d { --c: var(--yellow-edge) } .say.d .tag { background: var(--yellow); color: var(--ink) }
 .say.law { --c: var(--ink) }
 .say + .say, .say + .hl { margin-top: 12px }
+/* "Rejected": each reason beside his warning, then the plain answer; a little air before the next */
+.grid2.reason + .hl { margin-top: 12px } .hl + .grid2.reason { margin-top: 28px }
 .grid2 > .say, .grid3 > .say { margin-top: 0 }
 
 /* what should never happen: a black band, the edge in the color of who did it */
@@ -212,12 +226,17 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .live b { font-variant-numeric: tabular-nums }
 
 /* deadlines */
-.due { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px }
-.due > li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c, var(--line)); border-radius: 14px; padding: 16px 20px; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) auto; gap: 8px 22px; align-items: center }
+/* one panel, a hairline between rows, each row's edge in the color of who owes it */
+.due { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 1px 2px rgba(21, 23, 26, .05) }
+.due > li { background: var(--card); border-top: 1px solid var(--line); border-left: 5px solid var(--c, var(--line)); padding: 6px 12px 6px 14px; display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 2px 14px; align-items: center; font-size: .92rem; line-height: 1.32 }
+.due > li:first-child { border-top: 0; border-radius: 13px 13px 0 0 }
+.due > li:last-child { border-radius: 0 0 13px 13px }
+.due > li:only-child { border-radius: 13px }
 .due > li.p { --c: var(--red) } .due > li.d { --c: var(--yellow) } .due > li.law { --c: var(--ink) }
 .due-count { margin: -6px 0 18px; max-width: 44rem; font-size: 1.1rem }
-@media (max-width: 759px) { .due > li { grid-template-columns: minmax(0, 1fr) auto } .due > li > .txt { grid-column: 1 / -1; order: 3 } }
-.due .dt { font: 700 1.35rem/1.1 var(--display) }
+@media (max-width: 759px) { .due > li { grid-template-columns: minmax(0, 1fr) auto; padding: 6px 10px 7px 12px; font-size: .9rem; gap: 0 10px } .due > li > .txt { grid-column: 1 / -1; order: 3 } }
+.due .dt { font: 700 .95rem/1.2 var(--display) }
+.due .chip { font-size: 11.5px; padding: 5px 9px }
 .chip { justify-self: end; white-space: nowrap; font: 600 13px/1 var(--body); padding: 9px 12px; border-radius: 999px; border: 1px solid var(--ink); color: var(--ink); background: var(--card) }
 .chip.over { background: var(--band); border-color: var(--band); color: #FFFFFF }
 .chip.today { background: var(--ink); color: #FFFFFF }
@@ -228,12 +247,13 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 /* the item the band points to: a brief ring in its own color on arrival */
 .due > li { scroll-margin-top: 20px }
 .due > li:target, .due > li.flash { animation: flash 2s ease-out }
-@keyframes flash { 0%, 45% { box-shadow: 0 0 0 4px var(--c) } 100% { box-shadow: 0 0 0 4px transparent } }
-@media (prefers-reduced-motion: reduce) { .due > li:target, .due > li.flash { animation: none; box-shadow: 0 0 0 3px var(--c) } }
+@keyframes flash { 0%, 45% { box-shadow: inset 0 0 0 3px var(--c) } 100% { box-shadow: inset 0 0 0 3px transparent } }
+@media (prefers-reduced-motion: reduce) { .due > li:target, .due > li.flash { animation: none; box-shadow: inset 0 0 0 3px var(--c) } }
 .due > li.h { --c: var(--blue) }
 .due > li.resp { background: var(--blue-soft) }
-.resp-btn { justify-self: end; white-space: nowrap; font: 700 14px/1 var(--body); color: #FFFFFF; background: var(--blue); border: 0; border-radius: 999px;
-  padding: 14px 18px; min-height: 44px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .2) }
+.resp-btn { justify-self: end; white-space: nowrap; font: 700 13px/1 var(--body); color: #FFFFFF; background: var(--blue); border: 0; border-radius: 999px;
+  padding: 7px 12px; min-height: 28px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .2) }
+@media (pointer: coarse) { .resp-btn { min-height: 40px; padding: 10px 14px } }
 .resp-btn:hover { filter: brightness(1.1) }
 /* open, the button reads Close and stays in view while the letters are read */
 .resp-btn[aria-expanded="true"] { background: var(--ink); position: sticky; top: 12px; z-index: 2; box-shadow: 0 6px 18px rgba(21, 23, 26, .3) }
@@ -367,8 +387,7 @@ footer .wrap { display: grid; gap: 4px }
         <h1 data-who="halsey">LOS ANGELES COUNTY AND BEVERLY HILLS <span class="q">“JUSTICE”</span>. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?</h1>
         <p class="lede"><b class="h">Halsey Minor</b> warned <b class="p">the Beverly Hills police and city officials</b>, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.</p>
         <ul class="stats">
-          <li><b data-since="2026-03-19">216</b><span>days since the District Attorney's office rejected the case</span></li>
-          <li><b>0</b><span>letters telling him of the decision</span></li>
+          <li><b>0</b><span>letters telling him of the decision, in the <span class="live"><b data-since="2026-03-19">216</b> days</span> since the District Attorney's office rejected the case</span></li>
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
         </ul>
       </div>
@@ -470,10 +489,12 @@ footer .wrap { display: grid; gap: 4px }
 
   <section class="sec" id="answers">
     <div class="wrap">
+      <div class="pane">
       <h2>The <b class="d">District Attorney's office</b> told him his case was not in its system. That same day, it rejected the case.</h2>
       <div class="grid2">
         <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. I already told you I submitted your case to the DA.”</blockquote></div>
         <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026</span><blockquote>“We are not in receipt of any letter however the case you refer to is not in our system.”</blockquote></div>
+      </div>
       </div>
       <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. No one told him for nearly six months.<a class="fn" href="#n6">6</a></p>
     </div>
@@ -481,6 +502,7 @@ footer .wrap { display: grid; gap: 4px }
 
   <section class="sec" id="warnings">
     <div class="wrap">
+      <div class="pane">
       <h2>Thirteen times, in writing, he warned that the case would be sent unprepared and dumped.</h2>
       <div class="warn-head">
         <span class="count">13</span>
@@ -492,16 +514,18 @@ footer .wrap { display: grid; gap: 4px }
         <div class="d"><b>March 19, 2026</b><span>A deputy district attorney rejects it.</span></div>
         <div class="d"><b>No one conferred</b><span>with him, before or after.</span></div>
       </div>
+      </div>
       <p class="hl p" data-who="record">He asked on November 19, 2025 that the case be reassigned. No one answered.</p>
     </div>
   </section>
 
   <section class="sec" id="clock">
     <div class="wrap">
+      <div class="pane">
       <h2>The law did not stop this case. The justice system did.</h2>
-      <p class="dek">The <b class="d">District Attorney's office</b> rejected it as <span data-who="da">“beyond a statute of limitations.”</span> Count the time either way.</p>
+      <p class="dek">The <b class="d">District Attorney's office</b> counted three years. The law gives four: Penal Code §801.5, from discovery or from the last transfer, whichever is later. That runs to November 15, 2026 at the earliest, so on March 19, 2026 the case was within time.</p>
       <div class="clock" data-who="chart">
-        <svg viewBox="0 0 1000 300" role="img" aria-label="Timeline. 2015: the first theft he reported, about $450,000, moved to hidden accounts; about $1.5 million today, by his estimate. Then, to scale, November 2022 to December 2026. Five transfers in November and December 2022. Reported to the Beverly Hills police March 24 and 25, 2025. The District Attorney's count of 3 years ends November 15 to December 15, 2025, while the case is with the police; on December 2, 2025 he writes: Do not let it die on the vine. Sent to the District Attorney February 9, 2026. Rejected March 19, 2026, as beyond a statute of limitations. The victim learns on September 8, 2026. Four years after the transfers, the earliest end of the time under Penal Code section 801.5, is November 15 to December 15, 2026.">
+        <svg viewBox="0 0 1000 300" role="img" aria-label="Timeline. 2015: the first theft he reported, about $450,000, moved to hidden accounts; about $1.5 million today, by his estimate. Then, to scale, November 2022 to December 2026. Five transfers in November and December 2022. Reported to the Beverly Hills police March 24 and 25, 2025. On December 2, 2025 he writes: Do not let it die on the vine. Sent to the District Attorney February 9, 2026. Rejected March 19, 2026, as beyond a statute of limitations, within the four years that Penal Code section 801.5 gives. The victim learns on September 8, 2026. Four years after the transfers, the earliest end of the time under Penal Code section 801.5, is November 15 to December 15, 2026.">
         <line x1="142" y1="200" x2="960" y2="200" stroke="#15171A" stroke-width="2"/>
         <line x1="182.5" y1="200" x2="182.5" y2="210" stroke="#15171A" stroke-width="1.5"/>
         <text x="182.5" y="230" font-family="Jost, Futura, Arial, sans-serif" font-size="14" font-weight="600" fill="#565B62" text-anchor="middle">2023</text>
@@ -514,7 +538,6 @@ footer .wrap { display: grid; gap: 4px }
         <rect x="619.7" y="190" width="167.2" height="20" fill="#F9E4E8" stroke="#BA0C2F" stroke-width="1.5"/>
         <text x="786.9" y="286" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#BA0C2F" text-anchor="end">With the Beverly Hills police: Apr 1, 2025 – Feb 9, 2026, then sent to the DA</text>
         <rect x="157.5" y="186" width="16.0" height="28" fill="#737A84"/>
-        <rect x="741.1" y="104" width="16.0" height="110" fill="#F2C200" stroke="#B88F00" stroke-width="1"/>
         <rect x="935.5" y="142" width="16.0" height="72" fill="#E9EBEE" stroke="#15171A" stroke-width="1.5" stroke-dasharray="4 3"/>
         <line x1="40" y1="200" x2="116" y2="200" stroke="#15171A" stroke-width="2"/>
         <line x1="118" y1="209" x2="126" y2="191" stroke="#15171A" stroke-width="2"/>
@@ -525,8 +548,9 @@ footer .wrap { display: grid; gap: 4px }
         <text x="44.0" y="148" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#737A84" text-anchor="start">now about $1.5 million, his estimate</text>
         <line x1="70" y1="156" x2="70" y2="184" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
         <text x="157.5" y="172" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#737A84" text-anchor="start">Five transfers move $1,134,000 · Nov–Dec 2022</text>
-        <text x="757.1" y="96" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">The District Attorney's 3 years end · Nov 15 – Dec 15, 2025</text>
-        <text x="733.1" y="122" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1F56C3" text-anchor="end">Dec 2, 2025: “Do not let it die on the vine.”</text>
+        <circle cx="750.2" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
+        <line x1="750.2" y1="128" x2="750.2" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="750.2" y="122" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="600" fill="#1F56C3" text-anchor="end">Dec 2, 2025: “Do not let it die on the vine.”</text>
         <text x="960.0" y="96" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">4 years · §801.5</text>
         <text x="960.0" y="114" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="500" fill="#15171A" text-anchor="end">Nov–Dec 2026</text>
         <text x="960.0" y="132" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="12.5" font-weight="500" fill="#565B62" text-anchor="end">at the earliest</text>
@@ -535,8 +559,9 @@ footer .wrap { display: grid; gap: 4px }
         <text x="615.4" y="150" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">Reported in person · Mar 24–25, 2025</text>
         <circle cx="786.9" cy="200" r="6.5" fill="#BA0C2F" stroke="#FFFFFF" stroke-width="2"/>
         <circle cx="807.2" cy="200" r="6.5" fill="#F2C200" stroke="#15171A" stroke-width="2"/>
-        <line x1="807.2" y1="46" x2="807.2" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
         <text x="807.2" y="40" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#15171A" text-anchor="end">Rejected: “beyond a statute of limitations” · Mar 19, 2026</text>
+        <line x1="807.2" y1="66" x2="807.2" y2="192" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="807.2" y="60" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#15171A" text-anchor="end">Within time under Penal Code §801.5</text>
         <circle cx="899.3" cy="200" r="6.5" fill="#1F56C3" stroke="#FFFFFF" stroke-width="2"/>
         <line x1="899.3" y1="208" x2="899.3" y2="238" stroke="#9AA0A8" stroke-width="1" stroke-dasharray="3 3"/>
         <text x="899.3" y="254" font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" fill="#1F56C3" text-anchor="end">He learns · Sep 8, 2026</text>
@@ -546,18 +571,18 @@ footer .wrap { display: grid; gap: 4px }
           <li class="s"><span class="t">Nov 15 – Dec 15, 2022</span><span>Five online transfers move $1,134,000.</span></li>
           <li class="h"><span class="t">Mar 24–25, 2025</span><span>He reports the crime, in person.</span></li>
           <li class="p"><span class="t">Apr 1, 2025</span><span>The police assign a detective.</span></li>
-          <li class="d"><span class="t">Nov 15 – Dec 15, 2025</span><span>The District Attorney's 3 years end. The police still hold the case.</span></li>
           <li class="h"><span class="t">Dec 2, 2025</span><span>He writes to the police and the City: “Do not let it die on the vine.”</span></li>
           <li class="p"><span class="t">Feb 9, 2026</span><span>The police send the case to the District Attorney.</span></li>
-          <li class="d"><span class="t">Mar 19, 2026</span><span>Rejected: “The case was beyond a statute of limitations.”</span></li>
+          <li class="d"><span class="t">Mar 19, 2026</span><span>Rejected: “The case was beyond a statute of limitations.” Under Penal Code §801.5 it was within time.</span></li>
           <li class="h"><span class="t">Sep 8, 2026</span><span>He learns the case was rejected in March.</span></li>
           <li><span class="t">Nov 15 – Dec 15, 2026</span><span>Four years after the transfers: the earliest end under Penal Code §801.5.</span></li>
         </ol>
       </div>
+      </div>
       <div class="grid2">
         <div>
           <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this must be brought within 3 years. This occurred in 2022 and thus would have required being brought by 2025.”</blockquote></div>
-          <p class="hl p" data-who="record">December 2, 2025, inside that count: “Do not let it die on the vine.” The police held the case ten more weeks.</p>
+          <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made the money his separate property, and the police sent the case as grand theft. For grand theft, Penal Code §801.5 gives four years. The case was within time.</p>
         </div>
         <div>
           <div class="say law" data-who="law"><span class="tag" style="background:var(--ink)">The four-year rule</span><blockquote>Penal Code §801.5: four years from discovery, or from the last transfer, whichever is later.<a class="fn" href="#n8">8</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
@@ -570,17 +595,19 @@ footer .wrap { display: grid; gap: 4px }
   <section class="sec" id="reasons">
     <div class="wrap">
       <h2>Rejected for the very reasons he warned about.</h2>
-      <div class="grid2">
-        <div>
-          <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was beyond a statute of limitations.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“Do not let it die on the vine.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
-        </div>
-        <div>
-          <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on community property would also not support a filing of this case.”</blockquote></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n7">7</a></blockquote></div>
-          <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
-        </div>
+      <div class="grid2 reason">
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was beyond a statute of limitations.”</blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“Do not let it die on the vine.”</blockquote></div>
+      </div>
+      <p class="hl d" data-who="record"><b>Wrong by law.</b> Penal Code §801.5 gives four years, to November 15, 2026 at the earliest. On March 19, 2026, the case was within time.<a class="fn" href="#n8">8</a></p>
+      <div class="grid2 reason">
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on community property would also not support a filing of this case.”</blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n7">7</a></blockquote></div>
+      </div>
+      <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made those funds his separate property, not community property.</p>
+      <div class="grid2 reason">
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
       </div>
       <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer.<a class="fn" href="#n9">9</a></p>
     </div>
@@ -608,15 +635,15 @@ footer .wrap { display: grid; gap: 4px }
         </article>
         <article class="tile p">
           <span class="tag">City</span>
-          <span class="big">203</span>
-          <p>days to a first decision on his records request.<a class="fn" href="#n13">13</a></p>
+          <span class="big">0</span>
+          <p>decisions on his records request in the 24 days the law allows. The first came after 203 days.<a class="fn" href="#n13">13</a></p>
           <p class="hl p" data-who="city">His request “was quarantined by the city emailing system.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
-          <span class="big">13</span>
-          <p>requests to have Google save his email evidence.<a class="fn" href="#n14">14</a></p>
-          <p class="hl p" data-who="police">The police asked Google once, 104 days after the first. Later: “there is no further action that will be taken on your case.”</p>
+          <span class="big">1 of 13</span>
+          <p>requests to have Google save his email evidence that the police acted on, once, 104 days after the first.<a class="fn" href="#n14">14</a></p>
+          <p class="hl p" data-who="police">Later: “there is no further action that will be taken on your case.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
@@ -662,6 +689,7 @@ footer .wrap { display: grid; gap: 4px }
           <span class="vp" aria-hidden="true"></span>
         </a>
       </div>
+      <div class="pane">
       <div class="me-grid">
         <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
           <blockquote>
@@ -697,6 +725,7 @@ footer .wrap { display: grid; gap: 4px }
             <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
           </div>
         </div>
+      </div>
       </div>
       <div class="videos">
         <h3>His videos, on Vimeo</h3>
@@ -757,9 +786,7 @@ footer .wrap { display: grid; gap: 4px }
           <h2 class="endline" id="phone-h">THE EVIDENCE IS STILL IN THE VICTIM’S HANDS.</h2>
           <p class="hl p" data-who="police">He asked the police for a written procedure to take custody of the phone. The answer: “has to be requested by means of a PRA request”.<a class="fn" href="#n19">19</a></p>
           <ul class="stats">
-            <li><b data-since="2023-09-12">1135</b><span>days since the messages, September 12, 2023</span></li>
-            <li><b data-since="2026-09-26">25</b><span>days since he asked how to hand over the phone</span></li>
-            <li><b>0</b><span>times anyone has examined it</span></li>
+            <li><b>0</b><span>times anyone has examined it, in the <span class="live"><b data-since="2023-09-12">1135</b> days</span> since the messages of September 12, 2023, and the <span class="live"><b data-since="2026-09-26">25</b> days</span> since he asked how to hand it over</span></li>
           </ul>
         </div>
         <figure class="shot" data-who="record">
@@ -795,7 +822,7 @@ footer .wrap { display: grid; gap: 4px }
         <li id="n10">Penal Code §11116.10: on the victim's request, the prosecutor must, “within 30 days of the final disposition of the case, inform the victim or witness by letter”.</li>
         <li id="n11">California Constitution, article I, §28(b)(6): the victim's right “to reasonably confer with the prosecuting agency, upon request”. He asked twice before the decision and six times after, March 11 to April 17, 2026. In his words: “No one in the office conferred with me, before the decision or after it.”</li>
         <li id="n12">Government Code §7922.535(a): a decision “within 10 days from receipt of the request”. Asked April 6, April 27, May 4 and September 13, 2026.</li>
-        <li id="n13">First request March 20, 2026; first decision October 9, 2026. The quarantine message was the Records Bureau's first reply, on July 25, 2026, to his request of April 27. The City withholds the record of what was sent, under Government Code §7923.600.</li>
+        <li id="n13">First request March 20, 2026; first decision October 9, 2026. The law allows 10 days, and at most 14 more with written notice (Government Code §7922.535). The quarantine message was the Records Bureau's first reply, on July 25, 2026, to his request of April 27. The City withholds the record of what was sent, under Government Code §7923.600.</li>
         <li id="n14">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
         <li id="n15">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
         <li id="n16">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
