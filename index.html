@@ -174,11 +174,12 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 
 /* a quotation: thick edge and name chip in the speaker's color */
 .say { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c); border-radius: 14px; padding: 16px 20px 18px; min-width: 0 }
-.say .tag { display: inline-block; font: 600 13px/1.2 var(--body); padding: 5px 10px; border-radius: 999px; background: var(--c); color: #FFFFFF }
+/* October 23, 2026: names and titles are never highlighted; the tag is a quiet gray line, the card's edge says who */
+.say .tag { display: block; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
 .say blockquote { margin: 10px 0 0; font: 600 clamp(1.08rem, 1.8vw, 1.32rem)/1.32 var(--display); text-wrap: pretty }
 .say.h { --c: var(--blue) } .say.h blockquote { color: var(--blue) }
 .say.p { --c: var(--red) }
-.say.d { --c: var(--yellow-edge) } .say.d .tag { background: var(--yellow); color: var(--ink) }
+.say.d { --c: var(--yellow-edge) }
 .say.law { --c: var(--ink) }
 .say + .say, .say + .hl { margin-top: 12px }
 /* "Rejected": each reason beside his warning, then the plain answer; a little air before the next */
@@ -189,6 +190,10 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .hl { margin: 16px 0 0; background: var(--band); color: #FFFFFF; border-left: 12px solid var(--c); border-radius: 12px; padding: 18px 22px; font: 700 clamp(1.12rem, 2vw, 1.45rem)/1.32 var(--display); text-wrap: pretty }
 .hl.h { --c: var(--blue) } .hl.p { --c: var(--red) } .hl.d { --c: var(--yellow) }
 .hl .fn { color: #9AA0A8 }
+/* October 23, 2026: the story is told by highlighting. The claim is marked, word for word, in the color of who said it */
+mark { color: inherit; padding: 0 .1em; margin: 0 -.05em; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone }
+mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12, 47, .22) } mark.d { background: rgba(242, 194, 0, .5) } mark.k { background: rgba(21, 23, 26, .1) }
+.hl mark.h { background: var(--blue); color: #FFFFFF } .hl mark.p { background: var(--red); color: #FFFFFF } .hl mark.d { background: var(--yellow); color: var(--ink) }
 
 /* warnings */
 .warn-head { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; margin-bottom: 18px }
@@ -222,8 +227,7 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .round .tiles { margin-top: 22px }
 .round .moves { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font: 600 14px/1.4 var(--body); color: var(--muted) }
 .round .moves b { color: var(--ink) }
-.tile .tag { align-self: flex-start; font: 600 13px/1.2 var(--body); padding: 5px 10px; border-radius: 999px; background: var(--c); color: #FFFFFF }
-.tile.d .tag { color: var(--ink) }
+.tile .tag { align-self: flex-start; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
 .tile .big { font: 800 clamp(2.6rem, 4.6vw, 3.6rem)/.95 var(--display); font-variant-numeric: tabular-nums }
 .tile p { margin: 0 }
 .tile .hl { margin-top: auto; font-size: 1.05rem; padding: 14px 16px }
@@ -389,7 +393,7 @@ footer .wrap { display: grid; gap: 4px }
     <div class="glass">
       <div>
         <h1 data-who="halsey">LOS ANGELES COUNTY AND BEVERLY HILLS <span class="q">“JUSTICE”</span>. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?</h1>
-        <p class="lede"><b class="h">Halsey Minor</b> warned <b class="p">the Beverly Hills police and city officials</b>, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.</p>
+        <p class="lede">Halsey Minor warned the Beverly Hills police and city officials, in writing, <mark class="h">that his case would be dumped</mark>. It was <mark class="d">rejected for the very reasons he warned about</mark>, and <mark class="d">no one told him for nearly six months</mark>.</p>
         <ul class="stats">
           <li><b>217 days</b><span>from the rejection to the first written explanation of it, which came October 22, 2026: nine days after the 30 the law allows, when the victim asks</span></li>
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
@@ -462,12 +466,12 @@ footer .wrap { display: grid; gap: 4px }
 <section class="sec round" id="round">
   <div class="wrap">
     <div class="pane">
-    <h2>The fight, round by round. The latest round: <b class="d">the District Attorney's office</b>, October 22, 3:11 pm. <b class="h">His counter</b>, 10:33 pm. Their move.</h2>
+    <h2>The fight, round by round. The latest round: the District Attorney's office, October 22, 3:11 pm. His counter, 10:33 pm. Their move.</h2>
     <div class="grid2 reason">
-      <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026, 3:11 pm</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was insufficient evidence to establish that the suspect acted with the criminal intent required to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.” … “Based on the information available, that standard is not met.”<a class="fn" href="#n23">23</a></blockquote></div>
-      <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director · October 22, 2026, 10:33 pm</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: that sequence is the evidence of intent, and it was in front of your office.” … “Will your office take custody of the telephone, have its contents extracted by a forensic examiner, and obtain the Google and Meta records by subpoena before October 28, 2026, when the extortion counts under Penal Code section 523 run out?”</blockquote></div>
+      <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026, 3:11 pm</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was <mark class="d">insufficient evidence to establish that the suspect acted with the criminal intent required</mark> to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.” … “Based on the information available, that standard is not met.”<a class="fn" href="#n23">23</a></blockquote></div>
+      <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director · October 22, 2026, 10:33 pm</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: <mark class="h">that sequence is the evidence of intent, and it was in front of your office</mark>.” … “<mark class="h">Will your office take custody of the telephone</mark>, have its contents extracted by a forensic examiner, and obtain the Google and Meta records by subpoena before October 28, 2026, when the extortion counts under Penal Code section 523 run out?”</blockquote></div>
     </div>
-    <p class="hl d" data-who="record">The first written reasons came 217 days after the decision, and they were the third set. <span>The phone is not on the list of what was reviewed.</span> Both letters in full, under <a href="#da-2026-10-22">October 22</a>.</p>
+    <p class="hl d" data-who="record">The first written reasons came 217 days after the decision, and they were the third set. <mark class="d">The phone is not on the list of what was reviewed.</mark> Both letters in full, under <a href="#da-2026-10-22">October 22</a>.</p>
     <p class="moves"><span>Last punch: <b>October 22, 3:11 pm, the District Attorney's office</b></span> <span>Counter: <b>October 22, 10:33 pm, Halsey Minor</b></span> <span>Now: <b>their move</b></span> <span>The clock: <b>October 28</b>, when the time to charge the last extortion count runs out</span></p>
     </div>
     <div class="tiles">
@@ -475,7 +479,7 @@ footer .wrap { display: grid; gap: 4px }
       <article class="tile law"><span class="tag">Answers given late</span><span class="big">3</span><p>the City's first records decision, after 203 days; one preservation request to Google, after 104; the District Attorney's letter, 9 days after the 30 the law allows.</p></article>
       <article class="tile law"><span class="tag">Answers given within the time the law allows</span><span class="big">0</span><p>of the requests on this page to which the law gives a date.</p></article>
     </div>
-    <p class="hl h" data-who="record">He has no power to make any of them act. He has a ledger, a clock, and the law. This page is all three.</p>
+    <p class="hl h" data-who="record">He has no power to make any of them act. <mark class="h">He has a ledger, a clock, and the law.</mark> This page is all three.</p>
   </div>
 </section>
 
@@ -501,12 +505,12 @@ footer .wrap { display: grid; gap: 4px }
 <main>
   <section class="sec" id="reported">
     <div class="wrap">
-      <h2>$1,134,000, moved in five transfers he did not authorize. <b class="p">The police</b> sent it to the <b class="d">District Attorney</b> as grand theft.</h2>
+      <h2>$1,134,000, moved in five transfers he did not authorize. The police sent it to the District Attorney as grand theft.</h2>
       <p class="dek">A California tax refund paid to him, moved November 15 to December 15, 2022. He reported it to the Beverly Hills police in person on March 24 and 25, 2025. It was not the first: he has told the police and the District Attorney of a theft in 2015, about $450,000 moved to hidden accounts, which he now estimates at about $1.5 million.<a class="fn" href="#n3">3</a></p>
       <div class="grid3">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff did not consent to, authorize, or know of the transfers.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <b class="s">Shannon Minor</b> initiated or directed each transfer.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and subsequently rejected on March 19, 2026.”<a class="fn" href="#n5">5</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff <mark class="h">did not consent to, authorize, or know of the transfers</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <mark class="h">Shannon Minor initiated or directed each transfer</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and <mark class="p">subsequently rejected on March 19, 2026</mark>.”<a class="fn" href="#n5">5</a></blockquote></div>
       </div>
     </div>
   </section>
@@ -514,25 +518,25 @@ footer .wrap { display: grid; gap: 4px }
   <section class="sec" id="answers">
     <div class="wrap">
       <div class="pane">
-      <h2>The <b class="d">District Attorney's office</b> told him his case was not in its system. That same day, it rejected the case.</h2>
+      <h2>The District Attorney's office told him his case was not in its system. That same day, it rejected the case.</h2>
       <div class="grid2">
-        <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. I already told you I submitted your case to the DA.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026</span><blockquote>“We are not in receipt of any letter however the case you refer to is not in our system.”</blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. <mark class="p">I already told you I submitted your case to the DA</mark>.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026</span><blockquote>“We are not in receipt of any letter however <mark class="d">the case you refer to is not in our system</mark>.”</blockquote></div>
       </div>
       </div>
-      <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. No one told him for nearly six months.<a class="fn" href="#n6">6</a></p>
+      <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. <mark class="d">No one told him for nearly six months.</mark><a class="fn" href="#n6">6</a></p>
     </div>
   </section>
 
   <section class="sec" id="three">
     <div class="wrap">
-      <h2>One decision. Three descriptions of it from the <b class="d">District Attorney's office</b>, in seven months.</h2>
+      <h2>One decision. Three descriptions of it from the District Attorney's office, in seven months.</h2>
       <div class="grid3">
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026, the day the case was rejected</span><blockquote>“We are not in receipt of any letter however the case you refer to is not in our system. Maybe a different agency is prosecuting this case? I am sorry that we are unable to assist.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this must be brought within 3 years. This occurred in 2022 and thus would have required being brought by 2025.” … “The laws on community property would also not support a filing of this case.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was insufficient evidence to establish that the suspect acted with the criminal intent required to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.”<a class="fn" href="#n23">23</a></blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026, the day the case was rejected</span><blockquote>“We are not in receipt of any letter however the case you refer to is <mark class="d">not in our system</mark>. Maybe a different agency is prosecuting this case? I am sorry that we are unable to assist.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this <mark class="d">must be brought within 3 years</mark>. This occurred in 2022 and thus would have required being brought by 2025.” … “The laws on <mark class="d">community property would also not support a filing of this case</mark>.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was <mark class="d">insufficient evidence to establish that the suspect acted with the criminal intent required</mark> to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.”<a class="fn" href="#n23">23</a></blockquote></div>
       </div>
-      <p class="hl d" data-who="record">The first says there is no case. The second gives two legal reasons. The third sets both aside and gives a reason never mentioned before. The letter lists what was reviewed: statements by him, Shannon Minor and one other person; bank records of two joint accounts; the premarital agreement. <span>The phone is not on the list.</span></p>
+      <p class="hl d" data-who="record">The first says there is no case. The second gives two legal reasons. <mark class="d">The third sets both aside and gives a reason never mentioned before.</mark> The letter lists what was reviewed: statements by him, Shannon Minor and one other person; bank records of two joint accounts; the premarital agreement. <mark class="d">The phone is not on the list.</mark></p>
     </div>
   </section>
 
@@ -542,16 +546,16 @@ footer .wrap { display: grid; gap: 4px }
       <h2>Thirteen times, in writing, he warned that the case would be sent unprepared and dumped.</h2>
       <div class="warn-head">
         <span class="count">13</span>
-        <p>warnings, November 5, 2025 to March 11, 2026, to <b class="p">the detective, his superiors, the Chief and the City</b>, and to the <b class="d">District Attorney</b>.<a class="fn" href="#n7">7</a></p>
+        <p>warnings, November 5, 2025 to March 11, 2026, to the detective, his superiors, the Chief and the City, and to the District Attorney.<a class="fn" href="#n7">7</a></p>
       </div>
-      <p class="hl h" data-who="halsey">November 19, 2025: “…framing it in a way that the case might be prematurely rejected…”</p>
+      <p class="hl h" data-who="halsey">November 19, 2025: “…framing it in a way that <mark class="h">the case might be prematurely rejected</mark>…”</p>
       <div class="outcome">
         <div class="p"><b>February 9, 2026</b><span>The police send the case.</span></div>
         <div class="d"><b>March 19, 2026</b><span>A deputy district attorney rejects it.</span></div>
         <div class="d"><b>No one conferred</b><span>with him, before or after.</span></div>
       </div>
       </div>
-      <p class="hl p" data-who="record">He asked on November 19, 2025 that the case be reassigned. No one answered.</p>
+      <p class="hl p" data-who="record">He asked on November 19, 2025 that the case be reassigned. <mark class="p">No one answered.</mark></p>
     </div>
   </section>
 
@@ -559,7 +563,7 @@ footer .wrap { display: grid; gap: 4px }
     <div class="wrap">
       <div class="pane">
       <h2>The law did not stop this case. The justice system did.</h2>
-      <p class="dek">The <b class="d">District Attorney's office</b> counted three years. The law gives four: Penal Code §801.5, from discovery or from the last transfer, whichever is later. That runs to November 15, 2026 at the earliest, so on March 19, 2026 the case was within time.</p>
+      <p class="dek">The District Attorney's office counted three years. The law gives four: Penal Code §801.5, from discovery or from the last transfer, whichever is later. That runs to November 15, 2026 at the earliest, so on March 19, 2026 <mark class="d">the case was within time</mark>.</p>
       <div class="clock" data-who="chart">
         <svg viewBox="0 0 1000 300" role="img" aria-label="Timeline. 2015: the first theft he reported, about $450,000, moved to hidden accounts; about $1.5 million today, by his estimate. Then, to scale, November 2022 to December 2026. Five transfers in November and December 2022. Reported to the Beverly Hills police March 24 and 25, 2025. On December 2, 2025 he writes: Do not let it die on the vine. Sent to the District Attorney February 9, 2026. Rejected March 19, 2026, as beyond a statute of limitations, within the four years that Penal Code section 801.5 gives. The victim learns on September 8, 2026. Four years after the transfers, the earliest end of the time under Penal Code section 801.5, is November 15 to December 15, 2026.">
         <line x1="142" y1="200" x2="960" y2="200" stroke="#15171A" stroke-width="2"/>
@@ -617,12 +621,12 @@ footer .wrap { display: grid; gap: 4px }
       </div>
       <div class="grid2">
         <div>
-          <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this must be brought within 3 years. This occurred in 2022 and thus would have required being brought by 2025.”</blockquote></div>
-          <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made the money his separate property, and the police sent the case as grand theft. For grand theft, Penal Code §801.5 gives four years. The case was within time.</p>
+          <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this <mark class="d">must be brought within 3 years</mark>. This occurred in 2022 and thus would have required being brought by 2025.”</blockquote></div>
+          <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made the money his separate property, and the police sent the case as grand theft. For grand theft, Penal Code §801.5 gives four years. <mark class="d">The case was within time.</mark></p>
         </div>
         <div>
-          <div class="say law" data-who="law"><span class="tag" style="background:var(--ink)">The four-year rule</span><blockquote>Penal Code §801.5: four years from discovery, or from the last transfer, whichever is later.<a class="fn" href="#n8">8</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
-          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to District Attorney Hochman, September 21, 2026</span><blockquote>“Was the discovery rule part of the analysis?”</blockquote><p class="rule">No answer.</p></div>
+          <div class="say law" data-who="law"><span class="tag">The four-year rule</span><blockquote>Penal Code §801.5: <mark class="k">four years from discovery</mark>, or from the last transfer, whichever is later.<a class="fn" href="#n8">8</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
+          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to District Attorney Hochman, September 21, 2026</span><blockquote>“<mark class="h">Was the discovery rule part of the analysis?</mark>”</blockquote><p class="rule">No answer.</p></div>
         </div>
       </div>
     </div>
@@ -632,24 +636,24 @@ footer .wrap { display: grid; gap: 4px }
     <div class="wrap">
       <h2>Rejected for the very reasons he warned about.</h2>
       <div class="grid2 reason">
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was beyond a statute of limitations.”</blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“Do not let it die on the vine.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was <mark class="d">beyond a statute of limitations</mark>.”</blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“<mark class="h">Do not let it die on the vine.</mark>”</blockquote></div>
       </div>
-      <p class="hl d" data-who="record"><b>Wrong by law.</b> Penal Code §801.5 gives four years, to November 15, 2026 at the earliest. On March 19, 2026, the case was within time.<a class="fn" href="#n8">8</a></p>
+      <p class="hl d" data-who="record"><b>Wrong by law.</b> Penal Code §801.5 gives four years, to November 15, 2026 at the earliest. On March 19, 2026, <mark class="d">the case was within time</mark>.<a class="fn" href="#n8">8</a></p>
       <div class="grid2 reason">
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on community property would also not support a filing of this case.”</blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; you have clearly not read or had it explained to you.”<a class="fn" href="#n7">7</a></blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 2</span><blockquote>“The laws on <mark class="d">community property would also not support a filing of this case</mark>.”</blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, November 5, 2025, one of five on the agreement</span><blockquote>“First, we have a prenuptial agreement; <mark class="h">you have clearly not read or had it explained to you</mark>.”<a class="fn" href="#n7">7</a></blockquote></div>
       </div>
-      <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made those funds his separate property, not community property.</p>
+      <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made those funds <mark class="d">his separate property, not community property</mark>.</p>
       <div class="grid2 reason">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, those funds were Plaintiff's separate property.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was documented in the file sent to the District Attorney's Office.”</blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Under Sections 7 and 12 of the premarital agreement, <mark class="h">those funds were Plaintiff's separate property</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · Lieutenant Coulter, September 17, 2026</span><blockquote>“The premarital agreement was <mark class="p">documented in the file sent to the District Attorney's Office</mark>.”</blockquote></div>
       </div>
       <div class="grid2 reason">
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Bureau Director · October 22, 2026</span><blockquote>“Of relevance to your inquiry and complaints, I also reviewed a copy of the Pre-Nuptial Agreement between you and Shannon Minor. All these documents were part of the investigative file presented to the District Attorney's Office when prosecution was declined on March 19, 2026.”<a class="fn" href="#n23">23</a></blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director, October 22, 2026</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: that sequence is the evidence of intent, and it was in front of your office.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Bureau Director · October 22, 2026</span><blockquote>“Of relevance to your inquiry and complaints, <mark class="d">I also reviewed a copy of the Pre-Nuptial Agreement</mark> between you and Shannon Minor. All these documents were part of the investigative file presented to the District Attorney's Office when prosecution was declined on March 19, 2026.”<a class="fn" href="#n23">23</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director, October 22, 2026</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: <mark class="h">that sequence is the evidence of intent</mark>, and it was in front of your office.”</blockquote></div>
       </div>
-      <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer until October 22, 2026: it was in the file, the office's reviewer read it, and the office now sets the community-property reason aside, <span>“Even assuming”</span> the money was his.<a class="fn" href="#n9">9</a></p>
+      <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer until October 22, 2026: <mark class="d">it was in the file</mark>, the office's reviewer read it, and the office now sets the community-property reason aside, <span>“Even assuming”</span> the money was his.<a class="fn" href="#n9">9</a></p>
     </div>
   </section>
 
@@ -660,13 +664,13 @@ footer .wrap { display: grid; gap: 4px }
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">1</span>
-          <p>letter explaining the decision, on October 22, 2026: nine days after the 30 the law allows, when the victim asks.<a class="fn" href="#n10">10</a></p>
+          <p>letter explaining the decision, on October 22, 2026: <mark class="d">nine days after the 30 the law allows</mark>, when the victim asks.<a class="fn" href="#n10">10</a></p>
         </article>
         <article class="tile d">
           <span class="tag">District Attorney</span>
           <span class="big">0 of 8</span>
-          <p>requests to be heard, a right in California's Constitution.<a class="fn" href="#n11">11</a></p>
-          <p class="hl d" data-who="record">No one conferred with him, before the decision or after it.</p>
+          <p>requests to be heard, <mark class="d">a right in California's Constitution</mark>.<a class="fn" href="#n11">11</a></p>
+          <p class="hl d" data-who="record"><mark class="d">No one conferred with him</mark>, before the decision or after it.</p>
         </article>
         <article class="tile d">
           <span class="tag">District Attorney</span>
@@ -676,14 +680,14 @@ footer .wrap { display: grid; gap: 4px }
         <article class="tile p">
           <span class="tag">City</span>
           <span class="big">0</span>
-          <p>decisions on his records request in the 24 days the law allows. The first came after 203 days.<a class="fn" href="#n13">13</a></p>
-          <p class="hl p" data-who="city">His request “was quarantined by the city emailing system.”</p>
+          <p>decisions on his records request <mark class="p">in the 24 days the law allows</mark>. The first came after 203 days.<a class="fn" href="#n13">13</a></p>
+          <p class="hl p" data-who="city">His request “was <mark class="p">quarantined by the city emailing system</mark>.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
           <span class="big">1 of 13</span>
-          <p>requests to have Google save his email evidence that the police acted on, once, 104 days after the first.<a class="fn" href="#n14">14</a></p>
-          <p class="hl p" data-who="police">Later: “there is no further action that will be taken on your case.”</p>
+          <p>requests to have Google save his email evidence that the police acted on, <mark class="p">once, 104 days after the first</mark>.<a class="fn" href="#n14">14</a></p>
+          <p class="hl p" data-who="police">Later: “<mark class="p">there is no further action that will be taken on your case</mark>.”</p>
         </article>
         <article class="tile p">
           <span class="tag">Police</span>
@@ -697,7 +701,7 @@ footer .wrap { display: grid; gap: 4px }
   <section class="sec" id="watch">
     <div class="wrap">
       <h2>The next deadlines. Each one shows, live, whether it is met.</h2>
-      <p class="due-count"><b>11</b> requests still unanswered as the law requires: 9 to <b class="p">the police and the City</b>, 2 to the <b class="d">District Attorney</b>.</p>
+      <p class="due-count"><b>11</b> requests still unanswered as the law requires: 9 to the police and the City, 2 to the District Attorney.</p>
       <ul class="due">
         <li class="d" id="req-17" data-row="17" data-due="2026-10-07" data-fail="2026-10-07" title="The District Attorney&#x27;s office never answered by October 7. He withdrew the request on October 18."><span class="dt">Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip fail">Fail · 16 days</span></li>
         <li class="d" id="req-5" data-row="5" data-due="2026-10-13" data-met="Oct 22" title="The letter came October 22, nine days late. It sets the limitations question aside rather than answering it."><span class="dt">Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21. The letter came October 22, nine days late; it sets the limitations question aside rather than answering it.</span><span class="chip met">Answered Oct 22</span></li>
@@ -736,15 +740,15 @@ footer .wrap { display: grid; gap: 4px }
       <div class="me-grid">
         <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
           <blockquote>
-            <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to never let any American be deprived of our freedoms by power, money, fame, or prestige.</p>
-            <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that I literally pray for those who endure worse. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
+            <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to <mark class="h">never let any American be deprived of our freedoms by power, money, fame, or prestige</mark>.</p>
+            <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that <mark class="h">I literally pray for those who endure worse</mark>. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
             <p class="q">As a victim, when the system designed to protect you becomes adversarial, where do you go? That's the question I will spend my life answering.”</p>
           </blockquote>
         </div>
         <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
           <figure class="me-cover" data-who="halsey">
             <img src="plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
-            <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, eight months before he reported the crime.<a class="fn" href="#n17">17</a>
+            <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, <mark class="h">eight months before he reported the crime</mark>.<a class="fn" href="#n17">17</a>
               <span class="qd">From his plan</span>
               <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
             </figcaption>
@@ -757,7 +761,7 @@ footer .wrap { display: grid; gap: 4px }
             </figcaption>
           </figure>
         </aside>
-        <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, wanting to help others, not help me, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
+        <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
         <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
         <div class="say h invite" data-who="halsey">
           <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
@@ -827,8 +831,8 @@ footer .wrap { display: grid; gap: 4px }
       <div class="glass">
         <div>
           <h2 class="endline" id="phone-h">THE EVIDENCE IS STILL IN THE VICTIM’S HANDS.</h2>
-          <p class="hl p" data-who="police">He asked the police for a written procedure to take custody of the phone. The answer: “has to be requested by means of a PRA request”.<a class="fn" href="#n19">19</a></p>
-          <p class="hl d" data-who="record">The District Attorney's letter of October 22, 2026 lists what its reviewer read: statements, bank records, the premarital agreement. <span>The phone is not on the list.</span> “Based on the information available, that standard is not met.”<a class="fn" href="#n23">23</a></p>
+          <p class="hl p" data-who="police">He asked the police for a written procedure to take custody of the phone. The answer: “<mark class="p">has to be requested by means of a PRA request</mark>”.<a class="fn" href="#n19">19</a></p>
+          <p class="hl d" data-who="record">The District Attorney's letter of October 22, 2026 lists what its reviewer read: statements, bank records, the premarital agreement. <mark class="d">The phone is not on the list.</mark> “Based on the information available, that standard is not met.”<a class="fn" href="#n23">23</a></p>
           <ul class="stats">
             <li><b>0</b><span>times anyone has examined it, in the <span class="live"><b data-since="2023-09-12">1137</b> days</span> since the messages of September 12, 2023, and the <span class="live"><b data-since="2026-09-26">27</b> days</span> since he asked how to hand it over</span></li>
           </ul>
