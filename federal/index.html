@@ -456,6 +456,7 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: var(--red) }
 .nav-a.is-soon { color: rgba(255, 255, 255, .5); cursor: default }
+.mission-go { text-decoration: none } .mission-go::after { content: "→" }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }
 .fed-line a { color: inherit; opacity: .8; text-underline-offset: 3px }
 .fed-line a:hover, .fed-line a:focus-visible { opacity: 1 }
@@ -505,7 +506,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   <div class="wrap nav-in">
     <a class="nav-a" href="/">Home</a>
     <a class="nav-a" href="/federal/" aria-current="page">Time to go federal</a>
-    <span class="nav-a is-soon" aria-disabled="true" title="Its own page is being built">Mission</span>
+    <a class="nav-a" href="/mission/">Mission</a>
   </div>
 </nav>
 <header class="fed-hero"><div class="wrap"><h1>This is why Halsey is going federal.</h1><p class="fed-sub">Los Angeles County and Beverly Hills, measured not by him but by others: the Department of Justice, the State Auditor, the County's own lawyers, the departments' own reports and independent researchers.</p></div></header>
