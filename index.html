@@ -91,6 +91,7 @@ b.s { color: var(--gray); font-weight: 700 }
 .update:focus-visible { outline: 3px solid var(--u-fg); outline-offset: -6px }
 .u-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding-top: 8px; padding-bottom: 8px }
 .u-kind { flex: none; padding: 5px 10px; border-radius: 999px; background: #FFFFFF; color: var(--ink); font: 700 12px/1 var(--body); letter-spacing: .05em; text-transform: uppercase }
+.u-round { flex: none; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: #FFFFFF; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55); font: 800 12px/1 var(--body); letter-spacing: .05em; text-transform: uppercase }
 .update[data-kind="response"] .u-kind { color: var(--blue) }
 .update[data-kind="fail"] .u-kind { background: var(--band); color: #FFFFFF }
 .update[data-kind="answered"] .u-kind { color: #1F6F43 }
@@ -350,7 +351,7 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .codes-note { margin: 14px 0 0; font-size: 1rem; color: var(--muted) }
 /* the end, as it begins: the flag and the glass, with the evidence where the meter stands at the top */
 .hero.end { border-top: 1px solid var(--line) }
-.endline { margin: 0; max-width: none; font: 700 clamp(2rem, 4.6vw, 4.1rem)/1.02 var(--display); letter-spacing: -.005em; text-wrap: balance }
+.endline { margin: 0; max-width: none; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1.04 var(--display); letter-spacing: -.005em; text-wrap: balance }
 .hero.end .hl { margin-top: 22px }
 .shot { margin: 0; display: grid; justify-items: center; gap: 14px }
 .shot img { display: block; width: 100%; max-width: 340px; height: auto; border-radius: 24px; border: 7px solid var(--band); box-shadow: 0 30px 60px -28px rgba(21, 23, 26, .6) }
@@ -382,10 +383,82 @@ details.full[open] summary::after { content: "–" }
 .full-body p { margin: 0 }
 footer { background: var(--ink); color: #B9BDC3; padding-block: 22px 40px; font: 400 13px/1.6 var(--body) }
 footer .wrap { display: grid; gap: 4px }
+/* October 24, 2026: statements first. The details open on a click, in a pop-up over the page */
+.pop-open { display: inline-flex; align-items: center; gap: 8px; margin: 14px 8px 0 0; font: 700 14px/1 var(--body); color: var(--ink); background: var(--card);
+  border: 1.5px solid var(--ink); border-radius: 999px; padding: 10px 16px; min-height: 40px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .12) }
+.pop-open::after { content: "+"; font: 400 1.2rem/1 var(--display) }
+.pop-open:hover { background: var(--ink); color: #FFFFFF }
+dialog.pop { width: min(1120px, calc(100vw - 32px)); max-height: calc(100vh - 40px); padding: 0; border: 0; border-radius: 20px; background: var(--paper);
+  color: var(--ink); box-shadow: 0 40px 120px rgba(0, 0, 0, .45); overflow: auto }
+dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
+.pop-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px;
+  background: var(--paper); border-bottom: 1px solid var(--line) }
+.pop-head h3 { margin: 0; font: 700 clamp(1.02rem, 1.6vw, 1.25rem)/1.25 var(--display) }
+.pop-x { flex: none; font: 700 13px/1 var(--body); color: #FFFFFF; background: var(--ink); border: 0; border-radius: 999px; padding: 10px 14px; min-height: 36px; cursor: pointer }
+.pop-body { padding: 18px; display: grid; gap: 14px }
+.pop-body > .hl { margin: 0 }
+@media (max-width: 759px) { dialog.pop { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border-radius: 0 } .pop-body { padding: 14px } }
+/* the top: the round we are in, and the way to the fight */
+.fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
+  background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
+.fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
+.fight-go .fg-move { font: 700 1.05rem/1.2 var(--display) }
+.fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
+.fight-go:hover { filter: brightness(1.2) }
+.keystrip .key { margin: 14px 0 0 }
+/* the money: what was taken, in big type, with today's estimate */
+.money { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 16px }
+.money .m { background: var(--card); border: 1px solid var(--line); border-top: 8px solid var(--red); border-radius: 16px; padding: 16px 20px 18px; display: grid; gap: 8px; align-content: start }
+.money .big { font: 800 clamp(2.5rem, 5.4vw, 4rem)/.95 var(--display); font-variant-numeric: tabular-nums }
+.money p { margin: 0 }
+.money .est { display: block; margin-top: 6px; font: 700 1.05rem/1.3 var(--display) }
+.money-q { margin-bottom: 0 }
+.m-link { margin: 12px 0 0; font-weight: 600 }
+@media (max-width: 599px) { .money { grid-template-columns: minmax(0, 1fr) } }
+/* the fight: the round we are in and the score, over the rounds */
+.score { margin: -6px 0 16px; max-width: 52rem; font-size: 1.05rem; line-height: 1.6 }
+.score .rnd { display: inline-block; font: 800 1.2rem/1 var(--display); color: #FFFFFF; background: var(--red); border-radius: 8px; padding: 6px 10px; margin-right: 6px }
+.due .dt .rn { display: block; font: 700 10.5px/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+/* his statement beside his invitation; the rest of his record in its pop-up */
+.me-grid:not(.me-more) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "stmt inv"; align-items: start }
+.me-more { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-template-areas: "docs docs" "q1 q2"; align-items: stretch }
+.me-more .me-docs { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+@media (max-width: 899px) { .me-grid:not(.me-more) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stmt" "inv" } .me-more { grid-template-columns: minmax(0, 1fr); grid-template-areas: "docs" "q1" "q2" } }
+@media (max-width: 599px) { .me-more .me-docs { grid-template-columns: minmax(0, 1fr) } }
+details.notes-d summary { cursor: pointer; font: 700 1rem/1.3 var(--display); padding: 6px 0 12px }
+/* a third of the length: less air between statements, smaller headings, the evidence sized to be seen rather than to fill */
+.sec { padding-block: clamp(24px, 3.2vw, 44px) }
+h2 { margin-bottom: 16px; font-size: clamp(1.4rem, 2.7vw, 2.2rem) }
+.pane { padding: clamp(14px, 2.4vw, 28px) }
+.dek { margin-bottom: 18px }
+.count { font-size: clamp(2.8rem, 6vw, 4.4rem) }
+.clock { padding: clamp(10px, 1.8vw, 20px) }
+.vids:not(.more) { max-width: 820px; margin-bottom: 20px }
+.vid .vp { width: 60px; height: 60px; margin: -30px 0 0 -30px } .vid .vp::after { left: 24px; top: 18px; border-width: 12px 0 12px 19px }
+.codes { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 8px }
+.codes li { padding: 9px 14px } .codes b { font-size: 1rem }
+.shot img { max-width: 240px }
+.agq { grid-template-columns: minmax(0, 170px) minmax(0, 1fr) }
+.agtop { padding-bottom: clamp(20px, 3vw, 36px) }
+.daend { padding-bottom: clamp(28px, 4vw, 52px) }
+.ask { font-size: clamp(2rem, 4.6vw, 3.6rem) }
+.hero.end .hl { margin-top: 14px }
+h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
+.due-count { margin: -6px 0 14px; font-size: .98rem }
+.clock-list li { padding: 8px 0 8px 10px; font-size: .93rem; grid-template-columns: 5.8rem minmax(0, 1fr); gap: 10px }
+.hl { font-size: clamp(1.02rem, 1.7vw, 1.25rem); padding: 14px 18px }
+.me-grid:not(.me-more) .inv-ways { grid-template-columns: minmax(0, 1fr); gap: 8px }
+.me-grid:not(.me-more) .way { min-height: 44px; padding: 10px 14px; justify-content: space-between }
+.vids:not(.more) { max-width: 700px }
+.codes { display: flex; flex-wrap: wrap; gap: 8px }
+.codes li { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 12px; border-left-width: 6px }
+.codes b { font-size: .98rem } .codes span { font-size: .86rem }
+.sec { padding-block: clamp(20px, 2.6vw, 36px) }
+@media (min-width: 760px) { .due > li { grid-template-columns: 6.6rem minmax(0, 1fr) auto } .due .dt .rn { display: inline; margin-right: 5px } }
 </style>
 </head>
 <body>
-<a class="update u-d" id="update" href="#da-2026-10-22" data-kind="answered"><span class="wrap u-line"><span class="u-kind">The District Attorney's letter</span> <span class="u-text"><span class="u-date">Oct 22</span> · the first written explanation of the decision, 217 days after it was made and nine days late: both reasons of September 8 set aside, a third given, and the phone not on the list of what was reviewed. His reply follows it.</span> <span class="u-go">Read <span aria-hidden="true">→</span></span></span></a>
+<a class="update u-d" id="update" href="#da-2026-10-22" data-kind="answered"><span class="wrap u-line"><span class="u-round">Round <b data-round>7</b></span> <span class="u-kind">The District Attorney's letter</span> <span class="u-text"><span class="u-date">Oct 22</span> · the first written explanation of the decision, 217 days after it was made and nine days late: both reasons of September 8 set aside, a third given, and the phone not on the list of what was reviewed. His reply follows it.</span> <span class="u-go">Read <span aria-hidden="true">→</span></span></span></a>
 
 <header class="hero" id="top">
   <div class="flag" aria-hidden="true"></div>
@@ -398,6 +471,7 @@ footer .wrap { display: grid; gap: 4px }
           <li><b>217 days</b><span>from the rejection to the first written explanation of it, which came October 22, 2026: nine days after the 30 the law allows, when the victim asks</span></li>
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
         </ul>
+        <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>7</b></span><span class="fg-move" data-move=".">Their move.</span><span class="fg-go">Watch the fight <span aria-hidden="true">→</span></span></a>
       </div>
       <figure class="meter">
         <svg viewBox="0 0 320 320" role="img" aria-label="The justice meter, live. The needle points at injustice and strains toward justice. Only the Attorney General can turn it to justice.">
@@ -463,83 +537,16 @@ footer .wrap { display: grid; gap: 4px }
   </div>
 </header>
 
-<section class="sec round" id="round">
-  <div class="wrap">
-    <div class="pane">
-    <h2>The fight, round by round. The latest round: the District Attorney's office, October 22, 3:11 pm. His counter, 10:33 pm. Their move.</h2>
-    <div class="grid2 reason">
-      <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026, 3:11 pm</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was <mark class="d">insufficient evidence to establish that the suspect acted with the criminal intent required</mark> to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.” … “Based on the information available, that standard is not met.”<a class="fn" href="#n23">23</a></blockquote></div>
-      <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director · October 22, 2026, 10:33 pm</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: <mark class="h">that sequence is the evidence of intent, and it was in front of your office</mark>.” … “<mark class="h">Will your office take custody of the telephone</mark>, have its contents extracted by a forensic examiner, and obtain the Google and Meta records by subpoena before October 28, 2026, when the extortion counts under Penal Code section 523 run out?”</blockquote></div>
-    </div>
-    <p class="hl d" data-who="record">The first written reasons came 217 days after the decision, and they were the third set. <mark class="d">The phone is not on the list of what was reviewed.</mark> Both letters in full, under <a href="#da-2026-10-22">October 22</a>.</p>
-    <p class="moves"><span>Last punch: <b>October 22, 3:11 pm, the District Attorney's office</b></span> <span>Counter: <b>October 22, 10:33 pm, Halsey Minor</b></span> <span>Now: <b>their move</b></span> <span>The clock: <b>October 28</b>, when the time to charge the last extortion count runs out</span></p>
-    </div>
-    <div class="tiles">
-      <article class="tile law"><span class="tag">Answers they owe</span><span class="big">11</span><p>as the law requires: 9 from the police and the City, 2 from the District Attorney.</p></article>
-      <article class="tile law"><span class="tag">Answers given late</span><span class="big">3</span><p>the City's first records decision, after 203 days; one preservation request to Google, after 104; the District Attorney's letter, 9 days after the 30 the law allows.</p></article>
-      <article class="tile law"><span class="tag">Answers given within the time the law allows</span><span class="big">0</span><p>of the requests on this page to which the law gives a date.</p></article>
-    </div>
-    <p class="hl h" data-who="record">He has no power to make any of them act. <mark class="h">He has a ledger, a clock, and the law.</mark> This page is all three.</p>
-  </div>
-</section>
-
-<section class="agtop" id="ag">
-  <div class="wrap">
-    <figure class="agq" data-who="ag">
-      <img src="bonta.jpg" width="1280" height="1624" alt="Rob Bonta, Attorney General of California. Official portrait.">
-      <figcaption>
-        <h2>His office has the file.<a class="fn" href="#n1">1</a></h2>
-        <blockquote>“Victims of crime often struggle to rebuild their lives, and so, it is incumbent on all of us — in particular those of us in positions of power — to have their backs.”<a class="fn" href="#n2">2</a></blockquote>
-        <p class="by">Rob Bonta, Attorney General of California</p>
-      </figcaption>
-    </figure>
+<div class="wrap keystrip">
     <ul class="key" aria-label="How to read this page">
       <li class="k-h"><i></i>Halsey Minor, the victim</li>
       <li class="k-p"><i></i>Beverly Hills police and City</li>
       <li class="k-d"><i></i>District Attorney</li>
       <li class="k-hl">What should never happen</li>
     </ul>
-  </div>
-</section>
+</div>
 
 <main>
-  <section class="sec" id="reported">
-    <div class="wrap">
-      <h2>$1,134,000, moved in five transfers he did not authorize. The police sent it to the District Attorney as grand theft.</h2>
-      <p class="dek">A California tax refund paid to him, moved November 15 to December 15, 2022. He reported it to the Beverly Hills police in person on March 24 and 25, 2025. It was not the first: he has told the police and the District Attorney of a theft in 2015, about $450,000 moved to hidden accounts, which he now estimates at about $1.5 million.<a class="fn" href="#n3">3</a></p>
-      <div class="grid3">
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff <mark class="h">did not consent to, authorize, or know of the transfers</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <mark class="h">Shannon Minor initiated or directed each transfer</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
-        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and <mark class="p">subsequently rejected on March 19, 2026</mark>.”<a class="fn" href="#n5">5</a></blockquote></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec" id="answers">
-    <div class="wrap">
-      <div class="pane">
-      <h2>The District Attorney's office told him his case was not in its system. That same day, it rejected the case.</h2>
-      <div class="grid2">
-        <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. <mark class="p">I already told you I submitted your case to the DA</mark>.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026</span><blockquote>“We are not in receipt of any letter however <mark class="d">the case you refer to is not in our system</mark>.”</blockquote></div>
-      </div>
-      </div>
-      <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. <mark class="d">No one told him for nearly six months.</mark><a class="fn" href="#n6">6</a></p>
-    </div>
-  </section>
-
-  <section class="sec" id="three">
-    <div class="wrap">
-      <h2>One decision. Three descriptions of it from the District Attorney's office, in seven months.</h2>
-      <div class="grid3">
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026, the day the case was rejected</span><blockquote>“We are not in receipt of any letter however the case you refer to is <mark class="d">not in our system</mark>. Maybe a different agency is prosecuting this case? I am sorry that we are unable to assist.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this <mark class="d">must be brought within 3 years</mark>. This occurred in 2022 and thus would have required being brought by 2025.” … “The laws on <mark class="d">community property would also not support a filing of this case</mark>.”</blockquote></div>
-        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was <mark class="d">insufficient evidence to establish that the suspect acted with the criminal intent required</mark> to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.”<a class="fn" href="#n23">23</a></blockquote></div>
-      </div>
-      <p class="hl d" data-who="record">The first says there is no case. The second gives two legal reasons. <mark class="d">The third sets both aside and gives a reason never mentioned before.</mark> The letter lists what was reviewed: statements by him, Shannon Minor and one other person; bank records of two joint accounts; the premarital agreement. <mark class="d">The phone is not on the list.</mark></p>
-    </div>
-  </section>
-
   <section class="sec" id="warnings">
     <div class="wrap">
       <div class="pane">
@@ -549,13 +556,8 @@ footer .wrap { display: grid; gap: 4px }
         <p>warnings, November 5, 2025 to March 11, 2026, to the detective, his superiors, the Chief and the City, and to the District Attorney.<a class="fn" href="#n7">7</a></p>
       </div>
       <p class="hl h" data-who="halsey">November 19, 2025: “…framing it in a way that <mark class="h">the case might be prematurely rejected</mark>…”</p>
-      <div class="outcome">
-        <div class="p"><b>February 9, 2026</b><span>The police send the case.</span></div>
-        <div class="d"><b>March 19, 2026</b><span>A deputy district attorney rejects it.</span></div>
-        <div class="d"><b>No one conferred</b><span>with him, before or after.</span></div>
+      <p class="hl p" data-who="record">February 9, 2026: the police send the case. March 19: a deputy district attorney rejects it. No one conferred with him, before or after. He asked on November 19, 2025 that the case be reassigned. <mark class="p">No one answered.</mark></p>
       </div>
-      </div>
-      <p class="hl p" data-who="record">He asked on November 19, 2025 that the case be reassigned. <mark class="p">No one answered.</mark></p>
     </div>
   </section>
 
@@ -619,22 +621,58 @@ footer .wrap { display: grid; gap: 4px }
         </ol>
       </div>
       </div>
-      <div class="grid2">
-        <div>
+      <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made the money his separate property, and the police sent the case as grand theft. For grand theft, Penal Code §801.5 gives four years. <mark class="d">The case was within time.</mark></p>
+      <button class="pop-open" type="button" data-pop="pop-clock">The record behind it</button>
+      <dialog class="pop" id="pop-clock" aria-labelledby="pop-clock-h"><div class="pop-head"><h3 id="pop-clock-h">The record behind it: the office's count, the law, his question</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+        <div class="grid3">
           <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this <mark class="d">must be brought within 3 years</mark>. This occurred in 2022 and thus would have required being brought by 2025.”</blockquote></div>
-          <p class="hl d" data-who="record"><b>Wrong by law.</b> His premarital agreement made the money his separate property, and the police sent the case as grand theft. For grand theft, Penal Code §801.5 gives four years. <mark class="d">The case was within time.</mark></p>
-        </div>
-        <div>
           <div class="say law" data-who="law"><span class="tag">The four-year rule</span><blockquote>Penal Code §801.5: <mark class="k">four years from discovery</mark>, or from the last transfer, whichever is later.<a class="fn" href="#n8">8</a></blockquote><p class="rule">That runs to November 15 – December 15, 2026 at the earliest.</p></div>
           <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to District Attorney Hochman, September 21, 2026</span><blockquote>“<mark class="h">Was the discovery rule part of the analysis?</mark>”</blockquote><p class="rule">No answer.</p></div>
         </div>
-      </div>
+      </div></dialog>
     </div>
   </section>
 
-  <section class="sec" id="reasons">
+  <section class="sec" id="reported">
     <div class="wrap">
-      <h2>Rejected for the very reasons he warned about.</h2>
+      <h2>About $3.8 million taken from him, estimated at the S&amp;P 500 today.<a class="fn" href="#n25">25</a></h2>
+      <div class="money">
+        <div class="m"><span class="big">$1,134,000</span><p><b>2022.</b> Five transfers he did not authorize. The police sent it to the District Attorney as grand theft. <span class="est">About $2.2 million today, estimated.</span></p></div>
+        <div class="m"><span class="big">$450,000</span><p><b>2015.</b> Moved to hidden accounts.<a class="fn" href="#n3">3</a> <span class="est">About $1.7 million today, estimated.</span></p></div>
+      </div>
+      <div class="say h money-q" data-who="halsey"><span class="tag">Halsey Minor · October 23, 2026</span><blockquote>“I never knew there was a ‘college’ fund in your name for my kids. I guess that is because it was never sent to our house… since 2015”</blockquote></div>
+      <p class="hl p" data-who="record">Where did her Vanguard accounts come from? $915,203.56 on December 31, 2024. <mark class="p">The police never asked.</mark><a class="fn" href="#n24">24</a></p>
+      <button class="pop-open" type="button" data-pop="pop-money">His complaint and the police record</button>
+      <dialog class="pop" id="pop-money" aria-labelledby="pop-money-h"><div class="pop-head"><h3 id="pop-money-h">His complaint and the police record</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+        <p class="dek">A California tax refund paid to him, moved November 15 to December 15, 2022. He reported it to the Beverly Hills police in person on March 24 and 25, 2025. It was not the first: he has told the police and the District Attorney of a theft in 2015, about $450,000 moved to hidden accounts, which he now estimates at about $1.5 million.<a class="fn" href="#n3">3</a></p>
+      <div class="grid3">
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff <mark class="h">did not consent to, authorize, or know of the transfers</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his complaint</span><blockquote>“Plaintiff is informed and believes that <mark class="h">Shannon Minor initiated or directed each transfer</mark>.”<a class="fn" href="#n4">4</a></blockquote></div>
+        <div class="say p" data-who="police"><span class="tag">Police · records answer, Oct 9, 2026</span><blockquote>“Case submitted to the District Attorney's office on February 09, 2026 for 487(A) PC – Grand Theft, and <mark class="p">subsequently rejected on March 19, 2026</mark>.”<a class="fn" href="#n5">5</a></blockquote></div>
+      </div>
+      </div></dialog>
+      <p class="m-link"><a href="#contend">The crimes he contends, by code <span aria-hidden="true">↓</span></a></p>
+    </div>
+  </section>
+
+  <section class="sec" id="three">
+    <div class="wrap">
+      <h2>One decision. Three descriptions of it from the District Attorney's office, in seven months.</h2>
+      <p class="hl d" data-who="record">The first says there is no case. The second gives two legal reasons. <mark class="d">The third sets both aside and gives a reason never mentioned before.</mark> The letter lists what was reviewed: statements by him, Shannon Minor and one other person; bank records of two joint accounts; the premarital agreement. <mark class="d">The phone is not on the list.</mark></p>
+      <button class="pop-open" type="button" data-pop="pop-three">The three statements</button>
+      <dialog class="pop" id="pop-three" aria-labelledby="pop-three-h"><div class="pop-head"><h3 id="pop-three-h">One decision, three descriptions</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+      <div class="grid3">
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · March 19, 2026, the day the case was rejected</span><blockquote>“We are not in receipt of any letter however the case you refer to is <mark class="d">not in our system</mark>. Maybe a different agency is prosecuting this case? I am sorry that we are unable to assist.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · September 8, 2026</span><blockquote>“A case like this <mark class="d">must be brought within 3 years</mark>. This occurred in 2022 and thus would have required being brought by 2025.” … “The laws on <mark class="d">community property would also not support a filing of this case</mark>.”</blockquote></div>
+        <div class="say d" data-who="da"><span class="tag">District Attorney's office · Victor M. Rodriguez, Bureau Director · October 22, 2026</span><blockquote>“Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was <mark class="d">insufficient evidence to establish that the suspect acted with the criminal intent required</mark> to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.”<a class="fn" href="#n23">23</a></blockquote></div>
+      </div>
+        <div class="grid2">
+          <div class="say p" data-who="police"><span class="tag">Police · the detective, March 11, 2026</span><blockquote>“Yes. <mark class="p">I already told you I submitted your case to the DA</mark>.”</blockquote></div>
+        </div>
+        <p class="hl d" data-who="record">March 19, 2026: told <span>“not in our system”</span>, and the case was rejected that same day. <mark class="d">No one told him for nearly six months.</mark><a class="fn" href="#n6">6</a></p>
+      </div></dialog>
+      <button class="pop-open" type="button" data-pop="pop-reasons">Why both reasons were wrong</button>
+      <dialog class="pop" id="pop-reasons" aria-labelledby="pop-reasons-h"><div class="pop-head"><h3 id="pop-reasons-h">Rejected for the very reasons he warned about</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
       <div class="grid2 reason">
         <div class="say d" data-who="da"><span class="tag">District Attorney's office · reason 1</span><blockquote>“The case was <mark class="d">beyond a statute of limitations</mark>.”</blockquote></div>
         <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · his warning, December 2, 2025</span><blockquote>“<mark class="h">Do not let it die on the vine.</mark>”</blockquote></div>
@@ -654,12 +692,33 @@ footer .wrap { display: grid; gap: 4px }
         <div class="say h" data-who="halsey"><span class="tag">Halsey Minor · to the Bureau Director, October 22, 2026</span><blockquote>“Money moved within days of arriving, the account closed within three months, and a year of written statements that it did not exist: <mark class="h">that sequence is the evidence of intent</mark>, and it was in front of your office.”</blockquote></div>
       </div>
       <p class="hl d" data-who="record">He asked four times whether the deputy had the premarital agreement. No answer until October 22, 2026: <mark class="d">it was in the file</mark>, the office's reviewer read it, and the office now sets the community-property reason aside, <span>“Even assuming”</span> the money was his.<a class="fn" href="#n9">9</a></p>
+      </div></dialog>
     </div>
   </section>
 
-  <section class="sec" id="law">
+  <section class="sec fight" id="watch">
     <div class="wrap">
-      <h2>Six requests. Three got nothing. Three were answered late.</h2>
+      <h2>The fight, round by round.</h2>
+      <p class="score" data-rounds='[["2026-10-07","fail","2026-10-07"],["2026-10-13","answered","2026-10-22"],["2026-10-17","fail","2026-10-17"],["2026-10-21","open",""],["2026-10-21","open",""],["2026-10-23","open",""],["2026-10-23","open",""],["2026-10-24","open",""],["2026-10-24","open",""],["2026-10-28","open",""]]'><span class="rnd">Round <b data-round>7</b></span> <span data-move>Their move</span>. Answered as the law requires: <b><span data-n="ontime">0</span> of <span data-n="come">7</span></b> · answered late <span data-n="late">1</span> · Fail <span data-n="fail">2</span> · overdue <span data-n="overdue">2</span> · due today <span data-n="today">2</span>.</p>
+      <p class="due-count"><b>11</b> requests still unanswered as the law requires: 9 to the police and the City, 2 to the District Attorney.</p>
+      <ul class="due">
+        <li class="d" id="req-17" data-row="17" data-due="2026-10-07" data-fail="2026-10-07" title="The District Attorney&#x27;s office never answered by October 7. He withdrew the request on October 18."><span class="dt"><i class="rn">Round 1</i>Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip fail">Fail · 16 days</span></li>
+        <li class="d" id="req-5" data-row="5" data-due="2026-10-13" data-met="Oct 22" title="The letter came October 22, nine days late. It sets the limitations question aside rather than answering it."><span class="dt"><i class="rn">Round 2</i>Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21. The letter came October 22, nine days late; it sets the limitations question aside rather than answering it.</span><span class="chip met">Answered Oct 22</span></li>
+        <li class="p" id="req-19" data-row="19" data-due="2026-10-17" data-fail="2026-10-17" title="Her answer did not give what the law requires. See My Response."><span class="dt"><i class="rn">Round 3</i>Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip fail">Fail · 6 days</span></li>
+        <li class="h resp" data-row="19"><span class="dt">Oct 18</span><span class="txt"><b class="h">My Response</b> · my two letters, copied to the Attorney General and the District Attorney.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-18">Read my response</button><div class="resp-panel" id="resp-2026-10-18" role="region" aria-label="My Response, October 18, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 18, 2026, 8:38 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>PD-2026-677 has not yet given me what the law requires the Department to give the victim. Five points, each with the law that requires it.</p><p>1. The records your letter of 9 October says were attached. It says: "BHPD has identified records responsive to your 13-part amended request, which are attached herein as part of the City's initial production." The email carried the Marsy's Law pamphlet and the Policy Manual and no other record. Please send the records.</p><p>2. The items still being searched.</p><ul><li>On 9 October, items 2(b), 3(d), 5(a)–(d), 7, 8(e), 10, 11 and 13(b) were answered that the search continues, with no date.</li><li>The record of the quarantine and filter action, which you wrote on 25 September "will be added as part of your PD-2026-677 request," has no answer at all.</li><li>PD-2026-677 was received on 25 July. Government Code section 7922.535(a) requires a determination within 10 days and, for disclosable records, "the estimated date and time when the records will be made available."</li><li>Your notice of 25 September set 9 October, and section 7922.535(b) allows no extension beyond 14 days.</li></ul><p>Please give the determination and the date for each with your update of 23 October.</p><p class="cut">3. [This point is not shown on this page.]</p><p>4. The facts of the incident, owed to the victim. My request of 14 October, items (g) to (l), is made under Government Code section 7923.605(a), and your answer is due on 24 October. That section applies "Notwithstanding Section 7923.600," the section your letter of 9 October cited for the investigative records. Its exceptions are the safety of a witness and "the successful completion of the investigation or a related investigation." They do not reach a case in which the Department wrote to me on 30 September that "there is no further action that will be taken on your case," and in which the District Attorney's "evaluation was completed on 03/19/2026." Any withholding must state its ground for each item.</p><p>5. Items (d) and (e) of 7 October.</p><ul><li>Government Code section 7922.525(b): "Any reasonably segregable portion of a record shall be available for inspection by any person requesting the record after deletion of the portions that are exempted by law."</li><li>Penal Code section 832.7(c): "Notwithstanding subdivisions (a) and (b), a department or agency shall release to the complaining party a copy of the complaining party’s own statements at the time the complaint is filed."</li><li>POST wrote to me on 30 September that "Complaints received from the public will be forwarded to the employing agency for further investigation and disposition." Please send me my statements as the Department received them.</li></ul><p>Government Code section 7923.000 lets a requester ask the court to enforce these rights. Under section 7923.115(a), "the court shall award court costs and reasonable attorney’s fees to the requester" who prevails.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><article class="letter"><p class="meta">October 18, 2026, 8:59 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>One point from your email of 17 October that my letter this morning left out. You wrote that Policy 807 "was not included as part of the response for (f) since the policy is related to procedures for the seizure and storage of computer and digital evidence versus (f) asked for electronic devices delivered by a victim."</p><p>Policy 807.1 also covers "the preservation and storage of digital evidence," and 807.4 provides that cell phones "must be handled with care to preserve evidence that may be on the device including messages, stored data and/or images." Neither excludes a device delivered by a victim. Policy 802 does not mention electronic or digital evidence at all.</p><p>My telephone holds the evidence in case 2025-14983. Please state in writing, with your response of 24 October, which written procedure the Department applies to preserve the digital evidence on a telephone a victim delivers, or that there is none.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
+        <li class="p" id="req-20" data-row="20" data-due="2026-10-21"><span class="dt"><i class="rn">Round 4</i>Oct 21</span><span class="txt">The police on the extortion counts: which were presented, and whether the rest will go to the District Attorney by October 28.</span><span class="chip over">Overdue 2 days</span></li>
+        <li class="d" id="req-21" data-row="21" data-due="2026-10-21"><span class="dt"><i class="rn">Round 5</i>Oct 21</span><span class="txt">The District Attorney's office on whether the extortion counts were before the deputy.</span><span class="chip over">Overdue 2 days</span></li>
+        <li class="h resp" data-row="36"><span class="dt">Oct 22</span><span class="txt"><b class="d">The District Attorney's letter</b> · the first written explanation of the decision, from a Bureau Director, nine days late: both reasons of September 8 set aside, a third given. And <b class="h">My Response</b>, copied to the Attorney General, the District Attorney and the police.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="da-2026-10-22">Read the letter and my response</button><div class="resp-panel" id="da-2026-10-22" role="region" aria-label="The District Attorney's letter and My Response, October 22, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 22, 2026, 3:11 p.m. · From Victor M. Rodriguez, Director, Bureau of Branch &amp; Area Operations, Region 1, Office of the District Attorney, Los Angeles County · Subject: Suspect Shannon Minor, DA Case No. 46855335 · Re-sent at 3:17 p.m. after the first copy, to his Gmail address, was returned undelivered</p><p>Good afternoon, Mr. Minor.</p><p>I am a Bureau Director with the L.A. District Attorney's Office, and I conducted additional review of matters you raised regarding my office's decision to decline prosecution against your ex-wife, Shannon Minor. <span class="cut">[A passage is not shown on this page.]</span> Of relevance to your inquiry and complaints, I also reviewed a copy of the Pre-Nuptial Agreement between you and Shannon Minor. All these documents were part of the investigative file presented to the District Attorney's Office when prosecution was declined on March 19, 2026.</p><p>Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was insufficient evidence to establish that the suspect acted with the criminal intent required to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.</p><p class="cut">[This passage is not shown on this page.]</p><p>I understand that these conclusions may be frustrating, but criminal charges may only be filed when the evidence meets the legal standard required for prosecution. Based on the information available, that standard is not met.</p><p class="sig">Victor M. Rodriguez, Director</p></article><article class="letter"><p class="meta">October 22, 2026, evening · To Victor M. Rodriguez, Office of the District Attorney · Copied to the Attorney General's Public Inquiry Unit, District Attorney Hochman, the District Attorney's office, Chief Subin and Lieutenant Coulter</p><p>Mr. Rodriguez,</p><p>Thank you for your letter of October 22. It is the first written explanation of the decision of March 19, 2026, and it rests on a ground your office had not raised before: intent. It sets aside the two reasons given on September 8, the statute of limitations and community property. I take your letter as confirming that the premarital agreement was in the file on March 19 and that you have read it.</p><p><span class="cut">[A passage is not shown on this page.]</span> Four things that go to intent are not on that list.</p><p class="cut">1. [This point is not shown on this page.]</p><p class="cut">2. [This point is not shown on this page.]</p><p>3. The telephone. It holds her messages of September 2023: fifteen of September 12, each deleted by the sender within hours, and the nineteen of September 17, the last of them, at 10:20 that morning, demanding $50,000 a month. I have asked the Beverly Hills Police Department since September 26, 2026 for a written procedure to deliver it. The Department's answer, on October 7, was that it "has to be requested by means of a PRA request." No one has examined the telephone in the 1,136 days since those messages. A forensic examiner could extract its contents in a day.</p><p>4. The preserved records. The Department's preservation request to Google of January 12, 2026 has run. On September 30, 2026 the Department wrote that "there is no further action that will be taken on your case." That day I asked your office to renew the requests to Google and Meta. No answer has come.</p><p>One more fact for the file. <span class="cut">[A passage is not shown on this page.]</span> In thirteen months, the Department never interviewed me.</p><p>Five questions, each answerable in a line:</p><ul><li>(a) Was the telephone, or any extraction from it, among "the information available" to you?</li><li>(b) Were her written statements that there was no money, and the Vanguard accounts, among it?</li><li>(c) Will your office take custody of the telephone, have its contents extracted by a forensic examiner, and obtain the Google and Meta records by subpoena before October 28, 2026, when the extortion counts under Penal Code section 523 run out?</li><li>(d) Is your letter of October 22 the notice required by Penal Code section 11116.10, which I requested on September 13?</li><li>(e) Under article I, section 28(b)(6) of the California Constitution, I ask to confer with your office before any further decision. I have asked eight times since March 11, 2026.</li></ul><p>I will deliver the telephone, under a written procedure for its custody, at any time. I will come to Los Angeles at my own expense and answer questions for as long as anyone wants to ask them, recorded, on the record.</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
+        <li class="p" id="req-1" data-row="1" data-due="2026-10-23"><span class="dt"><i class="rn">Round 6</i>Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.</span><span class="chip today">Due today</span></li>
+        <li class="p" id="req-31" data-row="31" data-due="2026-10-23"><span class="dt"><i class="rn">Round 7</i>Oct 23</span><span class="txt">The records the Records Bureau said on October 9 were attached, and a date for each item still being searched.</span><span class="chip today">Due today</span></li>
+        <li class="p" id="req-22" data-row="22" data-due="2026-10-24"><span class="dt"><i class="rn">Round 8</i>Oct 24</span><span class="txt">The answer to his request for the facts of the incident.</span><span class="chip">Due tomorrow</span></li>
+        <li class="p" id="req-34" data-row="34" data-due="2026-10-24"><span class="dt"><i class="rn">Round 9</i>Oct 24</span><span class="txt">The written procedure that preserves the evidence on a telephone a victim delivers to the police.</span><span class="chip">Due tomorrow</span></li>
+        <li class="p" id="req-33" data-row="33" data-due="2026-10-28"><span class="dt"><i class="rn">Round 10</i>Oct 28</span><span class="txt">The parts of the records withheld on October 17 that can be released, and his own statements to the Department.</span><span class="chip">Due in 5 days</span></li>
+        <li class="p" data-due="2026-10-28" data-kind="limit"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out.<a class="fn" href="#n16">16</a></span><span class="chip">5 days left</span></li>
+        <li class="law" data-due="2026-11-15" data-end="2026-12-15" data-kind="limit"><span class="dt">Nov 15</span><span class="txt">Through December 15: four years after the transfers, the earliest end under Penal Code §801.5.</span><span class="chip">23 days left</span></li>
+      </ul>
+      <button class="pop-open" type="button" data-pop="pop-before">Before the rounds: six requests, March to September</button>
+      <dialog class="pop" id="pop-before" aria-labelledby="pop-before-h"><div class="pop-head"><h3 id="pop-before-h">Before the rounds: six requests. Three got nothing. Three were answered late.</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
       <div class="tiles">
         <article class="tile d">
           <span class="tag">District Attorney</span>
@@ -695,31 +754,23 @@ footer .wrap { display: grid; gap: 4px }
           <p>replies from either police chief.<a class="fn" href="#n15">15</a></p>
         </article>
       </div>
+      </div></dialog>
+      <p class="hl h" data-who="record">He has no power to make any of them act. <mark class="h">He has a ledger, a clock, and the law.</mark> This page is all three.</p>
     </div>
   </section>
 
-  <section class="sec" id="watch">
-    <div class="wrap">
-      <h2>The next deadlines. Each one shows, live, whether it is met.</h2>
-      <p class="due-count"><b>11</b> requests still unanswered as the law requires: 9 to the police and the City, 2 to the District Attorney.</p>
-      <ul class="due">
-        <li class="d" id="req-17" data-row="17" data-due="2026-10-07" data-fail="2026-10-07" title="The District Attorney&#x27;s office never answered by October 7. He withdrew the request on October 18."><span class="dt">Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip fail">Fail · 16 days</span></li>
-        <li class="d" id="req-5" data-row="5" data-due="2026-10-13" data-met="Oct 22" title="The letter came October 22, nine days late. It sets the limitations question aside rather than answering it."><span class="dt">Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21. The letter came October 22, nine days late; it sets the limitations question aside rather than answering it.</span><span class="chip met">Answered Oct 22</span></li>
-        <li class="p" id="req-19" data-row="19" data-due="2026-10-17" data-fail="2026-10-17" title="Her answer did not give what the law requires. See My Response."><span class="dt">Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.</span><span class="chip fail">Fail · 6 days</span></li>
-        <li class="h resp" data-row="19"><span class="dt">Oct 18</span><span class="txt"><b class="h">My Response</b> · my two letters, copied to the Attorney General and the District Attorney.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-18">Read my response</button><div class="resp-panel" id="resp-2026-10-18" role="region" aria-label="My Response, October 18, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 18, 2026, 8:38 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>PD-2026-677 has not yet given me what the law requires the Department to give the victim. Five points, each with the law that requires it.</p><p>1. The records your letter of 9 October says were attached. It says: "BHPD has identified records responsive to your 13-part amended request, which are attached herein as part of the City's initial production." The email carried the Marsy's Law pamphlet and the Policy Manual and no other record. Please send the records.</p><p>2. The items still being searched.</p><ul><li>On 9 October, items 2(b), 3(d), 5(a)–(d), 7, 8(e), 10, 11 and 13(b) were answered that the search continues, with no date.</li><li>The record of the quarantine and filter action, which you wrote on 25 September "will be added as part of your PD-2026-677 request," has no answer at all.</li><li>PD-2026-677 was received on 25 July. Government Code section 7922.535(a) requires a determination within 10 days and, for disclosable records, "the estimated date and time when the records will be made available."</li><li>Your notice of 25 September set 9 October, and section 7922.535(b) allows no extension beyond 14 days.</li></ul><p>Please give the determination and the date for each with your update of 23 October.</p><p class="cut">3. [This point is not shown on this page.]</p><p>4. The facts of the incident, owed to the victim. My request of 14 October, items (g) to (l), is made under Government Code section 7923.605(a), and your answer is due on 24 October. That section applies "Notwithstanding Section 7923.600," the section your letter of 9 October cited for the investigative records. Its exceptions are the safety of a witness and "the successful completion of the investigation or a related investigation." They do not reach a case in which the Department wrote to me on 30 September that "there is no further action that will be taken on your case," and in which the District Attorney's "evaluation was completed on 03/19/2026." Any withholding must state its ground for each item.</p><p>5. Items (d) and (e) of 7 October.</p><ul><li>Government Code section 7922.525(b): "Any reasonably segregable portion of a record shall be available for inspection by any person requesting the record after deletion of the portions that are exempted by law."</li><li>Penal Code section 832.7(c): "Notwithstanding subdivisions (a) and (b), a department or agency shall release to the complaining party a copy of the complaining party’s own statements at the time the complaint is filed."</li><li>POST wrote to me on 30 September that "Complaints received from the public will be forwarded to the employing agency for further investigation and disposition." Please send me my statements as the Department received them.</li></ul><p>Government Code section 7923.000 lets a requester ask the court to enforce these rights. Under section 7923.115(a), "the court shall award court costs and reasonable attorney’s fees to the requester" who prevails.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article><article class="letter"><p class="meta">October 18, 2026, 8:59 a.m. · To the Records Bureau, Beverly Hills Police Department · Copied to the Attorney General's Public Inquiry Unit and the District Attorney</p><p>Ms. Rivas,</p><p>One point from your email of 17 October that my letter this morning left out. You wrote that Policy 807 "was not included as part of the response for (f) since the policy is related to procedures for the seizure and storage of computer and digital evidence versus (f) asked for electronic devices delivered by a victim."</p><p>Policy 807.1 also covers "the preservation and storage of digital evidence," and 807.4 provides that cell phones "must be handled with care to preserve evidence that may be on the device including messages, stored data and/or images." Neither excludes a device delivered by a victim. Policy 802 does not mention electronic or digital evidence at all.</p><p>My telephone holds the evidence in case 2025-14983. Please state in writing, with your response of 24 October, which written procedure the Department applies to preserve the digital evidence on a telephone a victim delivers, or that there is none.</p><p>I am copying the Attorney General's Public Inquiry Unit (PIU #1564601) and the District Attorney (ECER #719953).</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
-        <li class="p" id="req-20" data-row="20" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The police on the extortion counts: which were presented, and whether the rest will go to the District Attorney by October 28.</span><span class="chip over">Overdue 2 days</span></li>
-        <li class="d" id="req-21" data-row="21" data-due="2026-10-21"><span class="dt">Oct 21</span><span class="txt">The District Attorney's office on whether the extortion counts were before the deputy.</span><span class="chip over">Overdue 2 days</span></li>
-        <li class="h resp" data-row="36"><span class="dt">Oct 22</span><span class="txt"><b class="d">The District Attorney's letter</b> · the first written explanation of the decision, from a Bureau Director, nine days late: both reasons of September 8 set aside, a third given. And <b class="h">My Response</b>, copied to the Attorney General, the District Attorney and the police.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="da-2026-10-22">Read the letter and my response</button><div class="resp-panel" id="da-2026-10-22" role="region" aria-label="The District Attorney's letter and My Response, October 22, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 22, 2026, 3:11 p.m. · From Victor M. Rodriguez, Director, Bureau of Branch &amp; Area Operations, Region 1, Office of the District Attorney, Los Angeles County · Subject: Suspect Shannon Minor, DA Case No. 46855335 · Re-sent at 3:17 p.m. after the first copy, to his Gmail address, was returned undelivered</p><p>Good afternoon, Mr. Minor.</p><p>I am a Bureau Director with the L.A. District Attorney's Office, and I conducted additional review of matters you raised regarding my office's decision to decline prosecution against your ex-wife, Shannon Minor. <span class="cut">[A passage is not shown on this page.]</span> Of relevance to your inquiry and complaints, I also reviewed a copy of the Pre-Nuptial Agreement between you and Shannon Minor. All these documents were part of the investigative file presented to the District Attorney's Office when prosecution was declined on March 19, 2026.</p><p>Even assuming that (1) the case is not barred by the statute of limitations, and (2) the tax refund would be considered your separate property, I determined there was insufficient evidence to establish that the suspect acted with the criminal intent required to prove embezzlement or any other charge beyond a reasonable doubt. For that reason, I concur with the prior declination decision.</p><p class="cut">[This passage is not shown on this page.]</p><p>I understand that these conclusions may be frustrating, but criminal charges may only be filed when the evidence meets the legal standard required for prosecution. Based on the information available, that standard is not met.</p><p class="sig">Victor M. Rodriguez, Director</p></article><article class="letter"><p class="meta">October 22, 2026, evening · To Victor M. Rodriguez, Office of the District Attorney · Copied to the Attorney General's Public Inquiry Unit, District Attorney Hochman, the District Attorney's office, Chief Subin and Lieutenant Coulter</p><p>Mr. Rodriguez,</p><p>Thank you for your letter of October 22. It is the first written explanation of the decision of March 19, 2026, and it rests on a ground your office had not raised before: intent. It sets aside the two reasons given on September 8, the statute of limitations and community property. I take your letter as confirming that the premarital agreement was in the file on March 19 and that you have read it.</p><p><span class="cut">[A passage is not shown on this page.]</span> Four things that go to intent are not on that list.</p><p class="cut">1. [This point is not shown on this page.]</p><p class="cut">2. [This point is not shown on this page.]</p><p>3. The telephone. It holds her messages of September 2023: fifteen of September 12, each deleted by the sender within hours, and the nineteen of September 17, the last of them, at 10:20 that morning, demanding $50,000 a month. I have asked the Beverly Hills Police Department since September 26, 2026 for a written procedure to deliver it. The Department's answer, on October 7, was that it "has to be requested by means of a PRA request." No one has examined the telephone in the 1,136 days since those messages. A forensic examiner could extract its contents in a day.</p><p>4. The preserved records. The Department's preservation request to Google of January 12, 2026 has run. On September 30, 2026 the Department wrote that "there is no further action that will be taken on your case." That day I asked your office to renew the requests to Google and Meta. No answer has come.</p><p>One more fact for the file. <span class="cut">[A passage is not shown on this page.]</span> In thirteen months, the Department never interviewed me.</p><p>Five questions, each answerable in a line:</p><ul><li>(a) Was the telephone, or any extraction from it, among "the information available" to you?</li><li class="cut">(b) [This passage is not shown on this page.]</li><li>(c) Will your office take custody of the telephone, have its contents extracted by a forensic examiner, and obtain the Google and Meta records by subpoena before October 28, 2026, when the extortion counts under Penal Code section 523 run out?</li><li>(d) Is your letter of October 22 the notice required by Penal Code section 11116.10, which I requested on September 13?</li><li>(e) Under article I, section 28(b)(6) of the California Constitution, I ask to confer with your office before any further decision. I have asked eight times since March 11, 2026.</li></ul><p>I will deliver the telephone, under a written procedure for its custody, at any time. I will come to Los Angeles at my own expense and answer questions for as long as anyone wants to ask them, recorded, on the record.</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
-        <li class="p" id="req-1" data-row="1" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.</span><span class="chip today">Due today</span></li>
-        <li class="p" id="req-31" data-row="31" data-due="2026-10-23"><span class="dt">Oct 23</span><span class="txt">The records the Records Bureau said on October 9 were attached, and a date for each item still being searched.</span><span class="chip today">Due today</span></li>
-        <li class="p" id="req-22" data-row="22" data-due="2026-10-24"><span class="dt">Oct 24</span><span class="txt">The answer to his request for the facts of the incident.</span><span class="chip">Due tomorrow</span></li>
-        <li class="p" id="req-34" data-row="34" data-due="2026-10-24"><span class="dt">Oct 24</span><span class="txt">The written procedure that preserves the evidence on a telephone a victim delivers to the police.</span><span class="chip">Due tomorrow</span></li>
-        <li class="p" id="req-33" data-row="33" data-due="2026-10-28"><span class="dt">Oct 28</span><span class="txt">The parts of the records withheld on October 17 that can be released, and his own statements to the Department.</span><span class="chip">Due in 5 days</span></li>
-        <li class="p" data-due="2026-10-28" data-kind="limit"><span class="dt">Oct 28</span><span class="txt">The time to charge the last extortion count he reported runs out.<a class="fn" href="#n16">16</a></span><span class="chip">5 days left</span></li>
-        <li class="law" data-due="2026-11-15" data-end="2026-12-15" data-kind="limit"><span class="dt">Nov 15</span><span class="txt">Through December 15: four years after the transfers, the earliest end under Penal Code §801.5.</span><span class="chip">23 days left</span></li>
-      </ul>
-    </div>
-  </section>
+  <section class="agtop" id="ag">
+  <div class="wrap">
+    <figure class="agq" data-who="ag">
+      <img src="bonta.jpg" width="1280" height="1624" alt="Rob Bonta, Attorney General of California. Official portrait.">
+      <figcaption>
+        <h2>His office has the file.<a class="fn" href="#n1">1</a></h2>
+        <blockquote>“Victims of crime often struggle to rebuild their lives, and so, it is incumbent on all of us — in particular those of us in positions of power — to have their backs.”<a class="fn" href="#n2">2</a></blockquote>
+        <p class="by">Rob Bonta, Attorney General of California</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
   <section class="sec" id="halsey">
     <div class="wrap">
@@ -745,6 +796,20 @@ footer .wrap { display: grid; gap: 4px }
             <p class="q">As a victim, when the system designed to protect you becomes adversarial, where do you go? That's the question I will spend my life answering.”</p>
           </blockquote>
         </div>
+        <div class="say h invite" data-who="halsey">
+          <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
+          <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+          <div class="inv-ways" aria-label="Write to him">
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
+            <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <button class="pop-open" type="button" data-pop="pop-halsey">His plan, his record, his videos</button>
+      <dialog class="pop" id="pop-halsey" aria-labelledby="pop-halsey-h"><div class="pop-head"><h3 id="pop-halsey-h">Ready before: his plan, his record, his videos</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+        <div class="me-grid me-more">
         <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
           <figure class="me-cover" data-who="halsey">
             <img src="plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
@@ -763,17 +828,7 @@ footer .wrap { display: grid; gap: 4px }
         </aside>
         <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
         <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
-        <div class="say h invite" data-who="halsey">
-          <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
-          <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
-          <div class="inv-ways" aria-label="Write to him">
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
-          </div>
         </div>
-      </div>
-      </div>
       <div class="videos">
         <h3>His videos, on Vimeo</h3>
         <h4>Made with Google Gemini, each in answer to a question</h4>
@@ -806,6 +861,7 @@ footer .wrap { display: grid; gap: 4px }
           <li><a href="https://vimeo.com/1233152942" target="_blank" rel="noopener">LOVE AND LAW REATIME AGENTS<span>October 5, 2026</span></a></li>
         </ul>
       </div>
+      </div></dialog>
     </div>
   </section>
 
@@ -857,6 +913,7 @@ footer .wrap { display: grid; gap: 4px }
   <section class="notes" id="notes" data-who="notes">
     <div class="wrap">
       <h2>Notes</h2>
+      <details class="notes-d" id="notes-d"><summary>Notes and sources</summary>
       <ol>
         <li id="n1">California Attorney General, Public Inquiry Unit, file PIU #1564601, on Beverly Hills Police Department case 2025-14983. The California Constitution, article V, §13, gives the Attorney General the duty “to see that the laws of the State are uniformly and adequately enforced”, and “direct supervision over every district attorney”.</li>
         <li id="n2">Attorney General Rob Bonta, April 26, 2024, in his office's release for National Crime Victims' Rights Week (oag.ca.gov). The portrait is his official one, from the California Department of Justice.</li>
@@ -881,6 +938,8 @@ footer .wrap { display: grid; gap: 4px }
         <li id="n21">Los Angeles County District Attorney's Office, news release of December 3, 2024, on his swearing-in (da.lacounty.gov).</li>
         <li id="n22">Every quotation on this page is word for word from the written record: his letter to the Attorney General and the messages it quotes, the District Attorney's office's message of September 8, 2026, his letter to District Attorney Hochman of September 21, 2026, his civil complaint, the Penal Code, the Attorney General's release, the District Attorney's office's letter of October 22, 2026 and his reply to it, and Halsey Minor's own statements of October 11 and 16, 2026.</li>
         <li id="n23">Victor M. Rodriguez, Director, Bureau of Branch &amp; Area Operations, Region 1, Office of the District Attorney, Los Angeles County, to Halsey Minor, October 22, 2026, 3:11 p.m., under the subject “Suspect Shannon Minor, DA Case No. 46855335”; re-sent at 3:17 p.m. after the first copy, to his Gmail address, was returned undelivered. It is the first written explanation of the decision of March 19, 2026. He had asked for the letter on September 13 (Penal Code §11116.10: 30 days). The letter and his reply of the same evening are shown in full under October 22 in the list of deadlines.</li>
+        <li id="n24">The Vanguard annual statement of December 31, 2024: four accounts in her sole name, $915,203.56. The Department has had those documents since October 2, 2025. He writes that the police never asked where the money came from.</li>
+        <li id="n25">Estimated by the change in SPY, a fund that tracks the S&amp;P 500, without dividends: $1,134,000 from its average close from November 15 to December 15, 2022 ($398.30), and $450,000 from its average monthly close in 2015 ($205.19), to its close on October 23, 2026 ($759.97). His own estimate for 2015, in his messages of January 2026, was about $1.5 million.</li>
       </ol>
       <details class="full">
         <summary>Every request and every answer, from his letter to the Attorney General</summary>
@@ -902,6 +961,7 @@ footer .wrap { display: grid; gap: 4px }
           <p>Every request listed here from 20 March 2026 on was made after my case had already been rejected. Until 8 September, I did not know.</p>
           <p><b>Update, October 22, 2026.</b> The District Attorney's office sent a written explanation of the decision, nine days after the 30 days the law allows, and confirmed that the premarital agreement was in the file. Note 23.</p>
         </div>
+      </details>
       </details>
     </div>
   </section>
@@ -1061,6 +1121,42 @@ footer .wrap { display: grid; gap: 4px }
     if (a && opens[a.getAttribute('href').slice(1)]) { e.preventDefault(); opens[a.getAttribute('href').slice(1)](); }
   });
   window.addEventListener('hashchange', function () { if (opens[location.hash.slice(1)]) opens[location.hash.slice(1)](); });
+  // October 24, 2026: a statement's details open in a pop-up over the page; Close, Escape or a click outside closes it
+  Array.prototype.forEach.call(document.querySelectorAll('.pop-open'), function (b) {
+    b.addEventListener('click', function () {
+      var d = document.getElementById(b.getAttribute('data-pop'));
+      if (d && d.showModal) d.showModal(); else if (d) d.setAttribute('open', '');
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('dialog.pop'), function (d) {
+    d.querySelector('.pop-x').addEventListener('click', function () { if (d.close) d.close(); else d.removeAttribute('open'); });
+    d.addEventListener('click', function (e) { if (e.target === d && d.close) d.close(); });
+  });
+  // a note number opens the notes, and closes a pop-up on the way
+  Array.prototype.forEach.call(document.querySelectorAll('a.fn'), function (a) {
+    a.addEventListener('click', function () {
+      var nd = document.getElementById('notes-d'); if (nd) nd.open = true;
+      var o = document.querySelector('dialog.pop[open]'); if (o && o.close) o.close();
+    });
+  });
+  // the fight: the round we are in and the score, live, from the same record the build used
+  var sc = document.querySelector('.score[data-rounds]');
+  if (sc) {
+    var rounds = JSON.parse(sc.getAttribute('data-rounds')), n = { come: 0, ontime: 0, late: 0, fail: 0, overdue: 0, today: 0 };
+    rounds.forEach(function (r) {
+      var due = day(r[0]);
+      if (due > t) return;
+      n.come++;
+      if (r[1] === 'answered') n[day(r[2]) <= due ? 'ontime' : 'late']++;
+      else if (r[1] === 'fail') n.fail++;
+      else if (due < t) n.overdue++;
+      else n.today++;
+    });
+    var move = n.fail + n.overdue + n.today ? 'Their move' : 'His move';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-round]'), function (e) { e.textContent = n.come; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-move]'), function (e) { e.textContent = move + e.getAttribute('data-move'); });
+    Object.keys(n).forEach(function (k) { var e = sc.querySelector('[data-n="' + k + '"]'); if (e) e.textContent = n[k]; });
+  }
   var asof = document.getElementById('asof');
   if (asof) asof.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 })();
