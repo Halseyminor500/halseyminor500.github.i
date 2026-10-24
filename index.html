@@ -402,9 +402,9 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
   background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
 .fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
-.fight-go .fg-move { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }   /* his word: "Their move" looks like "Watch the fight" */
 .fight-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px } .fight-row .fight-go { margin-top: 0 }
 .fight-go.fed-go { background: #002147 }   /* his word: federal is the blue of the American flag (Old Glory Blue, Pantone 282 C) */
+.fight-go.fed-go .fg-round { background: #FFFFFF; color: #BB133E }   /* his word: red and white swapped, so federal is not tied to the Beverly Hills red; the flag's own red (Old Glory Red, Pantone 193 C) */
 .fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
 .fight-go:hover { filter: brightness(1.2) }
 .keystrip .key { margin: 14px 0 0 }
@@ -465,8 +465,6 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 15px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 14px 0 11px; border-bottom: 3px solid transparent }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: #FFFFFF }
-.nav-a.is-soon { color: rgba(255, 255, 255, .5); cursor: default }
-.mission-go { text-decoration: none } .mission-go::after { content: "→" }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }
 .fed-line a { color: inherit; opacity: .8; text-underline-offset: 3px }
 .fed-line a:hover, .fed-line a:focus-visible { opacity: 1 }
@@ -497,7 +495,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 <nav class="topnav" aria-label="Halsey Minor">
   <div class="wrap nav-in">
     <a class="nav-a" href="/" aria-current="page">Home</a>
-    <a class="nav-a" href="/federal/">Time to go federal</a>
+    <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
   </div>
 </nav>
@@ -515,8 +513,8 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
         </ul>
         <div class="fight-row">
-          <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>10</b></span><span class="fg-go">Watch the fight <span aria-hidden="true">→</span></span></a>
-          <a class="fight-go fed-go" href="/federal/"><span class="fg-round">Round 1</span><span class="fg-go">Going federal <span aria-hidden="true">→</span></span></a>
+          <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>10</b></span><span class="fg-go">Battle for Justice <span aria-hidden="true">→</span></span></a>
+          <a class="fight-go fed-go" href="/federal/"><span class="fg-round">Round 1</span><span class="fg-go">Going Federal <span aria-hidden="true">→</span></span></a>
         </div>
         <p class="fed-line"><a href="/federal/">Why Halsey is going federal <span aria-hidden="true">→</span></a></p>
       </div>
@@ -850,45 +848,6 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   </div>
 </section>
 
-  <section class="sec" id="halsey">
-    <div class="wrap">
-      <h2>If you're thinking of coming to California, let this be a lesson</h2>
-      <div class="vids">
-        <a class="vid" href="https://vimeo.com/1236709009" target="_blank" rel="noopener" data-vimeo="1236709009" aria-label="Play the video: California’s Betrayal The Hypocrisy of Insolvency">
-          <img src="poster-1.jpg" width="960" height="540" alt="">
-          <span class="vt">California’s Betrayal The Hypocrisy of Insolvency</span>
-          <span class="vp" aria-hidden="true"></span>
-        </a>
-        <a class="vid" href="https://vimeo.com/1236709068" target="_blank" rel="noopener" data-vimeo="1236709068" aria-label="Play the video: The Asymmetric Ledger California and the Architect’s Exile">
-          <img src="poster-2.jpg" width="960" height="540" alt="">
-          <span class="vt">The Asymmetric Ledger California and the Architect’s Exile</span>
-          <span class="vp" aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class="pane">
-      <div class="me-grid">
-        <div class="say h me-statement" data-who="halsey"><span class="tag">Halsey Minor · his statement, October 16, 2026</span>
-          <blockquote>
-            <p>“I didn't find God or a willingness to help because of this case. This case has only hardened my commitment to <mark class="h">never let any American be deprived of our freedoms by power, money, fame, or prestige</mark>.</p>
-            <p>I am thankful I have not seen the worst miscarriages of justice, but it is bad enough that <mark class="h">I literally pray for those who endure worse</mark>. Being a victim is bad, but being a victim who is victimized by the system you pay to protect you is soul-crushing, and I don't know how people without my technical know-how, especially AI, ever find justice or peace in their lives.</p>
-            <p class="q">As a victim, when the system designed to protect you becomes adversarial, where do you go? That's the question I will spend my life answering.”</p>
-          </blockquote>
-        </div>
-        <div class="say h invite" data-who="halsey">
-          <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
-          <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
-          <div class="inv-ways" aria-label="Write to him">
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
-            <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
-          </div>
-        </div>
-      </div>
-      </div>
-      <a class="pop-open mission-go" href="/mission/">His plan, his record, his videos</a>
-    </div>
-  </section>
-
   <section class="sec" id="contend">
     <div class="wrap">
       <h2>The laws he contends were broken, by code.<a class="fn" href="#n18">18</a></h2>
@@ -955,8 +914,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
         <li id="n14">Thirteen requests, September 30, 2025 to January 9, 2026. The Department's records show one preservation request to Google, made January 12, 2026. Only a government agency can make that request (18 U.S.C. §2703(f)(1)). Lieutenant Coulter wrote the later words on September 30, 2026, when he asked that the request be renewed.</li>
         <li id="n15">He wrote to Chief Stainbrook from November 2025, and to Chief Subin from September 2026.</li>
         <li id="n16">Penal Code §523. On October 13 he asked the police whether they will present the extortion counts, and the District Attorney's office whether they were before the deputy. Also open: the police department's complaint PSU26-107, and POST's complaint PUBLIC-26-001329.</li>
-        <li id="n17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
-        <li id="n18">His message of March 30, 2026 to the District Attorney's office, the U.S. Attorney and the FBI listed these by code; extortion is in his report to the Chief of Police of September 8, 2026. Section 664(a) is the provision for an attempt found willful, deliberate and premeditated.</li>
+        <li id="n18" value="18">His message of March 30, 2026 to the District Attorney's office, the U.S. Attorney and the FBI listed these by code; extortion is in his report to the Chief of Police of September 8, 2026. Section 664(a) is the provision for an attempt found willful, deliberate and premeditated.</li>
         <li id="n19">His request of September 26, 2026 to Professional Standards and Chief Subin: “A written procedure for taking custody of my telephone, so that I could deliver it.” Sergeant Leber answered on October 7. He made that records request the same day. On October 17 the Records Bureau answered it, pointing to the Department's Policy 802, Property and Evidence, and sending its Policy Manual.</li>
         <li id="n20">His screenshot, cropped to the date and the messages; nothing else is changed.</li>
         <li id="n21">Los Angeles County District Attorney's Office, news release of December 3, 2024, on his swearing-in (da.lacounty.gov).</li>
@@ -1006,37 +964,6 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   Array.prototype.forEach.call(document.querySelectorAll('[data-since]'), function (el) {
     var n = Math.round((t - day(el.getAttribute('data-since'))) / 86400000);
     if (n >= 0) el.textContent = n.toLocaleString('en-US');
-  });
-  // his videos: on halseyminor.com a tap puts Vimeo's player in place of the picture; on the claude.ai page the link opens Vimeo
-  if (document.documentElement.getAttribute('data-embed') === 'inline') {
-    var player = function (a, autoplay) {
-      var f = document.createElement('iframe');
-      f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?' + (autoplay ? 'autoplay=1&' : '') + 'dnt=1&title=1&byline=0&portrait=0';
-      f.allow = 'autoplay; fullscreen; picture-in-picture';
-      f.setAttribute('allowfullscreen', '');
-      if (!autoplay) f.setAttribute('loading', 'lazy');
-      f.title = a.querySelector('.vt').textContent;
-      var box = document.createElement('div'); box.className = 'vid'; box.appendChild(f);
-      a.parentNode.replaceChild(box, a);
-    };
-    Array.prototype.forEach.call(document.querySelectorAll('.vid[data-vimeo]'), function (a) {
-      // his four videos have no picture of their own on this page: Vimeo's player takes their place at once, with its picture
-      if (a.classList.contains('pre')) { player(a, false); return; }
-      a.addEventListener('click', function (ev) { ev.preventDefault(); player(a, true); });
-    });
-  }
-  // his invitation: Copy puts the address on the clipboard; if the browser refuses, the address is selected instead
-  var copyBtn = document.getElementById('inv-copy');
-  if (copyBtn) copyBtn.addEventListener('click', function () {
-    var addr = copyBtn.getAttribute('data-copy');
-    var selectIt = function () {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('inv-addr'));
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected';
-    };
-    try {
-      navigator.clipboard.writeText(addr).then(function () { copyBtn.textContent = 'Copied'; }, selectIt);
-    } catch (e) { selectIt(); }
-    setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2400);
   });
   // share: the phone's own share sheet where there is one; otherwise the address is copied, or shown if copying is refused
   var shareBtn = document.getElementById('share');

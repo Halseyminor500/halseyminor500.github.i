@@ -13,12 +13,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mission · Halsey Minor</title>
-<meta name="description" content="Operating Equity: his plan, his record, his videos, and the companies he built at operatingequity.ai.">
+<meta name="description" content="Operating Equity · operatingequity.ai · Legal Justice AI, the document that began it: dated from its own files.">
 <link rel="canonical" href="https://halseyminor.com/mission/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://halseyminor.com/mission/">
 <meta property="og:title" content="Mission · Halsey Minor">
-<meta property="og:description" content="Operating Equity: his plan, his record, his videos, and the companies he built at operatingequity.ai.">
+<meta property="og:description" content="Operating Equity · operatingequity.ai · Legal Justice AI, the document that began it: dated from its own files.">
 <meta property="og:image" content="https://halseyminor.com/share.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -394,9 +394,9 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
   background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
 .fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
-.fight-go .fg-move { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }   /* his word: "Their move" looks like "Watch the fight" */
 .fight-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px } .fight-row .fight-go { margin-top: 0 }
 .fight-go.fed-go { background: #002147 }   /* his word: federal is the blue of the American flag (Old Glory Blue, Pantone 282 C) */
+.fight-go.fed-go .fg-round { background: #FFFFFF; color: #BB133E }   /* his word: red and white swapped, so federal is not tied to the Beverly Hills red; the flag's own red (Old Glory Red, Pantone 193 C) */
 .fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
 .fight-go:hover { filter: brightness(1.2) }
 .keystrip .key { margin: 14px 0 0 }
@@ -457,8 +457,6 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 15px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 14px 0 11px; border-bottom: 3px solid transparent }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: #FFFFFF }
-.nav-a.is-soon { color: rgba(255, 255, 255, .5); cursor: default }
-.mission-go { text-decoration: none } .mission-go::after { content: "→" }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }
 .fed-line a { color: inherit; opacity: .8; text-underline-offset: 3px }
 .fed-line a:hover, .fed-line a:focus-visible { opacity: 1 }
@@ -553,83 +551,246 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 }
 </style>
 <style>
-.mission > h2 { margin-top: 4px }
-.notes-m { margin: 28px 0 56px; padding-left: 1.6em; max-width: 46rem; font-size: .9rem; color: var(--muted) }
+/* Mission: the Operating Equity page of October 13, 2026, back in the site's own boxes */
+.mission > section > h2 { margin: clamp(34px, 4.4vw, 52px) 0 12px }
+.mission > section:first-child > h2 { margin-top: 4px }
+.mission h3 { margin: 20px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
+.m-note { margin: 0 0 14px; max-width: 44rem; font-size: .95rem; color: var(--muted) }
+.m-sec .vids:not(.more) { max-width: 700px; margin-bottom: 16px }
+.m-sec .invite { max-width: 700px }
+.vids.more { margin: 0 }
+.vids.three { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+@media (max-width: 899px) { .vids.three { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 599px) { .vids.more, .vids.three { grid-template-columns: minmax(0, 1fr) } }
+.m-quotes { display: grid; gap: 12px; max-width: 50rem; margin-top: 16px }
+.m-quotes > .say { margin: 0 }
+.say blockquote p { margin: 0 0 .6em } .say blockquote p:last-child { margin: 0 }
+.say.long blockquote { font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body) }
+.say .src { margin: 10px 0 0; font-size: .9rem; color: var(--muted) }
+.say .src a { color: inherit; text-underline-offset: 3px }
+.m-cover { max-width: 50rem; margin-top: 16px; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); align-items: start; gap: 16px 20px }
+.m-cover img { max-width: 240px }
+@media (max-width: 599px) { .m-cover { grid-template-columns: minmax(0, 1fr) } }
+.evo { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 250px); gap: 12px; overflow-x: auto; padding: 2px 2px 12px; scroll-snap-type: x proximity; overscroll-behavior-x: contain }
+.evo .n { scroll-snap-align: start; display: grid; align-content: start; gap: 6px; background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--blue); border-radius: 12px; padding: 14px 16px }
+.evo .n.files { border-top-color: #C3C7CD }
+.evo .d { font: 700 1.05rem/1.2 var(--display) }
+.evo .k { font: 600 11px/1.2 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.evo .t { margin: 0; font: 600 1rem/1.3 var(--display); color: var(--blue) }
+.evo p { margin: 0; font-size: .92rem; line-height: 1.5 }
+.evo .dl { font: 600 .9rem/1.3 var(--body); color: var(--blue); text-underline-offset: 3px }
+.m-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
+@media (max-width: 899px) { .m-cards { grid-template-columns: minmax(0, 1fr) } }
+.m-card { background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--blue); border-radius: 12px; padding: 16px 18px }
+.m-card h3 { margin: 0 0 6px; font: 700 1.15rem/1.2 var(--display); color: var(--blue) }
+.m-card p { margin: 0; font-size: .97rem; line-height: 1.6 }
+.m-kick { display: block; margin: 24px 0 4px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
+.m-big { margin: 0; max-width: 40rem; font: 700 clamp(1.4rem, 2.8vw, 2.1rem)/1.15 var(--display); color: var(--blue); text-wrap: balance }
+.m-goals { margin: 8px 0 0; max-width: 50rem }
+.m-measures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; max-width: 50rem }
+@media (max-width: 599px) { .m-measures { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.m-measures div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; align-content: start }
+.m-measures b { font: 800 1.8rem/1 var(--display); color: var(--blue) }
+.m-measures span { font-size: .92rem; line-height: 1.35 }
+.m-filing { margin: 16px 0 0; max-width: 50rem; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 12px; padding: 16px 20px }
+.m-filing .fh { display: block; margin-bottom: 8px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
+.m-filing p { margin: 0 0 .7em; font-size: .97rem; line-height: 1.65 } .m-filing p:last-child { margin: 0 }
+.notes-m { margin: 40px 0 56px; padding-left: 1.6em; max-width: 46rem; font-size: .9rem; color: var(--muted) }
 </style>
 </head>
 <body>
 <nav class="topnav" aria-label="Halsey Minor">
   <div class="wrap nav-in">
     <a class="nav-a" href="/">Home</a>
-    <a class="nav-a" href="/federal/">Time to go federal</a>
+    <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/" aria-current="page">Mission</a>
   </div>
 </nav>
-<!-- Mission (his word, October 24, 2026: "Operating equity goes in the section called mission"): moved word for word from the
-     main page's pop-up "Ready before: his plan, his record, his videos"; note 17 comes with it -->
-<header class="fed-hero"><div class="wrap"><h1>Mission</h1><p class="fed-sub">Operating Equity: his plan, his record, his videos, and the companies he built at operatingequity.ai.</p></div></header>
-<main class="wrap mission">
-      <h2>Ready before: his plan, his record, his videos</h2>
-        <div class="me-grid me-more">
-        <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
-          <figure class="me-cover" data-who="halsey">
-            <img src="/plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
-            <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, <mark class="h">eight months before he reported the crime</mark>.<a class="fn" href="#n17">17</a>
-              <span class="qd">From his plan</span>
-              <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
-            </figcaption>
-          </figure>
-          <figure class="me-cover" data-who="halsey">
-            <img src="/ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
-            <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
-              <span class="qd">The role, as he wrote it</span>
-              <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
-            </figcaption>
-          </figure>
-        </aside>
-        <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
-        <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
-        </div>
-      <div class="videos">
-        <h3>His videos, on Vimeo</h3>
-        <h4>Made with Google Gemini, each in answer to a question</h4>
-        <div class="vids more">
-          <a class="vid pre" href="https://vimeo.com/1200593847" target="_blank" rel="noopener" data-vimeo="1200593847" aria-label="Play the video: The Trillion-Dollar Gift">
-            <span class="vt">The Trillion-Dollar Gift</span>
-            <span class="vd">June 11, 2026</span>
-            <span class="vp" aria-hidden="true"></span>
-          </a>
-          <a class="vid pre" href="https://vimeo.com/1201944057" target="_blank" rel="noopener" data-vimeo="1201944057" aria-label="Play the video: The Builders Paradox Architecting the Open Web and the Closed">
-            <span class="vt">The Builders Paradox Architecting the Open Web and the Closed</span>
-            <span class="vd">June 16, 2026</span>
-            <span class="vp" aria-hidden="true"></span>
-          </a>
-          <a class="vid pre" href="https://vimeo.com/1211863204" target="_blank" rel="noopener" data-vimeo="1211863204" aria-label="Play the video: The Salesforce for Social Justice">
-            <span class="vt">The Salesforce for Social Justice</span>
-            <span class="vd">July 21, 2026</span>
-            <span class="vp" aria-hidden="true"></span>
-          </a>
-          <a class="vid pre" href="https://vimeo.com/1171557421" target="_blank" rel="noopener" data-vimeo="1171557421" aria-label="Play the video: The Trillionaire Ghost and Builder vs The Reaper">
-            <span class="vt">The Trillionaire Ghost and Builder vs The Reaper</span>
-            <span class="vd">March 8, 2026</span>
-            <span class="vp" aria-hidden="true"></span>
-          </a>
-        </div>
-        <h4>The companies he built at operatingequity.ai</h4>
-        <ul>
-          <li><a href="https://vimeo.com/1218683867" target="_blank" rel="noopener">CIVIC — Rebuilding Trust Through a Creator Driven Network<span>August 16, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1233152341" target="_blank" rel="noopener">EMILY FILLING OUT ALL FORMS 50 STATES.<span>October 5, 2026</span></a></li>
-          <li><a href="https://vimeo.com/1233152942" target="_blank" rel="noopener">LOVE AND LAW REATIME AGENTS<span>October 5, 2026</span></a></li>
-        </ul>
+<!-- Mission (his words, October 24, 2026: "Mission is the reconstruction of the entire operating equity page that is now gone, and when it
+     comes back, I will make changes to it"). The Operating Equity page of October 13, 2026 (the Mission room of
+     site-2026/archive-2026-10-13/workspace/preview31/index.html), in its order, with today's pieces where they belong:
+     - first, the section that left the main page (his heading, the two California videos, his invitation); his statement of October 16
+       is not used ("do not use my quote");
+     - "Ready before" as it was; his four videos (the two he crossed out on October 17 stay out); the companies' three videos;
+     - every element marked data-oe is the October page word for word; a cut inside a quote is marked […]. Cut by the never-publish
+       list: the September 30 line on the cover, the civil-case item on the timeline, one sentence of the August 26, 2025 email and the
+       first sentence of the September 29 quote. Left out by his word: GoFundMe. Gone with the rooms: the links to them and "Seven
+       rooms". The two downloads stay off (the Draft 32 text carries withheld words), and the sentences that offered them go. -->
+<header class="fed-hero"><div class="wrap"><h1>Mission</h1><p class="fed-sub" data-oe>Operating Equity · operatingequity.ai · Legal Justice AI, the document that began it: dated from its own files</p></div></header>
+<main class="wrap mission" data-who="halsey">
+  <section class="m-sec" id="california">
+    <h2>If you're thinking of coming to California, let this be a lesson</h2>
+    <div class="vids">
+      <a class="vid" href="https://vimeo.com/1236709009" target="_blank" rel="noopener" data-vimeo="1236709009" aria-label="Play the video: California’s Betrayal The Hypocrisy of Insolvency">
+        <img src="/poster-1.jpg" width="960" height="540" alt="">
+        <span class="vt">California’s Betrayal The Hypocrisy of Insolvency</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid" href="https://vimeo.com/1236709068" target="_blank" rel="noopener" data-vimeo="1236709068" aria-label="Play the video: The Asymmetric Ledger California and the Architect’s Exile">
+        <img src="/poster-2.jpg" width="960" height="540" alt="">
+        <span class="vt">The Asymmetric Ledger California and the Architect’s Exile</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="say h invite" data-who="halsey">
+      <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
+      <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+      <div class="inv-ways" aria-label="Write to him">
+        <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
+        <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
+        <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
       </div>
-      <ol class="notes-m">
-        <li id="n17" value="17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
-      </ol>
-</main>
+    </div>
+  </section>
 
+  <section id="ready">
+    <h2>Ready before: his plan, his record, his videos</h2>
+    <div class="me-grid me-more">
+      <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
+        <figure class="me-cover" data-who="halsey">
+          <img src="/plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
+          <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, <mark class="h">eight months before he reported the crime</mark>.<a class="fn" href="#n17">17</a>
+            <span class="qd">From his plan</span>
+            <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
+          </figcaption>
+        </figure>
+        <figure class="me-cover" data-who="halsey">
+          <img src="/ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
+          <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
+            <span class="qd">The role, as he wrote it</span>
+            <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
+          </figcaption>
+        </figure>
+      </aside>
+      <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
+      <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <h2 data-oe>His videos</h2>
+    <p class="m-note"><span data-count>9</span> videos provided by Halsey Minor. Titles and upload dates are as Vimeo gives them.</p>
+    <h3 data-oe>Made with Google Gemini, each in answer to a question</h3>
+    <div class="vids more">
+      <a class="vid pre" href="https://vimeo.com/1200593847" target="_blank" rel="noopener" data-vimeo="1200593847" aria-label="Play the video: The Trillion-Dollar Gift">
+        <span class="vt">The Trillion-Dollar Gift</span>
+        <span class="vd">June 11, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid pre" href="https://vimeo.com/1201944057" target="_blank" rel="noopener" data-vimeo="1201944057" aria-label="Play the video: The Builders Paradox Architecting the Open Web and the Closed">
+        <span class="vt">The Builders Paradox Architecting the Open Web and the Closed</span>
+        <span class="vd">June 16, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid pre" href="https://vimeo.com/1211863204" target="_blank" rel="noopener" data-vimeo="1211863204" aria-label="Play the video: The Salesforce for Social Justice">
+        <span class="vt">The Salesforce for Social Justice</span>
+        <span class="vd">July 21, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid pre" href="https://vimeo.com/1171557421" target="_blank" rel="noopener" data-vimeo="1171557421" aria-label="Play the video: The Trillionaire Ghost and Builder vs The Reaper">
+        <span class="vt">The Trillionaire Ghost and Builder vs The Reaper</span>
+        <span class="vd">March 8, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+    </div>
+    <h3 id="companies" data-oe>The companies at operatingequity.ai</h3>
+    <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2026</span><blockquote data-oe><p>“These are the companies I created at operatingequity.ai, working 16 hours a day, 7 days a week.”</p></blockquote></div>
+    <div class="vids more three">
+      <a class="vid pre" href="https://vimeo.com/1218683867" target="_blank" rel="noopener" data-vimeo="1218683867" aria-label="Play the video: CIVIC — Rebuilding Trust Through a Creator Driven Network">
+        <span class="vt">CIVIC — Rebuilding Trust Through a Creator Driven Network</span>
+        <span class="vd">August 16, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid pre" href="https://vimeo.com/1233152341" target="_blank" rel="noopener" data-vimeo="1233152341" aria-label="Play the video: EMILY FILLING OUT ALL FORMS 50 STATES.">
+        <span class="vt">EMILY FILLING OUT ALL FORMS 50 STATES.</span>
+        <span class="vd">October 5, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+      <a class="vid pre" href="https://vimeo.com/1233152942" target="_blank" rel="noopener" data-vimeo="1233152942" aria-label="Play the video: LOVE AND LAW REATIME AGENTS">
+        <span class="vt">LOVE AND LAW REATIME AGENTS</span>
+        <span class="vd">October 5, 2026</span>
+        <span class="vp" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="m-quotes">
+      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2026</span><blockquote data-oe><p>“I could no longer build, raise funds, and fight the nonstop corruption now challenging my very ability to survive.</p><p>“The companies, to me, represented hope, addressing my victimhood and those of others. But the institutional failures of the Beverly Hills and Los Angeles justice system forced me to prioritize survival over building the things I dreamed of.”</p></blockquote></div>
+    </div>
+    <figure class="me-cover m-cover" data-who="halsey">
+      <img src="/lja-draft32-cover.jpg" loading="lazy" decoding="async" width="790" height="1024" data-oe-alt alt="The cover of Legal Justice AI: a line drawing of a courthouse. Printed on it: August 14, 2024. A new industry emerges. Legal Justice AI.">
+      <figcaption data-oe>Legal Justice AI · the cover, as the document renders it (Pages file “Legal Justice AI Draft 32,” last saved March 15, 2026). The date printed on the cover is the document’s own: August 14, 2024.</figcaption>
+    </figure>
+  </section>
+
+  <section id="evolution">
+    <h2 data-oe>The evolution, dated</h2>
+    <p class="m-note" data-oe>Every date below comes from a document: a file’s own metadata, the date printed on it, or the date of the message that carried it. Scroll sideways →</p>
+    <div class="evo">
+      <div class="n" data-oe><span class="d">Winter 2023–24</span><span class="k">His words, dated</span><p class="t">The plan is written</p><p>Dated by the author himself, in three messages quoted below: “2 years ago when I first returned to the US” (October 2025), “20 months ago when I started” (August 2025), “18 months ago” (July 2025).</p><a class="dl" href="#lja-words">His words, below →</a></div>
+      <div class="n files" data-oe><span class="d">June 24, 2024</span><span class="k">In the publisher’s files</span><p class="t">Partnership call briefing</p><p>A partner’s document, “Legal Justice – Partnership Call Briefing,” dated by the message that carried it. In the publisher’s files; not published.</p></div>
+      <div class="n files" data-oe><span class="d">July 11 – August 10, 2024</span><span class="k">File metadata</span><p class="t">The draft takes its images</p><p>21 images placed in the document carry these dates inside the Pages file (34 files, counting the small copies Pages keeps of each).</p></div>
+      <div class="n" data-oe><span class="d">August 14, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 25</p><p>PDF, 12.8 MB, sent by email August 14, 2024, and again August 22, 2024. The date printed on the cover. Not yet hosted here.</p></div>
+      <div class="n" data-oe><span class="d">August 27 – 31, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 30</p><p>PDF: created August 27, 2024, by Pages (the file’s own creation date); sent by email August 31, 2024; 25 pages.</p></div>
+      <div class="n" data-oe><span class="d">January 10, 2025</span><span class="k">Written by him</span><p class="t">First Principles of Love and Law</p><p>PDF, 6.6 MB, dated by the message that carried it. Not yet hosted here.</p></div>
+      <div class="n files" data-oe><span class="d">January 31, 2025</span><span class="k">In the publisher’s files</span><p class="t">The first product’s interface</p><p>A design firm’s agreement, dated by the message that carried it. In the publisher’s files; not published.</p></div>
+      <div class="n" data-oe><span class="d">March 17, 2025</span><span class="k">His words, dated</span><p class="t">“the first product, Love and Law”</p><p>The author to the design firm, quoted below.</p><a class="dl" href="#lja-words">His words, below →</a></div>
+      <div class="n" data-oe><span class="d">March 15, 2026</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 32</p><p>Pages file, last saved March 15, 2026. The cover above.</p></div>
+      <div class="n" data-oe><span class="d">2026</span><span class="k">Now</span><p class="t">operatingequity.ai · CIVIC</p><p>The company’s home page and its first public service, quoted below as read on September 30, 2026.</p><a class="dl" href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai →</a></div>
+      <div class="n" data-oe><span class="d">September 30, 2026</span><span class="k">Now</span><p class="t">This site</p><p>Published by Halsey Minor.</p></div>
+    </div>
+  </section>
+
+  <section id="lja-words">
+    <h2 data-oe>The author, dating it himself</h2>
+    <p class="m-note" data-oe>Sentences from the publisher’s own sent mail, verbatim; cuts are marked […]; private recipients are withheld.</p>
+    <div class="m-quotes">
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2025 · email to the Beverly Hills Police Department</span><blockquote data-oe>“I wrote this business plan 2 years ago when I first returned to the US alive but in severe pain.”</blockquote><p class="src" data-oe>The first sentence of a longer message on other matters; the rest is not published here. Attached to it: “Legal Justice AI Draft 2024.pdf”.</p></div>
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · August 26, 2025 · email; the recipient, a private individual, is withheld</span><blockquote data-oe data-cut>“I wrote this 20 months ago when I started. […] First is Love and Law. […]”</blockquote><p class="src" data-cut>Two sentences of a longer message; the rest is not published here. The subject line names “Legal Justice AI Draft 30”.</p></div>
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · July 29, 2025 · email; the recipient, a private individual, is withheld</span><blockquote data-oe>“I wrote the vision for legal justice AI 18 months ago.”</blockquote><p class="src" data-oe>The first sentence of a longer message on other matters. Attached to it: “Legal Justice AI Draft 30.pdf”.</p></div>
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · March 17, 2025 · email to a design firm · subject: “Legal Justice AI first service Love and Law”</span><blockquote data-oe>“Can you deliver all of the UI elements and help me create an investor presentation for Legal Justice and the first product, Love and Law, in the first four months? […] Nine hundred years ago, British common law emerged, allowing individuals to be tried by their peers. Since then, the changes have been only incremental at best.”</blockquote><p class="src" data-oe>Three sentences of a longer message; the rest concerns the engagement.</p></div>
+    </div>
+  </section>
+
+  <section id="document">
+    <h2 data-oe>The document, in its own words</h2>
+    <p class="m-note" data-oe>Quoted verbatim from “Legal Justice AI Draft 32,” under the document’s own headings.</p>
+    <div class="m-cards">
+      <div class="m-card" data-oe><h3>Vision</h3><p>We aim to connect people to the legal industry by creating the largest human-centered legal services company, democratizing access to justice through AI, data, and services. We envision a future where legal processes are faster, more affordable, and accessible to all, breaking down the extraordinary barrier between people and justice, fostering a fairer society through constant innovation, and redefining the legal industry’s relationship with society.</p></div>
+      <div class="m-card" data-oe><h3>Mission</h3><p>Our mission is to pioneer a new industry at the intersection of AI and legal services, both creating and transforming legal support. Legal Justice AI offers 24/7 comprehensive assistance, empowering individuals to navigate litigation with greater awareness, confidence, less stress, and better outcomes. We make justice more accessible through a vast array of tools, information, data, analytics, planning, and, ultimately, advanced judicial capabilities.</p></div>
+      <div class="m-card" data-oe><h3>Purpose</h3><p>Legal Justice AI seeks to simplify access to legal information, empower individuals in their legal journeys, and reduce the overall burden of litigation on society. Our company prioritizes the well-being of our customers by providing equitable, data-driven legal insight and comprehensive services and building trust through an absolute dedication to customer care and success. We intend to steer the reimagination of the legal system into a more equitable, accessible system focused on problem-solving using various tools, including emerging AI superintelligence.</p></div>
+    </div>
+    <span class="m-kick" data-oe>Same document · “Company goals”</span>
+    <p class="m-big" data-oe>We are committed to the problem, not family law.</p>
+    <p class="m-goals" data-oe>We will measure ourselves in four ways: 1. improving individual outcomes, 2. reducing user anxiety, 3. reducing total time, and 4. reducing total cost.</p>
+    <div class="m-measures" data-oe><div><b>1</b><span>improving individual outcomes</span></div><div><b>2</b><span>reducing user anxiety</span></div><div><b>3</b><span>reducing total time</span></div><div><b>4</b><span>reducing total cost</span></div></div>
+    <div class="m-filing" data-oe>
+      <span class="fh">Same document · “I Have Been Served” · excerpt</span>
+      <p>After the shock of being served and the confusion that follows, you upload your documents to the service. Immediately, you understand what's being claimed, a schedule of events, relevant laws explained, a list of documents to be filed, a game plan, time estimates per state, approximate spousal and support payments, and be provided with lawyers who match your needs, are successful and meet cost benchmarks. Alternative approaches like mediation will be introduced and compared, and you will receive high-quality litigation matching. While we may build mediation services in time, we will suggest the best alternatives, even when they are not financial partners.  You will never feel alone and helpless and will always know your options with Love and Law, even at 3 am communicating with your AI advocate. We will ALWAYS put the customer’s interests first, steering you to resources across the web. A tangle of data, laws, consultants, mediators, lawyers, and vast amounts of statistical knowledge spread across the web, documents, and electronic filing services are made understandable and available.</p>
+    </div>
+    <div class="m-filing" data-oe>
+      <span class="fh">Same document · the author, and the first service · excerpts</span>
+      <p>Legal Justice will be the first of an entirely new kind of company. Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.</p>
+      <p>Introducing love and Law<br>The first new service to legal justice.</p>
+    </div>
+  </section>
+
+  <section id="now">
+    <h2 data-oe>Now: Operating Equity</h2>
+    <div class="m-quotes">
+      <div class="say h" data-who="halsey"><span class="tag" data-oe>operatingequity.ai · the home page, as read on September 30, 2026</span><blockquote data-oe>“AI companies that define new categories for Equal Justice, Truth in Media and Mental Health for Everyone”</blockquote><p class="src"><a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a></p></div>
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>CIVIC · “Truth, verified.” · as read on September 30, 2026</span><blockquote data-oe>“Truth Engine tests the facts. Paste a transcript, article, speech, post or study, or a link to one. CIVIC extracts every empirical claim it contains and tests the first 10.”</blockquote><p class="src" data-oe><a href="https://civic-c64i.onrender.com" target="_blank" rel="noopener">civic-c64i.onrender.com</a> · a service of OperatingEquity.ai</p></div>
+      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 28, 2026</span><blockquote data-oe>“Operating Equity AI believes in equal justice.”</blockquote></div>
+      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 29, 2026 · on Love and Law</span><blockquote data-oe data-cut>“[…] The failure of my service, Love and Law, will be if the partners end up in court, but if they do, they will be on equal footing, no matter how much one party has financially versus the other.”</blockquote></div>
+      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 30, 2026</span><blockquote data-oe>“After you launch, I am launching the truth engine at the center of CIVIC.”</blockquote></div>
+    </div>
+  </section>
+
+  <ol class="notes-m">
+    <li id="n17" value="17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
+  </ol>
+</main>
 <script>
 (function () {
-  // his videos: on halseyminor.com a tap puts Vimeo's player in place of the picture; on the claude.ai page the link opens Vimeo
+  // his videos: a tap puts Vimeo's player in place of the picture
   if (document.documentElement.getAttribute('data-embed') === 'inline') {
     var player = function (a, autoplay) {
       var f = document.createElement('iframe');
@@ -642,12 +803,26 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
       a.parentNode.replaceChild(box, a);
     };
     Array.prototype.forEach.call(document.querySelectorAll('.vid[data-vimeo]'), function (a) {
-      // his four videos have no picture of their own on this page: Vimeo's player takes their place at once, with its picture
+      // the videos with no picture of their own here (all but the two from California): Vimeo's player takes their place at once, with its picture
       if (a.classList.contains('pre')) { player(a, false); return; }
       a.addEventListener('click', function (ev) { ev.preventDefault(); player(a, true); });
     });
   }
+  // his invitation: Copy puts the address on the clipboard; if the browser refuses, the address is selected instead
+  var copyBtn = document.getElementById('inv-copy');
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var addr = copyBtn.getAttribute('data-copy');
+    var selectIt = function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('inv-addr'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected';
+    };
+    try {
+      navigator.clipboard.writeText(addr).then(function () { copyBtn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2400);
+  });
 })();
 </script>
+
 </body>
 </html>
