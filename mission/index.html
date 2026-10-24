@@ -394,7 +394,8 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
   background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
 .fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
-.fight-go .fg-move { font: 700 1.05rem/1.2 var(--display) }
+.fight-go .fg-move { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }   /* his word: "Their move" looks like "Watch the fight" */
+.fight-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px } .fight-row .fight-go { margin-top: 0 }
 .fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
 .fight-go:hover { filter: brightness(1.2) }
 .keystrip .key { margin: 14px 0 0 }
@@ -483,22 +484,55 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 @media (max-width: 759px) { .un-list > li { grid-template-columns: minmax(0, 1fr) auto; padding: 9px 10px 10px 12px; font-size: .92rem } .un-list .un-main { grid-column: 1 / -1; order: 3 } }
 </style>
 <style>
-/* the federal page (October 24, 2026): one measure after another; each keeps its source and its limit */
-.fed-hero { padding-block: clamp(36px, 6vw, 80px) clamp(18px, 3vw, 32px) }
+/* the federal page (October 24, 2026): charts first; Beverly Hills red, the District Attorney and the Los Angeles agencies yellow, on every page */
+:root { --la: #D4A300; --bh: var(--red); --mute: #B9BDC3 }
+.fed-hero { padding-block: clamp(32px, 5vw, 64px) clamp(14px, 2vw, 22px) }
 .fed-hero h1 { margin: 0; max-width: 18ch; font: 800 clamp(2.2rem, 5.6vw, 4.4rem)/1.02 var(--display); text-wrap: balance }
-.fed-sub { margin: 18px 0 0; max-width: 46rem; font-size: 1.08rem; color: var(--muted) }
+.fed-sub { margin: 14px 0 0; max-width: 46rem; font-size: 1.05rem; color: var(--muted) }
+.fed-key { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 16px 0 0; padding: 0; list-style: none; font: 600 .92rem/1.3 var(--body) }
+.fed-key li { display: inline-flex; align-items: center; gap: 8px } .fed-key i { width: 14px; height: 14px; border-radius: 4px; background: var(--k) }
+.fed-lead { margin: 8px 0 26px; padding: clamp(18px, 3vw, 32px); background: var(--card); border: 1px solid var(--line); border-top: 8px solid var(--bh); border-radius: 16px }
+.fed-lead h2 { max-width: 34ch; margin: 6px 0 10px; font: 700 clamp(1.35rem, 2.8vw, 2.1rem)/1.2 var(--display) }
+.hero-n { display: block; font: 800 clamp(4rem, 12vw, 7.5rem)/.95 var(--display); color: var(--ink) }
+.fed-la { margin: 0 0 24px } .fed-la > h2 { margin: 34px 0 0 }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 18px 0 18px }
+.tile { background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--la); border-radius: 12px; padding: 14px 16px }
+.tile b { display: block; font: 800 clamp(1.7rem, 3.4vw, 2.3rem)/1.05 var(--display) } .tile span { display: block; margin-top: 6px; font-size: .88rem; line-height: 1.35 }
 .fm-list { display: grid; gap: 16px; padding-bottom: 40px }
-.fm { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--red); border-radius: 14px; padding: clamp(16px, 2.6vw, 26px); min-width: 0 }
+.fm { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 14px; padding: clamp(16px, 2.6vw, 26px); min-width: 0; margin: 0 0 16px }
+.fm.bh { border-left-color: var(--bh) } .fm.la { border-left-color: var(--la) }
 .fm-tag { margin: 0 0 6px; font: 700 .78rem/1.3 var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--muted) }
-.fm-big { margin: 0; font: 800 clamp(2.4rem, 6vw, 4rem)/1 var(--display); overflow-wrap: anywhere }
-.fm-big.words { font: 700 clamp(1.25rem, 2.6vw, 1.75rem)/1.22 var(--display) }
+.fm-big { margin: 0; font: 800 clamp(2.4rem, 6vw, 3.6rem)/1 var(--display) }
 .fm-what { margin: 8px 0 0; max-width: 46rem; font-size: 1.05rem }
-.fm details { margin: 12px 0 0 } .fm summary { cursor: pointer; font: 600 .92rem/1.3 var(--body); color: var(--blue) }
-.fm table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .9rem }
-.fm td { padding: 5px 12px 5px 0; vertical-align: top; border-bottom: 1px solid var(--line) } .fm td.v { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums }
+.bars { display: grid; gap: 10px; margin: 16px 0 6px }
+.br { display: grid; grid-template-columns: minmax(8rem, 15rem) minmax(0, 1fr) 5.2rem; align-items: center; gap: 12px }
+.bl { font: 600 .9rem/1.25 var(--body) }
+.bt { position: relative; height: 22px; background: linear-gradient(var(--line), var(--line)) left center / 100% 1px no-repeat; border-left: 1px solid var(--muted) }
+.bf { display: block; height: 22px; min-width: 3px; border-radius: 0 4px 4px 0 } .bf.bh { background: var(--bh) } .bf.la { background: var(--la) } .bf.mute { background: var(--mute) }
+.ref { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 1px solid var(--ink) }
+.bv { font: 700 .95rem/1 var(--body); font-variant-numeric: tabular-nums; white-space: nowrap }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px 28px } .sm { margin: 14px 0 0; font: 700 .86rem/1.3 var(--body) }
+.pair .br { grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr) 4rem }
+.cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; align-items: end; height: 210px; margin-top: 18px; border-bottom: 1px solid var(--muted) }
+.col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative }
+.cf { width: 24px; border-radius: 4px 4px 0 0 } .cf.la { background: var(--la) }
+.cv { font: 700 .85rem/1.2 var(--body); margin-bottom: 4px } .cx { position: absolute; bottom: -24px; font-size: .82rem; color: var(--muted); white-space: nowrap }
+.dr { margin: 14px 0 0 } .dl { margin: 0 0 6px; font-size: .9rem } .dl b { white-space: nowrap }
+.dots { display: grid; grid-template-columns: repeat(25, minmax(0, 14px)); gap: 4px } .dots i { display: block; aspect-ratio: 1; border-radius: 50%; background: var(--line) }
+.dots i.la { background: var(--la) } .dots i.bh { background: var(--bh) }
+.tl { list-style: none; margin: 8px 0 0; padding: 0 } .tl li { display: grid; grid-template-columns: 7.2rem 14px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-top: 1px solid var(--line) }
+.tl li:first-child { border-top: 0 } .tl-y { font: 700 .9rem/1.3 var(--display) } .tl-m { width: 14px; height: 14px; margin-top: 3px; border-radius: 50% }
+.tl li.la .tl-m { background: var(--la) } .tl li.bh .tl-m { background: var(--bh) } .tl-s { color: var(--muted) } .tl a { color: var(--blue); font-weight: 600 }
+.fm details { margin: 14px 0 0 } .fm .cols + details { margin-top: 40px } .fm summary, .fed-lead summary { cursor: pointer; font: 600 .9rem/1.3 var(--body); color: var(--blue) }
+.fm table, .fed-lead table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .88rem }
+.fm td, .fed-lead td { padding: 5px 12px 5px 0; vertical-align: top; border-bottom: 1px solid var(--line) } td.v { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums }
 .fm-src { margin: 12px 0 0; font-size: .86rem; color: var(--muted) } .fm-src a { color: var(--blue); font-weight: 600 }
 .fm-lim { margin: 4px 0 0; font-size: .82rem; color: var(--muted); font-style: italic }
 .fed-end { padding-bottom: 56px; font-size: .9rem; color: var(--muted) } .fed-end p { max-width: 46rem }
+@media (max-width: 640px) {
+  .br, .pair .br { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px } .br .bt { grid-column: 1 / -1; order: 3 }
+  .tl li { grid-template-columns: 14px minmax(0, 1fr) } .tl-y { grid-column: 2 } .tl-m { grid-row: 1 / span 2 } .dots { gap: 3px }
+}
 </style>
 <style>
 .mission > h2 { margin-top: 4px }

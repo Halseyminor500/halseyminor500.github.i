@@ -402,7 +402,8 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
   background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
 .fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
-.fight-go .fg-move { font: 700 1.05rem/1.2 var(--display) }
+.fight-go .fg-move { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }   /* his word: "Their move" looks like "Watch the fight" */
+.fight-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px } .fight-row .fight-go { margin-top: 0 }
 .fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
 .fight-go:hover { filter: brightness(1.2) }
 .keystrip .key { margin: 14px 0 0 }
@@ -512,7 +513,10 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
           <li><b>217 days</b><span>from the rejection to the first written explanation of it, which came October 22, 2026: nine days after the 30 the law allows, when the victim asks</span></li>
           <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
         </ul>
-        <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>10</b></span><span class="fg-move" data-move=".">Their move.</span><span class="fg-go">Watch the fight <span aria-hidden="true">→</span></span></a>
+        <div class="fight-row">
+          <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>10</b></span><span class="fg-move" data-move=".">Their move.</span><span class="fg-go">Watch the fight <span aria-hidden="true">→</span></span></a>
+          <a class="fight-go fed-go" href="/federal/"><span class="fg-round">Round 1</span><span class="fg-go">Federal <span aria-hidden="true">→</span></span></a>
+        </div>
         <p class="fed-line"><a href="/federal/">Why Halsey is going federal <span aria-hidden="true">→</span></a></p>
       </div>
       <figure class="meter">
