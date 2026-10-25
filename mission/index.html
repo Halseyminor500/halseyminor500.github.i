@@ -29,10 +29,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=swap" rel="stylesheet">
 <style>
-/* The color code, set by Halsey Minor on October 16, 2026:
-   blue = Halsey Minor, the victim (truth); red = the Beverly Hills police and the City (stop); yellow = the District Attorney's office (hold);
-   gray = the person reported; black and white = the Attorney General. A black band with a colored edge marks what should never happen,
-   the edge in the color of who did it. Red is used for nothing else, except the meter's injustice zone and his headline. */
 :root {
   --paper: #F3F4F5;
   --card: #FFFFFF;
@@ -62,20 +58,14 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.
 a { color: inherit }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px }
 blockquote { margin: 0 }
-
-/* the players, named in sentences */
 b.h { color: var(--blue); font-weight: 700 }
 b.p { color: var(--red); font-weight: 700 }
 b.d { font-weight: 700; background: linear-gradient(transparent 58%, var(--yellow) 58%) }
 b.s { color: var(--gray); font-weight: 700 }
 .fn { margin-left: 2px; font: 600 .6em/0 var(--body); vertical-align: super; color: var(--muted); text-decoration: none }
 .fn:hover { color: var(--ink) }
-
-/* the claude.ai copy only: a slim line saying where the page lives */
 .home-line { margin: 0; padding: 9px 16px; background: var(--ink); color: #FFFFFF; font: 600 14px/1.35 var(--body); text-align: center }
 .home-line a { color: #FFFFFF; text-underline-offset: 3px }
-
-/* the update band: the newest reply or response, in the color of who sent it; it takes you to it */
 .update { display: block; background: var(--u-bg); color: var(--u-fg); text-decoration: none; font: 600 14px/1.35 var(--body) }
 .update.u-h { --u-bg: var(--blue); --u-fg: #FFFFFF }
 .update.u-p { --u-bg: var(--red); --u-fg: #FFFFFF }
@@ -92,8 +82,6 @@ b.s { color: var(--gray); font-weight: 700 }
 .u-go { flex: none; margin-left: auto; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap }
 .update:hover .u-go { text-decoration-thickness: 2px }
 @media (max-width: 599px) { .u-line { display: block; padding-top: 7px; padding-bottom: 7px } .u-kind { display: inline-block; margin-right: 4px; padding: 4px 8px; font-size: 11px; vertical-align: 1px } .u-go { margin-left: 6px } }
-
-/* ---------- the flag and the glass panel ---------- */
 .hero { position: relative; isolation: isolate; padding-block: clamp(56px, 7vw, 100px) clamp(24px, 3vw, 40px) }
 .flag { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; aspect-ratio: 3 / 2; background: url("flag.webp") no-repeat center top / 100% auto; opacity: .8;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.2) 90%, transparent 100%);
@@ -127,8 +115,6 @@ h1 .q { color: var(--red) }
 .live-dot { animation: m-live 1.8s ease-in-out infinite }
 @keyframes m-live { 0%, 100% { opacity: 1 } 50% { opacity: .25 } }
 @media (prefers-reduced-motion: reduce) { .tremor, .route, .jglow, .live-dot { animation: none } .jglow { opacity: .8 } }
-
-/* ---------- the Attorney General, beside the meter ---------- */
 .agtop { padding-bottom: clamp(36px, 5vw, 64px) }
 .agq { margin: 0; display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: clamp(20px, 3.5vw, 44px); align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: clamp(18px, 3vw, 32px) }
 .agq img { display: block; width: 100%; height: auto; border-radius: 14px }
@@ -142,12 +128,9 @@ h1 .q { color: var(--red) }
 .key i { flex: none; width: 16px; height: 16px; border-radius: 5px; background: var(--c) }
 .key .k-h { --c: var(--blue) } .key .k-p { --c: var(--red) } .key .k-d { --c: var(--yellow) }
 .key .k-hl { background: var(--band); color: #FFFFFF; border-color: var(--band); border-left: 8px solid #9AA0A8; border-radius: 10px }
-
-/* ---------- sections ---------- */
 .sec { padding-block: clamp(44px, 6vw, 84px); border-top: 1px solid var(--line) }
 h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1.08 var(--display); text-wrap: balance }
 .dek { margin: -6px 0 26px; max-width: 44rem; font-size: 1.1rem }
-/* glass, as at the top: a block that floats above the page. The page's own colors glow faintly behind it, so the glass reads */
 .sec:has(.pane) { position: relative; isolation: isolate }
 .pane { position: relative; padding: clamp(14px, 3vw, 36px); border-radius: 26px; border: 1px solid rgba(255, 255, 255, .95);
   background: linear-gradient(115deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 30%), linear-gradient(165deg, rgba(255, 255, 255, .76), rgba(255, 255, 255, .46) 55%, rgba(255, 255, 255, .66));
@@ -160,15 +143,11 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 @media (max-width: 759px) { .pane { border-radius: 20px } }
 .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch }
 .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch }
-/* side-by-side cards end level: a column of cards lets its last card take up the difference, so no gap opens under it */
 .grid2 > div:not([class]), .grid3 > div:not([class]) { display: flex; flex-direction: column }
 .grid2 > div:not([class]) > div.say:last-of-type, .grid3 > div:not([class]) > div.say:last-of-type { flex: 1 0 auto }
 @media (max-width: 899px) { .grid3 { grid-template-columns: minmax(0, 1fr) } }
 @media (max-width: 759px) { .grid2 { grid-template-columns: minmax(0, 1fr) } }
-
-/* a quotation: thick edge and name chip in the speaker's color */
 .say { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--c); border-radius: 14px; padding: 16px 20px 18px; min-width: 0 }
-/* October 23, 2026: names and titles are never highlighted; the tag is a quiet gray line, the card's edge says who */
 .say .tag { display: block; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
 .say blockquote { margin: 10px 0 0; font: 600 clamp(1.08rem, 1.8vw, 1.32rem)/1.32 var(--display); text-wrap: pretty }
 .say.h { --c: var(--blue) } .say.h blockquote { color: var(--blue) }
@@ -176,20 +155,14 @@ h2 { margin: 0 0 22px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1
 .say.d { --c: var(--yellow-edge) }
 .say.law { --c: var(--ink) }
 .say + .say, .say + .hl { margin-top: 12px }
-/* "Rejected": each reason beside his warning, then the plain answer; a little air before the next */
 .grid2.reason + .hl { margin-top: 12px } .hl + .grid2.reason { margin-top: 28px }
 .grid2 > .say, .grid3 > .say { margin-top: 0 }
-
-/* what should never happen: a black band, the edge in the color of who did it */
 .hl { margin: 16px 0 0; background: var(--band); color: #FFFFFF; border-left: 12px solid var(--c); border-radius: 12px; padding: 18px 22px; font: 700 clamp(1.12rem, 2vw, 1.45rem)/1.32 var(--display); text-wrap: pretty }
 .hl.h { --c: var(--blue) } .hl.p { --c: var(--red) } .hl.d { --c: var(--yellow) }
 .hl .fn { color: #9AA0A8 }
-/* October 23, 2026: the story is told by highlighting. The claim is marked, word for word, in the color of who said it */
 mark { color: inherit; padding: 0 .1em; margin: 0 -.05em; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone }
 mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12, 47, .22) } mark.d { background: rgba(242, 194, 0, .5) } mark.k { background: rgba(21, 23, 26, .1) }
 .hl mark.h { background: var(--blue); color: #FFFFFF } .hl mark.p { background: var(--red); color: #FFFFFF } .hl mark.d { background: var(--yellow); color: var(--ink) }
-
-/* warnings */
 .warn-head { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; margin-bottom: 18px }
 .count { font: 800 clamp(3.4rem, 8vw, 6rem)/.9 var(--display); color: var(--blue); font-variant-numeric: tabular-nums }
 .warn-head p { margin: 0; max-width: 36rem; font-size: 1.1rem }
@@ -198,26 +171,22 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .outcome .p { --c: var(--red) } .outcome .d { --c: var(--yellow) }
 .outcome b { font: 700 1.2rem/1.2 var(--display) }
 @media (max-width: 759px) { .outcome { grid-template-columns: minmax(0, 1fr) } }
-
-/* the clock */
 .clock { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: clamp(14px, 2.4vw, 28px); margin-bottom: 16px }
 .clock svg { width: 100%; height: auto; display: block }
 .clock-list { display: none; list-style: none; margin: 0; padding: 0 }
 @media (max-width: 759px) { .clock svg { display: none } .clock-list { display: grid; gap: 0 } }
+@media (min-width: 760px) { .clock-list { display: grid; margin-top: 14px } .clock-list li:not(.his) { display: none } .clock-list li.his { border-top: 0 } }
 .clock-list li { display: grid; grid-template-columns: 7.2rem minmax(0, 1fr); gap: 12px; padding: 12px 0 12px 12px; border-top: 1px solid var(--line); border-left: 6px solid var(--c, var(--line)) }
 .clock-list li:first-child { border-top: 0 }
 .clock-list .t { font: 600 .95rem/1.3 var(--display) }
 .clock-list .h { --c: var(--blue) } .clock-list .h span + span { color: var(--blue) }
 .clock-list .p { --c: var(--red) } .clock-list .d { --c: var(--yellow) } .clock-list .s { --c: var(--gray) }
 .rule { margin: 12px 0 0; font-size: 1.05rem }
-
-/* requests */
 .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px }
 @media (max-width: 1023px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 @media (max-width: 639px) { .tiles { grid-template-columns: minmax(0, 1fr) } }
 .tile { background: var(--card); border: 1px solid var(--line); border-top: 8px solid var(--c); border-radius: 16px; padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0 }
 .tile.p { --c: var(--red) } .tile.d { --c: var(--yellow) } .tile.law { --c: var(--ink) }
-/* the fight, round by round: the latest exchange, then the score read off the dates */
 .round .tiles { margin-top: 22px }
 .round .moves { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font: 600 14px/1.4 var(--body); color: var(--muted) }
 .round .moves b { color: var(--ink) }
@@ -226,9 +195,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .tile p { margin: 0 }
 .tile .hl { margin-top: auto; font-size: 1.05rem; padding: 14px 16px }
 .live b { font-variant-numeric: tabular-nums }
-
-/* deadlines */
-/* one panel, a hairline between rows, each row's edge in the color of who owes it */
 .due { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 1px 2px rgba(21, 23, 26, .05) }
 .due > li { background: var(--card); border-top: 1px solid var(--line); border-left: 5px solid var(--c, var(--line)); padding: 6px 12px 6px 14px; display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 2px 14px; align-items: center; font-size: .92rem; line-height: 1.32 }
 .due > li:first-child { border-top: 0; border-radius: 13px 13px 0 0 }
@@ -243,10 +209,7 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .chip.over { background: var(--band); border-color: var(--band); color: #FFFFFF }
 .chip.today { background: var(--ink); color: #FFFFFF }
 .chip.met { border-color: #1F6F43; color: #1F6F43 }
-/* a reply that does not give what the law requires: a Fail, in the black of what should never happen; the edge shows who */
 .chip.fail { background: var(--band); border-color: var(--band); color: #FFFFFF; font-weight: 700; letter-spacing: .03em }
-/* his response follows the Fail, in his color: the button opens his letters in place */
-/* the item the band points to: a brief ring in its own color on arrival */
 .due > li { scroll-margin-top: 20px }
 .due > li:target, .due > li.flash { animation: flash 2s ease-out }
 @keyframes flash { 0%, 45% { box-shadow: inset 0 0 0 3px var(--c) } 100% { box-shadow: inset 0 0 0 3px transparent } }
@@ -257,9 +220,7 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
   padding: 7px 12px; min-height: 28px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .2) }
 @media (pointer: coarse) { .resp-btn { min-height: 40px; padding: 10px 14px } }
 .resp-btn:hover { filter: brightness(1.1) }
-/* open, the button reads Close and stays in view while the letters are read */
 .resp-btn[aria-expanded="true"] { background: var(--ink); position: sticky; top: 12px; z-index: 2; box-shadow: 0 6px 18px rgba(21, 23, 26, .3) }
-/* the item splits: his letters wipe in from one side to the other inside it while everything below moves down; Close puts it back */
 .resp-panel { grid-column: 1 / -1; order: 4; overflow: hidden }
 .resp-panel[hidden] { display: none }
 .resp-wipe { background: var(--card); border-radius: 10px; padding: 2px 22px 18px }
@@ -276,8 +237,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .letter .sig { margin-top: 14px; font-weight: 700 }
 @media (prefers-reduced-motion: reduce) { .resp-panel .resp-wipe { animation: none !important } }
 .meter-note { margin: -4px 0 0; max-width: 24rem; text-align: center; font: 500 13px/1.45 var(--body); color: var(--ink) }
-
-/* Halsey Minor: his two videos, shown like embedded players (picture and title first; the player loads on a tap) */
 .vids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 clamp(36px, 5vw, 60px) }
 @media (max-width: 759px) { .vids { grid-template-columns: minmax(0, 1fr) } }
 .vid { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; color: #FFFFFF; text-decoration: none; box-shadow: 0 18px 40px -24px rgba(21, 23, 26, .55) }
@@ -291,7 +250,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .vids.more { margin: 0 }
 .vid.pre { background: linear-gradient(135deg, var(--band) 0%, #1B2F5E 100%) }
 .vid .vd { position: absolute; left: 18px; bottom: 14px; font: 500 13px/1.2 var(--body); color: rgba(255, 255, 255, .82) }
-/* his invitation: the same card as his quotations, filled in his blue */
 .say.invite { background: var(--blue); border-color: var(--blue); color: #FFFFFF }
 .say.invite .inv-text { margin: 0; font: 600 clamp(1.08rem, 1.8vw, 1.32rem)/1.32 var(--display); text-wrap: pretty }
 .say.invite .inv-mail { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center }
@@ -299,7 +257,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .say.invite .copy { flex: none; font: 600 13px/1 var(--body); padding: 8px 14px; border-radius: 999px; border: 1.5px solid #FFFFFF; background: transparent; color: #FFFFFF; cursor: pointer }
 .say.invite .copy:hover { background: rgba(255, 255, 255, .16) }
 .say.invite :focus-visible { outline-color: #FFFFFF }
-/* three ways in: the same mailbox, the subject saying who is writing; solid and plain, white on his blue */
 .say.invite .inv-ways { margin: 18px 0 2px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
 @media (max-width: 639px) { .say.invite .inv-ways { grid-template-columns: minmax(0, 1fr) } }
 .say.invite .way { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 12px 16px; border-radius: 12px; background: #FFFFFF; color: var(--blue); text-decoration: none; text-align: center;
@@ -307,11 +264,8 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .say.invite .way::after { content: "\2192"; font-weight: 600 }
 .say.invite .way:hover { transform: translateY(-2px); box-shadow: 0 16px 28px -14px rgba(0, 0, 0, .6) }
 .say.invite .way:active { transform: none }
-/* Halsey Minor */
-/* his statement: a signed statement in the page's text face, the same card as his other words; not a slogan */
 .me-statement { max-width: 50rem; margin: 0 0 clamp(24px, 3vw, 36px) }
 .say.me-statement blockquote { margin: 12px 0 0; max-width: 44rem; font: 400 clamp(1rem, 1.3vw, 1.08rem)/1.62 var(--body); color: var(--blue) }
-/* his own story and his record follow it in black, quieter than his statement */
 .me-grid > .me-q1 blockquote, .me-grid > .me-q2 blockquote { font: 400 clamp(.98rem, 1.2vw, 1.04rem)/1.6 var(--body); color: var(--ink) }
 .me-statement blockquote p { margin: 0 0 .7em; text-wrap: pretty }
 .me-statement blockquote p.q { margin: 0; font-weight: 600 }
@@ -335,14 +289,11 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .videos li a:hover { border-color: var(--blue) }
 .videos li a::before { content: "▶"; color: var(--blue); font-size: .85rem }
 .videos li a span { font: 400 13px/1.4 var(--body); color: var(--muted) }
-
-/* the laws he contends were broken, by code: his, so in his blue */
 .codes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px }
 .codes li { background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 12px; padding: 14px 18px; display: grid; gap: 4px; align-content: start }
 .codes b { font: 700 1.15rem/1.25 var(--display) }
 .codes span { font: 500 .95rem/1.3 var(--body); color: var(--muted) }
 .codes-note { margin: 14px 0 0; font-size: 1rem; color: var(--muted) }
-/* the end, as it begins: the flag and the glass, with the evidence where the meter stands at the top */
 .hero.end { border-top: 1px solid var(--line) }
 .endline { margin: 0; max-width: none; font: 700 clamp(1.7rem, 3.4vw, 2.9rem)/1.04 var(--display); letter-spacing: -.005em; text-wrap: balance }
 .hero.end .hl { margin-top: 22px }
@@ -350,7 +301,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .shot img { display: block; width: 100%; max-width: 340px; height: auto; border-radius: 24px; border: 7px solid var(--band); box-shadow: 0 30px 60px -28px rgba(21, 23, 26, .6) }
 .shot figcaption { max-width: 26rem; font: 600 clamp(1rem, 1.4vw, 1.12rem)/1.35 var(--display); text-align: center; text-wrap: pretty }
 @media (max-width: 899px) { .shot img { max-width: 300px } }
-/* the District Attorney, at the end, as the Attorney General is at the top */
 .daend { padding-bottom: clamp(44px, 6vw, 84px) }
 .daend .say { max-width: 62rem }
 .daend .say blockquote { font-size: clamp(1.2rem, 2.2vw, 1.7rem) }
@@ -359,8 +309,6 @@ mark.h { background: rgba(31, 86, 195, .26) } mark.p { background: rgba(186, 12,
 .cta { margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; font: 600 clamp(1.1rem, 1.8vw, 1.35rem)/1.3 var(--display) }
 .share { flex: none; font: 600 15px/1 var(--body); padding: 13px 20px; border-radius: 999px; border: 0; background: var(--ink); color: #FFFFFF; cursor: pointer }
 .share:hover { background: #2A2E33 }
-
-/* notes, at the end */
 .notes { padding-block: clamp(40px, 6vw, 72px); border-top: 1px solid var(--line) }
 .notes h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin-bottom: 14px }
 .notes ol { margin: 0; padding-left: 1.5rem; display: grid; gap: 10px; max-width: 64rem; font-size: .94rem; color: var(--muted) }
@@ -376,7 +324,6 @@ details.full[open] summary::after { content: "–" }
 .full-body p { margin: 0 }
 footer { background: var(--ink); color: #B9BDC3; padding-block: 22px 40px; font: 400 13px/1.6 var(--body) }
 footer .wrap { display: grid; gap: 4px }
-/* October 24, 2026: statements first. The details open on a click, in a pop-up over the page */
 .pop-open { display: inline-flex; align-items: center; gap: 8px; margin: 14px 8px 0 0; font: 700 14px/1 var(--body); color: var(--ink); background: var(--card);
   border: 1.5px solid var(--ink); border-radius: 999px; padding: 10px 16px; min-height: 40px; cursor: pointer; box-shadow: 0 2px 0 rgba(21, 23, 26, .12) }
 .pop-open::after { content: "+"; font: 400 1.2rem/1 var(--display) }
@@ -391,17 +338,15 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .pop-body { padding: 18px; display: grid; gap: 14px }
 .pop-body > .hl { margin: 0 }
 @media (max-width: 759px) { dialog.pop { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border-radius: 0 } .pop-body { padding: 14px } }
-/* the top: the round we are in, and the way to the fight */
 .fight-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 22px; padding: 12px 18px 12px 12px; border-radius: 14px;
   background: var(--band); color: #FFFFFF; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(21, 23, 26, .6) }
 .fight-go .fg-round { font: 800 1.15rem/1 var(--display); background: var(--red); border-radius: 9px; padding: 8px 11px }
 .fight-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px } .fight-row .fight-go { margin-top: 0 }
-.fight-go.fed-go { background: #002147 }   /* his word: federal is the blue of the American flag (Old Glory Blue, Pantone 282 C) */
-.fight-go.fed-go .fg-round { background: #FFFFFF; color: #BB133E }   /* his word: red and white swapped, so federal is not tied to the Beverly Hills red; the flag's own red (Old Glory Red, Pantone 193 C) */
+.fight-go.fed-go { background: #002147 }
+.fight-go.fed-go .fg-round { background: #FFFFFF; color: #BB133E }
 .fight-go .fg-go { font: 600 .95rem/1.2 var(--body); text-decoration: underline; text-underline-offset: 3px }
 .fight-go:hover { filter: brightness(1.2) }
 .keystrip .key { margin: 14px 0 0 }
-/* the money: what was taken, in big type, with today's estimate */
 .money { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 16px }
 .money .m { background: var(--card); border: 1px solid var(--line); border-top: 8px solid var(--red); border-radius: 16px; padding: 16px 20px 18px; display: grid; gap: 8px; align-content: start }
 .money .big { font: 800 clamp(2.5rem, 5.4vw, 4rem)/.95 var(--display); font-variant-numeric: tabular-nums }
@@ -410,18 +355,15 @@ dialog.pop::backdrop { background: rgba(21, 23, 26, .6) }
 .money-q { margin-bottom: 0 }
 .m-link { margin: 12px 0 0; font-weight: 600 }
 @media (max-width: 599px) { .money { grid-template-columns: minmax(0, 1fr) } }
-/* the fight: the round we are in and the score, over the rounds */
 .score { margin: -6px 0 16px; max-width: 52rem; font-size: 1.05rem; line-height: 1.6 }
 .score .rnd { display: inline-block; font: 800 1.2rem/1 var(--display); color: #FFFFFF; background: var(--red); border-radius: 8px; padding: 6px 10px; margin-right: 6px }
 .due .dt .rn { display: block; font: 700 10.5px/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
-/* his statement beside his invitation; the rest of his record in its pop-up */
 .me-grid:not(.me-more) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "stmt inv"; align-items: start }
 .me-more { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-template-areas: "docs docs" "q1 q2"; align-items: stretch }
 .me-more .me-docs { grid-template-columns: repeat(2, minmax(0, 1fr)) }
 @media (max-width: 899px) { .me-grid:not(.me-more) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stmt" "inv" } .me-more { grid-template-columns: minmax(0, 1fr); grid-template-areas: "docs" "q1" "q2" } }
 @media (max-width: 599px) { .me-more .me-docs { grid-template-columns: minmax(0, 1fr) } }
 details.notes-d summary { cursor: pointer; font: 700 1rem/1.3 var(--display); padding: 6px 0 12px }
-/* a third of the length: less air between statements, smaller headings, the evidence sized to be seen rather than to fill */
 .sec { padding-block: clamp(24px, 3.2vw, 44px) }
 h2 { margin-bottom: 16px; font-size: clamp(1.4rem, 2.7vw, 2.2rem) }
 .pane { padding: clamp(14px, 2.4vw, 28px) }
@@ -450,9 +392,7 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .codes b { font-size: .98rem } .codes span { font-size: .86rem }
 .sec { padding-block: clamp(20px, 2.6vw, 36px) }
 @media (min-width: 760px) { .due > li { grid-template-columns: 6.6rem minmax(0, 1fr) auto } .due .dt .rn { display: inline; margin-right: 5px } }
-/* October 24, 2026, his word: a menu bar across the top; Round 1, the requests still unanswered, first and largest, opening all of them;
-   on each round that was violated, its code and nothing more */
-.topnav { background: var(--blue); color: #FFFFFF }   /* his word, October 24: the same blue as his own */
+.topnav { background: var(--blue); color: #FFFFFF }
 .nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
 .nav-in::-webkit-scrollbar { display: none }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 15px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 14px 0 11px; border-bottom: 3px solid transparent }
@@ -484,11 +424,9 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 @media (max-width: 759px) { .un-list > li { grid-template-columns: minmax(0, 1fr) auto; padding: 9px 10px 10px 12px; font-size: .92rem } .un-list .un-main { grid-column: 1 / -1; order: 3 } }
 </style>
 <style>
-/* the federal page (October 24, 2026): charts first; Beverly Hills red, the District Attorney and the Los Angeles agencies yellow, on every page */
-:root { --la: #D4A300; --bh: var(--red); --mute: #B9BDC3; --fed: #002147;   /* Old Glory Blue, Pantone 282 C, as the U.S. Department of State gives it */
-  --c1: #1E9E6A; --c2: #8E44C9; --c3: #E5832B; --neutral: #C3C7CD }   /* other colors inside a chart, validated; never a party's */
+:root { --la: #D4A300; --bh: var(--red); --mute: #B9BDC3; --fed: #002147;
+  --c1: #1E9E6A; --c2: #8E44C9; --c3: #E5832B; --neutral: #C3C7CD }
 .fed-hero { padding-block: clamp(32px, 5vw, 64px) clamp(14px, 2vw, 22px) }
-/* the federal page's own top: the blue of the American flag */
 .fed-hero.us { padding-bottom: clamp(22px, 3vw, 34px); margin-bottom: 24px; background: var(--fed); color: #FFFFFF }
 .fed-hero.us h1 { color: #FFFFFF }
 .fed-kick { margin: 0 0 14px; font: 700 .8rem/1.3 var(--body); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .78) }
@@ -552,7 +490,6 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 }
 </style>
 <style>
-/* Mission: the Operating Equity page of October 13, 2026, back in the site's own boxes */
 .mission > section > h2 { margin: 0 0 14px }
 .mission h3 { margin: 20px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
 .m-note { margin: 0 0 14px; max-width: 44rem; font-size: .95rem; color: var(--muted) }
@@ -596,19 +533,14 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .m-filing .fh { display: block; margin-bottom: 8px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
 .m-filing p { margin: 0 0 .7em; font-size: .97rem; line-height: 1.65 } .m-filing p:last-child { margin: 0 }
 .fed-sub a { color: inherit; text-underline-offset: 3px }
-/* his word, October 24, 2026: "I'm going to let you design that area ... a clean break", then "Can you in any way interpret what I showed you?
-   ... The circles gently move outwards and the color just sort of slightly shimmers", and then: "this is not the operating equity site ... This
-   is the connective tissue between HalseyMinor.com and Operating Equity ... apply a glass effect over the mission statement".
-   So: operatingequity.ai's light behind the whole Mission page (moving only while the top is on screen), the statement under glass, and every
-   section below in the main page's glass, each a block of its own, so sections can be moved around and the page stays whole. */
-html { background: #D9E2F0 } body { background: transparent }   /* on this page the light is the ground: the site's paper would cover it */
+html { background: #D9E2F0 } body { background: transparent }
 .oe-field { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: repeating-radial-gradient(circle at 50% 136%, #F1F8FD 0, #E3ECF6 4%, #D6E1EF 30%) }   /* the light, still, if there is no script */
+  background: repeating-radial-gradient(circle at 50% 136%, #F1F8FD 0, #E3ECF6 4%, #D6E1EF 30%) }
 .oe-light { position: absolute; inset: 0; width: 100%; height: 100% }
 .oe-field::after { content: ""; position: absolute; inset: 0; mix-blend-mode: soft-light;
   background: radial-gradient(55% 50% at 0% 72%, rgba(240, 214, 238, .55), transparent 72%), radial-gradient(55% 50% at 100% 72%, rgba(240, 214, 238, .55), transparent 72%) }
 .oe-hero { --oe-ink: #1B2030; --oe-ink-2: #394154; --oe-blue: #2B66F6; position: relative; color: var(--oe-ink) }
-.oe-hero h1, .oe-hero p, .oe-hero a, .oe-hero span { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-optical-sizing: auto }   /* the site sets its own faces on headings and text */
+.oe-hero h1, .oe-hero p, .oe-hero a, .oe-hero span { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-optical-sizing: auto }
 .oe-in { display: flex; align-items: center; justify-content: center; min-height: max(86svh, 640px); padding-top: clamp(96px, 12vh, 140px); padding-bottom: clamp(44px, 7vh, 88px) }
 .oe-glass { width: 100%; max-width: 1000px; padding: clamp(26px, 4.6vw, 64px); border-radius: 30px; color: var(--oe-ink); border: 1px solid rgba(255, 255, 255, .92);
   background: linear-gradient(115deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .04) 34%), linear-gradient(165deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .2) 55%, rgba(255, 255, 255, .4));
@@ -622,19 +554,17 @@ html { background: #D9E2F0 } body { background: transparent }   /* on this page 
 .oe-dbl { margin: clamp(22px, 2.6vw, 32px) 0 0; max-width: 36em; font-size: clamp(17px, 1.4vw, 20px); font-weight: 400; line-height: 1.55; letter-spacing: -.006em; color: var(--oe-ink-2); text-wrap: pretty }
 .oe-org { display: inline-flex; align-items: center; gap: 12px; margin-top: clamp(26px, 3vw, 38px); min-height: 50px; padding: 0 22px 0 18px; border-radius: 14px;
   background: var(--oe-blue); color: #FFFFFF; text-decoration: none; font-size: 16px; font-weight: 500; letter-spacing: -.004em; box-shadow: 0 12px 26px -14px rgba(43, 102, 246, .6) }
-.oe-org svg { display: block; width: 32px; height: auto; fill: currentColor }   /* the OperatingEquity.ai mark, redrawn from his screenshot */
+.oe-org svg { display: block; width: 32px; height: auto; fill: currentColor }
 .oe-org:hover { filter: brightness(1.06) }
 .oe-hero :focus-visible { outline: 2px solid var(--oe-ink); outline-offset: 3px }
 @media (prefers-reduced-motion: no-preference) { .oe-fade { animation: oe-fade 1400ms ease-out both; animation-delay: .15s } }
 @keyframes oe-fade { from { opacity: 0 } to { opacity: 1 } }
-/* every section below, in the main page's glass: a block of its own */
 .mission { padding-bottom: clamp(40px, 6vw, 72px) }
 .mission > section, .mission > .notes-m { margin: 0 0 clamp(18px, 2.4vw, 28px); padding: clamp(20px, 3.4vw, 44px); border-radius: 26px; border: 1px solid rgba(255, 255, 255, .95);
   background: linear-gradient(115deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 30%), linear-gradient(165deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .52) 55%, rgba(255, 255, 255, .72));
   box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .5), 0 1px 2px rgba(21, 23, 26, .06), 0 22px 44px -26px rgba(21, 23, 26, .3) }
 .mission > .notes-m { padding-left: calc(clamp(20px, 3.4vw, 44px) + 1.4em) }
 @media (max-width: 759px) { .mission > section, .mission > .notes-m { border-radius: 20px } }
-/* on this page only, the menu is a quiet frosted bar over the light */
 .topnav { position: absolute; top: 0; left: 0; right: 0; z-index: 10; color: var(--ink); background: rgba(255, 255, 255, .34);
   -webkit-backdrop-filter: saturate(1.4) blur(16px); backdrop-filter: saturate(1.4) blur(16px); border-bottom: 1px solid rgba(20, 26, 42, .07) }
 .topnav .nav-a { color: #141A2A }
