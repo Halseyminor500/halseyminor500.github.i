@@ -92,6 +92,7 @@ b.s { color: var(--gray); font-weight: 700 }
   -webkit-backdrop-filter: blur(2.5px) saturate(1.05); backdrop-filter: blur(2.5px) saturate(1.05);
   box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 40px 90px -30px rgba(21, 23, 26, .28) }
 @media (max-width: 899px) { .glass { grid-template-columns: minmax(0, 1fr) } }
+#top .glass { align-items: start }
 h1 { margin: 0; font: 700 clamp(2rem, 4.6vw, 4.1rem)/1.02 var(--display); letter-spacing: -.005em; text-wrap: balance; color: var(--ink) }
 h1 .q { color: var(--red) }
 .lede { margin: 22px 0 0; max-width: 40rem; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--ink) }
@@ -436,6 +437,16 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .fed-sub { margin: 14px 0 0; max-width: 46rem; font-size: 1.05rem; color: var(--muted) }
 .fed-key { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 16px 0 0; padding: 0; list-style: none; font: 600 .92rem/1.3 var(--body) }
 .fed-key li { display: inline-flex; align-items: center; gap: 8px } .fed-key i { width: 14px; height: 14px; border-radius: 4px; background: var(--k) }
+.fed-hero.us .wrap { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 22px clamp(28px, 4vw, 60px); align-items: start }
+.fed-hero.us .fed-key { grid-column: 1 / -1 }
+.fed-ag { margin: 0; display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 14px 18px; align-items: start; padding: clamp(16px, 2vw, 22px);
+  border-radius: 18px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .2) }
+.fed-ag img { display: block; width: 100%; height: auto; border-radius: 12px }
+.fed-ag blockquote { margin: 0; font: 600 clamp(1.08rem, 1.6vw, 1.32rem)/1.34 var(--display); color: #FFFFFF; text-wrap: pretty }
+.fed-ag figcaption { grid-column: 1 / -1; font: 500 .9rem/1.45 var(--body); color: rgba(255, 255, 255, .84) }
+.fed-ag figcaption a { color: inherit; text-underline-offset: 3px }
+@media (max-width: 899px) { .fed-hero.us .wrap { grid-template-columns: minmax(0, 1fr) } .fed-ag { max-width: 560px } }
+@media (max-width: 479px) { .fed-ag { grid-template-columns: minmax(0, 110px) minmax(0, 1fr) } }
 .fed-lead { margin: 8px 0 26px; padding: clamp(18px, 3vw, 32px); background: var(--card); border: 1px solid var(--line); border-top: 8px solid var(--bh); border-radius: 16px }
 .fed-lead h2 { max-width: 34ch; margin: 6px 0 10px; font: 700 clamp(1.35rem, 2.8vw, 2.1rem)/1.2 var(--display) }
 .hero-n { display: block; font: 800 clamp(4rem, 12vw, 7.5rem)/.95 var(--display); color: var(--ink) }
@@ -493,17 +504,15 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .mission > section > h2 { margin: 0 0 14px }
 .mission h3 { margin: 20px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
 .m-note { margin: 0 0 14px; max-width: 44rem; font-size: .95rem; color: var(--muted) }
-.m-sec .vids:not(.more) { max-width: 700px; margin-bottom: 16px }
-.m-sec .invite { max-width: 700px }
+.m-sec .vids:not(.more) { max-width: 700px; margin-bottom: 0 }
 .vids.more { margin: 0 }
 @media (max-width: 599px) { .vids.more { grid-template-columns: minmax(0, 1fr) } }
 .m-qt { margin: 0 0 8px; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
 .mission > section > h2.m-q { margin-bottom: 18px; max-width: 44rem; font: 600 clamp(1.3rem, 2.3vw, 1.8rem)/1.25 var(--display); color: var(--blue); text-wrap: pretty }
-.me-more { grid-template-areas: "docs docs" "q1 q2" "ceo ceo" }
-.me-grid > .me-wide { grid-area: ceo; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px 24px; align-items: start }
+.me-more { grid-template-areas: "docs docs" "q1 q2" "join join" }
+.mission .me-grid > .invite { grid-area: join; max-width: none; margin: 0 }
 .me-docs > .vid { align-self: start }
-@media (max-width: 899px) { .me-more { grid-template-areas: "docs" "q1" "q2" "ceo" } }
-@media (max-width: 599px) { .me-grid > .me-wide { grid-template-columns: minmax(0, 1fr) } }
+@media (max-width: 899px) { .me-more { grid-template-areas: "docs" "q1" "q2" "join" } }
 .m-quotes { display: grid; gap: 12px; max-width: 50rem; margin-top: 16px }
 .m-quotes > .say { margin: 0 }
 .say blockquote p { margin: 0 0 .6em } .say blockquote p:last-child { margin: 0 }
@@ -526,9 +535,18 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .m-kick { display: block; margin: 24px 0 4px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
 .m-big { margin: 0; max-width: 40rem; font: 700 clamp(1.4rem, 2.8vw, 2.1rem)/1.15 var(--display); color: var(--blue); text-wrap: balance }
 .m-goals { margin: 8px 0 0; max-width: 50rem }
-.m-measures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 12px 0 0; max-width: 50rem }
-@media (max-width: 599px) { .m-measures { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
-.m-measures div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 4px; align-content: start }
+.m-measures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0 0; max-width: 54rem; align-items: end }
+.m-measures div:nth-child(1) { min-height: 172px } .m-measures div:nth-child(2) { min-height: 144px }
+.m-measures div:nth-child(3) { min-height: 116px } .m-measures div:nth-child(4) { min-height: 88px }
+.m-measures div:nth-child(1) { border-color: rgba(31, 86, 195, .38) }
+@media (max-width: 599px) { .m-measures { grid-template-columns: minmax(0, 1fr); align-items: stretch } .m-measures div { min-height: 0 !important }
+  .m-measures div:nth-child(2) { margin-left: 8% } .m-measures div:nth-child(3) { margin-left: 16% } .m-measures div:nth-child(4) { margin-left: 24% } }
+.m-measures div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 4px; align-content: start }
+.mission .m-card, .mission .m-measures div, .mission .m-filing, .mission .me-cover, .mission .say:not(.invite), .mission .evo .n {
+  background: linear-gradient(155deg, rgba(255, 255, 255, .86), rgba(240, 246, 255, .5) 58%, rgba(255, 255, 255, .7)); border-color: rgba(255, 255, 255, .96);
+  box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .5), 0 1px 2px rgba(21, 23, 26, .05), 0 18px 34px -22px rgba(30, 50, 100, .42) }
+.mission .say:not(.invite) { border-left-color: var(--c) } .mission .me-cover, .mission .m-filing { border-left-color: var(--blue) }
+.mission .m-card, .mission .evo .n { border-top-color: var(--blue) } .mission .evo .n.files { border-top-color: #C3C7CD }
 .m-measures b { font: 800 1.8rem/1 var(--display); color: var(--blue) }
 .m-measures span { font-size: .92rem; line-height: 1.35 }
 .m-filing { margin: 16px 0 0; max-width: 50rem; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 12px; padding: 16px 20px }
@@ -544,7 +562,7 @@ html { background: #D9E2F0 } body { background: transparent }
 .oe-hero { --oe-ink: #1B2030; --oe-ink-2: #394154; --oe-blue: #2B66F6; position: relative; color: var(--oe-ink) }
 .oe-hero h1, .oe-hero p, .oe-hero a, .oe-hero span { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; font-optical-sizing: auto }
 .oe-in { display: flex; align-items: center; justify-content: center; min-height: max(86svh, 640px); padding-top: clamp(96px, 12vh, 140px); padding-bottom: clamp(44px, 7vh, 88px) }
-.oe-glass { width: 100%; max-width: 1000px; padding: clamp(26px, 4.6vw, 64px); border-radius: 30px; color: var(--oe-ink); border: 1px solid rgba(255, 255, 255, .92);
+.oe-glass { width: 100%; max-width: none; padding: clamp(26px, 4.6vw, 64px); border-radius: 30px; color: var(--oe-ink); border: 1px solid rgba(255, 255, 255, .92);
   background: linear-gradient(115deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .04) 34%), linear-gradient(165deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .2) 55%, rgba(255, 255, 255, .4));
   box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .4), 0 1px 2px rgba(20, 30, 60, .05), 0 30px 70px -36px rgba(30, 50, 100, .38);
   -webkit-backdrop-filter: blur(20px) saturate(1.35); backdrop-filter: blur(20px) saturate(1.35) }
@@ -615,15 +633,6 @@ html { background: #D9E2F0 } body { background: transparent }
         <span class="vp" aria-hidden="true"></span>
       </a>
     </div>
-    <div class="say h invite" data-who="halsey">
-      <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
-      <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
-      <div class="inv-ways" aria-label="Write to him">
-        <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
-        <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
-        <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
-      </div>
-    </div>
   </section>
 
   <section id="ready">
@@ -646,13 +655,56 @@ html { background: #D9E2F0 } body { background: transparent }
       </aside>
       <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
       <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
-      <figure class="me-cover me-wide" data-who="halsey">
-        <img src="/ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
-        <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
-          <span class="qd">The role, as he wrote it</span>
-          <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
-        </figcaption>
-      </figure>
+      <div class="say h invite" data-who="halsey">
+        <p class="inv-text">If you are truly passionate about finally bringing equitable justice to our antiquated, 900-year-old system:</p>
+        <p class="inv-mail"><a href="mailto:justice@operatingequity.ai" id="inv-addr">justice@operatingequity.ai</a><button type="button" class="copy" id="inv-copy" data-copy="justice@operatingequity.ai">Copy</button></p>
+        <div class="inv-ways" aria-label="Write to him">
+          <a class="way" href="mailto:justice@operatingequity.ai?subject=Legal%20Support">Legal Support</a>
+          <a class="way" href="mailto:justice@operatingequity.ai?subject=Financial%20Support">Financial Support</a>
+          <a class="way" href="mailto:justice@operatingequity.ai?subject=Community%20Support">Community Support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="document">
+    <h2 data-oe>The document, in its own words</h2>
+    <p class="m-note" data-oe>Quoted verbatim from “Legal Justice AI Draft 32,” under the document’s own headings.</p>
+    <div class="m-cards">
+      <div class="m-card" data-oe><h3>Vision</h3><p>We aim to connect people to the legal industry by creating the largest human-centered legal services company, democratizing access to justice through AI, data, and services. We envision a future where legal processes are faster, more affordable, and accessible to all, breaking down the extraordinary barrier between people and justice, fostering a fairer society through constant innovation, and redefining the legal industry’s relationship with society.</p></div>
+      <div class="m-card" data-oe><h3>Mission</h3><p>Our mission is to pioneer a new industry at the intersection of AI and legal services, both creating and transforming legal support. Legal Justice AI offers 24/7 comprehensive assistance, empowering individuals to navigate litigation with greater awareness, confidence, less stress, and better outcomes. We make justice more accessible through a vast array of tools, information, data, analytics, planning, and, ultimately, advanced judicial capabilities.</p></div>
+      <div class="m-card" data-oe><h3>Purpose</h3><p>Legal Justice AI seeks to simplify access to legal information, empower individuals in their legal journeys, and reduce the overall burden of litigation on society. Our company prioritizes the well-being of our customers by providing equitable, data-driven legal insight and comprehensive services and building trust through an absolute dedication to customer care and success. We intend to steer the reimagination of the legal system into a more equitable, accessible system focused on problem-solving using various tools, including emerging AI superintelligence.</p></div>
+    </div>
+    <span class="m-kick" data-oe>Same document · “Company goals”</span>
+    <p class="m-big" data-oe>We are committed to the problem, not family law.</p>
+    <p class="m-goals" data-oe>We will measure ourselves in four ways: 1. improving individual outcomes, 2. reducing user anxiety, 3. reducing total time, and 4. reducing total cost.</p>
+    <div class="m-measures" data-oe><div><b>1</b><span>improving individual outcomes</span></div><div><b>2</b><span>reducing user anxiety</span></div><div><b>3</b><span>reducing total time</span></div><div><b>4</b><span>reducing total cost</span></div></div>
+    <div class="m-filing" data-oe>
+      <span class="fh">Same document · “I Have Been Served” · excerpt</span>
+      <p>After the shock of being served and the confusion that follows, you upload your documents to the service. Immediately, you understand what's being claimed, a schedule of events, relevant laws explained, a list of documents to be filed, a game plan, time estimates per state, approximate spousal and support payments, and be provided with lawyers who match your needs, are successful and meet cost benchmarks. Alternative approaches like mediation will be introduced and compared, and you will receive high-quality litigation matching. While we may build mediation services in time, we will suggest the best alternatives, even when they are not financial partners.  You will never feel alone and helpless and will always know your options with Love and Law, even at 3 am communicating with your AI advocate. We will ALWAYS put the customer’s interests first, steering you to resources across the web. A tangle of data, laws, consultants, mediators, lawyers, and vast amounts of statistical knowledge spread across the web, documents, and electronic filing services are made understandable and available.</p>
+    </div>
+    <div class="m-filing" data-oe>
+      <span class="fh">Same document · the author, and the first service · excerpts</span>
+      <p>Legal Justice will be the first of an entirely new kind of company. Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.</p>
+      <p>Introducing love and Law<br>The first new service to legal justice.</p>
+    </div>
+  </section>
+
+  <section id="evolution">
+    <h2 data-oe>The evolution, dated</h2>
+    <p class="m-note" data-oe>Every date below comes from a document: a file’s own metadata, the date printed on it, or the date of the message that carried it. Scroll sideways →</p>
+    <div class="evo">
+      <div class="n" data-edited><span class="d">Winter 2023–24</span><span class="k">His words, dated</span><p class="t">The plan is written</p><p>Dated by the author himself, in three messages: “2 years ago when I first returned to the US” (October 2025), “20 months ago when I started” (August 2025), “18 months ago” (July 2025).</p></div>
+      <div class="n files" data-oe><span class="d">June 24, 2024</span><span class="k">In the publisher’s files</span><p class="t">Partnership call briefing</p><p>A partner’s document, “Legal Justice – Partnership Call Briefing,” dated by the message that carried it. In the publisher’s files; not published.</p></div>
+      <div class="n files" data-oe><span class="d">July 11 – August 10, 2024</span><span class="k">File metadata</span><p class="t">The draft takes its images</p><p>21 images placed in the document carry these dates inside the Pages file (34 files, counting the small copies Pages keeps of each).</p></div>
+      <div class="n" data-oe><span class="d">August 14, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 25</p><p>PDF, 12.8 MB, sent by email August 14, 2024, and again August 22, 2024. The date printed on the cover. Not yet hosted here.</p></div>
+      <div class="n" data-oe><span class="d">August 27 – 31, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 30</p><p>PDF: created August 27, 2024, by Pages (the file’s own creation date); sent by email August 31, 2024; 25 pages.</p></div>
+      <div class="n" data-oe><span class="d">January 10, 2025</span><span class="k">Written by him</span><p class="t">First Principles of Love and Law</p><p>PDF, 6.6 MB, dated by the message that carried it. Not yet hosted here.</p></div>
+      <div class="n files" data-oe><span class="d">January 31, 2025</span><span class="k">In the publisher’s files</span><p class="t">The first product’s interface</p><p>A design firm’s agreement, dated by the message that carried it. In the publisher’s files; not published.</p></div>
+      <div class="n" data-edited><span class="d">March 17, 2025</span><span class="k">His words, dated</span><p class="t">“the first product, Love and Law”</p><p>The author to the design firm.</p></div>
+      <div class="n" data-oe><span class="d">March 15, 2026</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 32</p><p>Pages file, last saved March 15, 2026.</p></div>
+      <div class="n" data-edited><span class="d">2026</span><span class="k">Now</span><p class="t">operatingequity.ai · CIVIC</p><p>The company’s home page and its first public service.</p><a class="dl" href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai →</a></div>
+      <div class="n" data-oe><span class="d">September 30, 2026</span><span class="k">Now</span><p class="t">This site</p><p>Published by Halsey Minor.</p></div>
     </div>
   </section>
 
@@ -698,71 +750,8 @@ html { background: #D9E2F0 } body { background: transparent }
     </div>
   </section>
 
-  <section id="evolution">
-    <h2 data-oe>The evolution, dated</h2>
-    <p class="m-note" data-oe>Every date below comes from a document: a file’s own metadata, the date printed on it, or the date of the message that carried it. Scroll sideways →</p>
-    <div class="evo">
-      <div class="n" data-oe><span class="d">Winter 2023–24</span><span class="k">His words, dated</span><p class="t">The plan is written</p><p>Dated by the author himself, in three messages quoted below: “2 years ago when I first returned to the US” (October 2025), “20 months ago when I started” (August 2025), “18 months ago” (July 2025).</p><a class="dl" href="#lja-words">His words, below →</a></div>
-      <div class="n files" data-oe><span class="d">June 24, 2024</span><span class="k">In the publisher’s files</span><p class="t">Partnership call briefing</p><p>A partner’s document, “Legal Justice – Partnership Call Briefing,” dated by the message that carried it. In the publisher’s files; not published.</p></div>
-      <div class="n files" data-oe><span class="d">July 11 – August 10, 2024</span><span class="k">File metadata</span><p class="t">The draft takes its images</p><p>21 images placed in the document carry these dates inside the Pages file (34 files, counting the small copies Pages keeps of each).</p></div>
-      <div class="n" data-oe><span class="d">August 14, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 25</p><p>PDF, 12.8 MB, sent by email August 14, 2024, and again August 22, 2024. The date printed on the cover. Not yet hosted here.</p></div>
-      <div class="n" data-oe><span class="d">August 27 – 31, 2024</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 30</p><p>PDF: created August 27, 2024, by Pages (the file’s own creation date); sent by email August 31, 2024; 25 pages.</p></div>
-      <div class="n" data-oe><span class="d">January 10, 2025</span><span class="k">Written by him</span><p class="t">First Principles of Love and Law</p><p>PDF, 6.6 MB, dated by the message that carried it. Not yet hosted here.</p></div>
-      <div class="n files" data-oe><span class="d">January 31, 2025</span><span class="k">In the publisher’s files</span><p class="t">The first product’s interface</p><p>A design firm’s agreement, dated by the message that carried it. In the publisher’s files; not published.</p></div>
-      <div class="n" data-oe><span class="d">March 17, 2025</span><span class="k">His words, dated</span><p class="t">“the first product, Love and Law”</p><p>The author to the design firm, quoted below.</p><a class="dl" href="#lja-words">His words, below →</a></div>
-      <div class="n" data-oe><span class="d">March 15, 2026</span><span class="k">Written by him</span><p class="t">Legal Justice AI, Draft 32</p><p>Pages file, last saved March 15, 2026.</p></div>
-      <div class="n" data-oe><span class="d">2026</span><span class="k">Now</span><p class="t">operatingequity.ai · CIVIC</p><p>The company’s home page and its first public service, quoted below as read on September 30, 2026.</p><a class="dl" href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai →</a></div>
-      <div class="n" data-oe><span class="d">September 30, 2026</span><span class="k">Now</span><p class="t">This site</p><p>Published by Halsey Minor.</p></div>
-    </div>
-  </section>
-
-  <section id="lja-words">
-    <h2 data-oe>The author, dating it himself</h2>
-    <p class="m-note" data-oe>Sentences from the publisher’s own sent mail, verbatim; cuts are marked […]; private recipients are withheld.</p>
-    <div class="m-quotes">
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2025 · email to the Beverly Hills Police Department</span><blockquote data-oe>“I wrote this business plan 2 years ago when I first returned to the US alive but in severe pain.”</blockquote><p class="src" data-oe>The first sentence of a longer message on other matters; the rest is not published here. Attached to it: “Legal Justice AI Draft 2024.pdf”.</p></div>
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · August 26, 2025 · email; the recipient, a private individual, is withheld</span><blockquote data-oe data-cut>“I wrote this 20 months ago when I started. […] First is Love and Law. […]”</blockquote><p class="src" data-cut>Two sentences of a longer message; the rest is not published here. The subject line names “Legal Justice AI Draft 30”.</p></div>
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · July 29, 2025 · email; the recipient, a private individual, is withheld</span><blockquote data-oe>“I wrote the vision for legal justice AI 18 months ago.”</blockquote><p class="src" data-oe>The first sentence of a longer message on other matters. Attached to it: “Legal Justice AI Draft 30.pdf”.</p></div>
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · March 17, 2025 · email to a design firm · subject: “Legal Justice AI first service Love and Law”</span><blockquote data-oe>“Can you deliver all of the UI elements and help me create an investor presentation for Legal Justice and the first product, Love and Law, in the first four months? […] Nine hundred years ago, British common law emerged, allowing individuals to be tried by their peers. Since then, the changes have been only incremental at best.”</blockquote><p class="src" data-oe>Three sentences of a longer message; the rest concerns the engagement.</p></div>
-    </div>
-  </section>
-
-  <section id="document">
-    <h2 data-oe>The document, in its own words</h2>
-    <p class="m-note" data-oe>Quoted verbatim from “Legal Justice AI Draft 32,” under the document’s own headings.</p>
-    <div class="m-cards">
-      <div class="m-card" data-oe><h3>Vision</h3><p>We aim to connect people to the legal industry by creating the largest human-centered legal services company, democratizing access to justice through AI, data, and services. We envision a future where legal processes are faster, more affordable, and accessible to all, breaking down the extraordinary barrier between people and justice, fostering a fairer society through constant innovation, and redefining the legal industry’s relationship with society.</p></div>
-      <div class="m-card" data-oe><h3>Mission</h3><p>Our mission is to pioneer a new industry at the intersection of AI and legal services, both creating and transforming legal support. Legal Justice AI offers 24/7 comprehensive assistance, empowering individuals to navigate litigation with greater awareness, confidence, less stress, and better outcomes. We make justice more accessible through a vast array of tools, information, data, analytics, planning, and, ultimately, advanced judicial capabilities.</p></div>
-      <div class="m-card" data-oe><h3>Purpose</h3><p>Legal Justice AI seeks to simplify access to legal information, empower individuals in their legal journeys, and reduce the overall burden of litigation on society. Our company prioritizes the well-being of our customers by providing equitable, data-driven legal insight and comprehensive services and building trust through an absolute dedication to customer care and success. We intend to steer the reimagination of the legal system into a more equitable, accessible system focused on problem-solving using various tools, including emerging AI superintelligence.</p></div>
-    </div>
-    <span class="m-kick" data-oe>Same document · “Company goals”</span>
-    <p class="m-big" data-oe>We are committed to the problem, not family law.</p>
-    <p class="m-goals" data-oe>We will measure ourselves in four ways: 1. improving individual outcomes, 2. reducing user anxiety, 3. reducing total time, and 4. reducing total cost.</p>
-    <div class="m-measures" data-oe><div><b>1</b><span>improving individual outcomes</span></div><div><b>2</b><span>reducing user anxiety</span></div><div><b>3</b><span>reducing total time</span></div><div><b>4</b><span>reducing total cost</span></div></div>
-    <div class="m-filing" data-oe>
-      <span class="fh">Same document · “I Have Been Served” · excerpt</span>
-      <p>After the shock of being served and the confusion that follows, you upload your documents to the service. Immediately, you understand what's being claimed, a schedule of events, relevant laws explained, a list of documents to be filed, a game plan, time estimates per state, approximate spousal and support payments, and be provided with lawyers who match your needs, are successful and meet cost benchmarks. Alternative approaches like mediation will be introduced and compared, and you will receive high-quality litigation matching. While we may build mediation services in time, we will suggest the best alternatives, even when they are not financial partners.  You will never feel alone and helpless and will always know your options with Love and Law, even at 3 am communicating with your AI advocate. We will ALWAYS put the customer’s interests first, steering you to resources across the web. A tangle of data, laws, consultants, mediators, lawyers, and vast amounts of statistical knowledge spread across the web, documents, and electronic filing services are made understandable and available.</p>
-    </div>
-    <div class="m-filing" data-oe>
-      <span class="fh">Same document · the author, and the first service · excerpts</span>
-      <p>Legal Justice will be the first of an entirely new kind of company. Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.</p>
-      <p>Introducing love and Law<br>The first new service to legal justice.</p>
-    </div>
-  </section>
-
-  <section id="now">
-    <h2 data-oe>Now: Operating Equity</h2>
-    <div class="m-quotes">
-      <div class="say h" data-who="halsey"><span class="tag" data-oe>operatingequity.ai · the home page, as read on September 30, 2026</span><blockquote data-oe>“AI companies that define new categories for Equal Justice, Truth in Media and Mental Health for Everyone”</blockquote><p class="src"><a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a></p></div>
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>CIVIC · “Truth, verified.” · as read on September 30, 2026</span><blockquote data-oe>“Truth Engine tests the facts. Paste a transcript, article, speech, post or study, or a link to one. CIVIC extracts every empirical claim it contains and tests the first 10.”</blockquote><p class="src" data-oe><a href="https://civic-c64i.onrender.com" target="_blank" rel="noopener">civic-c64i.onrender.com</a> · a service of <a href="https://operatingequity.ai" target="_blank" rel="noopener">OperatingEquity.ai</a></p></div>
-      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 28, 2026</span><blockquote data-oe>“Operating Equity AI believes in equal justice.”</blockquote></div>
-      <div class="say h long" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 29, 2026 · on Love and Law</span><blockquote data-oe data-cut>“[…] The failure of my service, Love and Law, will be if the partners end up in court, but if they do, they will be on equal footing, no matter how much one party has financially versus the other.”</blockquote></div>
-      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · September 30, 2026</span><blockquote data-oe>“After you launch, I am launching the truth engine at the center of CIVIC.”</blockquote></div>
-    </div>
-  </section>
-
   <ol class="notes-m">
-    <li id="n17" value="17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. His posting for a chief executive carries the date August 10, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
+    <li id="n17" value="17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
   </ol>
 </main>
 <script>
