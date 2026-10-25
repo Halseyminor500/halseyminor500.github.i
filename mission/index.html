@@ -496,9 +496,14 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .m-sec .vids:not(.more) { max-width: 700px; margin-bottom: 16px }
 .m-sec .invite { max-width: 700px }
 .vids.more { margin: 0 }
-.vids.three { grid-template-columns: repeat(3, minmax(0, 1fr)) }
-@media (max-width: 899px) { .vids.three { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
-@media (max-width: 599px) { .vids.more, .vids.three { grid-template-columns: minmax(0, 1fr) } }
+@media (max-width: 599px) { .vids.more { grid-template-columns: minmax(0, 1fr) } }
+.m-qt { margin: 0 0 8px; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
+.mission > section > h2.m-q { margin-bottom: 18px; max-width: 44rem; font: 600 clamp(1.3rem, 2.3vw, 1.8rem)/1.25 var(--display); color: var(--blue); text-wrap: pretty }
+.me-more { grid-template-areas: "docs docs" "q1 q2" "ceo ceo" }
+.me-grid > .me-wide { grid-area: ceo; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 16px 24px; align-items: start }
+.me-docs > .vid { align-self: start }
+@media (max-width: 899px) { .me-more { grid-template-areas: "docs" "q1" "q2" "ceo" } }
+@media (max-width: 599px) { .me-grid > .me-wide { grid-template-columns: minmax(0, 1fr) } }
 .m-quotes { display: grid; gap: 12px; max-width: 50rem; margin-top: 16px }
 .m-quotes > .say { margin: 0 }
 .say blockquote p { margin: 0 0 .6em } .say blockquote p:last-child { margin: 0 }
@@ -571,7 +576,7 @@ html { background: #D9E2F0 } body { background: transparent }
 .topnav a.nav-a:hover, .topnav a.nav-a:focus-visible { border-bottom-color: rgba(20, 26, 42, .3) }
 .topnav .nav-a[aria-current="page"] { border-bottom-color: #141A2A }
 .topnav :focus-visible { outline-color: #141A2A }
-.m-sub { margin: 0 0 18px; padding: 0 6px }
+.m-sub { margin: 0 0 18px }
 .mission h3 a { color: inherit; text-underline-offset: 3px }
 .notes-m { font-size: .9rem; color: var(--muted) }
 </style>
@@ -598,9 +603,9 @@ html { background: #D9E2F0 } body { background: transparent }
   </div>
 </header>
 <main class="wrap mission" data-who="halsey">
-  <p class="fed-sub m-sub" data-oe>Operating Equity · <a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a> · Legal Justice AI, the document that began it: dated from its own files</p>
   <section class="m-sec" id="california">
-    <h2>If you're thinking of coming to California, let this be a lesson</h2>
+    <p class="m-qt">Halsey Minor · October 24, 2026</p>
+    <h2 class="m-q">“I loved California, but it has not been an equitable friendship. My hope is that the system can be reformed so that I can one day feel the same as the first day I arrived in San Francisco.”</h2>
     <div class="vids">
       <a class="vid" href="https://vimeo.com/1236709009" target="_blank" rel="noopener" data-vimeo="1236709009" aria-label="Play the video: California’s Betrayal The Hypocrisy of Insolvency">
         <img src="/poster-1.jpg" width="960" height="540" alt="">
@@ -626,8 +631,9 @@ html { background: #D9E2F0 } body { background: transparent }
 
   <section id="ready">
     <h2>Ready before: his plan, his record, his videos</h2>
+    <p class="fed-sub m-sub" data-oe>Operating Equity · <a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a> · Legal Justice AI, the document that began it: dated from its own files</p>
     <div class="me-grid me-more">
-      <aside class="me-docs" aria-label="His plan and his search for a chief executive, 2024">
+      <aside class="me-docs" aria-label="His plan of July 11, 2024, and Emily">
         <figure class="me-cover" data-who="halsey">
           <img src="/plan-2024-07-11.jpg" loading="lazy" decoding="async" width="651" height="610" alt="The first dated cover of his plan: a line drawing of a courthouse. Printed on it: July 11, 2024. A new industry emerges. Legal Justice AI.">
           <figcaption><b>July 11, 2024:</b> the first dated cover of his plan, Legal Justice AI, <mark class="h">eight months before he reported the crime</mark>.<a class="fn" href="#n17">17</a>
@@ -635,16 +641,21 @@ html { background: #D9E2F0 } body { background: transparent }
             <blockquote>“democratizing access to justice through AI, data, and services”</blockquote>
           </figcaption>
         </figure>
-        <figure class="me-cover" data-who="halsey">
-          <img src="/ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
-          <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
-            <span class="qd">The role, as he wrote it</span>
-            <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
-          </figcaption>
-        </figure>
+        <a class="vid pre" data-auto href="https://vimeo.com/1233152341" target="_blank" rel="noopener" data-vimeo="1233152341" aria-label="Play the video: EMILY FILLING OUT ALL FORMS 50 STATES.">
+          <span class="vt">EMILY FILLING OUT ALL FORMS 50 STATES.</span>
+          <span class="vd">October 5, 2026</span>
+          <span class="vp" aria-hidden="true"></span>
+        </a>
       </aside>
       <div class="say h me-q1" data-who="halsey"><span class="tag">Halsey Minor · October 11, 2026</span><blockquote>“I returned home determined to fight for equal justice for all after surviving the first life attempts, <mark class="h">wanting to help others, not help me</mark>, only to find myself held underwater by the very system I wanted to fix for others. The irony is incredible.”</blockquote></div>
       <div class="say h me-q2" data-who="halsey"><span class="tag">Halsey Minor · in his plan</span><blockquote>“Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.”<a class="fn" href="#n17">17</a></blockquote></div>
+      <figure class="me-cover me-wide" data-who="halsey">
+        <img src="/ceo-2024-08-10.jpg" loading="lazy" decoding="async" width="730" height="510" alt="The cover of his posting for a chief executive. Printed on it: August 10, 2024. CEO search for Legal Justice AI.">
+        <figcaption><b>August 10, 2024:</b> the date on his posting for a chief executive of Legal Justice AI.<a class="fn" href="#n17">17</a>
+          <span class="qd">The role, as he wrote it</span>
+          <blockquote>“The CEO will lead our efforts to disrupt the legal industry, ensuring we deliver on our promise to transform how legal services are accessed, delivered, and experienced.”</blockquote>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -676,15 +687,10 @@ html { background: #D9E2F0 } body { background: transparent }
     </div>
     <h3 id="companies" data-oe>The companies at <a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a></h3>
     <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2026</span><blockquote data-oe><p>“These are the companies I created at operatingequity.ai, working 16 hours a day, 7 days a week.”</p></blockquote></div>
-    <div class="vids more three">
+    <div class="vids more">
       <a class="vid pre" href="https://vimeo.com/1218683867" target="_blank" rel="noopener" data-vimeo="1218683867" aria-label="Play the video: CIVIC — Rebuilding Trust Through a Creator Driven Network">
         <span class="vt">CIVIC — Rebuilding Trust Through a Creator Driven Network</span>
         <span class="vd">August 16, 2026</span>
-        <span class="vp" aria-hidden="true"></span>
-      </a>
-      <a class="vid pre" href="https://vimeo.com/1233152341" target="_blank" rel="noopener" data-vimeo="1233152341" aria-label="Play the video: EMILY FILLING OUT ALL FORMS 50 STATES.">
-        <span class="vt">EMILY FILLING OUT ALL FORMS 50 STATES.</span>
-        <span class="vd">October 5, 2026</span>
         <span class="vp" aria-hidden="true"></span>
       </a>
       <a class="vid pre" href="https://vimeo.com/1233152942" target="_blank" rel="noopener" data-vimeo="1233152942" aria-label="Play the video: LOVE AND LAW REATIME AGENTS">
@@ -692,9 +698,6 @@ html { background: #D9E2F0 } body { background: transparent }
         <span class="vd">October 5, 2026</span>
         <span class="vp" aria-hidden="true"></span>
       </a>
-    </div>
-    <div class="m-quotes">
-      <div class="say h" data-who="halsey"><span class="tag" data-oe>Halsey Minor · October 11, 2026</span><blockquote data-oe><p>“I could no longer build, raise funds, and fight the nonstop corruption now challenging my very ability to survive.</p><p>“The companies, to me, represented hope, addressing my victimhood and those of others. But the institutional failures of the Beverly Hills and Los Angeles justice system forced me to prioritize survival over building the things I dreamed of.”</p></blockquote></div>
     </div>
     <figure class="me-cover m-cover" data-who="halsey">
       <img src="/lja-draft32-cover.jpg" loading="lazy" decoding="async" width="790" height="1024" data-oe-alt alt="The cover of Legal Justice AI: a line drawing of a courthouse. Printed on it: August 14, 2024. A new industry emerges. Legal Justice AI.">
@@ -831,17 +834,34 @@ html { background: #D9E2F0 } body { background: transparent }
 (function () {
   // his videos: a tap puts Vimeo's player in place of the picture
   if (document.documentElement.getAttribute('data-embed') === 'inline') {
-    var player = function (a, autoplay) {
+    var player = function (a, autoplay, more) {
       var f = document.createElement('iframe');
-      f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?' + (autoplay ? 'autoplay=1&' : '') + 'dnt=1&title=1&byline=0&portrait=0';
+      f.src = 'https://player.vimeo.com/video/' + a.getAttribute('data-vimeo') + '?' + (autoplay ? 'autoplay=1&' : '') + (more || '') + 'dnt=1&title=1&byline=0&portrait=0';
       f.allow = 'autoplay; fullscreen; picture-in-picture';
       f.setAttribute('allowfullscreen', '');
       if (!autoplay) f.setAttribute('loading', 'lazy');
       f.title = a.querySelector('.vt').textContent;
       var box = document.createElement('div'); box.className = 'vid'; box.appendChild(f);
       a.parentNode.replaceChild(box, a);
+      return f;
     };
+    // Emily plays while most of her is on screen and pauses when she is not. Browsers let a video start by itself only without sound,
+    // so she starts muted. Vimeo's player takes "play" and "pause" by message once it says it is ready ("ready", or its answer to "ping").
+    var onScreen = function (f) {
+      var vimeo = 'https://player.vimeo.com', want = 'pause', ready = false;
+      var say = function () { if (ready) f.contentWindow.postMessage({ method: want }, vimeo); else f.contentWindow.postMessage({ method: 'ping' }, vimeo); };
+      window.addEventListener('message', function (ev) {
+        if (ev.source !== f.contentWindow || ev.origin !== vimeo) return;
+        var d = ev.data;
+        if (typeof d === 'string') { try { d = JSON.parse(d); } catch (e) { return; } }
+        if (d && !ready && (d.event === 'ready' || d.method === 'ping')) { ready = true; say(); }
+      });
+      f.addEventListener('load', say);
+      new IntersectionObserver(function (es) { want = es[0].intersectionRatio >= .6 ? 'play' : 'pause'; say(); }, { threshold: [0, .6] }).observe(f.parentNode);
+    };
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     Array.prototype.forEach.call(document.querySelectorAll('.vid[data-vimeo]'), function (a) {
+      if (a.hasAttribute('data-auto') && !still && 'IntersectionObserver' in window) { onScreen(player(a, false, 'muted=1&api=1&')); return; }
       // the videos with no picture of their own here (all but the two from California): Vimeo's player takes their place at once, with its picture
       if (a.classList.contains('pre')) { player(a, false); return; }
       a.addEventListener('click', function (ev) { ev.preventDefault(); player(a, true); });
