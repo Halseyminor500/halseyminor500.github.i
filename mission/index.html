@@ -502,13 +502,6 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .fm-src { margin: 12px 0 0; font-size: .86rem; color: var(--muted) } .fm-src a { color: var(--blue); font-weight: 600 }
 .fm-lim { margin: 4px 0 0; font-size: .82rem; color: var(--muted); font-style: italic }
 .fed-end { padding-bottom: 56px; font-size: .9rem; color: var(--muted) } .fed-end p { max-width: 46rem }
-@media (prefers-reduced-motion: no-preference) {
-  .bars-anim .bars.grow .bf { clip-path: inset(0 100% 0 0) } .bars-anim .bars.grow .bv { opacity: 0 }
-  .bars-anim .bars.grow.go .bf { animation: bar-grow var(--d) linear .25s forwards }
-  .bars-anim .bars.grow.go .bv { animation: bar-show .4s ease-out calc(var(--d) + .25s) forwards }
-}
-@keyframes bar-grow { to { clip-path: inset(0 0 0 0) } }
-@keyframes bar-show { to { opacity: 1 } }
 @media (max-width: 640px) {
   .br, .pair .br { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px } .br .bt { grid-column: 1 / -1; order: 3 }
   .tl li { grid-template-columns: 14px minmax(0, 1fr) } .tl-y { grid-column: 2 } .tl-m { grid-row: 1 / span 2 } .dots { gap: 3px }

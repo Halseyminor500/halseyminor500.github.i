@@ -440,11 +440,13 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 </style>
 <style>
 html.arrive { overflow: hidden }
-html.arrive { --ar-stage: radial-gradient(34% 40% at 50% 40%, rgba(206, 222, 255, .17) 0%, rgba(206, 222, 255, 0) 72%),
-  radial-gradient(58% 52% at 28% 16%, rgba(214, 228, 255, .44) 0%, rgba(150, 180, 238, .18) 42%, rgba(150, 180, 238, 0) 72%),
-  radial-gradient(42% 48% at 88% 58%, rgba(31, 86, 195, .42) 0%, rgba(31, 86, 195, 0) 70%),
-  radial-gradient(80% 34% at 50% 104%, rgba(255, 226, 190, .10) 0%, rgba(255, 226, 190, 0) 70%),
-  linear-gradient(180deg, #2A3A57 0%, #1C2741 46%, #111A2E 100%) }
+html.arrive { --ar-stage: radial-gradient(26% 62% at 50% -6%, rgba(255, 249, 232, .40) 0%, rgba(236, 242, 255, .15) 45%, rgba(236, 242, 255, 0) 78%),
+  radial-gradient(72% 60% at 50% -14%, rgba(255, 248, 230, .54) 0%, rgba(206, 224, 255, .25) 38%, rgba(160, 190, 245, 0) 74%),
+  radial-gradient(36% 40% at 50% 44%, rgba(226, 236, 255, .20) 0%, rgba(226, 236, 255, 0) 70%),
+  radial-gradient(60% 50% at 6% 72%, rgba(31, 86, 195, .30) 0%, rgba(31, 86, 195, 0) 70%),
+  radial-gradient(60% 50% at 94% 72%, rgba(31, 86, 195, .30) 0%, rgba(31, 86, 195, 0) 70%),
+  radial-gradient(130% 92% at 50% 30%, rgba(8, 16, 34, 0) 55%, rgba(8, 16, 34, .40) 100%),
+  linear-gradient(180deg, #34507F 0%, #263F69 42%, #1A2D4E 100%) }
 html.arrive body::before { content: ""; position: fixed; inset: 0; z-index: 900; background: var(--ar-stage) }
 html.arrive.ar-landing body::before { content: none }
 html.arrive .topnav { position: relative; z-index: 1000 }
@@ -453,11 +455,6 @@ html.arrive .nav-a { transition: border-color .18s ease, text-shadow .18s ease, 
 html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shadow: 0 0 14px rgba(255, 255, 255, .8) }
 #arrive { position: fixed; inset: 0; z-index: 950; overflow: hidden; color: #FFFFFF; cursor: pointer; -webkit-tap-highlight-color: transparent;
   background: var(--ar-stage); transition: opacity .45s ease }
-#arrive::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .07) 0, rgba(255, 255, 255, .015) 5px, rgba(10, 16, 30, .07) 10px, rgba(255, 255, 255, .02) 13px, rgba(255, 255, 255, .07) 16px),
-    linear-gradient(112deg, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, .06) 34%, rgba(255, 255, 255, 0) 48%);
-  -webkit-mask-image: radial-gradient(70% 62% at 32% 26%, #000 0%, rgba(0, 0, 0, .55) 45%, rgba(0, 0, 0, 0) 78%);
-  mask-image: radial-gradient(70% 62% at 32% 26%, #000 0%, rgba(0, 0, 0, .55) 45%, rgba(0, 0, 0, 0) 78%) }
 #arrive.ar-out { opacity: 0 }
 .ar-scene { position: absolute; left: 50%; top: var(--ar-cy); width: 0; height: 0; perspective: var(--ar-p); transform-origin: 0 0 }
 .ar-tilt, .ar-drum { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d }
@@ -472,7 +469,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   background: radial-gradient(circle, #2A3140 0%, #161A22 62%, #0B0D11 100%); box-shadow: 0 0 0 2px rgba(255, 255, 255, .6), inset 0 0 0 9px rgba(255, 255, 255, .06);
   transform: translateY(calc(var(--ar-h) / -2)) rotateX(90deg); -webkit-backface-visibility: hidden; backface-visibility: hidden }
 .ar-floor { position: absolute; left: calc(var(--ar-r) * -1.5); width: calc(var(--ar-r) * 3); top: calc(var(--ar-h) * .44); height: calc(var(--ar-r) * .7); pointer-events: none;
-  background: radial-gradient(ellipse at 50% 40%, rgba(170, 196, 245, .38) 0%, rgba(150, 180, 238, .1) 45%, rgba(0, 0, 0, 0) 70%) }
+  background: radial-gradient(ellipse at 50% 40%, rgba(214, 228, 255, .34) 0%, rgba(180, 204, 248, .1) 45%, rgba(0, 0, 0, 0) 70%) }
 .ar-cap { position: absolute; left: 50%; top: var(--ar-capy); transform: translateX(-50%); width: min(92vw, 640px); text-align: center; pointer-events: none }
 .ar-n { display: block; font: 500 12px/1 "IBM Plex Mono", Menlo, monospace; letter-spacing: .24em; text-transform: uppercase; color: rgba(255, 255, 255, .62) }
 .ar-name { display: block; margin: 10px 0 6px; font: 800 clamp(28px, 4.6vw, 44px)/1.05 var(--display); letter-spacing: .02em }
@@ -1138,10 +1135,10 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   var root = document.documentElement;
   if (!root.classList.contains('arrive')) return;
   var PAGES = [
-    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'Will it be held accountable to the laws?', face: '/arrive/home.webp' },
-    { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp' },
-    { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp' },
-    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp' }
+    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'Will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp' },
+    { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp', face2: '/arrive/federal-2x.webp' },
+    { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp', face2: '/arrive/mission-2x.webp' },
+    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp' }
   ];
   var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S, ASPECT = 390 / 507, HERE = 0;   // HERE: the page the drum comes to rest on
   var links = [].slice.call(document.querySelectorAll('.topnav .nav-a')).slice(0, N);
@@ -1167,8 +1164,10 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   // the size of the drum, from the room under the menu
   var vw = window.innerWidth, vh = window.innerHeight, nav = document.querySelector('.topnav');
   var top = nav ? Math.max(0, nav.getBoundingClientRect().bottom) : 0, room = vh - top, capH = vw < 600 ? 132 : 140;
-  var R = Math.max(110, Math.min(300, vw * .43, (room - capH - 64) / 2.7));
+  var R = Math.max(110, Math.min(460, vw * .46, (room - capH - 36) / 2.7));   // as large as the room allows
   var faceArc = 2 * Math.PI * R / N, H = Math.round(faceArc / ASPECT), w = 2 * R * Math.tan(ALPHA * Math.PI / 360), P = Math.round(4.2 * R);
+  var sharp = faceArc * (window.devicePixelRatio || 1) > 900;   // the finer pictures where the drum is large or the screen dense
+  PAGES.forEach(function (p) { p.src = sharp && p.face2 ? p.face2 : p.face; });
   var cy = top + 28 + (room - capH - 28) / 2;
 
   stage = el('div'); stage.id = 'arrive'; stage.setAttribute('aria-hidden', 'true');
@@ -1181,7 +1180,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   PAGES.forEach(function (p, i) {
     for (var k = 0; k < S; k++) {
       var s = el('i', 'ar-s' + (k === 0 ? ' ar-edge' : ''), drum), a = i * STEP + (k - (S - 1) / 2) * ALPHA;
-      s.style.backgroundImage = 'url("' + p.face + '")'; s.style.backgroundPosition = (-k * w) + 'px 0';
+      s.style.backgroundImage = 'url("' + p.src + '")'; s.style.backgroundPosition = (-k * w) + 'px 0';
       s.style.transform = 'rotateY(' + a + 'deg) translateZ(' + R + 'px)';
       slices.push({ el: s, page: i, a: a });
     }
@@ -1220,7 +1219,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   plan.push({ from: at, to: at, dur: HOLD }); seg(N * STEP, 440, settle);
   plan.push({ from: at, to: at, dur: 300 });
   var lit = -1, shown = -1, t0 = 0;
-  function dark(app) { var lit = Math.max(0, Math.cos((app + 16) * Math.PI / 180)); return Math.min(.92, Math.pow(1 - lit, 1.4) * 1.05).toFixed(3); }
+  function dark(app) { var lit = Math.max(0, Math.cos((app + 6) * Math.PI / 180)); return Math.min(.92, Math.pow(1 - lit, 1.4) * 1.05).toFixed(3); }
   function shadeAll(phi, keep) {
     for (var n = 0; n < slices.length; n++) {
       var s = slices[n], app = ((s.a - phi) % 360 + 540) % 360 - 180;
@@ -1275,7 +1274,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   }
 
   // it plays only once the four pictures are ready, and not at all if they take too long
-  var ready = PAGES.map(function (p) { var im = new Image(); im.src = p.face; return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); });
+  var ready = PAGES.map(function (p) { var im = new Image(); im.src = p.src; return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); });
   var waited = false, late = setTimeout(function () { waited = true; skip(); }, 1600);
   Promise.all(ready).then(function () { if (waited || done) return; clearTimeout(late); raf = requestAnimationFrame(frame); });
 })();
