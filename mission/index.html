@@ -499,6 +499,13 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .fm-src { margin: 12px 0 0; font-size: .86rem; color: var(--muted) } .fm-src a { color: var(--blue); font-weight: 600 }
 .fm-lim { margin: 4px 0 0; font-size: .82rem; color: var(--muted); font-style: italic }
 .fed-end { padding-bottom: 56px; font-size: .9rem; color: var(--muted) } .fed-end p { max-width: 46rem }
+@media (prefers-reduced-motion: no-preference) {
+  .bars-anim .bars.grow .bf { clip-path: inset(0 100% 0 0) } .bars-anim .bars.grow .bv { opacity: 0 }
+  .bars-anim .bars.grow.go .bf { animation: bar-grow var(--d) linear .25s forwards }
+  .bars-anim .bars.grow.go .bv { animation: bar-show .4s ease-out calc(var(--d) + .25s) forwards }
+}
+@keyframes bar-grow { to { clip-path: inset(0 0 0 0) } }
+@keyframes bar-show { to { opacity: 1 } }
 @media (max-width: 640px) {
   .br, .pair .br { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px } .br .bt { grid-column: 1 / -1; order: 3 }
   .tl li { grid-template-columns: 14px minmax(0, 1fr) } .tl-y { grid-column: 2 } .tl-m { grid-row: 1 / span 2 } .dots { gap: 3px }
@@ -508,11 +515,11 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .mission > section > h2 { margin: 0 0 14px }
 .mission h3 { margin: 20px 0 10px; font: 600 1rem/1.3 var(--body); color: var(--muted) }
 .m-note { margin: 0 0 14px; max-width: 44rem; font-size: .95rem; color: var(--muted) }
-.m-sec .vids:not(.more) { max-width: 700px; margin-bottom: 0 }
+.m-sec .vids:not(.more) { max-width: none; margin-bottom: 0 }
 .vids.more { margin: 0 }
 @media (max-width: 599px) { .vids.more { grid-template-columns: minmax(0, 1fr) } }
 .m-qt { margin: 0 0 8px; font: 600 12.5px/1.35 var(--body); letter-spacing: .01em; color: var(--muted) }
-.mission > section > h2.m-q { margin-bottom: 18px; max-width: 44rem; font: 600 clamp(1.3rem, 2.3vw, 1.8rem)/1.25 var(--display); color: var(--blue); text-wrap: pretty }
+.mission > section > h2.m-q { margin-bottom: 18px; max-width: 28em; font: 600 clamp(1.3rem, 2.3vw, 1.8rem)/1.25 var(--display); color: var(--blue); text-wrap: pretty }
 .me-more { grid-template-areas: "docs docs" "q1 q2" "join join" }
 .mission .me-grid > .invite { grid-area: join; max-width: none; margin: 0 }
 .me-docs > .vid { align-self: start }
@@ -538,10 +545,16 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 .m-card p { margin: 0; font-size: .97rem; line-height: 1.6 }
 .m-kick { display: block; margin: 24px 0 4px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
 .m-big { margin: 0; max-width: 40rem; font: 700 clamp(1.4rem, 2.8vw, 2.1rem)/1.15 var(--display); color: var(--blue); text-wrap: balance }
+.m-raise { margin: clamp(28px, 3.6vw, 44px) 0 4px; padding: clamp(22px, 3.4vw, 40px) clamp(22px, 3.8vw, 48px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, .96);
+  background: linear-gradient(155deg, rgba(255, 255, 255, .94), rgba(236, 243, 255, .66) 58%, rgba(255, 255, 255, .84));
+  box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .6), 0 2px 6px rgba(21, 23, 26, .07), 0 36px 64px -30px rgba(21, 23, 26, .5) }
+.m-raise .m-qt { margin-bottom: 10px }
+.m-raise .m-big { max-width: none; font-size: clamp(1.8rem, 3.6vw, 2.9rem); line-height: 1.1 }
+.m-raise .m-big span { display: block }
 .m-goals { margin: 8px 0 0; max-width: 50rem }
-.m-measures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0 0; max-width: 54rem; align-items: end }
-.m-measures div:nth-child(1) { min-height: 172px } .m-measures div:nth-child(2) { min-height: 144px }
-.m-measures div:nth-child(3) { min-height: 116px } .m-measures div:nth-child(4) { min-height: 88px }
+.m-measures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0 0; max-width: none; align-items: end }
+.m-measures div:nth-child(1) { min-height: 228px } .m-measures div:nth-child(2) { min-height: 192px }
+.m-measures div:nth-child(3) { min-height: 156px } .m-measures div:nth-child(4) { min-height: 120px }
 .m-measures div:nth-child(1) { border-color: rgba(31, 86, 195, .38) }
 @media (max-width: 599px) { .m-measures { grid-template-columns: minmax(0, 1fr); align-items: stretch } .m-measures div { min-height: 0 !important }
   .m-measures div:nth-child(2) { margin-left: 8% } .m-measures div:nth-child(3) { margin-left: 16% } .m-measures div:nth-child(4) { margin-left: 24% } }
@@ -551,8 +564,8 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .5), 0 1px 2px rgba(21, 23, 26, .05), 0 18px 34px -22px rgba(30, 50, 100, .42) }
 .mission .say:not(.invite) { border-left-color: var(--c) } .mission .me-cover, .mission .m-filing { border-left-color: var(--blue) }
 .mission .m-card, .mission .evo .n { border-top-color: var(--blue) } .mission .evo .n.files { border-top-color: #C3C7CD }
-.m-measures b { font: 800 1.8rem/1 var(--display); color: var(--blue) }
-.m-measures span { font-size: .92rem; line-height: 1.35 }
+.m-measures b { font: 800 clamp(2rem, 3.2vw, 2.6rem)/1 var(--display); color: var(--blue) }
+.m-measures span { font: 600 clamp(1.02rem, 1.45vw, 1.24rem)/1.3 var(--display); color: var(--ink) }
 .m-filing { margin: 16px 0 0; max-width: 50rem; background: var(--card); border: 1px solid var(--line); border-left: 8px solid var(--blue); border-radius: 12px; padding: 16px 20px }
 .m-filing .fh { display: block; margin-bottom: 8px; font: 600 12.5px/1.35 var(--body); color: var(--muted) }
 .m-filing p { margin: 0 0 .7em; font-size: .97rem; line-height: 1.65 } .m-filing p:last-child { margin: 0 }
@@ -584,10 +597,10 @@ html { background: #D9E2F0 } body { background: transparent }
 @media (prefers-reduced-motion: no-preference) { .oe-fade { animation: oe-fade 1400ms ease-out both; animation-delay: .15s } }
 @keyframes oe-fade { from { opacity: 0 } to { opacity: 1 } }
 .mission { padding-bottom: clamp(40px, 6vw, 72px) }
-.mission > section, .mission > .notes-m { margin: 0 0 clamp(18px, 2.4vw, 28px); padding: clamp(20px, 3.4vw, 44px); border-radius: 26px; border: 1px solid rgba(255, 255, 255, .95);
+.mission > section, .mission > .notes-m { margin: 0 0 clamp(18px, 2.4vw, 28px); padding: clamp(26px, 4.6vw, 64px); border-radius: 26px; border: 1px solid rgba(255, 255, 255, .95);
   background: linear-gradient(115deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0) 30%), linear-gradient(165deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .52) 55%, rgba(255, 255, 255, .72));
   box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(255, 255, 255, .5), 0 1px 2px rgba(21, 23, 26, .06), 0 22px 44px -26px rgba(21, 23, 26, .3) }
-.mission > .notes-m { padding-left: calc(clamp(20px, 3.4vw, 44px) + 1.4em) }
+.mission > .notes-m { padding-left: calc(clamp(26px, 4.6vw, 64px) + 1.4em) }
 @media (max-width: 759px) { .mission > section, .mission > .notes-m { border-radius: 20px } }
 .topnav { position: absolute; top: 0; left: 0; right: 0; z-index: 10; color: var(--ink); background: rgba(255, 255, 255, .34);
   -webkit-backdrop-filter: saturate(1.4) blur(16px); backdrop-filter: saturate(1.4) blur(16px); border-bottom: 1px solid rgba(20, 26, 42, .07) }
@@ -641,7 +654,7 @@ html { background: #D9E2F0 } body { background: transparent }
   </section>
 
   <section id="ready">
-    <h2>Ready before: his plan, his record, his videos</h2>
+    <h2>He was planning this before he reported the crime</h2>
     <p class="fed-sub m-sub" data-oe>Operating Equity · <a href="https://operatingequity.ai" target="_blank" rel="noopener">operatingequity.ai</a> · Legal Justice AI, the document that began it: dated from its own files</p>
     <div class="me-grid me-more">
       <aside class="me-docs" aria-label="His plan of July 11, 2024, and Emily">
@@ -680,14 +693,13 @@ html { background: #D9E2F0 } body { background: transparent }
       <div class="m-card" data-oe><h3>Mission</h3><p>Our mission is to pioneer a new industry at the intersection of AI and legal services, both creating and transforming legal support. Legal Justice AI offers 24/7 comprehensive assistance, empowering individuals to navigate litigation with greater awareness, confidence, less stress, and better outcomes. We make justice more accessible through a vast array of tools, information, data, analytics, planning, and, ultimately, advanced judicial capabilities.</p></div>
       <div class="m-card" data-oe><h3>Purpose</h3><p>Legal Justice AI seeks to simplify access to legal information, empower individuals in their legal journeys, and reduce the overall burden of litigation on society. Our company prioritizes the well-being of our customers by providing equitable, data-driven legal insight and comprehensive services and building trust through an absolute dedication to customer care and success. We intend to steer the reimagination of the legal system into a more equitable, accessible system focused on problem-solving using various tools, including emerging AI superintelligence.</p></div>
     </div>
+    <div class="m-raise" data-who="halsey">
+      <p class="m-qt">Halsey Minor · October 25, 2026</p>
+      <p class="m-big"><span>“We are not committed to family law.</span> <span>We are committed to human solutions.”</span></p>
+    </div>
     <span class="m-kick" data-oe>Same document · “Company goals”</span>
-    <p class="m-big" data-oe>We are committed to the problem, not family law.</p>
     <p class="m-goals" data-oe>We will measure ourselves in four ways: 1. improving individual outcomes, 2. reducing user anxiety, 3. reducing total time, and 4. reducing total cost.</p>
     <div class="m-measures" data-oe><div><b>1</b><span>improving individual outcomes</span></div><div><b>2</b><span>reducing user anxiety</span></div><div><b>3</b><span>reducing total time</span></div><div><b>4</b><span>reducing total cost</span></div></div>
-    <div class="m-filing" data-oe>
-      <span class="fh">Same document · “I Have Been Served” · excerpt</span>
-      <p>After the shock of being served and the confusion that follows, you upload your documents to the service. Immediately, you understand what's being claimed, a schedule of events, relevant laws explained, a list of documents to be filed, a game plan, time estimates per state, approximate spousal and support payments, and be provided with lawyers who match your needs, are successful and meet cost benchmarks. Alternative approaches like mediation will be introduced and compared, and you will receive high-quality litigation matching. While we may build mediation services in time, we will suggest the best alternatives, even when they are not financial partners.  You will never feel alone and helpless and will always know your options with Love and Law, even at 3 am communicating with your AI advocate. We will ALWAYS put the customer’s interests first, steering you to resources across the web. A tangle of data, laws, consultants, mediators, lawyers, and vast amounts of statistical knowledge spread across the web, documents, and electronic filing services are made understandable and available.</p>
-    </div>
     <div class="m-filing" data-oe>
       <span class="fh">Same document · the author, and the first service · excerpts</span>
       <p>Legal Justice will be the first of an entirely new kind of company. Having built a NASDAQ 100 web publishing company, CNET, I left to co-found the SaaS business as Salesforce.com’s co-founder, #2 shareholder, and largest investor for seven years.</p>
@@ -716,7 +728,7 @@ html { background: #D9E2F0 } body { background: transparent }
   <section id="videos">
     <h2 data-oe>His videos</h2>
     <p class="m-note"><span data-count>9</span> videos provided by Halsey Minor. Titles and upload dates are as Vimeo gives them.</p>
-    <h3 data-oe>Made with Google Gemini, each in answer to a question</h3>
+    <h3 data-edited>Made with Google Gemini, each an answer to a question</h3>
     <div class="vids more">
       <a class="vid pre" href="https://vimeo.com/1200593847" target="_blank" rel="noopener" data-vimeo="1200593847" aria-label="Play the video: The Trillion-Dollar Gift">
         <span class="vt">The Trillion-Dollar Gift</span>
