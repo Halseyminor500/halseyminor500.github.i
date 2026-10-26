@@ -440,14 +440,24 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 </style>
 <style>
 html.arrive { overflow: hidden }
-html.arrive body::before { content: ""; position: fixed; inset: 0; z-index: 900; background: radial-gradient(ellipse 80% 70% at 50% 42%, #1D2330 0%, #10131A 55%, #07080B 100%) }
+html.arrive { --ar-stage: radial-gradient(34% 40% at 50% 40%, rgba(206, 222, 255, .17) 0%, rgba(206, 222, 255, 0) 72%),
+  radial-gradient(58% 52% at 28% 16%, rgba(214, 228, 255, .44) 0%, rgba(150, 180, 238, .18) 42%, rgba(150, 180, 238, 0) 72%),
+  radial-gradient(42% 48% at 88% 58%, rgba(31, 86, 195, .42) 0%, rgba(31, 86, 195, 0) 70%),
+  radial-gradient(80% 34% at 50% 104%, rgba(255, 226, 190, .10) 0%, rgba(255, 226, 190, 0) 70%),
+  linear-gradient(180deg, #2A3A57 0%, #1C2741 46%, #111A2E 100%) }
+html.arrive body::before { content: ""; position: fixed; inset: 0; z-index: 900; background: var(--ar-stage) }
 html.arrive.ar-landing body::before { content: none }
 html.arrive .topnav { position: relative; z-index: 1000 }
 html.arrive .nav-a[aria-current="page"] { border-bottom-color: transparent }
 html.arrive .nav-a { transition: border-color .18s ease, text-shadow .18s ease, opacity .18s ease; opacity: .62 }
 html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shadow: 0 0 14px rgba(255, 255, 255, .8) }
 #arrive { position: fixed; inset: 0; z-index: 950; overflow: hidden; color: #FFFFFF; cursor: pointer; -webkit-tap-highlight-color: transparent;
-  background: radial-gradient(ellipse 80% 70% at 50% 42%, #1D2330 0%, #10131A 55%, #07080B 100%); transition: opacity .45s ease }
+  background: var(--ar-stage); transition: opacity .45s ease }
+#arrive::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .07) 0, rgba(255, 255, 255, .015) 5px, rgba(10, 16, 30, .07) 10px, rgba(255, 255, 255, .02) 13px, rgba(255, 255, 255, .07) 16px),
+    linear-gradient(112deg, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, .06) 34%, rgba(255, 255, 255, 0) 48%);
+  -webkit-mask-image: radial-gradient(70% 62% at 32% 26%, #000 0%, rgba(0, 0, 0, .55) 45%, rgba(0, 0, 0, 0) 78%);
+  mask-image: radial-gradient(70% 62% at 32% 26%, #000 0%, rgba(0, 0, 0, .55) 45%, rgba(0, 0, 0, 0) 78%) }
 #arrive.ar-out { opacity: 0 }
 .ar-scene { position: absolute; left: 50%; top: var(--ar-cy); width: 0; height: 0; perspective: var(--ar-p); transform-origin: 0 0 }
 .ar-tilt, .ar-drum { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d }
@@ -462,7 +472,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   background: radial-gradient(circle, #2A3140 0%, #161A22 62%, #0B0D11 100%); box-shadow: 0 0 0 2px rgba(255, 255, 255, .6), inset 0 0 0 9px rgba(255, 255, 255, .06);
   transform: translateY(calc(var(--ar-h) / -2)) rotateX(90deg); -webkit-backface-visibility: hidden; backface-visibility: hidden }
 .ar-floor { position: absolute; left: calc(var(--ar-r) * -1.5); width: calc(var(--ar-r) * 3); top: calc(var(--ar-h) * .44); height: calc(var(--ar-r) * .7); pointer-events: none;
-  background: radial-gradient(ellipse at 50% 40%, rgba(120, 150, 210, .32) 0%, rgba(120, 150, 210, .08) 45%, rgba(0, 0, 0, 0) 70%) }
+  background: radial-gradient(ellipse at 50% 40%, rgba(170, 196, 245, .38) 0%, rgba(150, 180, 238, .1) 45%, rgba(0, 0, 0, 0) 70%) }
 .ar-cap { position: absolute; left: 50%; top: var(--ar-capy); transform: translateX(-50%); width: min(92vw, 640px); text-align: center; pointer-events: none }
 .ar-n { display: block; font: 500 12px/1 "IBM Plex Mono", Menlo, monospace; letter-spacing: .24em; text-transform: uppercase; color: rgba(255, 255, 255, .62) }
 .ar-name { display: block; margin: 10px 0 6px; font: 800 clamp(28px, 4.6vw, 44px)/1.05 var(--display); letter-spacing: .02em }
