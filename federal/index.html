@@ -401,6 +401,8 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 @media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
 @media (max-width: 374px) { .nav-a { font-size: 16px; letter-spacing: .01em } .nav-in { gap: 10px } }
+@media (max-width: 599px) { .nav-in { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 18px; row-gap: 0; overflow: visible; padding-top: 2px; padding-bottom: 2px }
+  .nav-a { padding: 10px 0 7px } .nav-a:first-child { grid-column: 1 / -1; justify-self: start } }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: #FFFFFF }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }
@@ -525,7 +527,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 <body>
 <nav class="topnav" aria-label="Halsey Minor">
   <div class="wrap nav-in">
-    <a class="nav-a" href="/">Home</a>
+    <a class="nav-a" href="/">Home: Fight for Justice</a>
     <a class="nav-a" href="/federal/" aria-current="page">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
     <a class="nav-a" href="/legacy/">Legacy</a>

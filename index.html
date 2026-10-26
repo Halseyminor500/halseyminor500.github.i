@@ -409,6 +409,8 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 @media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
 @media (max-width: 374px) { .nav-a { font-size: 16px; letter-spacing: .01em } .nav-in { gap: 10px } }
+@media (max-width: 599px) { .nav-in { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 18px; row-gap: 0; overflow: visible; padding-top: 2px; padding-bottom: 2px }
+  .nav-a { padding: 10px 0 7px } .nav-a:first-child { grid-column: 1 / -1; justify-self: start } }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: #FFFFFF }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }
@@ -436,11 +438,64 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 @media (max-width: 759px) { .r1-open { min-height: 300px; align-content: center } }
 @media (max-width: 759px) { .un-list > li { grid-template-columns: minmax(0, 1fr) auto; padding: 9px 10px 10px 12px; font-size: .92rem } .un-list .un-main { grid-column: 1 / -1; order: 3 } }
 </style>
+<style>
+html.arrive { overflow: hidden }
+html.arrive body::before { content: ""; position: fixed; inset: 0; z-index: 900; background: radial-gradient(ellipse 80% 70% at 50% 42%, #1D2330 0%, #10131A 55%, #07080B 100%) }
+html.arrive.ar-landing body::before { content: none }
+html.arrive .topnav { position: relative; z-index: 1000 }
+html.arrive .nav-a[aria-current="page"] { border-bottom-color: transparent }
+html.arrive .nav-a { transition: border-color .18s ease, text-shadow .18s ease, opacity .18s ease; opacity: .62 }
+html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shadow: 0 0 14px rgba(255, 255, 255, .8) }
+#arrive { position: fixed; inset: 0; z-index: 950; overflow: hidden; color: #FFFFFF; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: radial-gradient(ellipse 80% 70% at 50% 42%, #1D2330 0%, #10131A 55%, #07080B 100%); transition: opacity .45s ease }
+#arrive.ar-out { opacity: 0 }
+.ar-scene { position: absolute; left: 50%; top: var(--ar-cy); width: 0; height: 0; perspective: var(--ar-p); transform-origin: 0 0 }
+.ar-tilt, .ar-drum { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d }
+.ar-tilt { transform: rotateX(-9deg) }
+.ar-drum { will-change: transform }
+.ar-s { position: absolute; left: calc(var(--ar-w) / -2); top: calc(var(--ar-h) / -2); width: var(--ar-w); height: var(--ar-h);
+  background-repeat: no-repeat; background-size: var(--ar-fw) var(--ar-h); -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, .78), inset 0 -3px 0 rgba(255, 255, 255, .5) }
+.ar-s::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(7, 8, 11, var(--sl, 0)), rgba(7, 8, 11, var(--sr, 0))) }
+.ar-s.ar-edge { box-shadow: inset 0 3px 0 rgba(255, 255, 255, .78), inset 0 -3px 0 rgba(255, 255, 255, .5), inset 2px 0 0 rgba(7, 8, 11, .9) }
+.ar-lid { position: absolute; left: calc(var(--ar-r) * -1); top: calc(var(--ar-r) * -1); width: calc(var(--ar-r) * 2); height: calc(var(--ar-r) * 2); border-radius: 50%;
+  background: radial-gradient(circle, #2A3140 0%, #161A22 62%, #0B0D11 100%); box-shadow: 0 0 0 2px rgba(255, 255, 255, .6), inset 0 0 0 9px rgba(255, 255, 255, .06);
+  transform: translateY(calc(var(--ar-h) / -2)) rotateX(90deg); -webkit-backface-visibility: hidden; backface-visibility: hidden }
+.ar-floor { position: absolute; left: calc(var(--ar-r) * -1.5); width: calc(var(--ar-r) * 3); top: calc(var(--ar-h) * .44); height: calc(var(--ar-r) * .7); pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, rgba(120, 150, 210, .32) 0%, rgba(120, 150, 210, .08) 45%, rgba(0, 0, 0, 0) 70%) }
+.ar-cap { position: absolute; left: 50%; top: var(--ar-capy); transform: translateX(-50%); width: min(92vw, 640px); text-align: center; pointer-events: none }
+.ar-n { display: block; font: 500 12px/1 "IBM Plex Mono", Menlo, monospace; letter-spacing: .24em; text-transform: uppercase; color: rgba(255, 255, 255, .62) }
+.ar-name { display: block; margin: 10px 0 6px; font: 800 clamp(28px, 4.6vw, 44px)/1.05 var(--display); letter-spacing: .02em }
+.ar-line { display: block; font: 400 clamp(14px, 1.7vw, 17px)/1.45 var(--body); color: rgba(255, 255, 255, .78) }
+.ar-line i { font-style: normal; font-weight: 600; color: #FFFFFF }
+.ar-cap > * { transition: opacity .2s ease, transform .2s ease }
+.ar-cap.ar-blur > * { opacity: 0; transform: translateY(6px) }
+.ar-skip { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); appearance: none; border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .08); color: #FFFFFF; border-radius: 999px; padding: 9px 16px; font: 600 14px/1 var(--body); letter-spacing: .04em; cursor: pointer }
+</style>
+<script>
+(function () {
+  var d = document.documentElement;
+  try {
+    var force = /[?&]arrive=1\b/.test(location.search);
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var inside = /^https?:\/\/(www\.)?halseyminor\.com\//i.test(document.referrer || '');
+    var robot = /bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent || '') || navigator.webdriver === true;
+    var seen = false; try { seen = sessionStorage.getItem('arrive') === '1'; } catch (e) {}
+    var small = window.innerHeight < 480 || window.innerWidth < 300;
+    var hidden = document.visibilityState === 'hidden';
+    if (force || (!still && !inside && !robot && !seen && !small && !hidden && !(location.hash && location.hash.length > 1))) {
+      d.classList.add('arrive');
+      window.arriveFailsafe = setTimeout(function () { d.classList.remove('arrive'); }, 6000);
+    }
+  } catch (e) { d.classList.remove('arrive'); }
+})();
+</script>
 </head>
 <body>
 <nav class="topnav" aria-label="Halsey Minor">
   <div class="wrap nav-in">
-    <a class="nav-a" href="/" aria-current="page">Home</a>
+    <a class="nav-a" href="/" aria-current="page">Home: Fight for Justice</a>
     <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
     <a class="nav-a" href="/legacy/">Legacy</a>
@@ -1064,6 +1119,155 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   }
   var asof = document.getElementById('asof');
   if (asof) asof.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+})();
+</script>
+<script>
+(function () {
+  /* The arrival. The four pages, in the menu's order, wrapped around a drum that turns under the menu: one fast turn to Home, then a
+     pause on each page in the menu's order while its menu item lights, then back to Home, where it rests and unrolls into the page itself. */
+  var root = document.documentElement;
+  if (!root.classList.contains('arrive')) return;
+  var PAGES = [
+    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'Will it be held accountable to the laws?', face: '/arrive/home.webp' },
+    { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp' },
+    { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp' },
+    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp' }
+  ];
+  var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S, ASPECT = 390 / 507, HERE = 0;   // HERE: the page the drum comes to rest on
+  var links = [].slice.call(document.querySelectorAll('.topnav .nav-a')).slice(0, N);
+  var stage, drum, cap, slices = [], raf = 0, done = false, landing = false, failsafe = 0;
+
+  function el(tag, cls, parent) { var e = document.createElement(tag); if (cls) e.className = cls; if (parent) parent.appendChild(e); return e; }
+  function end() {
+    if (done) return; done = true; cancelAnimationFrame(raf); clearTimeout(failsafe); clearTimeout(window.arriveFailsafe);
+    links.forEach(function (a) { a.classList.remove('ar-lit'); });
+    root.classList.remove('arrive', 'ar-landing');
+    if (stage && stage.parentNode) stage.parentNode.removeChild(stage);
+    ['keydown', 'wheel', 'touchmove', 'orientationchange'].forEach(function (t) { window.removeEventListener(t, skip, true); });
+  }
+  function skip() {
+    if (done || landing === 'skip') return; landing = 'skip'; cancelAnimationFrame(raf);
+    if (!stage) return end();
+    root.classList.add('ar-landing'); stage.classList.add('ar-out'); setTimeout(end, 380);
+  }
+  clearTimeout(window.arriveFailsafe); failsafe = setTimeout(end, 12000);   // from here this script ends the show itself
+  if (document.visibilityState === 'hidden' || !links.length) return end();
+  try { sessionStorage.setItem('arrive', '1'); } catch (e) {}
+
+  // the size of the drum, from the room under the menu
+  var vw = window.innerWidth, vh = window.innerHeight, nav = document.querySelector('.topnav');
+  var top = nav ? Math.max(0, nav.getBoundingClientRect().bottom) : 0, room = vh - top, capH = vw < 600 ? 132 : 140;
+  var R = Math.max(110, Math.min(300, vw * .43, (room - capH - 64) / 2.7));
+  var faceArc = 2 * Math.PI * R / N, H = Math.round(faceArc / ASPECT), w = 2 * R * Math.tan(ALPHA * Math.PI / 360), P = Math.round(4.2 * R);
+  var cy = top + 28 + (room - capH - 28) / 2;
+
+  stage = el('div'); stage.id = 'arrive'; stage.setAttribute('aria-hidden', 'true');
+  var st = stage.style;
+  st.setProperty('--ar-r', R + 'px'); st.setProperty('--ar-h', H + 'px'); st.setProperty('--ar-w', (w + 1.2) + 'px'); st.setProperty('--ar-fw', (w * S) + 'px');
+  st.setProperty('--ar-p', P + 'px'); st.setProperty('--ar-cy', cy + 'px'); st.setProperty('--ar-capy', (cy + H * .5 * P / (P - R) + 22) + 'px');
+  var scene = el('div', 'ar-scene', stage), tilt = el('div', 'ar-tilt', scene);
+  el('div', 'ar-floor', scene);
+  drum = el('div', 'ar-drum', tilt);
+  PAGES.forEach(function (p, i) {
+    for (var k = 0; k < S; k++) {
+      var s = el('i', 'ar-s' + (k === 0 ? ' ar-edge' : ''), drum), a = i * STEP + (k - (S - 1) / 2) * ALPHA;
+      s.style.backgroundImage = 'url("' + p.face + '")'; s.style.backgroundPosition = (-k * w) + 'px 0';
+      s.style.transform = 'rotateY(' + a + 'deg) translateZ(' + R + 'px)';
+      slices.push({ el: s, page: i, a: a });
+    }
+  });
+  var lid = el('div', 'ar-lid', tilt);
+  cap = el('div', 'ar-cap ar-blur', stage);
+  var cn = el('span', 'ar-n', cap), cname = el('b', 'ar-name', cap), cline = el('span', 'ar-line', cap);
+  var sk = el('button', 'ar-skip', stage); sk.type = 'button'; sk.tabIndex = -1; sk.textContent = 'Skip';
+  stage.addEventListener('pointerdown', skip);
+  ['keydown', 'wheel', 'touchmove', 'orientationchange'].forEach(function (t) { window.addEventListener(t, skip, true); });
+  document.body.appendChild(stage);
+  drum.style.transform = 'rotateY(0deg)';
+  var box = slices.reduce(function (b, s) { var r = s.el.getBoundingClientRect(); return { t: Math.min(b.t, r.top), b: Math.max(b.b, r.bottom) }; }, { t: 1e9, b: -1e9 });
+  var shift = top + Math.max(18, (room - (box.b - box.t) - 20 - capH) / 2) - box.t;
+  cy += shift; st.setProperty('--ar-cy', cy + 'px'); st.setProperty('--ar-capy', (box.b + shift + 16) + 'px');
+
+  function caption(i) {
+    var p = PAGES[i];
+    cap.classList.add('ar-blur');
+    setTimeout(function () {
+      if (done) return;
+      cn.textContent = (i + 1) + ' of ' + N; cname.textContent = p.name;
+      cline.textContent = ''; if (p.title) { var t = el('i', null, cline); t.textContent = p.title; cline.appendChild(document.createTextNode(' · ')); }
+      cline.appendChild(document.createTextNode(p.line));
+      cap.classList.remove('ar-blur');
+    }, 150);
+  }
+  // the turn: one fast revolution, a pause on each page in the menu's order, then rest on Home
+  var outCubic = function (u) { return 1 - Math.pow(1 - u, 3); };
+  var inOut = function (u) { return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+  var settle = function (u) { var c = 1; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
+  var plan = [], at = -360, HOLD = 680;                 // it arrives already turning, on Home, goes once round to Home, then visits each page in turn
+  function seg(to, dur, ease) { plan.push({ from: at, to: to, dur: dur, ease: ease }); at = to; }
+  seg(0, 1150, outCubic);
+  for (var j = 1; j < N; j++) { plan.push({ from: at, to: at, dur: HOLD }); seg(j * STEP, 440, inOut); }
+  plan.push({ from: at, to: at, dur: HOLD }); seg(N * STEP, 440, settle);
+  plan.push({ from: at, to: at, dur: 300 });
+  var lit = -1, shown = -1, t0 = 0;
+  function dark(app) { var lit = Math.max(0, Math.cos((app + 16) * Math.PI / 180)); return Math.min(.92, Math.pow(1 - lit, 1.4) * 1.05).toFixed(3); }
+  function shadeAll(phi, keep) {
+    for (var n = 0; n < slices.length; n++) {
+      var s = slices[n], app = ((s.a - phi) % 360 + 540) % 360 - 180;
+      if (Math.abs(app) > 100 || s.page === keep) continue;
+      s.el.style.setProperty('--sl', dark(app - ALPHA / 2)); s.el.style.setProperty('--sr', dark(app + ALPHA / 2));
+    }
+  }
+  function front(phi) { return ((Math.round(phi / STEP) % N) + N) % N; }
+  function light(i) { if (i === lit) return; lit = i; links.forEach(function (a, n) { a.classList.toggle('ar-lit', n === i); }); }
+  function frame(now) {
+    if (done) return;
+    if (!t0) t0 = now;
+    var t = now - t0, phi = at, k = 0, fast = true;
+    for (; k < plan.length; k++) {
+      var g = plan[k];
+      if (t < g.dur) { phi = g.ease ? g.from + (g.to - g.from) * g.ease(t / g.dur) : g.from; fast = k === 0; break; }
+      t -= g.dur;
+    }
+    drum.style.transform = 'rotateY(' + (-phi) + 'deg)'; shadeAll(phi, -1);
+    var f = front(phi); light(f);
+    if (!fast && f !== shown && Math.abs(phi - Math.round(phi / STEP) * STEP) < STEP * .3) { shown = f; caption(f); }
+    if (k >= plan.length) return land();
+    raf = requestAnimationFrame(frame);
+  }
+  // the landing: Home unrolls off the drum, flat, and comes forward as the stage clears
+  function land() {
+    landing = true; root.classList.add('ar-landing'); drum.style.transform = 'rotateY(' + (-HERE * STEP) + 'deg)';
+    var l0 = 0, D = 760, k = P / (P - R), aim = null, hero = document.getElementById('top');
+    // on a phone the page's own top is the same picture: Home lands exactly on it, full width, so the hand-off cannot be seen
+    if (vw < 700 && hero) { var hs = vw / (w * S * k); aim = { s: hs, ty: hero.getBoundingClientRect().top - cy + H / 2 * k * hs }; }
+    function step(now) {
+      if (done || landing === 'skip') return;
+      if (!l0) l0 = now;
+      var u = Math.min(1, (now - l0) / D), e = inOut(u), flat = Math.min(1, e * 1.25);
+      var r2 = R / Math.max(.002, 1 - flat);
+      slices.forEach(function (s) {
+        if (s.page === HERE) {
+          var a2 = (s.a - HERE * STEP) * R / r2;
+          s.el.style.transform = 'rotateY(' + (HERE * STEP) + 'deg) translateZ(' + (R - r2) + 'px) rotateY(' + a2 + 'deg) translateZ(' + r2 + 'px)';
+          ['--sl', '--sr'].forEach(function (v) { s.el.style.setProperty(v, ((parseFloat(s.el.style.getPropertyValue(v)) || 0) * (1 - e)).toFixed(3)); });
+        } else s.el.style.opacity = Math.max(0, 1 - u * 3);
+      });
+      lid.style.opacity = Math.max(0, 1 - u * 2.5);
+      scene.style.transform = aim ? 'translateY(' + (aim.ty * e) + 'px) scale(' + (1 + (aim.s - 1) * e) + ')' : 'scale(' + (1 + .3 * e) + ')';
+      tilt.style.transform = 'rotateX(' + (-9 * (1 - e)) + 'deg)';
+      cap.style.opacity = Math.max(0, 1 - u * 3);
+      var f0 = aim ? .62 : .45; stage.style.opacity = u < f0 ? 1 : Math.max(0, 1 - (u - f0) / (1 - f0));
+      if (u >= 1) return end();
+      raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  // it plays only once the four pictures are ready, and not at all if they take too long
+  var ready = PAGES.map(function (p) { var im = new Image(); im.src = p.face; return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); });
+  var waited = false, late = setTimeout(function () { waited = true; skip(); }, 1600);
+  Promise.all(ready).then(function () { if (waited || done) return; clearTimeout(late); raf = requestAnimationFrame(frame); });
 })();
 </script>
 

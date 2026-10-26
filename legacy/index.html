@@ -59,6 +59,8 @@ img { max-width: 100% }
 .topnav .wrap { max-width: 1240px }
 @media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
 @media (max-width: 374px) { .nav-a { font-size: 16px; letter-spacing: .01em } .nav-in { gap: 10px } }
+@media (max-width: 599px) { .nav-in { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 18px; row-gap: 0; overflow: visible; padding-top: 2px; padding-bottom: 2px }
+  .nav-a { padding: 10px 0 7px } .nav-a:first-child { grid-column: 1 / -1; justify-self: start } }
 .hero { padding-top: clamp(22px, 3.6vw, 48px); padding-bottom: clamp(16px, 2.6vw, 30px) }
 .hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(22px, 4vw, 56px); align-items: center }
 .eyebrow { margin: 0 0 12px; font: 500 12px/1.4 var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--rule) }
@@ -252,7 +254,7 @@ dialog.viewer::backdrop { background: var(--veil) }
 <body>
 <nav class="topnav" aria-label="Halsey Minor">
   <div class="wrap nav-in">
-    <a class="nav-a" href="/">Home</a>
+    <a class="nav-a" href="/">Home: Fight for Justice</a>
     <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
     <a class="nav-a" href="/legacy/" aria-current="page">Legacy</a>
