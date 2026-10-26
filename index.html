@@ -410,7 +410,7 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .sec { padding-block: clamp(20px, 2.6vw, 36px) }
 @media (min-width: 760px) { .due > li { grid-template-columns: 6.6rem minmax(0, 1fr) auto } .due .dt .rn { display: inline; margin-right: 5px } }
 .topnav { background: var(--blue); color: #FFFFFF }
-.nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
+.nav-in { display: flex; flex-wrap: wrap; align-items: center; column-gap: clamp(18px, 3.6vw, 44px); row-gap: 0; min-height: 50px }
 .nav-in::-webkit-scrollbar { display: none }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 @media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
@@ -542,6 +542,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
     <a class="nav-a" href="/legacy/">Legacy</a>
+    <a class="nav-a" href="/our-children/">Our Children</a>
   </div>
 </nav>
 <a class="update u-h" id="update" href="#resp-2026-10-25-36" data-kind="response"><span class="wrap u-line"><span class="u-round">Round <b data-round>10</b></span> <span class="u-kind">My Response</span> <span class="u-text"><span class="u-date">Oct 25</span> · one letter answering the District Attorney's Fail of October 23</span> <span class="u-go">Read <span aria-hidden="true">→</span></span></span></a>
@@ -1014,7 +1015,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     </div>
   </section>
 </main>
-<nav class="nx" aria-label="The next page"><a class="nx-card" href="/federal/"><span class="nx-text"><span class="nx-k">Next · 2 of 4</span><span class="nx-name">Going Federal <span aria-hidden="true">→</span></span><span class="nx-line">Why Halsey is going federal</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="go"></i><i></i><i></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/federal.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
+<nav class="nx" aria-label="The next page"><a class="nx-card" href="/federal/"><span class="nx-text"><span class="nx-k">Next · 2 of 5</span><span class="nx-name">Going Federal <span aria-hidden="true">→</span></span><span class="nx-line">Why Halsey is going federal</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="go"></i><i></i><i></i><i></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/federal.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
 
 <footer>
   <div class="wrap">
@@ -1181,15 +1182,17 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 </script>
 <script>
 (function () {
-  /* The arrival. The four pages, in the menu's order, wrapped around a drum that turns under the menu: one fast turn to Home, then a
-     pause on each page in the menu's order while its menu item lights, then back to Home, where it rests and unrolls into the page itself. */
+  /* The arrival. The five pages, in the menu's order, wrapped around a drum that turns under the menu: one fast turn to Home, then a
+     pause on each page in the menu's order while its menu item lights, then back to Home, where it rests and unrolls into the page itself.
+     Our Children is the fifth, so a child who arrives sees at once that there are words for them. */
   var root = document.documentElement;
   if (!root.classList.contains('arrive')) return;
   var PAGES = [
     { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'When will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp' },
     { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp', face2: '/arrive/federal-2x.webp' },
     { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp', face2: '/arrive/mission-2x.webp' },
-    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp' }
+    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp' },
+    { name: 'Our Children', title: 'Love Keeps No Hours', line: 'For every parent who loves a child they cannot reach', face: '/arrive/children.webp', face2: '/arrive/children-2x.webp' }
   ];
   var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S, ASPECT = 390 / 507, HERE = 0;   // HERE: the page the drum comes to rest on
   var links = [].slice.call(document.querySelectorAll('.topnav .nav-a')).slice(0, N);
@@ -1215,7 +1218,9 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   // the size of the drum, from the room under the menu
   var vw = window.innerWidth, vh = window.innerHeight, nav = document.querySelector('.topnav');
   var top = nav ? Math.max(0, nav.getBoundingClientRect().bottom) : 0, room = vh - top, capH = vw < 600 ? 132 : 140;
-  var R = Math.max(110, Math.min(460, vw * .46, (room - capH - 36) / 2.7));   // as large as the room allows
+  // as large as the room allows; with more pages each takes a smaller share of the drum, so the drum grows to keep each picture near the
+  // size it had with four (on a phone it may just touch the screen's edges)
+  var R = Math.max(110, Math.min(460 * N / 4, vw * Math.min(.52, .46 * N / 4), (room - capH - 36) / (2.7 * 4 / N)));
   var faceArc = 2 * Math.PI * R / N, H = Math.round(faceArc / ASPECT), w = 2 * R * Math.tan(ALPHA * Math.PI / 360), P = Math.round(4.2 * R);
   var sharp = faceArc * (window.devicePixelRatio || 1) > 900;   // the finer pictures where the drum is large or the screen dense
   PAGES.forEach(function (p) { p.src = sharp && p.face2 ? p.face2 : p.face; });

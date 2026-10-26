@@ -403,7 +403,7 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .sec { padding-block: clamp(20px, 2.6vw, 36px) }
 @media (min-width: 760px) { .due > li { grid-template-columns: 6.6rem minmax(0, 1fr) auto } .due .dt .rn { display: inline; margin-right: 5px } }
 .topnav { background: var(--blue); color: #FFFFFF }
-.nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
+.nav-in { display: flex; flex-wrap: wrap; align-items: center; column-gap: clamp(18px, 3.6vw, 44px); row-gap: 0; min-height: 50px }
 .nav-in::-webkit-scrollbar { display: none }
 .nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 @media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
@@ -652,6 +652,7 @@ html { background: #D9E2F0 } body { background: transparent }
     <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/" aria-current="page">Mission</a>
     <a class="nav-a" href="/legacy/">Legacy</a>
+    <a class="nav-a" href="/our-children/">Our Children</a>
   </div>
 </nav>
 <div class="oe-field" aria-hidden="true"><canvas class="oe-light"></canvas></div>
@@ -803,7 +804,7 @@ html { background: #D9E2F0 } body { background: transparent }
     <li id="n17" value="17">Legal Justice AI, written by him. The first cover to carry a date reads July 11, 2024. The vision line is from Draft 30 of his plan; the CNET line is from Draft 32. The video titles and dates are as Vimeo gives them.</li>
   </ol>
 </main>
-<nav class="nx" aria-label="The next page"><a class="nx-card" href="/legacy/"><span class="nx-text"><span class="nx-k">Next · 4 of 4</span><span class="nx-name">Legacy <span aria-hidden="true">→</span></span><span class="nx-line"><b>Minor on the Law</b> · Four generations of one family’s argument with the law</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="go"></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/legacy.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
+<nav class="nx" aria-label="The next page"><a class="nx-card" href="/legacy/"><span class="nx-text"><span class="nx-k">Next · 4 of 5</span><span class="nx-name">Legacy <span aria-hidden="true">→</span></span><span class="nx-line"><b>Minor on the Law</b> · Four generations of one family’s argument with the law</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="go"></i><i></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/legacy.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
 <script>
 (function () {
   // the light at the top, as on operatingequity.ai: very large circles centred well below the screen, a third of a screen apart, drifting

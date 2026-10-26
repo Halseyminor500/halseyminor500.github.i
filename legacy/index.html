@@ -51,7 +51,7 @@ img { max-width: 100% }
 .wrap { width: 100%; max-width: 1180px; margin: 0 auto; box-sizing: border-box; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
 @media (min-width: 760px) { .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)) } }
 .topnav { background: var(--blue); color: var(--white); position: relative; z-index: 5 }
-.nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
+.nav-in { display: flex; flex-wrap: wrap; align-items: center; column-gap: clamp(18px, 3.6vw, 44px); row-gap: 0; min-height: 50px }
 .nav-in::-webkit-scrollbar { display: none }
 .nav-a { flex: none; color: var(--white); text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 .nav-a:hover { border-bottom-color: rgba(255, 255, 255, .7) }
@@ -288,6 +288,7 @@ dialog.viewer::backdrop { background: var(--veil) }
     <a class="nav-a" href="/federal/">Going Federal <span aria-hidden="true">→</span></a>
     <a class="nav-a" href="/mission/">Mission</a>
     <a class="nav-a" href="/legacy/" aria-current="page">Legacy</a>
+    <a class="nav-a" href="/our-children/">Our Children</a>
   </div>
 </nav>
 <div class="era" aria-hidden="true"><div class="era-now"></div><div class="era-past"></div></div>
@@ -475,7 +476,7 @@ dialog.viewer::backdrop { background: var(--veil) }
 
   </div>
 </main>
-<nav class="nx" aria-label="The next page"><a class="nx-card" href="/"><span class="nx-text"><span class="nx-k">Next · 1 of 4</span><span class="nx-name">Home: Fight for Justice <span aria-hidden="true">→</span></span><span class="nx-line"><b>The Justice Meter</b> · When will it be held accountable to the laws?</span><span class="nx-track" aria-hidden="true"><i class="on go"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/home.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
+<nav class="nx" aria-label="The next page"><a class="nx-card" href="/our-children/"><span class="nx-text"><span class="nx-k">Next · 5 of 5</span><span class="nx-name">Our Children <span aria-hidden="true">→</span></span><span class="nx-line"><b>Love Keeps No Hours</b> · For every parent who loves a child they cannot reach</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="go"></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/children.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
 
 <dialog class="reader era-1" id="r-truce" aria-labelledby="r-truce-h">
   <header class="rd-head"><div><p class="chip">Division I · 3 March 1865</p><h3 id="r-truce-h">The flag of truce</h3><p class="yrs">Sheridan and Custer enter Charlottesville</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
