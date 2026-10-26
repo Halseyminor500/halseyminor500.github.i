@@ -73,7 +73,9 @@ b.s { color: var(--gray); font-weight: 700 }
 .fn:hover { color: var(--ink) }
 .home-line { margin: 0; padding: 9px 16px; background: var(--ink); color: #FFFFFF; font: 600 14px/1.35 var(--body); text-align: center }
 .home-line a { color: #FFFFFF; text-underline-offset: 3px }
-.update { display: block; background: var(--u-bg); color: var(--u-fg); text-decoration: none; font: 600 14px/1.35 var(--body) }
+.update { display: block; width: calc(100% - 2 * max(16px, env(safe-area-inset-left, 0px))); max-width: 1160px; margin: 12px auto 0; border-radius: 16px; background: var(--u-bg); color: var(--u-fg); text-decoration: none; font: 600 14px/1.35 var(--body); box-shadow: 0 12px 26px -18px rgba(21, 23, 26, .5) }
+@media (min-width: 760px) { .update { width: calc(100% - 2 * max(40px, env(safe-area-inset-left, 0px))) } }
+.update .u-line { max-width: none; padding-left: 20px; padding-right: 20px }
 .update.u-h { --u-bg: var(--blue); --u-fg: #FFFFFF }
 .update.u-p { --u-bg: var(--red); --u-fg: #FFFFFF }
 .update.u-d { --u-bg: var(--yellow); --u-fg: var(--ink) }
@@ -88,7 +90,7 @@ b.s { color: var(--gray); font-weight: 700 }
 .u-text { flex: 1 1 18rem; min-width: 0 }
 .u-go { flex: none; margin-left: auto; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap }
 .update:hover .u-go { text-decoration-thickness: 2px }
-@media (max-width: 599px) { .u-line { display: block; padding-top: 7px; padding-bottom: 7px } .u-kind { display: inline-block; margin-right: 4px; padding: 4px 8px; font-size: 11px; vertical-align: 1px } .u-go { margin-left: 6px } }
+@media (max-width: 599px) { .u-line { display: block; padding-top: 7px; padding-bottom: 7px } .u-kind { display: inline-block; margin-right: 4px; padding: 4px 8px; font-size: 11px; vertical-align: 1px } .u-go { margin-left: 0 } .update .u-line { padding-left: 14px; padding-right: 14px } }
 .hero { position: relative; isolation: isolate; padding-block: clamp(56px, 7vw, 100px) clamp(24px, 3vw, 40px) }
 .flag { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; aspect-ratio: 3 / 2; background: url("flag.webp") no-repeat center top / 100% auto; opacity: .8;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, rgba(0,0,0,.6) 76%, rgba(0,0,0,.2) 90%, transparent 100%);
