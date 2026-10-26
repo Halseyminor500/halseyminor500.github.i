@@ -379,7 +379,8 @@ h2 { margin-bottom: 16px; font-size: clamp(1.4rem, 2.7vw, 2.2rem) }
 .codes li { padding: 9px 14px } .codes b { font-size: 1rem }
 .shot img { max-width: 240px }
 .agq { grid-template-columns: minmax(0, 170px) minmax(0, 1fr) }
-.agtop { padding-bottom: clamp(20px, 3vw, 36px) }
+@media (max-width: 639px) { .agq { grid-template-columns: minmax(0, 1fr) } }
+.agtop { padding-top: clamp(20px, 2.6vw, 36px); padding-bottom: clamp(20px, 3vw, 36px) }
 .daend { padding-bottom: clamp(28px, 4vw, 52px) }
 .ask { font-size: clamp(2rem, 4.6vw, 3.6rem) }
 .hero.end .hl { margin-top: 14px }

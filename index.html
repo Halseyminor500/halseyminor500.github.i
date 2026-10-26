@@ -386,7 +386,8 @@ h2 { margin-bottom: 16px; font-size: clamp(1.4rem, 2.7vw, 2.2rem) }
 .codes li { padding: 9px 14px } .codes b { font-size: 1rem }
 .shot img { max-width: 240px }
 .agq { grid-template-columns: minmax(0, 170px) minmax(0, 1fr) }
-.agtop { padding-bottom: clamp(20px, 3vw, 36px) }
+@media (max-width: 639px) { .agq { grid-template-columns: minmax(0, 1fr) } }
+.agtop { padding-top: clamp(20px, 2.6vw, 36px); padding-bottom: clamp(20px, 3vw, 36px) }
 .daend { padding-bottom: clamp(28px, 4vw, 52px) }
 .ask { font-size: clamp(2rem, 4.6vw, 3.6rem) }
 .hero.end .hl { margin-top: 14px }
@@ -445,7 +446,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
     <a class="nav-a" href="/legacy/">Legacy</a>
   </div>
 </nav>
-<a class="update u-h" id="update" href="#resp-2026-10-24" data-kind="response"><span class="wrap u-line"><span class="u-round">Round <b data-round>10</b></span> <span class="u-kind">My Response</span> <span class="u-text"><span class="u-date">Oct 24</span> · one letter answering the police's Fail of October 24</span> <span class="u-go">Read <span aria-hidden="true">→</span></span></span></a>
+<a class="update u-h" id="update" href="#resp-2026-10-25-36" data-kind="response"><span class="wrap u-line"><span class="u-round">Round <b data-round>10</b></span> <span class="u-kind">My Response</span> <span class="u-text"><span class="u-date">Oct 25</span> · one letter answering the District Attorney's Fail of October 23</span> <span class="u-go">Read <span aria-hidden="true">→</span></span></span></a>
 
 <header class="hero" id="top">
   <div class="flag" aria-hidden="true"></div>
@@ -538,6 +539,19 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 </div>
 
 <main>
+  <section class="agtop" id="ag">
+  <div class="wrap">
+    <figure class="agq" data-who="ag">
+      <img src="bonta.jpg" width="1280" height="1624" alt="Rob Bonta, Attorney General of California. Official portrait.">
+      <figcaption>
+        <h2>His office has the file.<a class="fn" href="#n1">1</a></h2>
+        <blockquote>“Victims of crime often struggle to rebuild their lives, and so, it is incumbent on all of us — in particular those of us in positions of power — to have their backs.”<a class="fn" href="#n2">2</a></blockquote>
+        <p class="by">Rob Bonta, Attorney General of California</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
   <section class="sec" id="warnings">
     <div class="wrap">
       <div class="pane">
@@ -702,9 +716,9 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
   <section class="sec fight" id="watch">
     <div class="wrap">
       <h2>The fight, round by round.</h2>
-      <p class="score" data-rounds='[["2026-10-07","fail","2026-10-07"],["2026-10-13","fail","2026-10-22"],["2026-10-17","fail","2026-10-17"],["2026-10-21","fail","2026-10-24"],["2026-10-21","fail","2026-10-22"],["2026-10-23","fail","2026-10-23"],["2026-10-23","fail","2026-10-23"],["2026-10-24","fail","2026-10-24"],["2026-10-24","open",""],["2026-10-28","open",""],["2026-10-28","fail","2026-10-23"],["2026-10-28","open",""]]'><span class="rnd">Round <b data-round>10</b></span> <span data-move>Their move</span>. Answered as the law requires: <b><span data-n="ontime">0</span> of <span data-n="come">9</span></b> · answered late <span data-n="late">0</span> · Fail <span data-n="fail">8</span> · overdue <span data-n="overdue">1</span> · due today <span data-n="today">0</span>.</p>
+      <p class="score" data-rounds='[["2026-10-07","fail","2026-10-07"],["2026-10-13","fail","2026-10-22"],["2026-10-17","fail","2026-10-17"],["2026-10-21","fail","2026-10-24"],["2026-10-21","fail","2026-10-22"],["2026-10-23","fail","2026-10-23"],["2026-10-23","fail","2026-10-23"],["2026-10-24","fail","2026-10-24"],["2026-10-24","open",""],["2026-10-28","open",""],["2026-10-28","fail","2026-10-23"],["2026-10-28","open",""],["2026-11-04","open",""]]'><span class="rnd">Round <b data-round>10</b></span> <span data-move>Their move</span>. Answered as the law requires: <b><span data-n="ontime">0</span> of <span data-n="come">9</span></b> · answered late <span data-n="late">0</span> · Fail <span data-n="fail">8</span> · overdue <span data-n="overdue">1</span> · due today <span data-n="today">0</span>.</p>
       <ul class="due">
-        <li class="r1"><button class="r1-open" type="button" data-pop="pop-unanswered" aria-haspopup="dialog"><i class="rn">Round 1</i><b class="r1-n">14</b><span class="r1-t">requests still unanswered as the law requires: 10 to the police and the City, 4 to the District Attorney.</span><span class="r1-go">See all 14</span></button></li>
+        <li class="r1"><button class="r1-open" type="button" data-pop="pop-unanswered" aria-haspopup="dialog"><i class="rn">Round 1</i><b class="r1-n">15</b><span class="r1-t">requests still unanswered as the law requires: 11 to the police and the City, 4 to the District Attorney.</span><span class="r1-go">See all 15</span></button></li>
         <li class="d late" id="req-17" data-row="17" data-due="2026-10-07" data-fail="2026-10-07" title="The District Attorney&#x27;s office never answered by October 7. He withdrew the request on October 18."><span class="dt"><i class="rn">Round 2</i>Oct 7</span><span class="txt">The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.</span><span class="chip fail">Fail · 19 days</span></li>
         <li class="d late" id="req-5" data-row="5" data-due="2026-10-13" data-fail="2026-10-22" title="Its answer did not give everything the request asked."><span class="dt"><i class="rn">Round 3</i>Oct 13</span><span class="txt">The District Attorney's letter of the decision, and answers to his questions of September 21.<span class="viol">Violation of Penal Code §11116.10</span></span><span class="chip fail">Fail · 4 days</span></li>
         <li class="p late" id="req-19" data-row="19" data-due="2026-10-17" data-fail="2026-10-17" title="Her answer did not give what the law requires. See My Response."><span class="dt"><i class="rn">Round 4</i>Oct 17</span><span class="txt">The Records Bureau's answer to his October 7 additions.<span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip fail">Fail · 9 days</span></li>
@@ -716,14 +730,17 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
         <li class="p late" id="req-1" data-row="1" data-due="2026-10-23" data-fail="2026-10-23" title="Its answer did not give everything the request asked."><span class="dt"><i class="rn">Round 7</i>Oct 23</span><span class="txt">The Records Bureau's update on the parts of his records request still being searched.<span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip fail">Fail · 3 days</span></li>
         <li class="p late" id="req-31" data-row="31" data-due="2026-10-23" data-fail="2026-10-23" title="Its answer did not give everything the request asked."><span class="dt"><i class="rn">Round 8</i>Oct 23</span><span class="txt">The records the Records Bureau said on October 9 were attached, and a date for each item still being searched.<span class="viol">Violation of Gov. Code §7922.535(a), (b)</span></span><span class="chip fail">Fail · 3 days</span></li>
         <li class="p late" id="req-22" data-row="22" data-due="2026-10-24" data-fail="2026-10-24" title="Its answer did not give everything the request asked."><span class="dt"><i class="rn">Round 9</i>Oct 24</span><span class="txt">The answer to his request for the facts of the incident.<span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip fail">Fail · 2 days</span></li>
+        <li class="h resp" data-row="22"><span class="dt">Oct 25</span><span class="txt"><b class="h">My Response</b> · my one letter.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-25">Read my response</button><div class="resp-panel" id="resp-2026-10-25" role="region" aria-label="My Response, October 25, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 25, 2026, 6:54 a.m. · To the Records Bureau, Beverly Hills Police Department</p><p>Ms. Rivas,</p><p>Thank you for the case report, the CAD log and the 911 audio, and for the letter on my request of 14 October.</p><p>First, the statements of the parties. Your letter withholds the suspects' statements under Government Code section 7923.600, and their names and addresses on the ground of section 7923.610. My request was made under section 7923.605(a), which begins "Notwithstanding Section 7923.600" and requires disclosure to the victim of "the names and addresses of persons involved in" the incident and the "statements of the parties involved in the incident". Its only exceptions are "(1) The safety of a witness or other person involved in the investigation." and "(2) The successful completion of the investigation or a related investigation." The Department has written that "there is no further action that will be taken on your case." Please send the statements and the names, or state, for each, which of those two exceptions the Department relies on.</p><p>Second, my own recorded statement. The case report says: "my conversation with Halsey was recorded using Officer Eudave's 04230 body camera as mine was not working at the time of the call." That recording is my statement as a party involved in the incident. Please send it, or state the ground for withholding it.</p><p>Third, one line in the case report. It lists the offense as "503 PC-M". Please tell me what "-M" denotes in the Department's records system.</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
         <li class="p late" id="req-34" data-row="34" data-due="2026-10-24"><span class="dt"><i class="rn">Round 10</i>Oct 24</span><span class="txt">The written procedure that preserves the evidence on a telephone a victim delivers to the police.</span><span class="chip over">Overdue 2 days</span></li>
         <li class="p" id="req-33" data-row="33" data-due="2026-10-28"><span class="dt"><i class="rn">Round 11</i>Oct 28</span><span class="txt">The parts of the records withheld on October 17 that can be released, and his own statements to the Department.<span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip">Due in 2 days</span></li>
         <li class="d late" id="req-36" data-row="36" data-due="2026-10-28" data-fail="2026-10-23" title="It answered none of his five questions; it said the office will take no further action."><span class="dt"><i class="rn">Round 12</i>Oct 28</span><span class="txt">The District Attorney's answers to his five questions on the October 22 review.<span class="viol">Violation of Penal Code §11116.10 and Cal. Const. art. I, §28(b)(6)</span></span><span class="chip fail">Fail · 3 days</span></li>
+        <li class="h resp" data-row="36"><span class="dt">Oct 25</span><span class="txt"><b class="h">My Response</b> · my one letter, copied to the Attorney General's Public Inquiry Unit.</span><button class="resp-btn" type="button" aria-expanded="false" aria-controls="resp-2026-10-25-36">Read my response</button><div class="resp-panel" id="resp-2026-10-25-36" role="region" aria-label="My Response, October 25, 2026"><div class="resp-wipe"><article class="letter"><p class="meta">October 25, 2026, 7:38 a.m. · To Victor M. Rodriguez, District Attorney's Office · Copied to the Attorney General's Public Inquiry Unit</p><p>Mr. Rodriguez,</p><p>One question from my letter of 23 October, answerable in a line: is your letter of 22 October the notice required by Penal Code section 11116.10, which I requested on 13 September? A yes or a no is enough.</p><p class="sig">Halsey Minor</p><p class="cut">[Contact details are not shown on this page.]</p></article></div></div></li>
         <li class="p" id="req-44" data-row="44" data-due="2026-10-28"><span class="dt"><i class="rn">Round 13</i>Oct 28</span><span class="txt">The police on the extortion counts: from which writing, and from which date, the Department counts the time.</span><span class="chip">Due in 2 days</span></li>
+        <li class="p" id="req-45" data-row="45" data-due="2026-11-04"><span class="dt"><i class="rn">Round 14</i>Nov 4</span><span class="txt">The Records Bureau on the parties' statements and names, and the recording of his own statement.<span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip">Due in 9 days</span></li>
         <li class="p" data-due="2026-11-04" data-kind="limit"><span class="dt">Nov 4</span><span class="txt">The time to charge the last extortion count he reported runs out.<a class="fn" href="#n16">16</a></span><span class="chip">9 days left</span></li>
         <li class="law" data-due="2026-11-15" data-end="2026-12-15" data-kind="limit"><span class="dt">Nov 15</span><span class="txt">Through December 15: four years after the transfers, the earliest end under Penal Code §801.5.</span><span class="chip">20 days left</span></li>
       </ul>
-      <dialog class="pop" id="pop-unanswered" aria-labelledby="pop-unanswered-h"><div class="pop-head"><h3 id="pop-unanswered-h">14 requests still unanswered as the law requires</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+      <dialog class="pop" id="pop-unanswered" aria-labelledby="pop-unanswered-h"><div class="pop-head"><h3 id="pop-unanswered-h">15 requests still unanswered as the law requires</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
         <ol class="un-list">
           <li class="d late" data-due="2026-10-07" data-fail="2026-10-07"><span class="un-rn">Round 2</span><span class="un-main"><span class="un-to">The District Attorney</span>The District Attorney's answer on renewing the evidence preservation requests to Google and Meta.<span class="un-meta">Asked Sep 30 · due Oct 7</span></span><span class="chip fail">Fail · 19 days</span></li>
           <li class="d late" data-due="2026-10-13" data-fail="2026-10-22"><span class="un-rn">Round 3</span><span class="un-main"><span class="un-to">The District Attorney</span>The District Attorney's letter of the decision, and answers to his questions of September 21.<span class="un-meta">Asked Sep 16 · due Oct 13</span><span class="viol">Violation of Penal Code §11116.10</span></span><span class="chip fail">Fail · 4 days</span></li>
@@ -739,6 +756,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
           <li class="p" data-due="2026-10-28"><span class="un-rn">Round 11</span><span class="un-main"><span class="un-to">The police and the City</span>The parts of the records withheld on October 17 that can be released, and his own statements to the Department.<span class="un-meta">Asked Oct 18 · due Oct 28</span><span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip">Due in 2 days</span></li>
           <li class="d late" data-due="2026-10-28" data-fail="2026-10-23"><span class="un-rn">Round 12</span><span class="un-main"><span class="un-to">The District Attorney</span>The District Attorney's answers to his five questions on the October 22 review.<span class="un-meta">Asked Oct 22 · due Oct 28</span><span class="viol">Violation of Penal Code §11116.10 and Cal. Const. art. I, §28(b)(6)</span></span><span class="chip fail">Fail · 3 days</span></li>
           <li class="p" data-due="2026-10-28"><span class="un-rn">Round 13</span><span class="un-main"><span class="un-to">The police and the City</span>The police on the extortion counts: from which writing, and from which date, the Department counts the time.<span class="un-meta">Asked Oct 24 · due Oct 28</span></span><span class="chip">Due in 2 days</span></li>
+          <li class="p" data-due="2026-11-04"><span class="un-rn">Round 14</span><span class="un-main"><span class="un-to">The police and the City</span>The Records Bureau on the parties' statements and names, and the recording of his own statement.<span class="un-meta">Asked Oct 25 · due Nov 4</span><span class="viol">Violation of Gov. Code §7922.535(a)</span></span><span class="chip">Due in 9 days</span></li>
         </ol>
         <p class="pop-foot"><button class="pop-x" type="button">Close</button></p>
       </div></dialog>
@@ -783,19 +801,6 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
       <p class="hl h" data-who="record">He has no power to make any of them act. <mark class="h">He has a ledger, a clock, and the law.</mark> This page is all three.</p>
     </div>
   </section>
-
-  <section class="agtop" id="ag">
-  <div class="wrap">
-    <figure class="agq" data-who="ag">
-      <img src="bonta.jpg" width="1280" height="1624" alt="Rob Bonta, Attorney General of California. Official portrait.">
-      <figcaption>
-        <h2>His office has the file.<a class="fn" href="#n1">1</a></h2>
-        <blockquote>“Victims of crime often struggle to rebuild their lives, and so, it is incumbent on all of us — in particular those of us in positions of power — to have their backs.”<a class="fn" href="#n2">2</a></blockquote>
-        <p class="by">Rob Bonta, Attorney General of California</p>
-      </figcaption>
-    </figure>
-  </div>
-</section>
 
   <section class="sec" id="contend">
     <div class="wrap">
@@ -901,7 +906,7 @@ li.late .viol { display: block; margin-top: 3px; font: 700 .86rem/1.3 var(--body
 <footer>
   <div class="wrap">
     <span>Halsey Minor, the victim · Beverly Hills Police Department case 2025-14983 · California Attorney General PIU #1564601</span>
-    <span>Record updated October 25, 2026. Counts as of <span id="asof">October 26, 2026</span>.</span>
+    <span>Record updated October 26, 2026. Counts as of <span id="asof">October 26, 2026</span>.</span>
   </div>
 </footer>
 
