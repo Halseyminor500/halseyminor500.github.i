@@ -398,7 +398,9 @@ h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
 .topnav { background: var(--blue); color: #FFFFFF }
 .nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
 .nav-in::-webkit-scrollbar { display: none }
-.nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 15px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 14px 0 11px; border-bottom: 3px solid transparent }
+.nav-a { flex: none; color: #FFFFFF; text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
+@media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
+@media (max-width: 374px) { .nav-a { font-size: 16px; letter-spacing: .01em } .nav-in { gap: 10px } }
 a.nav-a:hover, a.nav-a:focus-visible { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: #FFFFFF }
 .fed-line { margin: 14px 0 0; font: 500 .95rem/1.4 var(--body) }

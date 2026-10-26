@@ -37,7 +37,7 @@
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --t: 0;
 }
-body { margin: 0; background: var(--now-1); color: var(--ink); font: 400 17.5px/1.62 var(--body); -webkit-font-smoothing: antialiased }
+body { margin: 0; background: var(--now-1); color: var(--ink); font: 400 16.5px/1.58 var(--body); -webkit-font-smoothing: antialiased }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper) }
 a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1px }
 a:hover { text-decoration-thickness: 2px }
@@ -53,29 +53,22 @@ img { max-width: 100% }
 .topnav { background: var(--blue); color: var(--white); position: relative; z-index: 5 }
 .nav-in { display: flex; align-items: center; gap: clamp(18px, 3.6vw, 44px); min-height: 50px; overflow-x: auto; scrollbar-width: none }
 .nav-in::-webkit-scrollbar { display: none }
-.nav-a { flex: none; color: var(--white); text-decoration: none; font: 600 15px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 14px 0 11px; border-bottom: 3px solid transparent }
+.nav-a { flex: none; color: var(--white); text-decoration: none; font: 600 18px/1.2 var(--display); letter-spacing: .03em; white-space: nowrap; padding: 13px 0 10px; border-bottom: 3px solid transparent }
 .nav-a:hover { border-bottom-color: rgba(255, 255, 255, .7) }
 .nav-a[aria-current="page"] { border-bottom-color: var(--white) }
 .topnav .wrap { max-width: 1240px }
-.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); background: rgba(255, 255, 255, .55); border-bottom: 1px solid rgba(255, 255, 255, .8); box-shadow: 0 6px 22px -18px var(--shadow) }
-.rail ol { list-style: none; margin: 0 auto; padding-top: 8px; padding-bottom: 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; position: relative }
-.rail a { display: grid; gap: 1px; padding: 4px 8px; border-radius: 10px; color: var(--muted); text-decoration: none; min-width: 0 }
-.rail b { font: 600 13px/1.2 var(--mono); letter-spacing: .04em; color: var(--sepia) }
-.rail span { font: 500 13.5px/1.25 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-.rail i { font-style: normal } .rail .sh { display: none }
-.rail a[aria-current="true"] { background: var(--white); color: var(--ink); box-shadow: 0 1px 2px var(--shadow) }
-.rail a[aria-current="true"] b { color: var(--blue) }
-.rail .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, var(--rule), var(--gold) 45%, var(--blue)); transform-origin: left; transform: scaleX(var(--t)) }
-.hero { padding-top: clamp(36px, 6vw, 84px); padding-bottom: clamp(30px, 5vw, 64px) }
-.hero-in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 72px); align-items: center }
-.eyebrow { margin: 0 0 14px; font: 500 12.5px/1.4 var(--mono); letter-spacing: .26em; text-transform: uppercase; color: var(--rule) }
-h1 { margin: 0; font: 600 clamp(3rem, 7.4vw, 6.2rem)/.95 var(--display); letter-spacing: -.025em; text-wrap: balance }
-.hero-sub { margin: 18px 0 0; max-width: 26rem; font: italic 400 clamp(1.3rem, 2.3vw, 1.7rem)/1.4 var(--old); color: var(--sepia) }
-.past-future { margin: 36px 0 0; padding-left: 22px; border-left: 3px solid var(--blue) }
+@media (max-width: 599px) { .nav-a { font-size: 17px } .nav-in { gap: 12px } }
+@media (max-width: 374px) { .nav-a { font-size: 16px; letter-spacing: .01em } .nav-in { gap: 10px } }
+.hero { padding-top: clamp(22px, 3.6vw, 48px); padding-bottom: clamp(16px, 2.6vw, 30px) }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(22px, 4vw, 56px); align-items: center }
+.eyebrow { margin: 0 0 12px; font: 500 12px/1.4 var(--mono); letter-spacing: .24em; text-transform: uppercase; color: var(--rule) }
+h1 { margin: 0; font: 600 clamp(2.6rem, 6.4vw, 5.2rem)/.95 var(--display); letter-spacing: -.025em; text-wrap: balance }
+.hero-sub { margin: 14px 0 0; max-width: 26rem; font: italic 400 clamp(1.2rem, 2vw, 1.5rem)/1.4 var(--old); color: var(--sepia) }
+.past-future { margin: 26px 0 0; padding-left: 20px; border-left: 3px solid var(--blue) }
 .past-future figcaption { font: 500 12.5px/1.4 var(--body); letter-spacing: .02em; color: var(--muted); margin-bottom: 6px }
-.past-future blockquote { margin: 0; font: 600 clamp(1.7rem, 3.4vw, 2.6rem)/1.1 var(--display); letter-spacing: -.01em; color: var(--blue) }
-.develop { margin: 0 }
-.dv-stage { position: relative; aspect-ratio: 1122 / 1620; max-width: 100%; overflow: hidden; border-radius: 4px; background: var(--stage); box-shadow: 0 0 0 10px var(--white), 0 2px 4px 10px rgba(32, 28, 20, .06), 0 40px 70px -28px var(--shadow) }
+.past-future blockquote { margin: 0; font: 600 clamp(1.6rem, 3vw, 2.3rem)/1.1 var(--display); letter-spacing: -.01em; color: var(--blue) }
+.develop { margin: 0; justify-self: center; width: min(100%, calc(min(64vh, 600px) * .6926)) }
+.dv-stage { position: relative; aspect-ratio: 1122 / 1620; overflow: hidden; border-radius: 4px; background: var(--stage); box-shadow: 0 0 0 9px var(--white), 0 2px 4px 9px rgba(32, 28, 20, .06), 0 34px 60px -28px var(--shadow) }
 .dv-stage img { position: absolute; display: block; max-width: none }
 .dv-bw, .dv-color { inset: 0; width: 100%; height: 100% }
 .dv-sig { left: 17.29%; top: 92.04%; width: 69.25%; height: 7.28% }
@@ -89,58 +82,135 @@ h1 { margin: 0; font: 600 clamp(3rem, 7.4vw, 6.2rem)/.95 var(--display); letter-
 @keyframes rise { to { -webkit-mask-position: 0 100%; mask-position: 0 100% } }
 .develop.done .dv-sig, .develop.done .dv-color { animation: none; clip-path: none; -webkit-mask-position: 0 100%; mask-position: 0 100% }
 .develop.show-1884 .dv-color { opacity: 0 }
-.dv-foot { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-start; margin-top: 26px }
+.dv-foot { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: flex-start; margin-top: 20px }
 .dv-switch { display: inline-flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 0 1px var(--line) }
-.dv-switch button { appearance: none; border: 0; background: transparent; padding: 7px 16px; border-radius: 999px; font: 600 14px/1 var(--mono); letter-spacing: .06em; color: var(--muted); cursor: pointer }
+.dv-switch button { appearance: none; border: 0; background: transparent; padding: 7px 15px; border-radius: 999px; font: 600 14px/1 var(--mono); letter-spacing: .06em; color: var(--muted); cursor: pointer }
 .dv-switch button[aria-pressed="true"] { background: var(--ink); color: var(--white) }
-.dv-caps { flex: 1 1 16rem; min-width: 0; margin: 0; font: 400 13px/1.5 var(--body); color: var(--muted) }
+.dv-caps { flex: 1 1 14rem; min-width: 0; margin: 0; font: 400 12.5px/1.45 var(--body); color: var(--muted) }
 .dv-caps span { display: block } .dv-caps b { color: var(--ink); font-weight: 600 }
 .develop.show-1884 .c-2026, .develop:not(.show-1884) .c-1884 { opacity: .55 }
-main { padding-bottom: 40px }
-.panel { margin: 0 0 clamp(20px, 2.6vw, 30px); padding: clamp(24px, 4.4vw, 60px); border-radius: 26px; background: linear-gradient(160deg, var(--glass-hi), var(--glass) 55%, rgba(255, 255, 255, .7)); border: 1px solid var(--glass-edge);
-  box-shadow: inset 0 1px 0 var(--white), 0 1px 2px rgba(32, 28, 20, .06), 0 28px 54px -32px var(--shadow); backdrop-filter: blur(10px) saturate(1.15); -webkit-backdrop-filter: blur(10px) saturate(1.15) }
-.chip { display: inline-block; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px; background: var(--rule); color: var(--white); font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase }
-.panel.now .chip { background: var(--blue) }
-.panel h2 { margin: 0; font: 600 clamp(2.1rem, 4.8vw, 3.6rem)/1.02 var(--display); letter-spacing: -.02em; text-wrap: balance }
-.yrs { margin: 8px 0 0; font: 500 14px/1.4 var(--mono); letter-spacing: .12em; color: var(--muted) }
-.lead { margin: 26px 0 18px; max-width: 40rem; font: 400 clamp(1.25rem, 2.2vw, 1.55rem)/1.45 var(--body); text-wrap: pretty }
-.body p { margin: 0 0 16px; max-width: 42rem; text-wrap: pretty }
-.grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 56px); align-items: start; margin-top: 8px }
-.grid.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) }
-.grid > * { min-width: 0 }
+main { padding-bottom: 28px }
+.card { margin: 0 0 clamp(14px, 1.8vw, 20px); padding: clamp(18px, 2.8vw, 34px); border-radius: 24px; background: linear-gradient(160deg, var(--glass-hi), var(--glass) 55%, rgba(255, 255, 255, .7)); border: 1px solid var(--glass-edge);
+  box-shadow: inset 0 1px 0 var(--white), 0 1px 2px rgba(32, 28, 20, .06), 0 24px 46px -32px var(--shadow); backdrop-filter: blur(10px) saturate(1.15); -webkit-backdrop-filter: blur(10px) saturate(1.15) }
+.chip { display: inline-block; margin: 0 0 10px; padding: 5px 11px; border-radius: 999px; background: var(--rule); color: var(--white); font: 500 11.5px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase }
+.now .chip { background: var(--blue) }
+.card h2 { margin: 0; font: 600 clamp(1.7rem, 3.2vw, 2.45rem)/1.04 var(--display); letter-spacing: -.02em; text-wrap: balance }
+.yrs { margin: 6px 0 0; font: 500 13px/1.4 var(--mono); letter-spacing: .1em; color: var(--muted) }
+.lede { margin: 14px 0 0; max-width: 40rem; font: 400 clamp(1.08rem, 1.7vw, 1.22rem)/1.5 var(--body); text-wrap: pretty }
+.chain h2 { font-size: clamp(1.35rem, 2.4vw, 1.8rem) }
+.ch { position: relative; margin: 18px 0 0; padding: 20px 0 0 }
+.ch-hall { position: absolute; top: 0; bottom: 0; left: calc(var(--a) * 100%); width: calc((var(--b) - var(--a)) * 100%); background: linear-gradient(180deg, rgba(164, 125, 60, .2), rgba(164, 125, 60, .08)); border-left: 1px dashed rgba(164, 125, 60, .7); border-right: 1px dashed rgba(164, 125, 60, .7) }
+.ch-hall i { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); white-space: nowrap; font: 500 10.5px/1.2 var(--mono); font-style: normal; letter-spacing: .04em; color: #7A5A22 }
+.life { position: relative; display: block; height: 46px; color: var(--ink); text-decoration: none; border-radius: 8px }
+.life:hover .lab b { text-decoration: underline; text-underline-offset: 3px }
+.lab { position: absolute; top: 4px; left: calc(var(--a) * 100%); white-space: nowrap; font: 400 12.5px/1.25 var(--body); color: var(--muted) }
+.lab b { font: 600 13.5px/1.25 var(--display); color: var(--ink); margin-right: 6px }
+.life.end .lab { left: auto; right: 0; text-align: right }
+.bar { position: absolute; bottom: 8px; height: 10px; left: calc(var(--a) * 100%); width: calc((var(--b) - var(--a)) * 100%); border-radius: 5px; background: var(--c); transform-origin: left center }
+.life.end .bar { border-radius: 5px 0 0 5px; -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent); mask-image: linear-gradient(90deg, #000 70%, transparent) }
+.ro { position: absolute; bottom: 1px; left: calc(var(--x) * 100%); width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: 0 0 0 1.5px var(--c), 0 2px 6px -2px var(--shadow); display: grid; place-items: center }
+.ro svg, .ro-key svg { width: 16px; height: 13px; overflow: visible }
+.ro-key { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--white); box-shadow: 0 0 0 1px var(--line); vertical-align: -6px; margin: 0 2px }
+.ch-axis { position: relative; height: 18px; margin-top: 4px; border-top: 1px solid rgba(21, 23, 26, .2); font: 500 11px/1 var(--mono); color: var(--muted) }
+.ch-axis span { position: absolute; top: 6px; left: calc(var(--x) * 100%); transform: translateX(-50%) }
+.ch-axis span:first-child { transform: none } .ch-axis span:last-child { transform: translateX(-100%) }
+.ch-cap { margin: 14px 0 0; max-width: 46rem; font-size: 15px; line-height: 1.55; color: var(--muted) }
+.ch-cap b { color: var(--ink); font-weight: 600 }
+.ch.armed .bar { transform: scaleX(0) }
+.ch.armed .ro { opacity: 0; transform: scale(.4) }
+.ch.go .bar { animation: grow 1s cubic-bezier(.3, .7, .2, 1) forwards; animation-delay: calc(var(--i) * .22s) }
+.ch.go .ro { animation: pop .5s ease-out forwards; animation-delay: calc(var(--i) * .22s + .7s) }
+@keyframes grow { to { transform: scaleX(1) } }
+@keyframes pop { to { opacity: 1; transform: scale(1) } }
+.plate { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(18px, 3vw, 40px); align-items: start }
+.plate.slim { grid-template-columns: minmax(0, 210px) minmax(0, 1fr) }
+.plate.now { grid-template-columns: minmax(0, 430px) minmax(0, 1fr) }
+.plate > * { min-width: 0 }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 16px; margin: 16px 0 0; max-width: 46rem; border-top: 1px solid rgba(21, 23, 26, .12) }
+.facts dt, .facts dd { margin: 0; padding: 7px 0; border-bottom: 1px solid rgba(21, 23, 26, .12) }
+.facts dt { font: 500 12.5px/1.75 var(--mono); color: var(--rule); white-space: nowrap }
+.now .facts dt { color: var(--blue) }
+.facts dd { font-size: 15px; line-height: 1.5 }
+.moments { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0 }
+.mo { appearance: none; display: inline-flex; align-items: baseline; gap: 9px; padding: 9px 14px 9px 12px; border-radius: 12px; border: 1px solid var(--paper-edge); background: linear-gradient(180deg, var(--paper-hi), rgba(246, 239, 224, .7)); color: var(--ink); font: 500 14.5px/1.25 var(--body); cursor: pointer; text-align: left; box-shadow: 0 6px 14px -12px var(--shadow) }
+.mo:hover { border-color: var(--gold) }
+.mo-y { font: 500 12px/1.2 var(--mono); color: var(--rule); white-space: nowrap }
+.mo::after { content: "→"; color: var(--gold); margin-left: 2px }
 .print { margin: 0 }
-.print .frame { display: block; padding: 10px; background: var(--white); box-shadow: 0 1px 2px rgba(32, 28, 20, .1), 0 24px 44px -26px var(--shadow) }
+.print .frame { display: block; padding: 8px; background: var(--white); box-shadow: 0 1px 2px rgba(32, 28, 20, .1), 0 20px 40px -26px var(--shadow) }
 .print img { display: block; width: 100%; height: auto }
 .era-1 .print img { filter: sepia(.38) contrast(1.04) brightness(1.02) }
 .era-2 .print img { filter: sepia(.18) contrast(1.03) }
-.era-3 .print img { filter: grayscale(1) contrast(1.04) }
-.print figcaption { margin-top: 10px; font: 400 12.5px/1.55 var(--body); color: var(--muted) }
-.print figcaption b { color: var(--ink); font-weight: 600 }
-.slip { margin: 22px 0; padding: 18px 22px 16px; background: linear-gradient(180deg, var(--paper-hi), var(--paper)); border: 1px solid var(--paper-edge); border-left: 4px solid var(--gold); border-radius: 3px; box-shadow: 0 10px 22px -18px var(--shadow); max-width: 40rem }
-.slip blockquote { margin: 0; font: italic 400 1.28rem/1.45 var(--old); color: var(--sepia) }
-.slip figcaption { margin-top: 10px; font: 400 12px/1.4 var(--mono); letter-spacing: .02em; color: var(--muted) }
-.slip.red { border-left-color: var(--rule) }
-.hq { margin: 30px 0 4px; padding: 2px 0 2px 22px; border-left: 3px solid var(--blue); max-width: 44rem }
-.hq figcaption { font: 500 12.5px/1.4 var(--body); color: var(--muted); margin-bottom: 8px }
-.hq blockquote { margin: 0; font: 500 clamp(1.25rem, 2.2vw, 1.6rem)/1.35 var(--display); color: var(--blue) }
-.hq blockquote + blockquote { margin-top: 12px }
-.hq .big { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 600; line-height: 1.1 }
-.tl { display: grid; grid-template-columns: minmax(7.5rem, 10rem) minmax(0, 1fr); margin: 28px 0 0; border-top: 1px solid rgba(21, 23, 26, .12) }
-.tl dt, .tl dd { margin: 0; padding: 13px 0; border-bottom: 1px solid rgba(21, 23, 26, .12) }
-.tl dt { padding-right: 16px; font: 500 13.5px/1.7 var(--mono); color: var(--rule) }
-.panel.now .tl dt { color: var(--blue) }
-.tl dd { line-height: 1.5 }
-.notes { display: grid; gap: 14px; align-content: start; font-size: 15px; line-height: 1.5; color: var(--muted) }
-.notes p { margin: 0; padding-left: 26px; position: relative }
-.notes p::before { content: "§"; position: absolute; left: 0; top: -2px; font: 400 20px/1.2 var(--old); color: var(--rule) }
-.notes b { display: block; font: 600 13px/1.3 var(--body); letter-spacing: .02em; color: var(--ink) }
-.pull { margin: 30px 0 0; font: italic 400 clamp(1.4rem, 2.6vw, 1.9rem)/1.35 var(--old); color: var(--sepia); max-width: 36rem }
-.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 4vw, 44px); margin-top: 26px; padding-top: 24px; border-top: 1px solid rgba(21, 23, 26, .12) }
-.cols2 p { margin: 0 }
-.more { margin-top: 18px; font: 500 14px/1.4 var(--body) }
+.print figcaption, .fig-cap { margin-top: 8px; font: 400 12px/1.5 var(--body); color: var(--muted) }
+.print figcaption b, .fig-cap b { color: var(--ink); font-weight: 600 }
 .zoom-open { all: unset; display: block; cursor: zoom-in; position: relative }
 .zoom-open:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px }
-.zoom-open .badge { position: absolute; right: 18px; bottom: 18px; padding: 8px 14px; border-radius: 999px; background: var(--veil); color: var(--white); font: 500 13px/1 var(--body); letter-spacing: .02em }
+.zoom-open .badge { position: absolute; right: 14px; bottom: 14px; padding: 7px 13px; border-radius: 999px; background: var(--veil); color: var(--white); font: 500 13px/1 var(--body); letter-spacing: .02em }
+.roll { margin: 0 }
+.roll-card { padding: 18px 20px 16px; background: linear-gradient(180deg, #FFFFFF, #F7F5F0); border: 1px solid var(--line); box-shadow: 0 20px 40px -26px var(--shadow) }
+.roll-k { margin: 0; font: 500 11px/1.3 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--muted) }
+.roll-t { margin: 2px 0 12px; font: 500 1.25rem/1.2 var(--old); color: var(--ink) }
+.roll ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line) }
+.roll li { padding: 8px 0; border-bottom: 1px solid var(--line); font: 400 15px/1.3 var(--old); color: var(--muted) }
+.roll li.his { color: var(--ink); font-weight: 500; font-size: 17px }
+.roll li span { display: block; font: 500 11px/1.4 var(--mono); letter-spacing: .06em; color: var(--rule) }
+.slip { margin: 16px 0; padding: 14px 18px 12px; background: linear-gradient(180deg, var(--paper-hi), var(--paper)); border: 1px solid var(--paper-edge); border-left: 4px solid var(--gold); border-radius: 3px; box-shadow: 0 8px 18px -16px var(--shadow) }
+.slip blockquote { margin: 0; font: italic 400 1.18rem/1.45 var(--old); color: var(--sepia) }
+.slip figcaption { margin-top: 8px; font: 400 11.5px/1.4 var(--mono); letter-spacing: .02em; color: var(--muted) }
+.slip.red { border-left-color: var(--rule) }
+.hq { margin: 18px 0 0; padding: 1px 0 1px 18px; border-left: 3px solid var(--blue); max-width: 42rem }
+.hq figcaption { font: 500 12px/1.4 var(--body); color: var(--muted); margin-bottom: 6px }
+.hq blockquote { margin: 0; font: 500 clamp(1.12rem, 1.9vw, 1.38rem)/1.35 var(--display); color: var(--blue) }
+.band { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: clamp(18px, 3vw, 36px); align-items: center }
+.mv { margin: 0 }
+.mv-stage { position: relative; aspect-ratio: 1 / 1; background: var(--white); box-shadow: 0 0 0 8px var(--white), 0 20px 40px -26px var(--shadow) }
+.mv-stage img { position: absolute; display: block; max-width: none }
+.mv-hippo { inset: 0; width: 100%; height: 100% }
+.mv-bird { left: 48.75%; top: 21.875%; width: 11.25%; height: 7.5%; transform-origin: 50% 100% }
+.mv.armed .mv-bird { opacity: 0; transform: translate(360%, -420%) rotate(-16deg) }
+.mv.go .mv-bird { animation: land 2.2s cubic-bezier(.22, .7, .2, 1) forwards }
+@keyframes land { 0% { opacity: 0; transform: translate(360%, -420%) rotate(-16deg) } 12% { opacity: 1 } 62% { transform: translate(-12%, -70%) rotate(8deg) } 80% { transform: translate(0, 6%) rotate(-3deg) } 90% { transform: translate(0, -8%) rotate(1deg) } 100% { opacity: 1; transform: translate(0, 0) rotate(0) } }
+.mv figcaption { margin-top: 12px; font: 400 12px/1.5 var(--body); color: var(--muted) }
+.ro-fig { margin: 0 }
+.ro-card { padding: 14px 12px 6px; background: var(--white); box-shadow: 0 1px 2px rgba(32, 28, 20, .1), 0 20px 40px -26px var(--shadow) }
+.rotunda { display: block; width: 100%; height: auto }
+.rotunda path { fill: var(--white); stroke: var(--ink); stroke-width: .95; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke }
+.rotunda .ln { fill: none }
+.ro-fig.armed path { stroke-dasharray: 1; stroke-dashoffset: 1 }
+.ro-fig.go path { animation: draw 1.1s ease-in-out forwards }
+.ro-fig.go .r-drum path { animation-delay: .5s } .ro-fig.go .r-dome path { animation-delay: 1.1s } .ro-fig.go .r-portico path { animation-delay: 1.7s; animation-duration: 1.3s }
+@keyframes draw { to { stroke-dashoffset: 0 } }
+.close-line { margin: 6px 0 14px; font: 600 clamp(1.3rem, 2.4vw, 1.75rem)/1.25 var(--display); color: var(--blue); text-wrap: balance }
+.srcs-d { border-top: 1px solid rgba(21, 23, 26, .14); padding-top: 10px }
+.srcs-d summary { cursor: pointer; font: 600 14px/1.4 var(--body); color: var(--ink); padding: 6px 0 }
+.srcs { margin: 10px 0 0; padding-left: 1.3em; max-width: 50rem; font-size: 14px; line-height: 1.55 } .srcs li { margin: 0 0 7px }
+.foot { margin: 12px 0 4px; font: 400 12px/1.6 var(--body); color: var(--muted) }
+dialog.reader { width: min(760px, calc(100vw - 32px)); max-height: min(88vh, 960px); margin: auto; padding: 0; border: 0; border-radius: 20px; background: linear-gradient(180deg, var(--paper-hi), #F2E9D6); color: var(--ink); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .55); overflow: auto; overscroll-behavior: contain }
+dialog.reader::backdrop { background: rgba(21, 23, 26, .55); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px) }
+.rd-head { position: sticky; top: 0; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 20px 22px 12px; background: linear-gradient(180deg, var(--paper-hi) 75%, rgba(246, 239, 224, 0)) }
+.rd-head h3 { margin: 0; font: 600 clamp(1.5rem, 3vw, 2rem)/1.08 var(--display); letter-spacing: -.015em }
+.rd-x { appearance: none; border: 1px solid var(--paper-edge); background: var(--white); width: 40px; height: 40px; border-radius: 50%; font: 400 22px/1 var(--body); color: var(--ink); cursor: pointer }
+.rd-body { padding: 0 22px 24px }
+.rd-body p { margin: 0 0 12px; max-width: 40rem }
+.rd-body .lede { margin: 0 0 12px }
+.rd-body .print { float: right; width: min(42%, 230px); margin: 4px 0 12px 18px }
+.rd-body .print.wide { float: none; width: auto; margin: 14px 0 }
+.rd-body .tl { display: grid; grid-template-columns: minmax(6.5rem, 8.5rem) minmax(0, 1fr); margin: 14px 0; border-top: 1px solid rgba(21, 23, 26, .14) }
+.rd-body .tl dt, .rd-body .tl dd { margin: 0; padding: 9px 0; border-bottom: 1px solid rgba(21, 23, 26, .14) }
+.rd-body .tl dt { padding-right: 12px; font: 500 12.5px/1.6 var(--mono); color: var(--rule) }
+.rd-body .tl dd { font-size: 15px; line-height: 1.5 }
+.rd-body .note { margin: 12px 0 0; padding-left: 22px; position: relative; font-size: 14.5px; color: var(--muted) }
+.rd-body .note::before { content: "§"; position: absolute; left: 0; top: -2px; font: 400 18px/1.2 var(--old); color: var(--rule) }
+.rd-body .note b { color: var(--ink) }
+.pull { margin: 16px 0 0; font: italic 400 clamp(1.25rem, 2.2vw, 1.55rem)/1.35 var(--old); color: var(--sepia); clear: both }
+.rd-src { margin: 16px 0 0; font: 400 12px/1.5 var(--mono); color: var(--muted); clear: both }
+.firm { list-style: none; margin: 18px 0 6px; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative; clear: both }
+.firm::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; border-top: 1px solid rgba(21, 23, 26, .25) }
+.firm li { position: relative; padding: 0 4px; text-align: center; font: 400 12px/1.4 var(--body); color: var(--muted) }
+.firm li::before { content: ""; display: block; width: 9px; height: 9px; margin: 2px auto 8px; border-radius: 50%; background: var(--ink) }
+.firm .y { display: block; font: 600 12px/1.6 var(--mono); color: var(--ink) }
+.firm li.his, .firm li.his .y { color: var(--rule) }
+.firm li.his::before { width: 13px; height: 13px; margin: 0 auto 6px; background: var(--rule) }
 dialog.viewer { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--veil); color: var(--white); overflow: hidden }
 dialog.viewer::backdrop { background: var(--veil) }
 .v-stage { position: absolute; inset: 0; overflow: hidden; touch-action: none; cursor: grab }
@@ -152,37 +222,27 @@ dialog.viewer::backdrop { background: var(--veil) }
 .v-bar button { appearance: none; border: 1px solid rgba(255, 255, 255, .55); background: rgba(21, 23, 26, .55); color: var(--white); border-radius: 999px; padding: 9px 16px; font: 500 14px/1 var(--body); cursor: pointer }
 .v-bar button.main { background: var(--white); color: var(--ink); border-color: var(--white) }
 .v-note { flex-basis: 100%; margin: 4px 0 0; text-align: center; font: 400 13px/1.4 var(--body); color: rgba(255, 255, 255, .82) }
-.firm { list-style: none; margin: 30px 0 4px; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); position: relative }
-.firm::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; border-top: 1px solid rgba(21, 23, 26, .25) }
-.firm li { position: relative; padding: 0 6px; text-align: center; font: 400 12.5px/1.45 var(--body); color: var(--muted) }
-.firm li::before { content: ""; display: block; width: 9px; height: 9px; margin: 2px auto 10px; border-radius: 50%; background: var(--ink) }
-.firm .y { display: block; font: 600 12.5px/1.6 var(--mono); color: var(--ink) }
-.firm li.his, .firm li.his .y { color: var(--rule) }
-.firm li.his::before { width: 13px; height: 13px; margin: 0 auto 8px; background: var(--rule) }
-.firm-cap { margin: 8px 0 0; font: 400 12.5px/1.5 var(--body); color: var(--muted) }
-.mv { margin: 0; max-width: 340px }
-.mv-stage { position: relative; aspect-ratio: 1 / 1; background: var(--white); box-shadow: 0 0 0 10px var(--white), 0 24px 44px -26px var(--shadow) }
-.mv-stage img { position: absolute; display: block; max-width: none }
-.mv-hippo { inset: 0; width: 100%; height: 100% }
-.mv-bird { left: 48.75%; top: 21.875%; width: 11.25%; height: 7.5%; transform-origin: 50% 100% }
-.mv.armed .mv-bird { opacity: 0; transform: translate(360%, -420%) rotate(-16deg) }
-.mv.go .mv-bird { animation: land 2.2s cubic-bezier(.22, .7, .2, 1) forwards }
-@keyframes land { 0% { opacity: 0; transform: translate(360%, -420%) rotate(-16deg) } 12% { opacity: 1 } 62% { transform: translate(-12%, -70%) rotate(8deg) } 80% { transform: translate(0, 6%) rotate(-3deg) } 90% { transform: translate(0, -8%) rotate(1deg) } 100% { opacity: 1; transform: translate(0, 0) rotate(0) } }
-.mv figcaption { margin-top: 16px; font: 400 12.5px/1.5 var(--body); color: var(--muted) }
-.srcs { margin: 14px 0 0; padding-left: 1.3em; max-width: 48rem; font-size: 15px; line-height: 1.55 } .srcs li { margin: 0 0 8px }
-.foot { margin: 26px 0 0; font: 400 12.5px/1.6 var(--body); color: var(--muted) }
 @media (prefers-reduced-motion: reduce) { .v-stage img.ease, .dv-color { transition: none } }
 @media (max-width: 899px) {
-  .hero-in, .grid, .grid.flip { grid-template-columns: minmax(0, 1fr) }
-  .develop { max-width: 520px }
-  .notes { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)) }
+  .hero-in { grid-template-columns: minmax(0, 1fr) }
+  .develop { width: min(100%, 420px); justify-self: start }
+  .plate, .plate.slim, .plate.now { grid-template-columns: minmax(0, 1fr) }
+  .plate.slim > figure { max-width: 240px }
+  .plate .ro-fig { max-width: 520px }
 }
 @media (max-width: 640px) {
-  body { font-size: 17px }
-  .tl { grid-template-columns: minmax(0, 1fr) } .tl dt { padding: 12px 0 0; border-bottom: 0 } .tl dd { padding-top: 2px }
-  .cols2 { grid-template-columns: minmax(0, 1fr) }
-  .rail ol { gap: 2px } .rail a { padding: 4px 4px } .rail span { font-size: 12.5px } .rail b { font-size: 12px } .rail .lg { display: none } .rail .sh { display: inline }
-  .firm { grid-template-columns: minmax(0, 1fr); gap: 12px }
+  body { font-size: 16px }
+  .band { grid-template-columns: minmax(0, 1fr); gap: 14px } .band .mv { max-width: 150px }
+  .lab { font-size: 11.5px } .lab b { font-size: 12.5px; margin-right: 4px }
+  .life { height: 42px }
+  .ch-hall i { font-size: 9.5px }
+  .facts { grid-template-columns: 5.4rem minmax(0, 1fr); gap: 0 10px } .facts dt { font-size: 11.5px; line-height: 1.9; white-space: normal } .facts dd { font-size: 14.5px }
+  .plate.slim > figure.print { max-width: 150px } .plate.slim > figure.roll { max-width: 230px }
+  dialog.reader { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0 }
+  .rd-head { padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 10px } .rd-body { padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px)) }
+  .rd-body .print { float: none; width: 52%; margin: 0 0 14px }
+  .rd-body .tl { grid-template-columns: minmax(0, 1fr) } .rd-body .tl dt { padding: 9px 0 0; border-bottom: 0 } .rd-body .tl dd { padding-top: 2px }
+  .firm { grid-template-columns: minmax(0, 1fr); gap: 10px }
   .firm::before { left: 6px; right: auto; top: 6px; bottom: 6px; border-top: 0; border-left: 1px solid rgba(21, 23, 26, .25) }
   .firm li { display: grid; grid-template-columns: 13px 4rem minmax(0, 1fr); gap: 0 12px; padding: 0; text-align: left }
   .firm li::before, .firm li.his::before { margin: 4px 0 0; justify-self: center }
@@ -199,22 +259,14 @@ dialog.viewer::backdrop { background: var(--veil) }
   </div>
 </nav>
 <div class="era" aria-hidden="true"><div class="era-now"></div><div class="era-past"></div></div>
-
-
-<nav class="rail" aria-label="The four generations">
-  <ol class="wrap">
-    <li><a href="#jbm" data-gen="jbm"><b>1813</b><span><i class="lg">John B. Minor</i><i class="sh">John B.</i></span></a></li>
-    <li><a href="#rcm" data-gen="rcm"><b>1869</b><span><i class="lg">Raleigh C. Minor</i><i class="sh">Raleigh C.</i></span></a></li>
-    <li><a href="#cvm" data-gen="cvm"><b>1900</b><span><i class="lg">Charles V. Minor</i><i class="sh">Hippo</i></span></a></li>
-    <li><a href="#halsey" data-gen="halsey"><b>1964</b><span><i class="lg">Halsey Minor</i><i class="sh">Halsey</i></span></a></li>
-    <li class="bar" aria-hidden="true"></li>
-  </ol>
-</nav>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <symbol id="ro-glyph" viewBox="0 0 20 16"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 15.2H19M3 13.6H17M5 13.4V9.2M8.3 13.4V9.2M11.7 13.4V9.2M15 13.4V9.2M3.4 8.8H16.6M3.4 8.8L10 5.6L16.6 8.8"/><path d="M4.4 7.2A5.6 4.3 0 0 1 15.6 7.2M3.6 7.6H5.6M14.4 7.6H16.4"/></g></symbol>
+</svg>
 
 <header class="hero" id="top">
   <div class="wrap hero-in">
     <div>
-      <p class="eyebrow">Louisa County · Charlottesville · 1813 to today</p>
+      <p class="eyebrow">Charlottesville · 1813 to today</p>
       <h1>Minor on the Law</h1>
       <p class="hero-sub">Four generations of one family’s argument with the law.</p>
       <figure class="past-future" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption><blockquote>“The past is my future.”</blockquote></figure>
@@ -239,253 +291,251 @@ dialog.viewer::backdrop { background: var(--veil) }
 <main id="main">
   <div class="wrap">
 
-    <section class="panel era-1" aria-label="Why this page">
-      <figure class="hq" data-who="halsey" style="margin-top: 0"><figcaption>Halsey Minor · October 25, 2026</figcaption>
-        <blockquote>“I was raised in a family of lawyers. My father was not, but all of my uncles were, and my grandfather was … It’s not a lark, it’s a lifestyle.”</blockquote></figure>
+    <section class="card chain" id="chain" aria-labelledby="chain-h">
+      <h2 id="chain-h">Four lives, one university</h2>
+      <div class="ch" id="ch">
+        <span class="ch-hall" style="--a: .4601; --b: .5587" aria-hidden="true"><i>Minor Hall 1911–32</i></span>
+        <a class="life" href="#jbm" data-life="1813-1895" style="--a: 0; --b: .385; --c: var(--rule); --i: 0"><span class="lab"><b>John B. Minor</b>1813–1895</span><span class="bar"></span><span class="ro" style="--x: .0986" title="University of Virginia, 1834"><svg><use href="#ro-glyph"/></svg></span></a>
+        <a class="life" href="#rcm" data-life="1869-1923" style="--a: .2629; --b: .5164; --c: var(--gold); --i: 1"><span class="lab"><b>Raleigh C. Minor</b>1869–1923</span><span class="bar"></span><span class="ro" style="--x: .3615" title="University of Virginia, 1890"><svg><use href="#ro-glyph"/></svg></span></a>
+        <a class="life" href="#cvm" data-life="1900-1988" style="--a: .4085; --b: .8216; --c: var(--sepia); --i: 2"><span class="lab"><b>C. Venable Minor</b>1900–1988</span><span class="bar"></span><span class="ro" style="--x: .5258" title="University of Virginia, 1925"><svg><use href="#ro-glyph"/></svg></span></a>
+        <a class="life end" href="#halsey" data-life="1964-" style="--a: .7089; --b: 1; --c: var(--blue); --i: 3"><span class="lab"><b>Halsey Minor</b>1964–</span><span class="bar"></span><span class="ro" style="--x: .8169" title="University of Virginia, 1987"><svg><use href="#ro-glyph"/></svg></span></a>
+      </div>
+      <div class="ch-axis" aria-hidden="true"><span style="--x: 0">1813</span><span style="--x: .2207">1860</span><span style="--x: .4554">1910</span><span style="--x: .6901">1960</span><span style="--x: 1">today</span></div>
+      <p class="ch-cap">Each life overlaps the next, and each studied at the University of Virginia <span class="ro-key"><svg viewBox="0 0 20 16" width="16" height="13" aria-hidden="true"><use href="#ro-glyph"/></svg></span>: <b>1834, 1890, 1925, 1987</b>. From 1911 to 1932 the Law School stood in Minor Hall, named for John B. Minor.</p>
     </section>
 
-    <section class="panel era-1" id="jbm" aria-labelledby="jbm-h">
-      <p class="chip">Division I · The Teacher</p>
-      <h2 id="jbm-h">John Barbee Minor</h2>
-      <p class="yrs">2 June 1813 – 29 July 1895</p>
-      <div class="grid">
-        <div class="body">
-          <p class="lead">At sixteen he crossed Virginia on horseback as a newspaper agent, then walked to Ohio to enroll at Kenyon College. Dissatisfied, he walked back.</p>
-          <p>He took his Bachelor of Laws at the University of Virginia in 1834, aged twenty-one. He returned to its faculty in 1845 and taught there for fifty years, until 1895, the year he died.</p>
-          <p>Among his students was James Clark McReynolds, later Associate Justice of the Supreme Court of the United States.</p>
-          <p class="more"><a href="https://en.wikipedia.org/wiki/John_B._Minor" rel="external">John B. Minor on Wikipedia →</a></p>
-        </div>
-        <figure class="print"><span class="frame"><img src="/legacy/jbm-1859.jpg" width="442" height="586" alt="John B. Minor as a young professor in 1859: dark hair, a high collar and a loose black tie."></span>
-          <figcaption><b>1859.</b> Photograph by Adam B. Walter. University of Virginia Prints &amp; Photographs, Albert and Shirley Small Special Collections Library. Public domain.</figcaption></figure>
-      </div>
-      <dl class="tl">
-        <dt>1834</dt><dd>Bachelor of Laws, University of Virginia, at twenty-one.</dd>
-        <dt>1845 – 1895</dt><dd>Professor of Common and Statute Law. Fifty years in one seat.</dd>
-        <dt>1865</dt><dd>Walks out under a flag of truce to meet the Union column. <a href="#truce">The day →</a></dd>
-        <dt>From 1875</dt><dd><i>Institutes of Common and Statute Law</i>, four volumes, printed at his own expense. <a href="#institutes">The book →</a></dd>
-        <dt>1911</dt><dd>Minor Hall opens, named for him. It housed the Law School until 1932.</dd>
-      </dl>
-    </section>
-
-    <section class="panel era-1" id="truce" aria-labelledby="truce-h">
-      <p class="chip">Division I · The Flag of Truce</p>
-      <h2 id="truce-h">3 March 1865</h2>
-      <p class="yrs">Sheridan and Custer enter Charlottesville</p>
-      <div class="grid">
-        <div class="body">
-          <p class="lead">He was too unwell to attend the meeting at which he was appointed. He went out anyway.</p>
-          <figure class="slip" data-who="uva"><blockquote>“Resolved that the Chairman &amp; Professor Minor be appointed a committee to meet the commanding General … and request of him a guard to protect public &amp; private property at the University.”</blockquote><figcaption>Faculty Minutes, University of Virginia, 1 March 1865</figcaption></figure>
-          <figure class="slip" data-who="jbm"><blockquote>“Most persons think they will destroy the University. I am not of that opinion, but I cannot avoid much anxiety in consequence of so many having a contrary impression.”</blockquote><figcaption>Diary of John B. Minor, 2 March 1865</figcaption></figure>
-          <p>Between one and two o’clock he went with Mayor Christopher Fowler, faculty chairman Socrates Maupin, and Rector Thomas Preston to the ground opposite Carr’s Hill, where a flag of truce had already been raised.</p>
-          <figure class="slip" data-who="jbm"><blockquote>“We announced to these men … that no defense of Charlottesville was contemplated, that the town was evacuated, and that we requested protection for the University, and for the town.”</blockquote><figcaption>Diary of John B. Minor, 3 March 1865</figcaption></figure>
-          <p>Custer passed in triumph with three captured battle flags displayed. Two of his staff rode out of the line to repeat the assurance. What arrived was one man.</p>
-          <figure class="slip" data-who="jbm"><blockquote>“He remained all the afternoon, at the corner opposite the Medical Hall, and was extremely serviceable, and very courteous.”</blockquote><figcaption>Diary of John B. Minor, 3 March 1865</figcaption></figure>
-          <p>By the next day the guard was twenty-five men under Lieutenant David Collins, Company L, Michigan Cavalry. On 5 March a captain of Sheridan’s staff came to state the General’s determination to preserve the University unharmed. Meanwhile the uniform works, Marchant’s factory, the warehouses and the bridges burned.</p>
-          <figure class="slip red" data-who="jbm"><blockquote>“Thus we escaped the dangers which threatened, and upon the whole have lost very little. … But our poor neighbors suffered terribly.”</blockquote><figcaption>Diary of John B. Minor, 6 March 1865</figcaption></figure>
-          <p class="pull">The University of Virginia stands. He was one of the four men who walked out to ask that it be spared.</p>
-        </div>
-        <div class="notes">
-          <p><b>Of the risk</b>The Virginia Military Institute had been burned the previous June. Everyone knew it.</p>
-          <p><b>Of the tradition</b>The family holds that guards were posted with orders to fire on any man who tried to burn the place. The archive records the guard, and the courtesy. It does not record the order.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel era-1" id="institutes" aria-labelledby="inst-h">
-      <p class="chip">Division I · The Book</p>
-      <h2 id="inst-h">The <i>Institutes</i></h2>
-      <p class="yrs">Four volumes · Richmond · Fourth edition 1891</p>
-      <div class="grid flip">
-        <figure class="print"><span class="frame"><img src="/legacy/institutes-1891.jpg" width="437" height="697" alt="Title page: Institutes of Common and Statute Law, by John B. Minor, LL.D. Volume I, The Rights Which Relate to the Person. Fourth edition, revised and corrected. Richmond: printed for the author, 1891."></span>
-          <figcaption><b>Title page,</b> <i>Institutes of Common and Statute Law</i>, Vol. I, fourth edition. Richmond, 1891. Internet Archive.</figcaption></figure>
-        <div class="body">
-          <p class="lead">He set out to state the whole of the common law of Virginia with more precision than anyone had before, and then he paid the printer himself.</p>
-          <figure class="slip" data-who="imprint"><blockquote>“Printed for the author.”</blockquote><figcaption>Imprint, <i>Institutes of Common and Statute Law</i>, Vol. I. Richmond, 1891</figcaption></figure>
-          <p>There was no publisher standing behind it and no advance. He wrote the treatise, financed the printing, and arranged the distribution through three booksellers. The work went through four editions in his lifetime and shaped the teaching of law across the South for a generation.</p>
-          <figure class="slip" data-who="jbm"><blockquote>“No one can be more surprised than the author at the bulk and character which this work has assumed.”</blockquote><figcaption>Preface to the first edition, <i>Institutes of Common and Statute Law</i></figcaption></figure>
-        </div>
-      </div>
-      <figure class="print" style="margin-top: 34px">
+    <section class="card plate era-1" id="jbm" aria-labelledby="jbm-h">
+      <figure class="print">
         <button type="button" class="zoom-open" id="class-open" aria-haspopup="dialog" aria-label="Open the class photograph full screen and find him"><span class="frame"><img id="class-img" src="/legacy/law-class-1890s.jpg" width="1153" height="797" loading="lazy" decoding="async" alt="More than a hundred law students in suits and hats on the steps of a columned building, with their professors seated in the front row."></span><span class="badge">Find him ⤢</span></button>
         <figcaption><b>About 1890–1893.</b> Professor John B. Minor with a class of law students, forty-five years into the same appointment. Albert and Shirley Small Special Collections Library, University of Virginia.</figcaption>
       </figure>
-    </section>
-
-    <section class="panel era-2" id="rcm" aria-labelledby="rcm-h">
-      <p class="chip">Division II · The Architect</p>
-      <h2 id="rcm-h">Raleigh Colston Minor</h2>
-      <p class="yrs">1869 – 1923 · Professor of Constitutional and International Law</p>
-      <div class="grid">
-        <div class="body">
-          <p class="lead">The second division does not continue the first. It leaves the jurisdiction entirely.</p>
-          <p>His father had spent fifty years stating the common law of one state with unmatched exactness. The son took the same instrument and pointed it at a body of law with no sovereign, no court, and no existence. For a year, 1907–08, he was acting dean of the Law School.</p>
-          <figure class="slip" data-who="wurts"><blockquote>“Credit must be given to Professor Raleigh Colston Minor for everything in this book except the American modifications of the common law, and those I must assume responsibility for.”</blockquote><figcaption>John Wurts, preface to <i>The Law of Real Property (Based on Minor’s Institutes)</i>, New Haven, 5 January 1910</figcaption></figure>
-          <p>His own two-volume treatise on real property had appeared in 1908, built, as its title records, on his father’s <i>Institutes</i>. Two years later another scholar rebuilt it again on his. Each generation took the one before as its foundation and built a new story on it.</p>
-        </div>
-        <div class="notes">
-          <p><b>Of the son</b>He did not restate his father. He took the same instrument and pointed it somewhere his father would not have.</p>
-          <p><b>Of the marriage</b>He married Natalie Embra Venable, daughter of Colonel Charles S. Venable of the mathematics faculty. The middle name of the next division descends from her.</p>
-        </div>
-      </div>
-      <dl class="tl">
-        <dt>1901</dt><dd><i>Conflict of Laws, or Private International Law</i>: the rules for which sovereign’s law applies when two of them reach the same dispute.</dd>
-        <dt>1907 – 08</dt><dd>Acting dean of the Law School, University of Virginia.</dd>
-        <dt>1908</dt><dd><i>The Law of Real Property</i>, two volumes, built on his father’s <i>Institutes</i>.</dd>
-        <dt>1918</dt><dd><i>A Republic of Nations</i>, Oxford University Press. <a href="#republic">The book →</a></dd>
-        <dt>1923</dt><dd>Dies at fifty-four.</dd>
-      </dl>
-    </section>
-
-    <section class="panel era-2" id="republic" aria-labelledby="rep-h">
-      <p class="chip">Division II · The Book</p>
-      <h2 id="rep-h"><i>A Republic of Nations</i></h2>
-      <p class="yrs">Oxford University Press · 1918</p>
-      <div class="grid">
-        <div class="body">
-          <p class="lead">A study of the organization of a federal league of nations, published before there was a league, by a professor in Charlottesville.</p>
-          <p>The First World War was still being fought when the book went to press. The Covenant would not be drafted at the Paris Peace Conference until the following year.</p>
-          <p>He was not commenting on an institution. He was drafting the organizational law for one that did not exist, in the hope that someone would need it. Oxford published it at once in New York, London, Toronto, Melbourne and Bombay.</p>
-        </div>
-        <figure class="print"><span class="frame"><img src="/legacy/republic-of-nations-1918.jpg" width="436" height="705" loading="lazy" decoding="async" alt="Title page: A Republic of Nations, a study of the organization of a federal league of nations, by Raleigh C. Minor, Professor of Constitutional and International Law at the University of Virginia. New York, Oxford University Press, 1918."></span>
-          <figcaption><b>Title page,</b> <i>A Republic of Nations</i>. New York: Oxford University Press, American Branch, 1918. Internet Archive.</figcaption></figure>
-      </div>
-      <dl class="tl">
-        <dt>Division I</dt><dd>Stated the law that existed, for the jurisdiction he lived in.</dd>
-        <dt>Division II</dt><dd>Wrote the law for a jurisdiction that did not yet exist, and might never.</dd>
-        <dt>In common</dt><dd>Neither man waited for permission, and neither wrote for a market that had asked.</dd>
-      </dl>
-    </section>
-
-    <section class="panel era-3" id="cvm" aria-labelledby="cvm-h">
-      <p class="chip">Division III · The Practitioner</p>
-      <h2 id="cvm-h">Charles Venable Minor</h2>
-      <p class="yrs">1900 – 1988 · Charlottesville, Virginia · Known to his family as Hippo</p>
-      <div class="grid">
-        <div class="body">
-          <p class="lead">The first two divisions taught and wrote. The third practiced, and practice does not leave a title page.</p>
-          <p>Son of Raleigh Colston Minor and Natalie Embra Venable; grandson of John Barbee Minor. Bachelor of Science, University of Virginia, 1922. Law School, class of 1925. To his family, and to his grandson, he was Hippo.</p>
-        </div>
-        <div class="notes">
-          <p><b>Of the record</b>The practitioner leaves the least paper. The work goes into other people’s matters and stays there.</p>
-          <p><b>Of the name</b>The family knows him as Hippo. The archive does not.</p>
-        </div>
-      </div>
-      <dl class="tl">
-        <dt>1962 – 63</dt><dd><b>President of the Virginia State Bar.</b> His name is on the Bar’s own roll of past presidents, between E. Griffith Dodson, Jr. and William E. White.</dd>
-        <dt>The firm</dt><dd>Name partner in Perkins, Battle &amp; Minor of Charlottesville, and afterwards in Battle, Neal, Harris, Minor &amp; Williams.</dd>
-        <dt>The Governor</dt><dd>His partner was John Stewart Battle (1890–1972), Governor of Virginia 1950–54, who returned to the Charlottesville practice when his term ended.</dd>
-        <dt>1966</dt><dd>The Charlottesville firm merges with Richmond’s McGuire, Woods, King, Davis &amp; Patterson to form McGuire, Woods &amp; Battle, today McGuireWoods.</dd>
-      </dl>
-      <p style="margin-top: 22px; max-width: 42rem">The firm’s line runs back to a Charlottesville practice opened in 1834 by Egbert R. Watson, once private secretary to President Monroe: the same year John B. Minor took his degree a few hundred yards away.</p>
-      <ol class="firm" aria-label="The line of the firm">
-        <li><span class="y">1834</span>Egbert R. Watson</li>
-        <li><span class="y">1870</span>George Perkins</li>
-        <li class="his"><span class="y">1936</span>Perkins, Battle &amp; Minor</li>
-        <li class="his"><span class="y">Then</span>Battle, Neal, Harris, Minor &amp; Williams</li>
-        <li><span class="y">1966</span>McGuire, Woods &amp; Battle</li>
-        <li><span class="y">Today</span>McGuireWoods</li>
-      </ol>
-      <p class="firm-cap">The line of the firm. In red, the firms that carried his name.</p>
-      <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
-        <blockquote>“He was called the last Southern gentleman, because he was such a kind and considerate individual, and absolutely universally loved.”</blockquote></figure>
-    </section>
-
-    <section class="panel era-3" id="hippo" aria-labelledby="hippo-h">
-      <p class="chip">Division III · The Ode</p>
-      <h2 id="hippo-h">The hippo and the bird</h2>
-      <div class="grid flip" style="margin-top: 26px; align-items: center">
-        <figure class="mv" id="mv">
-          <div class="mv-stage">
-            <img class="mv-hippo" src="/legacy/mv-hippo.jpg" width="320" height="320" loading="lazy" decoding="async" alt="The Minor Ventures logo: a hippo standing, with a small bird on its back, above the words Minor Ventures, San Francisco.">
-            <img class="mv-bird" src="/legacy/mv-bird.png" width="36" height="24" alt="">
-          </div>
-          <figcaption>Minor Ventures, San Francisco: its logo.</figcaption>
-        </figure>
-        <div class="body">
-          <p class="lead" style="margin-top: 0">When Halsey Minor started Minor Ventures, he made its logo a hippo with a small bird on its back. Its companies included GrandCentral, now Google Voice, and OpenDNS.</p>
-          <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
-            <blockquote>“The hippo, of course, is my hero, and I am the bird on the back.”</blockquote>
-            <blockquote>“That shows the amount of respect I had for that man and for everything that he stood for.”</blockquote>
-            <blockquote class="big">“It’s not technology, it’s values.”</blockquote></figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel era-3" id="advertising" aria-labelledby="adv-h">
-      <p class="chip">Division III · The Last Objection</p>
-      <h2 id="adv-h">The Question of Advertising</h2>
-      <p class="lead">The idea that a lawyer might advertise was said to have troubled him. It was the settled position of the entire American bar for nearly seventy years, and he held it as a man who had led that bar.</p>
-      <dl class="tl">
-        <dt>1908</dt><dd>The American Bar Association adopts Canon 27 of the Canons of Professional Ethics, declaring the solicitation of business by advertising unprofessional.</dd>
-        <dt>1908 – 1977</dt><dd>The prohibition is adopted by the highest courts of the individual states and holds, substantially unbroken, for nearly seven decades.</dd>
-        <dt>1962 – 63</dt><dd>C. Venable Minor presides over the Virginia State Bar under that rule.</dd>
-        <dt>1977</dt><dd><i>Bates v. State Bar of Arizona</i>, 433 U.S. 350, extends commercial-speech protection to attorney advertising. The rule he had defended is struck down.</dd>
-        <dt>After</dt><dd>The billboard, the daytime commercial, the injury hotline. He lived another eleven years and saw all of it.</dd>
-      </dl>
-      <div class="cols2">
-        <p>His objection was never to competition. It was to the idea that a person in the worst week of their life should be treated as a market: that distress should be prospected for rather than answered.</p>
-        <p>Whatever one makes of the rule he defended, the instinct behind it survives intact in the division that follows: what happens to a family should not be the occasion of anyone’s commercial good fortune.</p>
-      </div>
-    </section>
-
-    <section class="panel now" id="halsey" aria-labelledby="hm-h">
-      <p class="chip">Division IV · The Reformation</p>
-      <h2 id="hm-h">Halsey Minor</h2>
-      <p class="yrs">1964 –</p>
-      <p class="lead">He did not go to law school. That is the departure. Everything after it is the return.</p>
-      <div class="body">
-        <p>The first three divisions accepted the instrument and improved it: stated it more precisely, extended it to new jurisdictions, practiced it honorably, and led the bar that governed it. This one does not accept the instrument.</p>
-        <p>The common law is a nine-hundred-year-old technology for producing equal justice. The ideal has never been the defect. The delivery mechanism is the defect: an adversarial procedure billed by the hour, which pays its practitioners for duration and charges its users for a resolution most of them cannot afford to reach.</p>
-      </div>
-      <dl class="tl">
-        <dt>Not changing</dt><dd>The ideal. Equal justice, and the conviction that it is owed rather than sold.</dd>
-        <dt>Changing</dt><dd>The venue and the incentive.</dd>
-        <dt>The claim</dt><dd>Not a reinvention of the law. A reformation of how ordinary people are required to meet it.</dd>
-      </dl>
-      <div class="body" style="margin-top: 24px"><p>Rethinking publishing and rethinking enterprise software were the same act performed twice: find an industry whose structure, not its people, is producing the bad outcome, and replace the structure. Law is the third instance.</p></div>
-      <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
-        <blockquote>“I know he would want me to contribute in my way to the system he respected.”</blockquote></figure>
-      <p class="more"><a href="/mission/">What he is building →</a></p>
-    </section>
-
-    <section class="panel now" id="colophon" aria-labelledby="col-h">
-      <p class="chip">Colophon</p>
-      <h2 id="col-h">The obligation was never the method.</h2>
-      <div class="grid flip" style="margin-top: 26px">
-        <figure class="print"><span class="frame"><img src="/legacy/rotunda-plan.jpg" width="318" height="422" loading="lazy" decoding="async" alt="Thomas Jefferson's drawing of the Dome Room of the Rotunda: a circle of paired columns inside a round wall."></span>
-          <figcaption><b>Plan of the Dome Room,</b> the Rotunda, University of Virginia. Thomas Jefferson. Public domain.</figcaption></figure>
-        <dl class="tl" style="margin-top: 0">
-          <dt>Division I</dt><dd>Stated the law with more precision than anyone before him, walked out under a flag of truce to keep the University standing, and paid for the printing himself.</dd>
-          <dt>Division II</dt><dd>Wrote the constitutional law of a federation of nations a year before the federation was drafted into being.</dd>
-          <dt>Division III</dt><dd>Practiced, led the bar of Virginia, and objected to the last to anything that would trade the profession’s credibility for its custom.</dd>
-          <dt>Division IV</dt><dd>Leaves the courthouse, keeps the ideal, and rebuilds the delivery.</dd>
+      <div>
+        <p class="chip">Division I · The Teacher</p>
+        <h2 id="jbm-h">John Barbee Minor</h2>
+        <p class="yrs">2 June 1813 – 29 July 1895</p>
+        <p class="lede">At sixteen he crossed Virginia on horseback as a newspaper agent, then walked to Ohio to enroll at Kenyon College. Dissatisfied, he walked back.</p>
+        <dl class="facts">
+          <dt>1834</dt><dd>Bachelor of Laws, University of Virginia, at twenty-one.</dd>
+          <dt>1845 – 1895</dt><dd>Professor of Common and Statute Law. Fifty years in one seat.</dd>
+          <dt>1853</dt><dd>His law classes move into the new Rotunda Annex.</dd>
+          <dt>1865</dt><dd>Walks out under a flag of truce to ask that the University be spared.</dd>
+          <dt>From 1875</dt><dd>The <i>Institutes</i>, four volumes, printed at his own expense.</dd>
+          <dt>1911</dt><dd>Minor Hall opens, named for him: the Law School’s home until 1932.</dd>
         </dl>
+        <div class="moments">
+          <button type="button" class="mo" data-open="r-truce" aria-haspopup="dialog"><span class="mo-y">3 March 1865</span>The flag of truce</button>
+          <button type="button" class="mo" data-open="r-inst" aria-haspopup="dialog"><span class="mo-y">1875 – 1895</span>Printed for the author</button>
+        </div>
       </div>
-      <div class="body" style="margin-top: 26px">
-        <p>Four generations, one obligation, and no shared method. The first wrote a treatise nobody had asked for. The second wrote the law of a country that did not exist. The third spent forty years inside a system he believed in and defended its dignity when it became unfashionable to. The fourth is dismantling the part of it that stopped serving the people it was built for.</p>
-        <p>Not going to law school was the departure. This is the return, by the only route now available, and none of the three earlier divisions would have recognized the tools.</p>
-      </div>
-      <p class="pull" style="color: var(--blue); font-family: var(--display); font-style: normal; font-weight: 600">They would have recognized the reason.</p>
     </section>
 
-    <section class="panel now" id="sources" aria-labelledby="src-h">
-      <p class="chip">Sources</p>
-      <h2 id="src-h" style="font-size: 1.6rem">Where each fact can be read</h2>
-      <ol class="srcs">
-        <li>John B. Minor: <a href="https://en.wikipedia.org/wiki/John_B._Minor" rel="external">Wikipedia</a>; the University of Virginia Library, <a href="https://explore.lib.virginia.edu/exhibits/show/hoos/fabled-faculty/john-barbee-minor" rel="external">John Barbee Minor</a>; <a href="https://archives.lib.virginia.edu/ark:/59853/146296" rel="external">The Papers of John B. Minor, 1845–1893</a>.</li>
-        <li>3 March 1865: the Faculty Minutes of the University of Virginia, 1 March 1865, and the diary of John B. Minor, 2, 3 and 6 March 1865, as quoted in <i>Minor on the Law</i>, Plate III.</li>
-        <li><i>Institutes of Common and Statute Law</i>, Vol. I, fourth edition (Richmond, 1891), with the preface to the first edition: <a href="https://archive.org/details/institutesofcomm01mino" rel="external">Internet Archive</a>.</li>
-        <li>Raleigh Colston Minor: the University of Virginia Law Library, <a href="https://libguides.law.virginia.edu/faculty/r-minor" rel="external">faculty profile</a>; <a href="https://en.wikipedia.org/wiki/Raleigh_Colston_Minor" rel="external">Wikipedia</a>. John Wurts, <i>The Law of Real Property (Based on Minor’s Institutes)</i> (St. Paul: West Publishing, 1910): <a href="https://archive.org/details/cu31924018810006" rel="external">Internet Archive</a>.</li>
-        <li><i>A Republic of Nations</i> (New York: Oxford University Press, 1918): <a href="https://archive.org/details/republicofnation00minorich" rel="external">Internet Archive</a>.</li>
-        <li>C. Venable Minor, President 1962–63: the Virginia State Bar, <a href="https://vsb.org/Site/Site/about/past-presidents.aspx" rel="external">Past Presidents</a>. The firm: <a href="https://en.wikipedia.org/wiki/McGuireWoods" rel="external">McGuireWoods</a>. Governor John S. Battle: <a href="https://en.wikipedia.org/wiki/John_S._Battle" rel="external">Wikipedia</a>.</li>
-        <li>Advertising: the American Bar Association, Canons of Professional Ethics, Canon 27 (1908); <i>Bates v. State Bar of Arizona</i>, 433 U.S. 350 (1977): <a href="https://supreme.justia.com/cases/federal/us/433/350/" rel="external">Justia</a>.</li>
-        <li>Minor Ventures, GrandCentral (Google Voice) and OpenDNS: <a href="https://en.wikipedia.org/wiki/Halsey_Minor" rel="external">Wikipedia</a>.</li>
-      </ol>
-      <p class="foot">The archival images are originals; each caption names its collection. The color portrait of John B. Minor is a reconstruction by Halsey Minor from the photograph of 1 October 1884.</p>
+    <section class="card plate slim era-2" id="rcm" aria-labelledby="rcm-h">
+      <figure class="print"><span class="frame"><img src="/legacy/republic-of-nations-1918.jpg" width="436" height="705" loading="lazy" decoding="async" alt="Title page: A Republic of Nations, a study of the organization of a federal league of nations, by Raleigh C. Minor, Professor of Constitutional and International Law at the University of Virginia. New York, Oxford University Press, 1918."></span>
+        <figcaption><b>Title page,</b> <i>A Republic of Nations</i>. New York: Oxford University Press, American Branch, 1918. Internet Archive.</figcaption></figure>
+      <div>
+        <p class="chip">Division II · The Architect</p>
+        <h2 id="rcm-h">Raleigh Colston Minor</h2>
+        <p class="yrs">1869 – 1923 · Professor of Constitutional and International Law</p>
+        <p class="lede">Three degrees from the University by twenty-one. When the Rotunda burned in 1895, he saved nearly all of the law books.</p>
+        <dl class="facts">
+          <dt>1887 – 1890</dt><dd>B.A., M.S. and LL.B., University of Virginia.</dd>
+          <dt>1893</dt><dd>His father’s assistant; on the law faculty until 1923.</dd>
+          <dt>1895</dt><dd>Saves nearly all of the law collection from the Rotunda fire.</dd>
+          <dt>1907 – 08</dt><dd>Acting dean of the Law School, University of Virginia.</dd>
+          <dt>1908</dt><dd><i>The Law of Real Property</i>, two volumes, built on his father’s <i>Institutes</i>.</dd>
+          <dt>1918</dt><dd><i>A Republic of Nations</i>, a year before the Covenant.</dd>
+        </dl>
+        <div class="moments">
+          <button type="button" class="mo" data-open="r-fire" aria-haspopup="dialog"><span class="mo-y">27 October 1895</span>The fire</button>
+          <button type="button" class="mo" data-open="r-property" aria-haspopup="dialog"><span class="mo-y">1908 – 1910</span>Built on the <i>Institutes</i></button>
+          <button type="button" class="mo" data-open="r-republic" aria-haspopup="dialog"><span class="mo-y">1918</span>A league before the League</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card plate slim era-3" id="cvm" aria-labelledby="cvm-h">
+      <figure class="roll">
+        <div class="roll-card"><p class="roll-k">Virginia State Bar</p><p class="roll-t">Past Presidents</p>
+          <ol><li>E. Griffith Dodson, Jr.</li><li class="his"><span>1962 – 63</span>C. Venable Minor</li><li>William E. White</li></ol></div>
+        <figcaption class="fig-cap">His name on the Bar’s own roll, between E. Griffith Dodson, Jr. and William E. White. Set in type for this page.</figcaption>
+      </figure>
+      <div>
+        <p class="chip">Division III · The Practitioner</p>
+        <h2 id="cvm-h">Charles Venable Minor</h2>
+        <p class="yrs">1900 – 1988 · Charlottesville, Virginia · Known to his family as Hippo</p>
+        <p class="lede">The first two divisions taught and wrote. The third practiced, and practice does not leave a title page.</p>
+        <dl class="facts">
+          <dt>1922 · 1925</dt><dd>Bachelor of Science, University of Virginia; Law School, class of 1925, in Minor Hall, named for his grandfather.</dd>
+          <dt>1962 – 63</dt><dd><b>President of the Virginia State Bar.</b></dd>
+          <dt>The firm</dt><dd>Name partner in Perkins, Battle &amp; Minor, then Battle, Neal, Harris, Minor &amp; Williams. In 1966 the Charlottesville firm merged with Richmond’s McGuire, Woods, King, Davis &amp; Patterson to form McGuire, Woods &amp; Battle, today McGuireWoods.</dd>
+        </dl>
+        <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
+          <blockquote>“He was called the last Southern gentleman, because he was such a kind and considerate individual, and absolutely universally loved.”</blockquote></figure>
+        <div class="moments">
+          <button type="button" class="mo" data-open="r-firm" aria-haspopup="dialog"><span class="mo-y">1834 – today</span>The line of the firm</button>
+          <button type="button" class="mo" data-open="r-adv" aria-haspopup="dialog"><span class="mo-y">1908 – 1977</span>The question of advertising</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card band era-3" id="hippo" aria-labelledby="hippo-h">
+      <figure class="mv" id="mv">
+        <div class="mv-stage">
+          <img class="mv-hippo" src="/legacy/mv-hippo.jpg" width="320" height="320" loading="lazy" decoding="async" alt="The Minor Ventures logo: a hippo standing, with a small bird on its back, above the words Minor Ventures, San Francisco.">
+          <img class="mv-bird" src="/legacy/mv-bird.png" width="36" height="24" alt="">
+        </div>
+        <figcaption>Minor Ventures, San Francisco: its logo.</figcaption>
+      </figure>
+      <div>
+        <p class="chip">Division III · The Ode</p>
+        <h2 id="hippo-h">The hippo and the bird</h2>
+        <p class="lede">When Halsey Minor started Minor Ventures, he made its logo a hippo with a small bird on its back. Its companies included GrandCentral, now Google Voice, and OpenDNS.</p>
+        <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
+          <blockquote>“The hippo, of course, is my hero, and I am the bird on the back.”</blockquote></figure>
+      </div>
+    </section>
+
+    <section class="card plate now" id="halsey" aria-labelledby="hm-h">
+      <figure class="ro-fig" id="rotunda">
+        <div class="ro-card"><svg class="rotunda" viewBox="0 38 1000 624" role="img" aria-label="The Rotunda of the University of Virginia, drawn in line: a stepped dome over a round drum, a portico of six Corinthian columns with a clock in its pediment, steps down to the Lawn, and a terrace with a balustrade on each side.">
+<g class="r-dome"><path pathLength="1" d="M198 178Q500 162 802 178V165Q500 149 198 165Z"/><path pathLength="1" d="M215 165Q500 149 785 165V152Q500 136 215 152Z"/><path pathLength="1" d="M234 152Q500 136 766 152V140Q500 124 234 140Z"/><path pathLength="1" d="M252 140Q500 124 748 140V129Q500 113 252 129Z"/><path pathLength="1" class="ln" d="M274 128A226 74 0 0 1 726 128"/><path pathLength="1" d="M468 48H532V54H468Z"/><path pathLength="1" class="ln" d="M462 54H538"/></g>
+<g class="r-drum"><path pathLength="1" d="M194 560V178Q500 162 806 178V560Z"/><path pathLength="1" class="ln" d="M194 194Q500 178 806 194M194 208Q500 192 806 208M194 226Q500 210 806 226M194 246Q500 230 806 246M194 272Q500 256 806 272M202 272V516M798 272V516"/><path pathLength="1" d="M211 306H233V390H211Z"/><path pathLength="1" class="ln" d="M222 306V390M211 334H233M211 362H233"/><path pathLength="1" d="M394 306H426V390H394Z"/><path pathLength="1" class="ln" d="M410 306V390M394 334H426M394 362H426"/><path pathLength="1" d="M574 306H606V390H574Z"/><path pathLength="1" class="ln" d="M590 306V390M574 334H606M574 362H606"/><path pathLength="1" d="M767 306H789V390H767Z"/><path pathLength="1" class="ln" d="M778 306V390M767 334H789M767 362H789"/><path pathLength="1" d="M484 306H516V390H484Z"/><path pathLength="1" class="ln" d="M500 306V390M484 334H516M484 362H516"/><path pathLength="1" d="M211 446H233V540H211ZM205 441L222 425L239 441ZM205 441H239V445H205Z"/><path pathLength="1" class="ln" d="M222 446V540M211 469.5H233M211 493H233M211 516.5H233"/><path pathLength="1" d="M394 446H426V548H394ZM388 441L410 425L432 441ZM388 441H432V445H388Z"/><path pathLength="1" class="ln" d="M410 446V548M394 471.5H426M394 497H426M394 522.5H426"/><path pathLength="1" d="M574 446H606V548H574ZM568 441L590 425L612 441ZM568 441H612V445H568Z"/><path pathLength="1" class="ln" d="M590 446V548M574 471.5H606M574 497H606M574 522.5H606"/><path pathLength="1" d="M767 446H789V540H767ZM761 441L778 425L795 441ZM761 441H795V445H761Z"/><path pathLength="1" class="ln" d="M778 446V540M767 469.5H789M767 493H789M767 516.5H789"/><path pathLength="1" d="M480 556V446H520V556M480 446L474 441L500 425L526 441L520 446M500 446V556"/><path pathLength="1" class="ln" d="M486 458H496V500H486ZM504 458H514V500H504ZM486 510H496V548H486ZM504 510H514V548H504Z"/><path pathLength="1" d="M309 528V466A11 11 0 0 1 331 466V528Z"/><path pathLength="1" d="M669 528V466A11 11 0 0 1 691 466V528Z"/></g>
+<g class="r-portico"><path pathLength="1" d="M238 556H762V563H238Z"/><path pathLength="1" d="M254 548H296V556H254ZM256.5 541H293.5V548H256.5Z"/><path pathLength="1" d="M259 541L261.5 302H288.5 L291 541Z"/><path pathLength="1" d="M261 299C260 290 256 278 253 271H297 C294 278 290 290 289 299Z"/><path pathLength="1" d="M259.5 299H290.5V303H259.5ZM251 264H299V271H251Z"/><path pathLength="1" class="ln" d="M260.5 299Q264.1 283 267.8 299M267.8 299Q271.4 283 275 299M275 299Q278.6 283 282.2 299M282.2 299Q285.9 283 289.5 299M256.5 289Q260.2 273 263.9 289M263.9 289Q267.6 273 271.3 289M271.3 289Q275 273 278.7 289M278.7 289Q282.4 273 286.1 289M286.1 289Q289.8 273 293.5 289M252.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M291.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M344 548H386V556H344ZM346.5 541H383.5V548H346.5Z"/><path pathLength="1" d="M349 541L351.5 302H378.5 L381 541Z"/><path pathLength="1" d="M351 299C350 290 346 278 343 271H387 C384 278 380 290 379 299Z"/><path pathLength="1" d="M349.5 299H380.5V303H349.5ZM341 264H389V271H341Z"/><path pathLength="1" class="ln" d="M350.5 299Q354.1 283 357.8 299M357.8 299Q361.4 283 365 299M365 299Q368.6 283 372.2 299M372.2 299Q375.9 283 379.5 299M346.5 289Q350.2 273 353.9 289M353.9 289Q357.6 273 361.3 289M361.3 289Q365 273 368.7 289M368.7 289Q372.4 273 376.1 289M376.1 289Q379.8 273 383.5 289M342.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M381.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M434 548H476V556H434ZM436.5 541H473.5V548H436.5Z"/><path pathLength="1" d="M439 541L441.5 302H468.5 L471 541Z"/><path pathLength="1" d="M441 299C440 290 436 278 433 271H477 C474 278 470 290 469 299Z"/><path pathLength="1" d="M439.5 299H470.5V303H439.5ZM431 264H479V271H431Z"/><path pathLength="1" class="ln" d="M440.5 299Q444.1 283 447.8 299M447.8 299Q451.4 283 455 299M455 299Q458.6 283 462.2 299M462.2 299Q465.9 283 469.5 299M436.5 289Q440.2 273 443.9 289M443.9 289Q447.6 273 451.3 289M451.3 289Q455 273 458.7 289M458.7 289Q462.4 273 466.1 289M466.1 289Q469.8 273 473.5 289M432.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M471.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M524 548H566V556H524ZM526.5 541H563.5V548H526.5Z"/><path pathLength="1" d="M529 541L531.5 302H558.5 L561 541Z"/><path pathLength="1" d="M531 299C530 290 526 278 523 271H567 C564 278 560 290 559 299Z"/><path pathLength="1" d="M529.5 299H560.5V303H529.5ZM521 264H569V271H521Z"/><path pathLength="1" class="ln" d="M530.5 299Q534.1 283 537.8 299M537.8 299Q541.4 283 545 299M545 299Q548.6 283 552.2 299M552.2 299Q555.9 283 559.5 299M526.5 289Q530.2 273 533.9 289M533.9 289Q537.6 273 541.3 289M541.3 289Q545 273 548.7 289M548.7 289Q552.4 273 556.1 289M556.1 289Q559.8 273 563.5 289M522.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M561.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M614 548H656V556H614ZM616.5 541H653.5V548H616.5Z"/><path pathLength="1" d="M619 541L621.5 302H648.5 L651 541Z"/><path pathLength="1" d="M621 299C620 290 616 278 613 271H657 C654 278 650 290 649 299Z"/><path pathLength="1" d="M619.5 299H650.5V303H619.5ZM611 264H659V271H611Z"/><path pathLength="1" class="ln" d="M620.5 299Q624.1 283 627.8 299M627.8 299Q631.4 283 635 299M635 299Q638.6 283 642.2 299M642.2 299Q645.9 283 649.5 299M616.5 289Q620.2 273 623.9 289M623.9 289Q627.6 273 631.3 289M631.3 289Q635 273 638.7 289M638.7 289Q642.4 273 646.1 289M646.1 289Q649.8 273 653.5 289M612.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M651.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M704 548H746V556H704ZM706.5 541H743.5V548H706.5Z"/><path pathLength="1" d="M709 541L711.5 302H738.5 L741 541Z"/><path pathLength="1" d="M711 299C710 290 706 278 703 271H747 C744 278 740 290 739 299Z"/><path pathLength="1" d="M709.5 299H740.5V303H709.5ZM701 264H749V271H701Z"/><path pathLength="1" class="ln" d="M710.5 299Q714.1 283 717.8 299M717.8 299Q721.4 283 725 299M725 299Q728.6 283 732.2 299M732.2 299Q735.9 283 739.5 299M706.5 289Q710.2 273 713.9 289M713.9 289Q717.6 273 721.3 289M721.3 289Q725 273 728.7 289M728.7 289Q732.4 273 736.1 289M736.1 289Q739.8 273 743.5 289M702.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0M741.5 275a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path pathLength="1" d="M246 238H754V264H246Z"/><path pathLength="1" class="ln" d="M246 247H754M246 256H754"/><path pathLength="1" d="M246 218H754V238H246Z"/><path pathLength="1" d="M232 200L500 98L768 200Z"/><path pathLength="1" d="M238 200H762V218H238Z"/><path pathLength="1" class="ln" d="M246 208H252V214H246ZM258 208H264V214H258ZM270 208H276V214H270ZM282 208H288V214H282ZM294 208H300V214H294ZM306 208H312V214H306ZM318 208H324V214H318ZM330 208H336V214H330ZM342 208H348V214H342ZM354 208H360V214H354ZM366 208H372V214H366ZM378 208H384V214H378ZM390 208H396V214H390ZM402 208H408V214H402ZM414 208H420V214H414ZM426 208H432V214H426ZM438 208H444V214H438ZM450 208H456V214H450ZM462 208H468V214H462ZM474 208H480V214H474ZM486 208H492V214H486ZM498 208H504V214H498ZM510 208H516V214H510ZM522 208H528V214H522ZM534 208H540V214H534ZM546 208H552V214H546ZM558 208H564V214H558ZM570 208H576V214H570ZM582 208H588V214H582ZM594 208H600V214H594ZM606 208H612V214H606ZM618 208H624V214H618ZM630 208H636V214H630ZM642 208H648V214H642ZM654 208H660V214H654ZM666 208H672V214H666ZM678 208H684V214H678ZM690 208H696V214H690ZM702 208H708V214H702ZM714 208H720V214H714ZM726 208H732V214H726ZM738 208H744V214H738ZM750 208H756V214H750Z"/><path pathLength="1" class="ln" d="M250 196L500 109L750 196M256 196H744"/><path pathLength="1" class="ln" d="M256 193.9V188.9M744 193.9V188.9M267 190.1V185.1M733 190.1V185.1M278 186.3V181.3M722 186.3V181.3M289 182.4V177.4M711 182.4V177.4M300 178.6V173.6M700 178.6V173.6M311 174.8V169.8M689 174.8V169.8M322 170.9V165.9M678 170.9V165.9M333 167.1V162.1M667 167.1V162.1M344 163.3V158.3M656 163.3V158.3M355 159.5V154.5M645 159.5V154.5M366 155.6V150.6M634 155.6V150.6M377 151.8V146.8M623 151.8V146.8M388 148V143M612 148V143M399 144.1V139.1M601 144.1V139.1M410 140.3V135.3M590 140.3V135.3M421 136.5V131.5M579 136.5V131.5M432 132.7V127.7M568 132.7V127.7M443 128.8V123.8M557 128.8V123.8M454 125V120M546 125V120M465 121.2V116.2M535 121.2V116.2M476 117.4V112.4M524 117.4V112.4M487 113.5V108.5M513 113.5V108.5"/><path pathLength="1" class="ln" d="M481 158a19 19 0 1 0 38 0a19 19 0 1 0 -38 0M485 158a15 15 0 1 0 30 0a15 15 0 1 0 -30 0M500 146L500 143M506 147.6L507.5 145M510.4 152L513 150.5M512 158L515 158M510.4 164L513 165.5M506 168.4L507.5 171M500 170L500 173M494 168.4L492.5 171M489.6 164L487 165.5M488 158L485 158M489.6 152L487 150.5M494 147.6L492.5 145M500 158L493.1 154M500 158L510.4 152"/></g>
+<g class="r-ground"><path pathLength="1" class="ln" d="M6 655H994"/><path pathLength="1" class="ln" d="M242 570.7H758M242 578.3H758M242 586H758M242 593.7H758M242 601.3H758M242 609H758M242 616.7H758M242 624.3H758M242 632H758M242 639.7H758M242 647.3H758"/><path pathLength="1" d="M226 522H242V655H226ZM224 517H244V522H224Z"/><path pathLength="1" d="M758 522H774V655H758ZM756 517H776V522H756Z"/><path pathLength="1" d="M6 520H226V527H6ZM6 552H226V558H6Z"/><path pathLength="1" d="M12 515H24V562H12Z"/><path pathLength="1" d="M72 515H84V562H72Z"/><path pathLength="1" d="M132 515H144V562H132Z"/><path pathLength="1" d="M192 515H204V562H192Z"/><path pathLength="1" class="ln" d="M28 527C30 533 26 538 28 545V552M34 527C36 533 32 538 34 545V552M40 527C42 533 38 538 40 545V552M46 527C48 533 44 538 46 545V552M52 527C54 533 50 538 52 545V552M58 527C60 533 56 538 58 545V552M64 527C66 533 62 538 64 545V552M88 527C90 533 86 538 88 545V552M94 527C96 533 92 538 94 545V552M100 527C102 533 98 538 100 545V552M106 527C108 533 104 538 106 545V552M112 527C114 533 110 538 112 545V552M118 527C120 533 116 538 118 545V552M124 527C126 533 122 538 124 545V552M148 527C150 533 146 538 148 545V552M154 527C156 533 152 538 154 545V552M160 527C162 533 158 538 160 545V552M166 527C168 533 164 538 166 545V552M172 527C174 533 170 538 172 545V552M178 527C180 533 176 538 178 545V552M184 527C186 533 182 538 184 545V552M208 527C210 533 206 538 208 545V552M214 527C216 533 212 538 214 545V552M220 527C222 533 218 538 220 545V552"/><path pathLength="1" class="ln" d="M6 562H226M6 567H226"/><path pathLength="1" class="ln" d="M24 622A24 24 0 0 1 72 622ZM19 622A29 29 0 0 1 77 622M48 622L31 605M48 622L48 598M48 622L65 605M88 622A24 24 0 0 1 136 622ZM83 622A29 29 0 0 1 141 622M112 622L95 605M112 622L112 598M112 622L129 605M157 655V612A23 23 0 0 1 203 612V655M152 612A28 28 0 0 1 208 612"/><path pathLength="1" d="M774 520H994V527H774ZM774 552H994V558H774Z"/><path pathLength="1" d="M976 515H988V562H976Z"/><path pathLength="1" d="M916 515H928V562H916Z"/><path pathLength="1" d="M856 515H868V562H856Z"/><path pathLength="1" d="M796 515H808V562H796Z"/><path pathLength="1" class="ln" d="M972 527C974 533 970 538 972 545V552M966 527C968 533 964 538 966 545V552M960 527C962 533 958 538 960 545V552M954 527C956 533 952 538 954 545V552M948 527C950 533 946 538 948 545V552M942 527C944 533 940 538 942 545V552M936 527C938 533 934 538 936 545V552M912 527C914 533 910 538 912 545V552M906 527C908 533 904 538 906 545V552M900 527C902 533 898 538 900 545V552M894 527C896 533 892 538 894 545V552M888 527C890 533 886 538 888 545V552M882 527C884 533 880 538 882 545V552M876 527C878 533 874 538 876 545V552M852 527C854 533 850 538 852 545V552M846 527C848 533 844 538 846 545V552M840 527C842 533 838 538 840 545V552M834 527C836 533 832 538 834 545V552M828 527C830 533 826 538 828 545V552M822 527C824 533 820 538 822 545V552M816 527C818 533 814 538 816 545V552M792 527C794 533 790 538 792 545V552M786 527C788 533 784 538 786 545V552M780 527C782 533 778 538 780 545V552"/><path pathLength="1" class="ln" d="M774 562H994M774 567H994"/><path pathLength="1" class="ln" d="M928 622A24 24 0 0 1 976 622ZM923 622A29 29 0 0 1 981 622M952 622L935 605M952 622L952 598M952 622L969 605M864 622A24 24 0 0 1 912 622ZM859 622A29 29 0 0 1 917 622M888 622L871 605M888 622L888 598M888 622L905 605M797 655V612A23 23 0 0 1 843 612V655M792 612A28 28 0 0 1 848 612"/></g>
+        </svg></div>
+        <figcaption class="fig-cap"><b>The Rotunda, University of Virginia,</b> drawn for this page. All four studied at the University. John B. Minor’s law classes met in the Rotunda Annex from 1853; when it burned in 1895, Raleigh C. Minor saved the law books, and they stayed in the rebuilt Rotunda until the Law School moved to Minor Hall in 1911.</figcaption>
+      </figure>
+      <div>
+        <p class="chip">Division IV · The Reformation</p>
+        <h2 id="hm-h">Halsey Minor</h2>
+        <p class="yrs">1964 –</p>
+        <p class="lede">He did not go to law school. That is the departure. Everything after it is the return.</p>
+        <dl class="facts">
+          <dt>1987</dt><dd>Anthropology, University of Virginia.</dd>
+          <dt>Not changing</dt><dd>The ideal. Equal justice, and the conviction that it is owed rather than sold.</dd>
+          <dt>Changing</dt><dd>The venue and the incentive.</dd>
+          <dt>The claim</dt><dd>Not a reinvention of the law. A reformation of how ordinary people are required to meet it.</dd>
+        </dl>
+        <figure class="hq" data-who="halsey"><figcaption>Halsey Minor · October 25, 2026</figcaption>
+          <blockquote>“I know he would want me to contribute in my way to the system he respected.”</blockquote></figure>
+        <p class="moments"><a href="/mission/">What he is building →</a></p>
+      </div>
+    </section>
+
+    <section class="close now" aria-label="Sources">
+      <p class="close-line">Four generations, one obligation, and no shared method.</p>
+      <details class="srcs-d" id="sources">
+        <summary>Sources: where each fact can be read</summary>
+        <ol class="srcs">
+          <li>John B. Minor: <a href="https://en.wikipedia.org/wiki/John_B._Minor" rel="external">Wikipedia</a>; the University of Virginia Library, <a href="https://explore.lib.virginia.edu/exhibits/show/hoos/fabled-faculty/john-barbee-minor" rel="external">John Barbee Minor</a>; <a href="https://archives.lib.virginia.edu/ark:/59853/146296" rel="external">The Papers of John B. Minor, 1845–1893</a>.</li>
+          <li>The Law School, its rooms and Minor Hall: UVA Law, <a href="https://www.law.virginia.edu/about/timeline-key-events-uva-law-history" rel="external">A Timeline of Key Events in UVA Law History</a>; UVA Law, <a href="https://www.law.virginia.edu/news/201812/uva-okeeffe-exhibit-features-watercolor-former-law-school-building" rel="external">Minor Hall, named for professor, opened in 1911</a>.</li>
+          <li>The fire of 27 October 1895: the University of Virginia, <a href="https://rotunda.virginia.edu/history" rel="external">The Rotunda, History</a>; the Arthur J. Morris Law Library, <a href="https://digitalhistory.law.virginia.edu/library-history" rel="external">Library history</a>.</li>
+          <li>3 March 1865: the Faculty Minutes of the University of Virginia, 1 March 1865, and the diary of John B. Minor, 2, 3 and 6 March 1865, as quoted in <i>Minor on the Law</i>, Plate III.</li>
+          <li><i>Institutes of Common and Statute Law</i>, Vol. I, fourth edition (Richmond, 1891), with the preface to the first edition: <a href="https://archive.org/details/institutesofcomm01mino" rel="external">Internet Archive</a>.</li>
+          <li>Raleigh Colston Minor: UVA Law, <a href="https://archives.law.virginia.edu/node/649" rel="external">Archives &amp; Special Collections</a>; the University of Virginia Law Library, <a href="https://libguides.law.virginia.edu/faculty/r-minor" rel="external">faculty profile</a>. John Wurts, <i>The Law of Real Property (Based on Minor’s Institutes)</i> (St. Paul: West Publishing, 1910): <a href="https://archive.org/details/cu31924018810006" rel="external">Internet Archive</a>. <i>A Republic of Nations</i> (New York: Oxford University Press, 1918): <a href="https://archive.org/details/republicofnation00minorich" rel="external">Internet Archive</a>.</li>
+          <li>C. Venable Minor, President 1962–63: the Virginia State Bar, <a href="https://vsb.org/Site/Site/about/past-presidents.aspx" rel="external">Past Presidents</a>. The firm: <a href="https://en.wikipedia.org/wiki/McGuireWoods" rel="external">McGuireWoods</a>. Governor John S. Battle: <a href="https://en.wikipedia.org/wiki/John_S._Battle" rel="external">Wikipedia</a>.</li>
+          <li>Advertising: the American Bar Association, Canons of Professional Ethics, Canon 27 (1908); <i>Bates v. State Bar of Arizona</i>, 433 U.S. 350 (1977): <a href="https://supreme.justia.com/cases/federal/us/433/350/" rel="external">Justia</a>.</li>
+          <li>Halsey Minor at the University of Virginia, Minor Ventures, GrandCentral (Google Voice) and OpenDNS: <a href="https://en.wikipedia.org/wiki/Halsey_Minor" rel="external">Wikipedia</a>; UVA Innovates, <a href="https://innovates.virginia.edu/companies/cnet" rel="external">CNET</a>.</li>
+        </ol>
+        <p class="foot">The archival images are originals; each caption names its collection. The color portrait of John B. Minor is a reconstruction by Halsey Minor from the photograph of 1 October 1884. The Rotunda and the Bar’s roll are drawn and set for this page.</p>
+      </details>
     </section>
 
   </div>
 </main>
+
+<dialog class="reader era-1" id="r-truce" aria-labelledby="r-truce-h">
+  <header class="rd-head"><div><p class="chip">Division I · 3 March 1865</p><h3 id="r-truce-h">The flag of truce</h3><p class="yrs">Sheridan and Custer enter Charlottesville</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <figure class="print"><span class="frame"><img src="/legacy/jbm-1859.jpg" width="442" height="586" loading="lazy" decoding="async" alt="John B. Minor as a young professor in 1859: dark hair, a high collar and a loose black tie."></span>
+      <figcaption><b>1859.</b> Photograph by Adam B. Walter. University of Virginia Prints &amp; Photographs, Albert and Shirley Small Special Collections Library. Public domain.</figcaption></figure>
+    <p class="lede">He was too unwell to attend the meeting at which he was appointed. He went out anyway.</p>
+    <figure class="slip" data-who="uva"><blockquote>“Resolved that the Chairman &amp; Professor Minor be appointed a committee to meet the commanding General … and request of him a guard to protect public &amp; private property at the University.”</blockquote><figcaption>Faculty Minutes, University of Virginia, 1 March 1865</figcaption></figure>
+    <figure class="slip" data-who="jbm"><blockquote>“Most persons think they will destroy the University. I am not of that opinion, but I cannot avoid much anxiety in consequence of so many having a contrary impression.”</blockquote><figcaption>Diary of John B. Minor, 2 March 1865</figcaption></figure>
+    <p>Between one and two o’clock he went with Mayor Christopher Fowler, faculty chairman Socrates Maupin, and Rector Thomas Preston to the ground opposite Carr’s Hill, where a flag of truce had already been raised.</p>
+    <figure class="slip" data-who="jbm"><blockquote>“We announced to these men … that no defense of Charlottesville was contemplated, that the town was evacuated, and that we requested protection for the University, and for the town.”</blockquote><figcaption>Diary of John B. Minor, 3 March 1865</figcaption></figure>
+    <p>Custer passed in triumph with three captured battle flags displayed. Two of his staff rode out of the line to repeat the assurance. What arrived was one man.</p>
+    <figure class="slip" data-who="jbm"><blockquote>“He remained all the afternoon, at the corner opposite the Medical Hall, and was extremely serviceable, and very courteous.”</blockquote><figcaption>Diary of John B. Minor, 3 March 1865</figcaption></figure>
+    <p>By the next day the guard was twenty-five men under Lieutenant David Collins, Company L, Michigan Cavalry. On 5 March a captain of Sheridan’s staff came to state the General’s determination to preserve the University unharmed. Meanwhile the uniform works, Marchant’s factory, the warehouses and the bridges burned.</p>
+    <figure class="slip red" data-who="jbm"><blockquote>“Thus we escaped the dangers which threatened, and upon the whole have lost very little. … But our poor neighbors suffered terribly.”</blockquote><figcaption>Diary of John B. Minor, 6 March 1865</figcaption></figure>
+    <p class="note"><b>Of the risk.</b> The Virginia Military Institute had been burned the previous June. Everyone knew it.</p>
+    <p class="note"><b>Of the tradition.</b> The family holds that guards were posted with orders to fire on any man who tried to burn the place. The archive records the guard, and the courtesy. It does not record the order.</p>
+    <p class="pull">The University of Virginia stands. He was one of the four men who walked out to ask that it be spared.</p>
+  </div>
+</dialog>
+
+<dialog class="reader era-1" id="r-inst" aria-labelledby="r-inst-h">
+  <header class="rd-head"><div><p class="chip">Division I · The Book</p><h3 id="r-inst-h">Printed for the author</h3><p class="yrs"><i>Institutes of Common and Statute Law</i> · four volumes · Richmond</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <figure class="print"><span class="frame"><img src="/legacy/institutes-1891.jpg" width="437" height="697" loading="lazy" decoding="async" alt="Title page: Institutes of Common and Statute Law, by John B. Minor, LL.D. Volume I, The Rights Which Relate to the Person. Fourth edition, revised and corrected. Richmond: printed for the author, 1891."></span>
+      <figcaption><b>Title page,</b> <i>Institutes of Common and Statute Law</i>, Vol. I, fourth edition. Richmond, 1891. Internet Archive.</figcaption></figure>
+    <p class="lede">He set out to state the whole of the common law of Virginia with more precision than anyone had before, and then he paid the printer himself.</p>
+    <figure class="slip" data-who="imprint"><blockquote>“Printed for the author.”</blockquote><figcaption>Imprint, <i>Institutes of Common and Statute Law</i>, Vol. I. Richmond, 1891</figcaption></figure>
+    <p>There was no publisher standing behind it and no advance. He wrote the treatise, financed the printing, and arranged the distribution through three booksellers. The work went through four editions in his lifetime and shaped the teaching of law across the South for a generation.</p>
+    <figure class="slip" data-who="jbm"><blockquote>“No one can be more surprised than the author at the bulk and character which this work has assumed.”</blockquote><figcaption>Preface to the first edition, <i>Institutes of Common and Statute Law</i></figcaption></figure>
+  </div>
+</dialog>
+
+<dialog class="reader era-2" id="r-fire" aria-labelledby="r-fire-h">
+  <header class="rd-head"><div><p class="chip">Division II · 27 October 1895</p><h3 id="r-fire-h">The fire</h3><p class="yrs">The Rotunda, University of Virginia</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <p class="lede">Three months after John B. Minor’s death, a fire broke out in the Rotunda Annex, where the law classes met, and spread to the Rotunda.</p>
+    <p>It destroyed the Annex and the Rotunda, and most of the University’s library with them.</p>
+    <p>The law books were kept apart from the rest. Raleigh C. Minor saved nearly all of them. The rebuilt Rotunda gave them room in its basement, and they stayed there until the Law School moved to Minor Hall, named for his father, in 1911.</p>
+    <p class="rd-src">The University of Virginia, The Rotunda: History · the Arthur J. Morris Law Library, Library history · UVA Law, A Timeline of Key Events</p>
+  </div>
+</dialog>
+
+<dialog class="reader era-2" id="r-property" aria-labelledby="r-property-h">
+  <header class="rd-head"><div><p class="chip">Division II · 1908 – 1910</p><h3 id="r-property-h">Built on the <i>Institutes</i></h3><p class="yrs"><i>The Law of Real Property</i></p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <p class="lede">His own two-volume treatise on real property appeared in 1908, built, as its title records, on his father’s <i>Institutes</i>. Two years later another scholar rebuilt it again on his.</p>
+    <figure class="slip" data-who="wurts"><blockquote>“Credit must be given to Professor Raleigh Colston Minor for everything in this book except the American modifications of the common law, and those I must assume responsibility for.”</blockquote><figcaption>John Wurts, preface to <i>The Law of Real Property (Based on Minor’s Institutes)</i>, New Haven, 5 January 1910</figcaption></figure>
+    <p>Each generation took the one before as its foundation and built a new story on it.</p>
+  </div>
+</dialog>
+
+<dialog class="reader era-2" id="r-republic" aria-labelledby="r-republic-h">
+  <header class="rd-head"><div><p class="chip">Division II · 1918</p><h3 id="r-republic-h">A league before the League</h3><p class="yrs"><i>A Republic of Nations</i> · Oxford University Press</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <p class="lede">A study of the organization of a federal league of nations, published before there was a league, by a professor in Charlottesville.</p>
+    <p>The First World War was still being fought when the book went to press. The Covenant would not be drafted at the Paris Peace Conference until the following year.</p>
+    <p>He was not commenting on an institution. He was drafting the organizational law for one that did not exist, in the hope that someone would need it. Oxford published it at once in New York, London, Toronto, Melbourne and Bombay.</p>
+  </div>
+</dialog>
+
+<dialog class="reader era-3" id="r-firm" aria-labelledby="r-firm-h">
+  <header class="rd-head"><div><p class="chip">Division III · 1834 – today</p><h3 id="r-firm-h">The line of the firm</h3><p class="yrs">Charlottesville to McGuireWoods</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <p class="lede">The firm’s line runs back to a Charlottesville practice opened in 1834 by Egbert R. Watson, once private secretary to President Monroe: the same year John B. Minor took his degree a few hundred yards away.</p>
+    <ol class="firm" aria-label="The line of the firm">
+      <li><span class="y">1834</span>Egbert R. Watson</li>
+      <li><span class="y">1870</span>George Perkins</li>
+      <li class="his"><span class="y">1936</span>Perkins, Battle &amp; Minor</li>
+      <li class="his"><span class="y">Then</span>Battle, Neal, Harris, Minor &amp; Williams</li>
+      <li><span class="y">1966</span>McGuire, Woods &amp; Battle</li>
+      <li><span class="y">Today</span>McGuireWoods</li>
+    </ol>
+    <p class="fig-cap">In red, the firms that carried his name.</p>
+    <p>His partner was John Stewart Battle (1890–1972), Governor of Virginia 1950–54, who returned to the Charlottesville practice when his term ended.</p>
+  </div>
+</dialog>
+
+<dialog class="reader era-3" id="r-adv" aria-labelledby="r-adv-h">
+  <header class="rd-head"><div><p class="chip">Division III · The Last Objection</p><h3 id="r-adv-h">The question of advertising</h3><p class="yrs">1908 – 1977</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>
+  <div class="rd-body">
+    <p class="lede">The idea that a lawyer might advertise was said to have troubled him. It was the settled position of the entire American bar for nearly seventy years, and he held it as a man who had led that bar.</p>
+    <dl class="tl">
+      <dt>1908</dt><dd>The American Bar Association adopts Canon 27 of the Canons of Professional Ethics, declaring the solicitation of business by advertising unprofessional.</dd>
+      <dt>1908 – 1977</dt><dd>The prohibition is adopted by the highest courts of the individual states and holds, substantially unbroken, for nearly seven decades.</dd>
+      <dt>1962 – 63</dt><dd>C. Venable Minor presides over the Virginia State Bar under that rule.</dd>
+      <dt>1977</dt><dd><i>Bates v. State Bar of Arizona</i>, 433 U.S. 350, extends commercial-speech protection to attorney advertising. The rule he had defended is struck down.</dd>
+      <dt>After</dt><dd>The billboard, the daytime commercial, the injury hotline. He lived another eleven years and saw all of it.</dd>
+    </dl>
+    <p>His objection was never to competition. It was to the idea that a person in the worst week of their life should be treated as a market: that distress should be prospected for rather than answered.</p>
+    <p>Whatever one makes of the rule he defended, the instinct behind it survives intact in the division that follows: what happens to a family should not be the occasion of anyone’s commercial good fortune.</p>
+  </div>
+</dialog>
 
 <dialog class="viewer" id="viewer" aria-label="The law class, about 1890–1893">
   <div class="v-stage" id="v-stage"><img id="v-img" alt="The law class of about 1890–1893, full screen."><div class="v-ring" id="v-ring"></div></div>
@@ -503,31 +553,29 @@ dialog.viewer::backdrop { background: var(--veil) }
 (function () {
   var root = document.documentElement;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io = 'IntersectionObserver' in window;
 
   // the ground travels from 1813 to today as the reader scrolls
   var ticking = false;
   function travel() {
     ticking = false;
     var max = root.scrollHeight - innerHeight, p = max > 0 ? scrollY / max : 0;
-    var t = Math.min(1, Math.max(0, (p - .1) / .62));
+    var t = Math.min(1, Math.max(0, (p - .08) / .7));
     root.style.setProperty('--t', t.toFixed(3));
   }
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(travel); } }, { passive: true });
   addEventListener('resize', travel); travel();
 
-  // the rail marks the generation being read
-  var links = {}; [].forEach.call(document.querySelectorAll('.rail a[data-gen]'), function (a) { links[a.dataset.gen] = a; });
-  var owner = { top: 'jbm', jbm: 'jbm', truce: 'jbm', institutes: 'jbm', rcm: 'rcm', republic: 'rcm', cvm: 'cvm', hippo: 'cvm', advertising: 'cvm', halsey: 'halsey', colophon: 'halsey', sources: 'halsey' };
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var g = owner[e.target.id];
-        Object.keys(links).forEach(function (k) { if (k === g) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current'); });
-      });
-    }, { rootMargin: '-35% 0px -60% 0px' });
-    Object.keys(owner).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  // once, when a thing comes into view: the four lives grow, the Rotunda draws itself, the bird lands
+  function once(el, th) {
+    if (reduce || !io || !el) return;
+    el.classList.add('armed');
+    var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { el.classList.add('go'); o.disconnect(); } }); }, { threshold: th });
+    o.observe(el);
   }
+  once(document.getElementById('ch'), .5);
+  once(document.getElementById('rotunda'), .45);
+  once(document.getElementById('mv'), .6);
 
   // the opening: the photograph, his signature written, then the color rising into him
   var dv = document.getElementById('develop'), b84 = document.getElementById('dv-1884'), b26 = document.getElementById('dv-2026');
@@ -541,13 +589,14 @@ dialog.viewer::backdrop { background: var(--veil) }
   b84.addEventListener('click', function () { show('1884'); });
   b26.addEventListener('click', function () { show('2026'); });
 
-  // the hippo and the bird: once, when the logo comes into view
-  var mv = document.getElementById('mv');
-  if (!reduce && 'IntersectionObserver' in window) {
-    mv.classList.add('armed');
-    var mio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { mv.classList.add('go'); mio.disconnect(); } }); }, { threshold: .6 });
-    mio.observe(mv);
-  }
+  // the readers: each moment opens whole, and closes by its button, Esc, or a tap outside it
+  [].forEach.call(document.querySelectorAll('[data-open]'), function (b) {
+    b.addEventListener('click', function () { var d = document.getElementById(b.getAttribute('data-open')); if (d.showModal) d.showModal(); else d.setAttribute('open', ''); d.scrollTop = 0; });
+  });
+  [].forEach.call(document.querySelectorAll('dialog.reader'), function (d) {
+    d.querySelector('[data-close]').addEventListener('click', function () { d.close ? d.close() : d.removeAttribute('open'); });
+    d.addEventListener('click', function (e) { if (e.target === d) { var r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } });
+  });
 
   // the class photograph, full screen: drag, pinch, scroll to zoom; "Find him" goes to the center of the front row
   var dlg = document.getElementById('viewer'), stage = document.getElementById('v-stage'), img = document.getElementById('v-img'), ring = document.getElementById('v-ring');
