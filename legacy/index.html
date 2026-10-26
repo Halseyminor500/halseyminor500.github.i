@@ -250,6 +250,36 @@ dialog.viewer::backdrop { background: var(--veil) }
   .firm li::before, .firm li.his::before { margin: 4px 0 0; justify-self: center }
 }
 </style>
+<style>
+.nx { width: calc(100% - 2 * max(16px, env(safe-area-inset-left, 0px))); max-width: 1160px; margin: 40px auto 44px }
+@media (min-width: 760px) { .nx { width: calc(100% - 2 * max(40px, env(safe-area-inset-left, 0px))); margin: 56px auto 60px } }
+.nx-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) clamp(130px, 24vw, 290px); align-items: center; gap: clamp(16px, 3vw, 44px);
+  padding: clamp(22px, 3.4vw, 40px) clamp(20px, 3.6vw, 48px); border-radius: 24px; overflow: hidden; text-decoration: none; color: #FFFFFF;
+  background: radial-gradient(70% 95% at 50% -32%, rgba(255, 249, 232, .32) 0%, rgba(255, 249, 232, 0) 70%), linear-gradient(125deg, #2A66D8 0%, #1F56C3 46%, #173E90 100%);
+  box-shadow: 0 24px 46px -26px rgba(21, 23, 26, .6), inset 0 1px 0 rgba(255, 255, 255, .28) }
+.nx-card:focus-visible { outline: 3px solid #1F56C3; outline-offset: 4px }
+.nx-text { display: grid; gap: 10px; min-width: 0 }
+.nx-k { font: 500 12px/1 "IBM Plex Mono", Menlo, monospace; letter-spacing: .22em; text-transform: uppercase; color: rgba(255, 255, 255, .8) }
+.nx-name { font: 800 clamp(28px, 4.8vw, 54px)/1.04 "Jost", "Futura", "Century Gothic", Arial, sans-serif; letter-spacing: .01em; text-wrap: balance }
+.nx-name span { display: inline-block; transition: transform .35s ease }
+.nx-line { max-width: 34rem; font: 400 clamp(15px, 1.6vw, 18px)/1.45 "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; color: rgba(255, 255, 255, .9) }
+.nx-line b { font-weight: 600; color: #FFFFFF }
+.nx-track { display: flex; gap: 6px; margin-top: 8px }
+.nx-track i { width: 34px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .3) }
+.nx-track i.on { background: #FFFFFF }
+.nx-track i.go { background: transparent; box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 12px rgba(255, 255, 255, .75) }
+.nx-track i.on.go { background: #FFFFFF }
+.nx-pic { perspective: 900px; width: 100%; justify-self: end }
+.nx-img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.05; object-fit: cover; object-position: 50% 0; border-radius: 14px;
+  transform: rotateY(-16deg) rotateX(3deg); transform-origin: 70% 50%; box-shadow: -18px 22px 40px -18px rgba(5, 14, 40, .7), 0 0 0 1px rgba(255, 255, 255, .4);
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1) }
+.nx-card:hover .nx-img, .nx-card:focus-visible .nx-img { transform: rotateY(-4deg) rotateX(1deg) translateY(-4px) }
+.nx-card:hover .nx-name span, .nx-card:focus-visible .nx-name span { transform: translateX(6px) }
+@media (prefers-reduced-motion: no-preference) { .nx-track i.go { animation: nx-pulse 1.8s ease-in-out infinite } }
+@keyframes nx-pulse { 50% { box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 2px rgba(255, 255, 255, .2) } }
+@media (prefers-reduced-motion: reduce) { .nx-img, .nx-name span { transition: none } }
+@media (max-width: 599px) { .nx-card { grid-template-columns: minmax(0, 1fr) 108px; gap: 14px; border-radius: 20px } .nx-track i { width: 24px } }
+</style>
 </head>
 <body>
 <nav class="topnav" aria-label="Halsey Minor">
@@ -445,6 +475,7 @@ dialog.viewer::backdrop { background: var(--veil) }
 
   </div>
 </main>
+<nav class="nx" aria-label="The next page"><a class="nx-card" href="/"><span class="nx-text"><span class="nx-k">Next · 1 of 4</span><span class="nx-name">Home: Fight for Justice <span aria-hidden="true">→</span></span><span class="nx-line"><b>The Justice Meter</b> · When will it be held accountable to the laws?</span><span class="nx-track" aria-hidden="true"><i class="on go"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/home.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
 
 <dialog class="reader era-1" id="r-truce" aria-labelledby="r-truce-h">
   <header class="rd-head"><div><p class="chip">Division I · 3 March 1865</p><h3 id="r-truce-h">The flag of truce</h3><p class="yrs">Sheridan and Custer enter Charlottesville</p></div><button type="button" class="rd-x" data-close aria-label="Close">×</button></header>

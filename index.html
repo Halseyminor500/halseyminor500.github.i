@@ -13,20 +13,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Justice Meter · Halsey Minor</title>
-<meta name="description" content="Halsey Minor warned the Beverly Hills police and city officials, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.">
+<meta name="description" content="Halsey Minor warned the Beverly Hills police, in writing, that his case would be dumped. It was rejected for the very reasons he warned about.">
 <link rel="canonical" href="https://halseyminor.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Halsey Minor">
 <meta property="og:url" content="https://halseyminor.com/">
-<meta property="og:title" content="LOS ANGELES COUNTY AND BEVERLY HILLS “JUSTICE”. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?">
-<meta property="og:description" content="Halsey Minor warned the Beverly Hills police and city officials, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.">
+<meta property="og:title" content="WHEN WILL LOS ANGELES COUNTY AND BEVERLY HILLS “JUSTICE” BE HELD ACCOUNTABLE TO THE LAWS?">
+<meta property="og:description" content="Halsey Minor warned the Beverly Hills police, in writing, that his case would be dumped. It was rejected for the very reasons he warned about.">
 <meta property="og:image" content="https://halseyminor.com/share.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Justice Meter: the needle points at injustice.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LOS ANGELES COUNTY AND BEVERLY HILLS “JUSTICE”. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?">
-<meta name="twitter:description" content="Halsey Minor warned the Beverly Hills police and city officials, in writing, that his case would be dumped. It was rejected for the very reasons he warned about, and no one told him for nearly six months.">
+<meta name="twitter:title" content="WHEN WILL LOS ANGELES COUNTY AND BEVERLY HILLS “JUSTICE” BE HELD ACCOUNTABLE TO THE LAWS?">
+<meta name="twitter:description" content="Halsey Minor warned the Beverly Hills police, in writing, that his case would be dumped. It was rejected for the very reasons he warned about.">
 <meta name="twitter:image" content="https://halseyminor.com/share.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -108,10 +108,15 @@ h1 .q { color: var(--red) }
 .stats { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; border-top: 2px solid var(--ink) }
 .stats li { padding: 14px 14px 0 0; display: grid; gap: 6px; align-content: start }
 .stats li + li { padding-left: 14px; border-left: 1px solid rgba(21,23,26,.18) }
-.stats li > b { justify-self: start; font: 700 clamp(1.7rem, 3.2vw, 2.6rem)/1 var(--display); font-variant-numeric: tabular-nums; background: linear-gradient(transparent 62%, var(--yellow) 62%) }
+.stats li b { justify-self: start; font: 700 clamp(1.7rem, 3.2vw, 2.6rem)/1 var(--display); font-variant-numeric: tabular-nums; background: linear-gradient(transparent 62%, var(--yellow) 62%) }
 .stats span { font-size: .9rem; line-height: 1.35; color: var(--ink) }
 .stats span span { font-size: inherit }
-@media (max-width: 520px) { .stats { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr) } .stats li, .stats li + li { padding: 12px 0; border-left: 0; border-bottom: 1px solid rgba(21,23,26,.14); grid-template-columns: 5.5rem minmax(0,1fr); align-items: baseline } }
+@media (max-width: 520px) { .stats { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr) } .stats li, .stats li + li { padding: 12px 0; border-left: 0; border-bottom: 1px solid rgba(21,23,26,.14) }
+  .stats .stat-open { grid-template-columns: auto minmax(0,1fr); align-items: baseline; column-gap: 14px } .stats .stat-more { grid-column: 2 } .stats .stat-open > b { white-space: nowrap; align-self: start } }
+.stats .stat-open { all: unset; box-sizing: border-box; display: grid; gap: 6px; align-content: start; width: 100%; cursor: pointer; border-radius: 10px }
+.stats .stat-open:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px } .stats .stat-more { font: 600 13px/1.3 var(--body); font-style: normal; color: var(--blue) }
+.stats .stat-open:hover .stat-more { text-decoration: underline; text-underline-offset: 3px }
+.pop-body ol.rec-list { display: grid; margin: 0 } .pop-body ol.rec-list li { display: grid }
 .meter { margin: 0; display: grid; justify-items: center }
 .meter svg { width: min(100%, 400px); height: auto; display: block; overflow: visible }
 .meter { gap: 14px }
@@ -392,6 +397,7 @@ h2 { margin-bottom: 16px; font-size: clamp(1.4rem, 2.7vw, 2.2rem) }
 .ask { font-size: clamp(2rem, 4.6vw, 3.6rem) }
 .hero.end .hl { margin-top: 14px }
 h1 { font-size: clamp(1.8rem, 3.9vw, 3.4rem) }
+#top h1 { font-size: clamp(2rem, 4.3vw, 3.75rem) }
 .due-count { margin: -6px 0 14px; font-size: .98rem }
 .clock-list li { padding: 8px 0 8px 10px; font-size: .93rem; grid-template-columns: 5.8rem minmax(0, 1fr); gap: 10px }
 .hl { font-size: clamp(1.02rem, 1.7vw, 1.25rem); padding: 14px 18px }
@@ -480,6 +486,36 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 .ar-skip { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); appearance: none; border: 1px solid rgba(255, 255, 255, .35);
   background: rgba(255, 255, 255, .08); color: #FFFFFF; border-radius: 999px; padding: 9px 16px; font: 600 14px/1 var(--body); letter-spacing: .04em; cursor: pointer }
 </style>
+<style>
+.nx { width: calc(100% - 2 * max(16px, env(safe-area-inset-left, 0px))); max-width: 1160px; margin: 40px auto 44px }
+@media (min-width: 760px) { .nx { width: calc(100% - 2 * max(40px, env(safe-area-inset-left, 0px))); margin: 56px auto 60px } }
+.nx-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) clamp(130px, 24vw, 290px); align-items: center; gap: clamp(16px, 3vw, 44px);
+  padding: clamp(22px, 3.4vw, 40px) clamp(20px, 3.6vw, 48px); border-radius: 24px; overflow: hidden; text-decoration: none; color: #FFFFFF;
+  background: radial-gradient(70% 95% at 50% -32%, rgba(255, 249, 232, .32) 0%, rgba(255, 249, 232, 0) 70%), linear-gradient(125deg, #2A66D8 0%, #1F56C3 46%, #173E90 100%);
+  box-shadow: 0 24px 46px -26px rgba(21, 23, 26, .6), inset 0 1px 0 rgba(255, 255, 255, .28) }
+.nx-card:focus-visible { outline: 3px solid #1F56C3; outline-offset: 4px }
+.nx-text { display: grid; gap: 10px; min-width: 0 }
+.nx-k { font: 500 12px/1 "IBM Plex Mono", Menlo, monospace; letter-spacing: .22em; text-transform: uppercase; color: rgba(255, 255, 255, .8) }
+.nx-name { font: 800 clamp(28px, 4.8vw, 54px)/1.04 "Jost", "Futura", "Century Gothic", Arial, sans-serif; letter-spacing: .01em; text-wrap: balance }
+.nx-name span { display: inline-block; transition: transform .35s ease }
+.nx-line { max-width: 34rem; font: 400 clamp(15px, 1.6vw, 18px)/1.45 "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; color: rgba(255, 255, 255, .9) }
+.nx-line b { font-weight: 600; color: #FFFFFF }
+.nx-track { display: flex; gap: 6px; margin-top: 8px }
+.nx-track i { width: 34px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .3) }
+.nx-track i.on { background: #FFFFFF }
+.nx-track i.go { background: transparent; box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 12px rgba(255, 255, 255, .75) }
+.nx-track i.on.go { background: #FFFFFF }
+.nx-pic { perspective: 900px; width: 100%; justify-self: end }
+.nx-img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1.05; object-fit: cover; object-position: 50% 0; border-radius: 14px;
+  transform: rotateY(-16deg) rotateX(3deg); transform-origin: 70% 50%; box-shadow: -18px 22px 40px -18px rgba(5, 14, 40, .7), 0 0 0 1px rgba(255, 255, 255, .4);
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1) }
+.nx-card:hover .nx-img, .nx-card:focus-visible .nx-img { transform: rotateY(-4deg) rotateX(1deg) translateY(-4px) }
+.nx-card:hover .nx-name span, .nx-card:focus-visible .nx-name span { transform: translateX(6px) }
+@media (prefers-reduced-motion: no-preference) { .nx-track i.go { animation: nx-pulse 1.8s ease-in-out infinite } }
+@keyframes nx-pulse { 50% { box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 2px rgba(255, 255, 255, .2) } }
+@media (prefers-reduced-motion: reduce) { .nx-img, .nx-name span { transition: none } }
+@media (max-width: 599px) { .nx-card { grid-template-columns: minmax(0, 1fr) 108px; gap: 14px; border-radius: 20px } .nx-track i { width: 24px } }
+</style>
 <script>
 (function () {
   var d = document.documentElement;
@@ -515,12 +551,26 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   <div class="wrap">
     <div class="glass">
       <div>
-        <h1 data-who="halsey">LOS ANGELES COUNTY AND BEVERLY HILLS <span class="q">“JUSTICE”</span>. WILL IT BE HELD ACCOUNTABLE TO THE LAWS?</h1>
-        <p class="lede">Halsey Minor warned the Beverly Hills police and city officials, in writing, <mark class="h">that his case would be dumped</mark>. It was <mark class="d">rejected for the very reasons he warned about</mark>, and <mark class="d">no one told him for nearly six months</mark>.</p>
+        <h1 data-who="halsey">WHEN WILL LOS ANGELES COUNTY AND BEVERLY HILLS <span class="q">“JUSTICE”</span> BE HELD ACCOUNTABLE TO THE LAWS?</h1>
+        <p class="lede">Halsey Minor warned the Beverly Hills police, in writing, <mark class="h">that his case would be dumped</mark>. It was <mark class="d">rejected for the very reasons he warned about</mark>.</p>
+        <!-- October 26, 2026, his rule: each item understood at a glance, the record one tap away -->
         <ul class="stats">
-          <li><b>217 days</b><span>from the rejection to the first written explanation of it, which came October 22, 2026: nine days after the 30 the law allows, when the victim asks</span></li>
-          <li><b>0 of 8</b><span>requests to be heard that were met</span></li>
+          <li><button class="stat-open" type="button" data-pop="pop-217"><b>217 days</b><span>before anyone explained, in writing, why his case was rejected</span><i class="stat-more">The record →</i></button></li>
+          <li><button class="stat-open" type="button" data-pop="pop-confer"><b>0 of 8</b><span>requests to talk with the prosecutor, granted. California's Constitution gives every victim that right.</span><i class="stat-more">The record →</i></button></li>
         </ul>
+        <dialog class="pop" id="pop-217" aria-labelledby="pop-217-h"><div class="pop-head"><h3 id="pop-217-h">217 days: from the rejection to the first written explanation</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+          <ol class="clock-list rec-list">
+            <li class="d"><span class="t">Mar 19, 2026</span>A deputy district attorney rejects the case.</li>
+            <li class="h"><span class="t">Sep 8, 2026</span>He learns the case was rejected in March: nearly six months on, and no one had told him.</li>
+            <li class="d"><span class="t">Oct 22, 2026</span><span>The first written explanation of the decision: nine days after the 30 the law allows, when the victim asks.<a class="fn" href="#n10">10</a></span></li>
+          </ol>
+          <div class="say law" data-who="law"><span class="tag">The law</span><blockquote>Penal Code §11116.10: on the victim's request, the prosecutor must, “within 30 days of the final disposition of the case, inform the victim or witness by letter”.</blockquote></div>
+        </div></dialog>
+        <dialog class="pop" id="pop-confer" aria-labelledby="pop-confer-h"><div class="pop-head"><h3 id="pop-confer-h">0 of 8: his requests to talk with the prosecutor</h3><button class="pop-x" type="button">Close</button></div><div class="pop-body">
+          <div class="say law" data-who="law"><span class="tag">The right · California Constitution, article I, §28(b)(6) (Marsy's Law)</span><blockquote>Every crime victim has the right “to reasonably confer with the prosecuting agency, upon request”.<a class="fn" href="#n11">11</a></blockquote></div>
+          <div class="say d"><span class="tag">His eight requests</span><p class="rule">March 11 and 18, 2026, before the decision of March 19; then March 20, 23, 29 and 30, and April 6 and 17.</p></div>
+          <div class="say h" data-who="halsey"><span class="tag">Halsey Minor</span><blockquote>“No one in the office conferred with me, before the decision or after it.”</blockquote></div>
+        </div></dialog>
         <div class="fight-row">
           <a class="fight-go" href="#watch"><span class="fg-round">Round <b data-round>10</b></span><span class="fg-go">Battle for Justice <span aria-hidden="true">→</span></span></a>
           <a class="fight-go fed-go" href="/federal/"><span class="fg-round">Round 1</span><span class="fg-go">Going Federal <span aria-hidden="true">→</span></span></a>
@@ -964,6 +1014,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     </div>
   </section>
 </main>
+<nav class="nx" aria-label="The next page"><a class="nx-card" href="/federal/"><span class="nx-text"><span class="nx-k">Next · 2 of 4</span><span class="nx-name">Going Federal <span aria-hidden="true">→</span></span><span class="nx-line">Why Halsey is going federal</span><span class="nx-track" aria-hidden="true"><i class="on"></i><i class="go"></i><i></i><i></i></span></span><span class="nx-pic" aria-hidden="true"><img class="nx-img" src="/arrive/federal.webp" alt="" width="390" height="507" loading="lazy" decoding="async"></span></a></nav>
 
 <footer>
   <div class="wrap">
@@ -1135,7 +1186,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   var root = document.documentElement;
   if (!root.classList.contains('arrive')) return;
   var PAGES = [
-    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'Will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp' },
+    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'When will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp' },
     { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp', face2: '/arrive/federal-2x.webp' },
     { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp', face2: '/arrive/mission-2x.webp' },
     { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp' }
