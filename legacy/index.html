@@ -145,6 +145,13 @@ main { padding-bottom: 28px }
 .era-2 .print img { filter: sepia(.18) contrast(1.03) }
 .print figcaption, .fig-cap { margin-top: 8px; font: 400 12px/1.5 var(--body); color: var(--muted) }
 .print figcaption b, .fig-cap b { color: var(--ink); font-weight: 600 }
+.cm-stage { position: relative }
+.cm-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--stage) }
+.print .cm-orig[hidden], .cm-video[hidden], .cm-play[hidden] { display: none }
+.cm-play { position: absolute; right: 18px; bottom: 18px; padding: 8px 14px; border: 0; border-radius: 999px; background: var(--veil); color: var(--white); font: 500 13px/1 var(--body); cursor: pointer }
+.cm-play:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px }
+.cm-switch { margin-top: 10px }
+.plate > .class-motion { grid-column: 1 / -1 }
 .zoom-open { all: unset; display: block; cursor: zoom-in; position: relative }
 .zoom-open:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px }
 .zoom-open .badge { position: absolute; right: 14px; bottom: 14px; padding: 7px 13px; border-radius: 999px; background: var(--veil); color: var(--white); font: 500 13px/1 var(--body); letter-spacing: .02em }
@@ -338,9 +345,14 @@ dialog.viewer::backdrop { background: var(--veil) }
     </section>
 
     <section class="card plate era-1" id="jbm" aria-labelledby="jbm-h">
-      <figure class="print">
-        <button type="button" class="zoom-open" id="class-open" aria-haspopup="dialog" aria-label="Open the class photograph full screen and find him"><span class="frame"><img id="class-img" src="/legacy/law-class-1890s.jpg" width="1153" height="797" loading="lazy" decoding="async" alt="More than a hundred law students in suits and hats on the steps of a columned building, with their professors seated in the front row."></span><span class="badge">Find him ⤢</span></button>
-        <figcaption><b>About 1890–1893.</b> Professor John B. Minor with a class of law students, forty-five years into the same appointment. Albert and Shirley Small Special Collections Library, University of Virginia.</figcaption>
+      <figure class="print class-motion" id="class-fig">
+        <div class="frame cm-stage">
+          <video class="cm-video" id="class-video" muted playsinline preload="none" poster="/legacy/class-motion-2026-poster.webp" width="1280" height="720" aria-label="The law class of about 1890–1893, in color and motion"><source src="/legacy/class-motion-2026.webm" type="video/webm"><source src="/legacy/class-motion-2026.mp4" type="video/mp4"></video>
+          <img class="cm-orig" id="class-img" src="/legacy/law-class-1890s.jpg" width="1153" height="797" loading="lazy" decoding="async" alt="More than a hundred law students in suits and hats on the steps of a columned building, with their professors seated in the front row." hidden>
+          <button type="button" class="cm-play" id="class-play" hidden>Play again</button>
+        </div>
+        <div class="dv-switch cm-switch" role="group" aria-label="Show the class in color and motion, or the photograph as it survives"><button type="button" aria-pressed="true" data-v="motion">In color and motion</button><button type="button" aria-pressed="false" data-v="orig">The photograph as it survives</button></div>
+        <figcaption><b>About 1890–1893.</b> Professor John B. Minor with a class of law students, forty-five years into the same appointment. He sits at the center of the front row, as the photograph’s caption records. The photograph: Albert and Shirley Small Special Collections Library, University of Virginia. In color and motion: Halsey Minor, 2026.</figcaption>
       </figure>
       <div>
         <p class="chip">Division I · The Teacher</p>
@@ -571,17 +583,6 @@ dialog.viewer::backdrop { background: var(--veil) }
   </div>
 </dialog>
 
-<dialog class="viewer" id="viewer" aria-label="The law class, about 1890–1893">
-  <div class="v-stage" id="v-stage"><img id="v-img" alt="The law class of about 1890–1893, full screen."><div class="v-ring" id="v-ring"></div></div>
-  <div class="v-bar">
-    <button type="button" class="main" id="v-find">Find him</button>
-    <button type="button" id="v-in" aria-label="Zoom in">＋</button>
-    <button type="button" id="v-out" aria-label="Zoom out">－</button>
-    <button type="button" id="v-reset">Whole class</button>
-    <button type="button" id="v-close">Close</button>
-    <p class="v-note">He sits at the center of the front row, as the photograph’s caption records. Pinch or scroll to zoom; drag to look around.</p>
-  </div>
-</dialog>
 
 <script>
 (function () {
@@ -632,52 +633,27 @@ dialog.viewer::backdrop { background: var(--veil) }
     d.addEventListener('click', function (e) { if (e.target === d) { var r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } });
   });
 
-  // the class photograph, full screen: drag, pinch, scroll to zoom; "Find him" goes to the center of the front row
-  var dlg = document.getElementById('viewer'), stage = document.getElementById('v-stage'), img = document.getElementById('v-img'), ring = document.getElementById('v-ring');
-  var view = { s: 1, x: 0, y: 0 }, base = 1, W = 1153, H = 797, pts = new Map(), last = null;
-  function fit() { var r = stage.getBoundingClientRect(); base = Math.min(r.width / W, (r.height - 120) / H); }
-  function apply(ease) {
-    img.classList.toggle('ease', !!ease && !reduce);
-    var k = base * view.s; img.style.width = W + 'px'; img.style.height = H + 'px';
-    img.style.transform = 'translate(' + (view.x - W * k / 2) + 'px,' + (view.y - H * k / 2 - 50) + 'px) scale(' + k + ')';
-  }
-  function zoomAt(f, cx, cy) {
-    var r = stage.getBoundingClientRect(); var ox = cx - r.width / 2, oy = cy - (r.height / 2 - 50);
-    var ns = Math.min(6, Math.max(1, view.s * f)); f = ns / view.s;
-    view.x = ox - (ox - view.x) * f; view.y = oy - (oy - view.y) * f; view.s = ns; ring.classList.remove('on'); apply(false);
-  }
-  function findHim() {
-    // the center of the front row, by the caption: the seated row's faces, about 54% across and 67% down the photograph
-    var s = 2.3, k = base * s; view.s = s; view.x = -(0.54 - 0.5) * W * k; view.y = -(0.67 - 0.5) * H * k; apply(true);
-    var r = stage.getBoundingClientRect(), dw = Math.min(r.width * .62, 760), dh = Math.min(r.height * .5, 420);
-    ring.style.width = dw + 'px'; ring.style.height = dh + 'px'; ring.style.left = (r.width / 2 - dw / 2) + 'px'; ring.style.top = (r.height / 2 - 50 - dh / 2) + 'px';
-    ring.classList.add('on');
-  }
-  document.getElementById('class-open').addEventListener('click', function () {
-    if (!img.src) img.src = document.getElementById('class-img').currentSrc || document.getElementById('class-img').src;
-    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
-    fit(); view = { s: 1, x: 0, y: 0 }; ring.classList.remove('on'); apply(false);
+})();
+</script>
+<script>
+(function () {
+  var fig = document.getElementById('class-fig'); if (!fig) return;
+  var v = document.getElementById('class-video'), img = document.getElementById('class-img'), again = document.getElementById('class-play');
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function play() { again.hidden = true; try { v.currentTime = 0; } catch (e) {} var p = v.play(); if (p && p.catch) p.catch(function () { again.textContent = 'Play'; again.hidden = false; }); }
+  v.addEventListener('ended', function () { again.textContent = 'Play again'; again.hidden = false; });
+  again.addEventListener('click', play);
+  if (still || !('IntersectionObserver' in window)) { again.textContent = 'Play'; again.hidden = false; }
+  else { var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); play(); } }, { threshold: .6 }); io.observe(v); }
+  [].forEach.call(fig.querySelectorAll('.cm-switch button'), function (b) {
+    b.addEventListener('click', function () {
+      var orig = b.getAttribute('data-v') === 'orig';
+      [].forEach.call(fig.querySelectorAll('.cm-switch button'), function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      if (orig) v.pause();
+      img.hidden = !orig; v.hidden = orig; again.hidden = orig || !v.paused;
+      if (!orig && v.paused) again.textContent = v.currentTime > 0 ? 'Play again' : 'Play';
+    });
   });
-  document.getElementById('v-find').addEventListener('click', findHim);
-  document.getElementById('v-in').addEventListener('click', function () { var r = stage.getBoundingClientRect(); zoomAt(1.4, r.width / 2, r.height / 2 - 50); });
-  document.getElementById('v-out').addEventListener('click', function () { var r = stage.getBoundingClientRect(); zoomAt(1 / 1.4, r.width / 2, r.height / 2 - 50); });
-  document.getElementById('v-reset').addEventListener('click', function () { view = { s: 1, x: 0, y: 0 }; ring.classList.remove('on'); apply(true); });
-  document.getElementById('v-close').addEventListener('click', function () { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); });
-  addEventListener('resize', function () { if (dlg.open) { fit(); apply(false); } });
-  stage.addEventListener('wheel', function (e) { e.preventDefault(); var r = stage.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top); }, { passive: false });
-  stage.addEventListener('pointerdown', function (e) { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); last = null; });
-  stage.addEventListener('pointermove', function (e) {
-    if (!pts.has(e.pointerId)) return;
-    var prev = pts.get(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (pts.size === 1) { view.x += e.clientX - prev.x; view.y += e.clientY - prev.y; ring.classList.remove('on'); apply(false); }
-    else if (pts.size === 2) {
-      var p = Array.from(pts.values()), d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
-      if (last) { var r = stage.getBoundingClientRect(); zoomAt(d / last, (p[0].x + p[1].x) / 2 - r.left, (p[0].y + p[1].y) / 2 - r.top); }
-      last = d;
-    }
-  });
-  function up(e) { pts.delete(e.pointerId); last = null; }
-  stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
 })();
 </script>
 
