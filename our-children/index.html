@@ -69,6 +69,15 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
   .poem > :nth-child(n+5) { animation-delay: .85s }
 }
 @keyframes oc-in { from { opacity: 0; transform: translateY(8px) } }
+.sign { width: clamp(180px, 20vw, 230px); margin: .4em 0 0 -.2em }
+.sign svg { display: block; width: 100%; height: auto; overflow: visible }
+.sign .sp { fill: none; stroke: #fff; stroke-width: 14; stroke-linecap: butt; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1 }
+.sign.go .sp { stroke-dashoffset: 0; transition: stroke-dashoffset var(--t) cubic-bezier(.45, .05, .55, .95) var(--d) }
+.sign.wait image { mask: url(#sig-m) }
+.sign.done image { mask: none }
+.poem .face { width: clamp(150px, 17vw, 230px); margin: 0 auto clamp(12px, 2.2vh, 20px) }
+.poem .face img { display: block; width: 100%; height: auto;
+  -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%); mask-image: radial-gradient(closest-side, #000 70%, transparent 100%) }
 </style>
 </head>
 <body>
@@ -79,6 +88,7 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
 </nav>
 <main class="oc">
   <article class="poem" data-who="halsey" aria-labelledby="poem-h">
+    <div class="face"><img src="/our-children/halsey.webp" srcset="/our-children/halsey-sm.webp 320w, /our-children/halsey.webp 620w" sizes="(max-width: 599px) 150px, 230px" width="620" height="840" alt="Halsey Minor, drawn in pencil" decoding="async" fetchpriority="high"></div>
     <p class="kick">Our Children</p>
     <h1 id="poem-h">Love Keeps No Hours</h1>
     <p class="ded"><span>For every parent who loves a child they cannot reach,</span>
@@ -167,9 +177,23 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
     <p class="st"><span>I am here.</span>
       <span>I am here.</span>
       <span>I am here.</span></p>
+    <div class="sign" role="img" aria-label="Halsey Minor’s signature" data-ms="2370"><svg viewBox="0 0 369 116" width="369" height="116" aria-hidden="true" focusable="false"><defs><mask id="sig-m" maskUnits="userSpaceOnUse" x="0" y="0" width="369" height="116"><path class="sp" pathLength="1" style="--d:0.00s;--t:0.23s" d="M10,95 L18,96 L19,97 L27,97 L37,94 L44,90 L49,89 L51,87 L54,82 L54,77 L61,57 L61,54 L63,50 L64,43 L68,31 L69,21 L71,18"/><path class="sp" pathLength="1" style="--d:0.29s;--t:0.12s" d="M14,97 L14,99 L28,110 L30,111 L37,111 L44,103 L48,95 L48,91 L49,90"/><path class="sp" pathLength="1" style="--d:0.47s;--t:0.33s" d="M54,83 L59,81 L64,76 L73,74 L75,72 L75,70 L83,60 L82,55 L96,28 L101,21 L110,12 L116,11 L117,13 L117,20 L111,33 L98,49 L86,60 L84,60 L85,59 L84,58"/><path class="sp" pathLength="1" style="--d:0.86s;--t:0.12s" d="M55,60 L58,46 L63,31 L66,24 L68,24"/><path class="sp" pathLength="1" style="--d:1.04s;--t:0.12s" d="M65,92 L68,89 L68,85 L71,80 L72,75"/><path class="sp" pathLength="1" style="--d:1.22s;--t:0.13s" d="M67,91 L68,92 L73,92 L78,94 L84,94 L85,93 L92,92 L116,81 L126,74"/><path class="sp" pathLength="1" style="--d:1.41s;--t:0.12s" d="M87,60 L97,50"/><path class="sp" pathLength="1" style="--d:1.59s;--t:0.12s" d="M162,68 L164,62 L171,53 L180,38 L182,37 L182,35 L186,34 L188,29"/><path class="sp" pathLength="1" style="--d:1.77s;--t:0.12s" d="M173,63 L174,61 L176,60 L176,54 L179,50 L185,36 L186,35 L186,36"/><path class="sp" pathLength="1" style="--d:1.95s;--t:0.36s" d="M177,57 L178,59 L180,59 L182,58 L187,52 L193,51 L197,55 L205,58 L222,58 L223,57 L230,57 L231,56 L242,55 L243,54 L257,52 L271,48 L275,48 L276,47 L280,47 L281,46 L285,46 L286,45 L290,45 L291,44 L295,44 L301,42 L306,42 L307,41 L313,41 L314,40 L320,40 L321,39 L329,39 L330,38 L340,38 L341,37 L355,37"/></mask></defs><image href="/our-children/signature.webp" x="0" y="0" width="369" height="116"/></svg></div>
     <p class="help">If you are a parent or a child who is hurting tonight, call or text <a href="tel:988">988</a>, any hour.</p>
   </article>
 </main>
+<script>
+(function () {
+  var s = document.querySelector('.sign');
+  if (!s || !('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  s.classList.add('wait');
+  var io = new IntersectionObserver(function (es) {
+    if (!es.some(function (e) { return e.isIntersecting; })) return;
+    io.disconnect(); s.classList.add('go');
+    setTimeout(function () { s.classList.add('done'); }, (+s.getAttribute('data-ms') || 2400) + 200);
+  }, { threshold: .6 });
+  io.observe(s);
+})();
+</script>
 
 </body>
 </html>
