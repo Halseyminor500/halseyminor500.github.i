@@ -489,6 +489,19 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 .ar-name { display: block; margin: 10px 0 6px; font: 800 clamp(28px, 4.6vw, 44px)/1.05 var(--display); letter-spacing: .02em }
 .ar-line { display: block; font: 400 clamp(14px, 1.7vw, 17px)/1.45 var(--body); color: rgba(255, 255, 255, .78) }
 .ar-line i { font-style: normal; font-weight: 600; color: #FFFFFF }
+.ar-glow, .ar-rays { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1.4s ease; will-change: opacity }
+.ar-glow { background:
+  radial-gradient(ellipse calc(var(--ar-r) * 1.9) calc(var(--ar-h) * 1.05) at 50% var(--ar-cy), rgba(244, 249, 255, .98) 0%, rgba(226, 238, 255, .72) 40%, rgba(200, 222, 255, .32) 68%, rgba(200, 222, 255, 0) 100%),
+  radial-gradient(90% 65% at 50% -10%, rgba(250, 253, 255, .95) 0%, rgba(228, 240, 255, .5) 42%, rgba(228, 240, 255, 0) 75%),
+  linear-gradient(180deg, rgba(228, 238, 255, .62) 0%, rgba(206, 226, 255, .55) 50%, rgba(184, 212, 255, .42) 100%) }
+.ar-rays { background: repeating-conic-gradient(from -11deg at 50% -6%, rgba(255, 255, 255, 0) 0deg 4deg, rgba(240, 247, 255, .3) 6deg 8deg, rgba(255, 255, 255, 0) 10deg 15deg);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .55) 55%, transparent 92%); mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .55) 55%, transparent 92%);
+  transform-origin: 50% -6%; animation: ar-sway 7s ease-in-out infinite alternate }
+@keyframes ar-sway { from { transform: rotate(-2.5deg) } to { transform: rotate(2.5deg) } }
+#arrive.ar-shine .ar-glow, #arrive.ar-shine .ar-rays { opacity: 1; transition-duration: .7s }
+.ar-cap, .ar-n, .ar-line, .ar-line i, .ar-skip { transition: color .7s ease, text-shadow .7s ease, border-color .7s ease, background-color .7s ease }
+#arrive.ar-shine .ar-cap, #arrive.ar-shine .ar-n, #arrive.ar-shine .ar-line, #arrive.ar-shine .ar-line i { color: #1B2A4A; text-shadow: 0 0 14px rgba(255, 255, 255, .95), 0 0 36px rgba(255, 255, 255, .75) }
+#arrive.ar-shine .ar-skip { color: #1B2A4A; border-color: rgba(27, 42, 74, .45); background: rgba(255, 255, 255, .4) }
 .ar-cap > * { transition: opacity .2s ease, transform .2s ease }
 .ar-cap.ar-blur > * { opacity: 0; transform: translateY(6px) }
 .ar-skip { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); appearance: none; border: 1px solid rgba(255, 255, 255, .35);
@@ -1215,13 +1228,13 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   var root = document.documentElement;
   if (!root.classList.contains('arrive')) return;
   var PAGES = [
-    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'When will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp' },
-    { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp', face2: '/arrive/federal-2x.webp' },
-    { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp', face2: '/arrive/mission-2x.webp' },
-    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp' },
-    { name: 'Our Children', title: 'Love Keeps No Hours', line: 'For every parent who loves a child they cannot reach', face: '/arrive/children.webp', face2: '/arrive/children-2x.webp' }
+    { name: 'Home: Fight for Justice', title: 'The Justice Meter', line: 'When will it be held accountable to the laws?', face: '/arrive/home.webp', face2: '/arrive/home-2x.webp', wide: '/arrive/home-wide.webp', wide2: '/arrive/home-wide-2x.webp' },
+    { name: 'Going Federal', title: '', line: 'Why Halsey is going federal', face: '/arrive/federal.webp', face2: '/arrive/federal-2x.webp', wide: '/arrive/federal-wide.webp', wide2: '/arrive/federal-wide-2x.webp' },
+    { name: 'Mission', title: 'OperatingEquity.ai', line: 'AI-powered companies that address fundamental societal problems', face: '/arrive/mission.webp', face2: '/arrive/mission-2x.webp', wide: '/arrive/mission-wide.webp', wide2: '/arrive/mission-wide-2x.webp' },
+    { name: 'Legacy', title: 'Minor on the Law', line: 'Four generations of one family’s argument with the law', face: '/arrive/legacy.webp', face2: '/arrive/legacy-2x.webp', wide: '/arrive/legacy-wide.webp', wide2: '/arrive/legacy-wide-2x.webp' },
+    { name: 'Our Children', title: 'Love Keeps No Hours', line: 'For every parent who loves a child they cannot reach', face: '/arrive/children.webp', face2: '/arrive/children-2x.webp', wide: '/arrive/children-wide.webp', wide2: '/arrive/children-wide-2x.webp' }
   ];
-  var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S, ASPECT = 390 / 507, HERE = 0;   // HERE: the page the drum comes to rest on
+  var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S, HERE = 0;   // HERE: the page the drum comes to rest on
   var links = [].slice.call(document.querySelectorAll('.topnav .nav-a')).slice(0, N);
   var stage, drum, cap, slices = [], raf = 0, done = false, landing = false, failsafe = 0;
 
@@ -1244,19 +1257,23 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 
   // the size of the drum, from the room under the menu
   var vw = window.innerWidth, vh = window.innerHeight, nav = document.querySelector('.topnav');
-  var top = nav ? Math.max(0, nav.getBoundingClientRect().bottom) : 0, room = vh - top, capH = vw < 600 ? 132 : 140;
-  // as large as the room allows; with more pages each takes a smaller share of the drum, so the drum grows to keep each picture near the
-  // size it had with four (on a phone it may just touch the screen's edges)
-  var R = Math.max(110, Math.min(460 * N / 4, vw * Math.min(.52, .46 * N / 4), (room - capH - 36) / (2.7 * 4 / N)));
+  var top = nav ? Math.max(0, nav.getBoundingClientRect().bottom) : 0, room = vh - top, capH = vw < 600 ? 80 : 100;
+  // November 1, 2026, on his request: on a laptop the drum is wider, with half the dark at its sides, and the words stay below it. A wider drum
+  // is a taller one, so on a laptop each page is shown at a small tablet's width (560 by 507); on a phone, at a phone's (390 by 507)
+  var wide = vw >= 700, ASPECT = wide ? 560 / 507 : 390 / 507;
+  // as large as the room allows: the front page stands P / (P - R) times its height, and the words take capH below it
+  var Hmax = (room - capH - 38) / 1.3125;
+  var R = Math.max(110, Math.min(700, vw * Math.min(.52, .46 * N / 4), Hmax * ASPECT * N / (2 * Math.PI)));
   var faceArc = 2 * Math.PI * R / N, H = Math.round(faceArc / ASPECT), w = 2 * R * Math.tan(ALPHA * Math.PI / 360), P = Math.round(4.2 * R);
   var sharp = faceArc * (window.devicePixelRatio || 1) > 900;   // the finer pictures where the drum is large or the screen dense
-  PAGES.forEach(function (p) { p.src = sharp && p.face2 ? p.face2 : p.face; });
+  PAGES.forEach(function (p) { p.src = wide ? (sharp && p.wide2 ? p.wide2 : p.wide) : (sharp && p.face2 ? p.face2 : p.face); });
   var cy = top + 28 + (room - capH - 28) / 2;
 
   stage = el('div'); stage.id = 'arrive'; stage.setAttribute('aria-hidden', 'true');
   var st = stage.style;
   st.setProperty('--ar-r', R + 'px'); st.setProperty('--ar-h', H + 'px'); st.setProperty('--ar-w', (w + 1.2) + 'px'); st.setProperty('--ar-fw', (w * S) + 'px');
   st.setProperty('--ar-p', P + 'px'); st.setProperty('--ar-cy', cy + 'px'); st.setProperty('--ar-capy', (cy + H * .5 * P / (P - R) + 22) + 'px');
+  el('div', 'ar-glow', stage); el('div', 'ar-rays', stage);   // the light that shines on Our Children (arrive.css)
   var scene = el('div', 'ar-scene', stage), tilt = el('div', 'ar-tilt', scene);
   el('div', 'ar-floor', scene);
   drum = el('div', 'ar-drum', tilt);
@@ -1277,7 +1294,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   document.body.appendChild(stage);
   drum.style.transform = 'rotateY(0deg)';
   var box = slices.reduce(function (b, s) { var r = s.el.getBoundingClientRect(); return { t: Math.min(b.t, r.top), b: Math.max(b.b, r.bottom) }; }, { t: 1e9, b: -1e9 });
-  var shift = top + Math.max(18, (room - (box.b - box.t) - 20 - capH) / 2) - box.t;
+  var shift = top + Math.max(10, (room - (box.b - box.t) - 28 - capH) / 2) - box.t;
   cy += shift; st.setProperty('--ar-cy', cy + 'px'); st.setProperty('--ar-capy', (box.b + shift + 16) + 'px');
 
   function caption(i) {
@@ -1291,16 +1308,16 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
       cap.classList.remove('ar-blur');
     }, 150);
   }
-  // the turn: one fast revolution, a pause on each page in the menu's order, then rest on Home
-  var outCubic = function (u) { return 1 - Math.pow(1 - u, 3); };
+  // the turn (November 1, 2026, on his request): it appears at rest on Home, the whole page facing out; turns smoothly through every page
+  // without a stop; holds on Our Children for a second and a half, while the light rises; then turns on to Home, which becomes the page
   var inOut = function (u) { return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
-  var settle = function (u) { var c = 1; return 1 + (c + 1) * Math.pow(u - 1, 3) + c * Math.pow(u - 1, 2); };
-  var plan = [], at = -360, HOLD = 680;                 // it arrives already turning, on Home, goes once round to Home, then visits each page in turn
-  function seg(to, dur, ease) { plan.push({ from: at, to: to, dur: dur, ease: ease }); at = to; }
-  seg(0, 1150, outCubic);
-  for (var j = 1; j < N; j++) { plan.push({ from: at, to: at, dur: HOLD }); seg(j * STEP, 440, inOut); }
-  plan.push({ from: at, to: at, dur: HOLD }); seg(N * STEP, 440, settle);
-  plan.push({ from: at, to: at, dur: 300 });
+  var TA = 4600, HOLD = 1500, TC = 1300, REST = 300, TOT = TA + HOLD + TC + REST;   // to the poem; the hold; on to Home; at rest before the landing
+  function angle(t) {                                                     // degrees past Home
+    if (t < TA) return (N - 1) * STEP * inOut(t / TA);                    // Home to Our Children, easing out of rest and into the hold
+    t -= TA; if (t < HOLD) return (N - 1) * STEP;                         // the hold, in the light
+    t -= HOLD; if (t < TC) return (N - 1) * STEP + STEP * inOut(t / TC);  // on to Home
+    return N * STEP;
+  }
   var lit = -1, shown = -1, t0 = 0;
   function dark(app) { var lit = Math.max(0, Math.cos((app + 6) * Math.PI / 180)); return Math.min(.92, Math.pow(1 - lit, 1.4) * 1.05).toFixed(3); }
   function shadeAll(phi, keep) {
@@ -1315,16 +1332,13 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   function frame(now) {
     if (done) return;
     if (!t0) t0 = now;
-    var t = now - t0, phi = at, k = 0, fast = true;
-    for (; k < plan.length; k++) {
-      var g = plan[k];
-      if (t < g.dur) { phi = g.ease ? g.from + (g.to - g.from) * g.ease(t / g.dur) : g.from; fast = k === 0; break; }
-      t -= g.dur;
-    }
+    var t = now - t0, phi = angle(Math.min(t, TOT));
     drum.style.transform = 'rotateY(' + (-phi) + 'deg)'; shadeAll(phi, -1);
     var f = front(phi); light(f);
-    if (!fast && f !== shown && Math.abs(phi - Math.round(phi / STEP) * STEP) < STEP * .3) { shown = f; caption(f); }
-    if (k >= plan.length) return land();
+    // the light (arrive.css): it rises as the drum settles on Our Children, stays through the hold, and fades on the turn home
+    stage.classList.toggle('ar-shine', t >= TA - 300 && t < TA + HOLD);
+    if (f !== shown && Math.abs(phi - Math.round(phi / STEP) * STEP) < STEP * .3) { shown = f; caption(f); }
+    if (t >= TOT) return land();
     raf = requestAnimationFrame(frame);
   }
   // the landing: Home unrolls off the drum, flat, and comes forward as the stage clears
