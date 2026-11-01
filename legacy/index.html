@@ -69,17 +69,23 @@ h1 { margin: 0; font: 600 clamp(2.6rem, 6.4vw, 5.2rem)/.95 var(--display); lette
 .past-future { margin: 26px 0 0; padding-left: 20px; border-left: 3px solid var(--blue) }
 .past-future figcaption { font: 500 12.5px/1.4 var(--body); letter-spacing: .02em; color: var(--muted); margin-bottom: 6px }
 .past-future blockquote { margin: 0; font: 600 clamp(1.6rem, 3vw, 2.3rem)/1.1 var(--display); letter-spacing: -.01em; color: var(--blue) }
-.develop { margin: 0; justify-self: center; width: min(100%, calc(min(64vh, 600px) * .6926)) }
-.dv-stage { position: relative; aspect-ratio: 1122 / 1620; overflow: hidden; border-radius: 4px; background: var(--stage); box-shadow: 0 0 0 9px var(--white), 0 2px 4px 9px rgba(32, 28, 20, .06), 0 34px 60px -28px var(--shadow) }
+.develop { margin: 0; justify-self: center; width: min(100%, calc(min(64vh, 600px) * .5625)) }
+.dv-stage { position: relative; aspect-ratio: 720 / 1280; overflow: hidden; border-radius: 4px; background: var(--stage); box-shadow: 0 0 0 9px var(--white), 0 2px 4px 9px rgba(32, 28, 20, .06), 0 34px 60px -28px var(--shadow) }
 .dv-stage img { position: absolute; display: block; max-width: none }
-.dv-bw, .dv-color { inset: 0; width: 100%; height: 100% }
-.dv-sig { left: 17.29%; top: 92.04%; width: 69.25%; height: 7.28% }
+.dv-bw, .dv-color { top: 0; left: -11.39%; width: 123.06%; height: 100% }
+.dv-sig { left: 9.89%; top: 92.04%; width: 85.22%; height: 7.28% }
 .dv-color { -webkit-mask-image: linear-gradient(to top, #000 0%, #000 42%, transparent 58%, transparent 100%); mask-image: linear-gradient(to top, #000 0%, #000 42%, transparent 58%, transparent 100%);
   -webkit-mask-size: 100% 300%; mask-size: 100% 300%; -webkit-mask-position: 0 100%; mask-position: 0 100%; transition: opacity .7s ease }
 .develop.armed .dv-sig { clip-path: inset(0 100% 0 0) }
 .develop.armed .dv-color { -webkit-mask-position: 0 0%; mask-position: 0 0% }
-.develop.go .dv-sig { animation: sign 2.4s cubic-bezier(.5, .05, .4, 1) .7s forwards }
-.develop.go .dv-color { animation: rise 4s cubic-bezier(.45, 0, .25, 1) 3.3s forwards }
+.develop.go .dv-sig { animation: sign 1.15s cubic-bezier(.5, .05, .4, 1) .23s forwards }
+.develop.go .dv-color { animation: rise 1.27s cubic-bezier(.45, 0, .25, 1) .4s forwards }
+.dv-motion { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s ease }
+.develop.moving .dv-motion { opacity: 1; cursor: pointer }
+.develop.show-1884 .dv-motion { opacity: 0 }
+.dv-again { position: absolute; right: 14px; bottom: 14px; padding: 8px 14px; border: 0; border-radius: 999px; background: var(--veil); color: var(--white); font: 500 13px/1 var(--body); cursor: pointer }
+.dv-again[hidden] { display: none }
+.dv-again:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px }
 @keyframes sign { to { clip-path: inset(0 0 0 0) } }
 @keyframes rise { to { -webkit-mask-position: 0 100%; mask-position: 0 100% } }
 .develop.done .dv-sig, .develop.done .dv-color { animation: none; clip-path: none; -webkit-mask-position: 0 100%; mask-position: 0 100% }
@@ -231,7 +237,7 @@ dialog.viewer::backdrop { background: var(--veil) }
 .v-bar button { appearance: none; border: 1px solid rgba(255, 255, 255, .55); background: rgba(21, 23, 26, .55); color: var(--white); border-radius: 999px; padding: 9px 16px; font: 500 14px/1 var(--body); cursor: pointer }
 .v-bar button.main { background: var(--white); color: var(--ink); border-color: var(--white) }
 .v-note { flex-basis: 100%; margin: 4px 0 0; text-align: center; font: 400 13px/1.4 var(--body); color: rgba(255, 255, 255, .82) }
-@media (prefers-reduced-motion: reduce) { .v-stage img.ease, .dv-color { transition: none } }
+@media (prefers-reduced-motion: reduce) { .v-stage img.ease, .dv-color, .dv-motion { transition: none } }
 @media (max-width: 899px) {
   .hero-in { grid-template-columns: minmax(0, 1fr) }
   .develop { width: min(100%, 420px); justify-self: start }
@@ -316,13 +322,16 @@ dialog.viewer::backdrop { background: var(--veil) }
         <img class="dv-bw" src="/legacy/jbm-1884-nosig.jpg" width="1122" height="1620" alt="John B. Minor, photographed on 1 October 1884: white hair and a white beard, a dark bow tie and a grey coat.">
         <img class="dv-sig" src="/legacy/jbm-signature.png" width="777" height="118" alt="His signature: John B. Minor.">
         <img class="dv-color" src="/legacy/jbm-color.jpg" width="1122" height="1620" alt="John B. Minor as he most likely appeared: the same photograph, reconstructed in realistic color by Halsey Minor.">
+        <video class="dv-motion" id="dv-motion" muted playsinline preload="auto" poster="/legacy/jbm-motion-2026-poster.webp" width="720" height="1280" aria-label="John B. Minor lecturing: the reconstruction in motion and voice, made by AI in 2026"><source src="/legacy/jbm-motion-2026.webm" type="video/webm"><source src="/legacy/jbm-motion-2026.mp4" type="video/mp4"></video>
+        <button type="button" class="dv-again" id="dv-again" hidden>Again, with sound</button>
       </div>
       <div class="dv-foot">
         <div class="dv-switch" role="group" aria-label="Show the photograph of 1884 or the reconstruction of 2026">
           <button type="button" id="dv-1884" aria-pressed="false">1884</button><button type="button" id="dv-2026" aria-pressed="true">2026</button>
         </div>
         <p class="dv-caps"><span class="c-1884"><b>1884.</b> The photograph, 1 October 1884, with his signature. Arthur J. Morris Law Library Special Collections, University of Virginia.</span>
-          <span class="c-2026"><b>2026.</b> The same photograph, reconstructed by Halsey Minor as John B. Minor most likely appeared.</span></p>
+          <span class="c-2026"><b>2026.</b> The same photograph, reconstructed by Halsey Minor as John B. Minor most likely appeared.</span>
+          <span class="c-2026 c-motion"><b>In motion.</b> The reconstruction set in motion by Halsey Minor with Google Gemini, 2026. The movement, the voice and the words are made by AI, not recorded from him.</span></p>
       </div>
     </figure>
   </div>
@@ -612,13 +621,55 @@ dialog.viewer::backdrop { background: var(--veil) }
   once(document.getElementById('rotunda'), .45);
   once(document.getElementById('mv'), .6);
 
-  // the opening: the photograph, his signature written, then the color rising into him
+  // the opening: the photograph, his signature written, the color rising into him, then the reconstruction in motion, with his voice where
+  // the browser allows it (it does, once the reader has tapped anything on the site); silent otherwise, and a tap turns the voice on as he
+  // speaks. It rests in color. His word, October 31, 2026: "they will know it has sound if they see the transitions, touch it"
   var dv = document.getElementById('develop'), b84 = document.getElementById('dv-1884'), b26 = document.getElementById('dv-2026');
-  if (!reduce) { dv.classList.add('armed'); requestAnimationFrame(function () { requestAnimationFrame(function () { dv.classList.add('go'); }); }); }
-  // whatever a browser does with the animation, the portrait ends in color
-  if (!reduce) { setTimeout(function () { dv.classList.add('done'); }, 8200); dv.querySelector('.dv-color').addEventListener('animationend', function () { dv.classList.add('done'); }); }
+  var mv = document.getElementById('dv-motion'), again = document.getElementById('dv-again'), sound = false, timer = 0;
+  function rest(label) {
+    clearTimeout(timer); dv.classList.remove('moving'); dv.classList.add('done');
+    again.textContent = label || (sound ? 'Again' : 'Again, with sound'); again.hidden = false;
+  }
+  function moving() {
+    dv.classList.add('moving');
+    if (mv.muted) { again.textContent = 'Tap for sound'; again.hidden = false; } else { sound = true; again.hidden = true; }
+  }
+  function speak() { mv.muted = false; sound = true; again.hidden = true; }
+  function motion() {
+    clearTimeout(timer); dv.classList.add('done');
+    if (dv.classList.contains('show-1884')) { rest(); return; }
+    try { mv.currentTime = 0; } catch (e) {}
+    mv.muted = false;
+    var p = mv.play();
+    if (!(p && p.then)) { moving(); return; }
+    p.then(moving, function () {
+      mv.muted = true; var q = mv.play();
+      if (q && q.then) q.then(moving, function () { rest('Play'); }); else moving();
+    });
+  }
+  mv.addEventListener('click', function () { if (dv.classList.contains('moving') && mv.muted) speak(); });
+  function run() {
+    clearTimeout(timer); again.hidden = true; mv.pause();
+    dv.classList.remove('done', 'go', 'moving', 'show-1884');
+    b84.setAttribute('aria-pressed', 'false'); b26.setAttribute('aria-pressed', 'true');
+    dv.classList.add('armed'); void dv.offsetWidth;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { dv.classList.add('go'); }); });
+    // whatever a browser does with the animation, the portrait reaches color, then motion
+    timer = setTimeout(motion, 2500);
+  }
+  dv.querySelector('.dv-color').addEventListener('animationend', function () { if (dv.classList.contains('go') && !dv.classList.contains('done')) motion(); });
+  mv.addEventListener('ended', function () { rest(); });
+  again.addEventListener('click', function () {
+    if (again.textContent === 'Tap for sound') { speak(); return; }
+    sound = true;
+    // a phone lets a clip speak only from a tap, so it is started here, at once paused, and may speak when its turn comes
+    mv.muted = false; var p = mv.play(); if (p && p.then) p.then(function () { mv.pause(); }, function () {}); else mv.pause();
+    run();
+  });
+  if (!reduce) run(); else rest('Play, with sound');
   function show(year) {
-    dv.classList.add('done'); dv.classList.toggle('show-1884', year === '1884');
+    clearTimeout(timer); dv.classList.add('done'); dv.classList.toggle('show-1884', year === '1884');
+    if (year === '1884') { mv.pause(); rest(); }
     b84.setAttribute('aria-pressed', String(year === '1884')); b26.setAttribute('aria-pressed', String(year === '2026'));
   }
   b84.addEventListener('click', function () { show('1884'); });
