@@ -139,6 +139,9 @@ main { padding-bottom: 28px }
 .facts dt { font: 500 12.5px/1.75 var(--mono); color: var(--rule); white-space: nowrap }
 .now .facts dt { color: var(--blue) }
 .facts dd { font-size: 15px; line-height: 1.5 }
+.record { min-width: 0 }
+.record .hq { margin-top: 0 }
+.record .facts { margin-top: 18px }
 .moments { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0 }
 .mo { appearance: none; display: inline-flex; align-items: baseline; gap: 9px; padding: 9px 14px 9px 12px; border-radius: 12px; border: 1px solid var(--paper-edge); background: linear-gradient(180deg, var(--paper-hi), rgba(246, 239, 224, .7)); color: var(--ink); font: 500 14.5px/1.25 var(--body); cursor: pointer; text-align: left; box-shadow: 0 6px 14px -12px var(--shadow) }
 .mo:hover { border-color: var(--gold) }
@@ -244,6 +247,7 @@ dialog.viewer::backdrop { background: var(--veil) }
   .plate, .plate.slim, .plate.now { grid-template-columns: minmax(0, 1fr) }
   .plate.slim > figure { max-width: 240px }
   .plate .ro-fig { max-width: 520px }
+  .record { margin-top: 8px }
 }
 @media (max-width: 640px) {
   body { font-size: 16px }
@@ -381,7 +385,25 @@ dialog.viewer::backdrop { background: var(--veil) }
           <button type="button" class="mo" data-open="r-inst" aria-haspopup="dialog"><span class="mo-y">1875 – 1895</span>Printed for the author</button>
         </div>
       </div>
-    </section>
+          <div class="record">
+        <figure class="hq" data-who="alumni"><figcaption>Cut into the pedestal of his bust, presented by the law alumni on 12 June 1895, the fiftieth anniversary of his chair</figcaption><blockquote>“He taught the law and the reason thereof.”</blockquote></figure>
+        <dl class="facts" data-who="record">
+          <dt>1845</dt><dd>The fourth to hold Jefferson’s chair of law, at thirty-two, and its only teacher until 1851. In his first ten years, nine students in a hundred passed his examination for the degree.</dd>
+          <dt>1850</dt><dd>A new edition of the <i>Virginia Report of 1799–1800</i>, Madison’s Report on the Alien and Sedition Laws, edited by him.</dd>
+          <dt>1861 – 1865</dt><dd>Teaches through the war to a handful of students.</dd>
+          <dt>3 March 1865</dt><dd>Sheridan’s cavalry under Custer reaches Charlottesville. With the chairman of the faculty and the rector he meets it under a flag of truce: “we requested protection for the University, and for the town”, his diary says. Custer posts a guard, Sheridan confirms it, and the University is spared; the Virginia Military Institute had been burned the summer before. The diary is in the University’s Special Collections.</dd>
+          <dt>After Appomattox</dt><dd>With Maupin, borrows money on his own credit so the University can open for the session of 1865–66.</dd>
+          <dt>From 1870</dt><dd>A summer course of law lectures, believed the first summer law school in the country; more than a hundred students in a session.</dd>
+          <dt>1875 – 1895</dt><dd>The <i>Institutes of Common and Statute Law</i>: volumes I and II in 1875, IV in 1878, III in 1895; four editions in his lifetime. The Law Library’s history calls him “the leading legal professor in the South”.</dd>
+          <dt>1879 – 1880</dt><dd>Woodrow Wilson, later President of the United States, studies law under him: a “perfect teacher”, in Wilson’s words.</dd>
+          <dt>1884</dt><dd>James C. McReynolds takes his law degree in little more than a year; later Attorney General of the United States and a Justice of the Supreme Court.</dd>
+          <dt>Doctor of Laws</dt><dd>Honorary, from Washington and Lee and from Columbia.</dd>
+          <dt>1894</dt><dd><i>Exposition of the Law of Crimes and Punishments</i>, in general use across the country.</dd>
+          <dt>29 July 1895</dt><dd>Dies at eighty-two, in the fiftieth year of his chair.</dd>
+          <dt>Fifty years</dt><dd>More than six thousand students, by the Law Library’s count. A 1904 history of the University records that his students called his career “not only the longest but the ablest known to Anglo-Saxon jurisprudence”.</dd>
+        </dl>
+      </div>
+</section>
 
     <section class="card plate slim era-2" id="rcm" aria-labelledby="rcm-h">
       <figure class="print"><span class="frame"><img src="/legacy/republic-of-nations-1918.jpg" width="436" height="705" loading="lazy" decoding="async" alt="Title page: A Republic of Nations, a study of the organization of a federal league of nations, by Raleigh C. Minor, Professor of Constitutional and International Law at the University of Virginia. New York, Oxford University Press, 1918."></span>
@@ -482,6 +504,7 @@ dialog.viewer::backdrop { background: var(--veil) }
         <summary>Sources: where each fact can be read</summary>
         <ol class="srcs">
           <li>John B. Minor: <a href="https://en.wikipedia.org/wiki/John_B._Minor" rel="external">Wikipedia</a>; the University of Virginia Library, <a href="https://explore.lib.virginia.edu/exhibits/show/hoos/fabled-faculty/john-barbee-minor" rel="external">John Barbee Minor</a>; <a href="https://archives.lib.virginia.edu/ark:/59853/146296" rel="external">The Papers of John B. Minor, 1845–1893</a>.</li>
+          <li>His chair, his pupils and his books: the Arthur J. Morris Law Library, <a href="https://libguides.law.virginia.edu/faculty/j-minor" rel="external">Minor, John Barbee (1845–1895)</a>, and UVA Law, <a href="https://www.law.virginia.edu/static/uvalawyer/html/alumni/uvalawyer/f06/earlyyears.htm" rel="external">Virginia Teaching: the Early Years</a>; Lyon G. Tyler, <i>Encyclopedia of Virginia Biography</i> (1915), vol. III, pp. 201–202, <a href="https://usgenwebsites.org/vagenweb/tylers_bios/vol3-19.htm" rel="external">as transcribed</a>; <i>The Biographical Dictionary of America</i> (1906), vol. VII, <a href="https://en.wikisource.org/wiki/Page:The_Biographical_Dictionary_of_America,_vol._07.djvu/417" rel="external">Wikisource</a>. Woodrow Wilson: the University of Virginia, <a href="http://juel.iath.virginia.edu/node/1971" rel="external">Jefferson’s University, the Early Life</a>, and UVA Law, <a href="https://www.law.virginia.edu/uvalawyer/spring-2019/article/change-agents-international-and-military-leaders" rel="external">Change Agents</a>. James C. McReynolds: <a href="https://academic.oup.com/american-national-biography/reference/63042/reference-article/570490760" rel="external">American National Biography</a>. The flag of truce: his diary, 28 February to 7 March 1865, <a href="https://encyclopediavirginia.org/primary-documents/diary-of-john-b-minor-february-28-march-7-1865/" rel="external">as Encyclopedia Virginia transcribes it</a>, from the Papers of John B. Minor, <a href="https://search.lib.virginia.edu/sources/uva_library/items/u2143031" rel="external">MSS 3114</a>, Albert and Shirley Small Special Collections Library, University of Virginia; the University of Virginia Library, <a href="https://explore.lib.virginia.edu/exhibits/show/hoos/fabled-faculty/john-barbee-minor" rel="external">All the Hoos in Hooville</a>; <i>Virginia</i> magazine, <a href="https://uvamagazine.org/articles/a_civil_occupation" rel="external">A Civil Occupation</a> (2015); <i>Dictionary of American Biography</i> (1934), vol. XIII. His students: the Law Library’s <a href="https://archives.law.virginia.edu/legalknowledgepodcast/episodes/1/3" rel="external">Legal Knowledge</a>, episode 3; Barringer, Garnett and Page, <i>University of Virginia</i> (1904), vol. I, <a href="https://archive.org/details/universityofvirg01barruoft" rel="external">pp. 356–357</a>.</li>
           <li>The Law School, its rooms and Minor Hall: UVA Law, <a href="https://www.law.virginia.edu/about/timeline-key-events-uva-law-history" rel="external">A Timeline of Key Events in UVA Law History</a>; UVA Law, <a href="https://www.law.virginia.edu/news/201812/uva-okeeffe-exhibit-features-watercolor-former-law-school-building" rel="external">Minor Hall, named for professor, opened in 1911</a>.</li>
           <li>The fire of 27 October 1895: the University of Virginia, <a href="https://rotunda.virginia.edu/history" rel="external">The Rotunda, History</a>; the Arthur J. Morris Law Library, <a href="https://digitalhistory.law.virginia.edu/library-history" rel="external">Library history</a>.</li>
           <li>3 March 1865: the Faculty Minutes of the University of Virginia, 1 March 1865, and the diary of John B. Minor, 2, 3 and 6 March 1865, as quoted in <i>Minor on the Law</i>, Plate III.</li>
