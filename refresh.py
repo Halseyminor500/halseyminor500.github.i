@@ -54,10 +54,10 @@ if __name__ == '__main__':
     today = (datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1
              else datetime.datetime.now(zoneinfo.ZoneInfo('America/Los_Angeles')).date())
     changed = []
-    index = HERE / 'index.html'
+    index = HERE / 'fight' / 'index.html'   # the Justice Meter's address since November 9, 2026; the poem opens the site
     old = index.read_text(encoding='utf-8'); new = refresh(old, today)
     if new != old:
-        index.write_text(new, encoding='utf-8'); changed.append('index.html')
+        index.write_text(new, encoding='utf-8'); changed.append('fight/index.html')
     sitemap = HERE / 'sitemap.xml'
     if sitemap.exists():
         old = sitemap.read_text(encoding='utf-8')
