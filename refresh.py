@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """The morning refresh for halseyminor.com. Writes the day's counts (data-since), each deadline's state (data-due) and the
-"Counts as of" date into index.html, and the date into sitemap.xml, by the same rules as the page's own script.
+"Counts as of" date into fight/index.html (the Justice Meter), and the date into sitemap.xml, by the same rules as the page's own script.
 The record itself (answers, new items) changes only in the full build (build.py), never here.
 
     python3 refresh.py [YYYY-MM-DD]     # default: today, Pacific time
@@ -67,3 +67,8 @@ if __name__ == '__main__':
     with open(HERE / 'refresh-log.txt', 'a', encoding='utf-8') as log:
         log.write('%s · counts as of %s · %s\n' % (today.isoformat(), long(today), ', '.join(changed) or 'already current'))
     print('counts as of', long(today), '·', ', '.join(changed) or 'already current')
+    # Stage what changed, so that a commit of the older list (index.html, sitemap.xml, refresh-log.txt) still carries the record.
+    import subprocess
+    staged = changed + ['refresh-log.txt']
+    if subprocess.run(['git', '-C', str(HERE), 'add', '--'] + staged, capture_output=True).returncode == 0:
+        print('staged for commit:', ', '.join(staged))
