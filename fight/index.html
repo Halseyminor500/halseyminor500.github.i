@@ -550,15 +550,16 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 <script>
 (function () {
   var d = document.documentElement;
+  // Home's turn plays only on the poem's one link: a click there leaves its time in this tab's session (arrive-spin), read once here.
+  // A load of its own, a reload or a way back shows the record at once. ?arrive=1 plays it anyway, to watch it.
   try {
     var force = /[?&]arrive=1\b/.test(location.search);
+    var asked = false;
+    try { var t = +sessionStorage.getItem('arrive-spin'); sessionStorage.removeItem('arrive-spin'); asked = t > 0 && Math.abs(Date.now() - t) < 20000; } catch (e) {}
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var inside = /^https?:\/\/(www\.)?halseyminor\.com\//i.test(document.referrer || '');
-    var robot = /bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent || '') || navigator.webdriver === true;
-    var seen = false; try { seen = sessionStorage.getItem('arrive') === '1'; } catch (e) {}
     var small = window.innerHeight < 480 || window.innerWidth < 300;
     var hidden = document.visibilityState === 'hidden';
-    if (force || (!still && !inside && !robot && !seen && !small && !hidden && !(location.hash && location.hash.length > 1))) {
+    if (force || (asked && !still && !small && !hidden)) {
       d.classList.add('arrive');
       window.arriveFailsafe = setTimeout(function () { d.classList.remove('arrive'); }, 6000);
     }
@@ -1250,10 +1251,10 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
 </script>
 <script>
 (function () {
-  /* The arrival. The five pages, in the menu's order, wrapped around a drum that turns under the menu: one fast turn to Home, then a
-     pause on each page in the menu's order while its menu item lights, then back to Home, where it rests and unrolls into the page itself.
-     Our Children is the fifth, so a child who arrives sees at once that there are words for them. On the poem's own page, which opens the site, it
-     holds on Our Children in the light and unrolls into the poem instead: the page says so with data-arrive-land="4" on its html element. */
+  /* The turn. The five pages, in the menu's order, wrapped around a drum under the menu. Since November 10, 2026 it plays at one moment only:
+     when the poem's one link, "Home: Fight for Justice", is clicked (arrive-head.js). The drum appears at rest on Our Children, the page the
+     click came from, in the light; turns back through Legacy, Mission and Going Federal without a stop, each menu item lighting as its page
+     passes; rests on Home; and Home unrolls off the drum into the record itself. */
   var root = document.documentElement;
   if (!root.classList.contains('arrive')) return;
   var PAGES = [
@@ -1264,8 +1265,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     { name: 'Our Children', title: 'Love Keeps No Hours', line: 'For every parent who loves a child they cannot reach', face: '/arrive/children.webp', face2: '/arrive/children-2x.webp', wide: '/arrive/children-wide.webp', wide2: '/arrive/children-wide-2x.webp' }
   ];
   var N = PAGES.length, S = 12, STEP = 360 / N, ALPHA = STEP / S;
-  var HERE = +(root.getAttribute('data-arrive-land') || 0);   // the page the drum comes to rest on: Home, or the poem on its own page
-  var POEM = HERE === N - 1;
+  var HERE = 0, START = N - 1;   // it comes to rest on Home; it starts on Our Children, where the click was
   var links = [].slice.call(document.querySelectorAll('.topnav .nav-a')).slice(0, N);
   var stage, drum, cap, slices = [], raf = 0, done = false, landing = false, failsafe = 0;
 
@@ -1284,7 +1284,6 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   }
   clearTimeout(window.arriveFailsafe); failsafe = setTimeout(end, 12000);   // from here this script ends the show itself
   if (document.visibilityState === 'hidden' || !links.length) return end();
-  try { sessionStorage.setItem('arrive', '1'); } catch (e) {}
 
   // the size of the drum, from the room under the menu
   var vw = window.innerWidth, vh = window.innerHeight, nav = document.querySelector('.topnav');
@@ -1323,7 +1322,7 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
   stage.addEventListener('pointerdown', skip);
   ['keydown', 'wheel', 'touchmove', 'orientationchange'].forEach(function (t) { window.addEventListener(t, skip, true); });
   document.body.appendChild(stage);
-  drum.style.transform = 'rotateY(0deg)';
+  drum.style.transform = 'rotateY(' + (-START * STEP) + 'deg)'; shadeAll(START * STEP, -1); stage.classList.add('ar-shine');   // as it waits for its pictures
   var box = slices.reduce(function (b, s) { var r = s.el.getBoundingClientRect(); return { t: Math.min(b.t, r.top), b: Math.max(b.b, r.bottom) }; }, { t: 1e9, b: -1e9 });
   var shift = top + Math.max(10, (room - (box.b - box.t) - 28 - capH) / 2) - box.t;
   cy += shift; st.setProperty('--ar-cy', cy + 'px'); st.setProperty('--ar-capy', (box.b + shift + 16) + 'px');
@@ -1339,15 +1338,14 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
       cap.classList.remove('ar-blur');
     }, 150);
   }
-  // the turn (November 1, 2026, on his request): it appears at rest on Home, the whole page facing out; turns smoothly through every page
-  // without a stop; holds on Our Children for a second and a half, while the light rises; then turns on to Home, which becomes the page
+  // the turn: it appears at rest on Our Children, the whole page facing out, in the light; the light fades as it turns back through every page
+  // to Home without a stop (as smooth as the turn of November 1, 2026, a little quicker, since a click asked for it); at rest on Home, it lands
   var inOut = function (u) { return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
-  var TA = 4600, HOLD = 1500, TC = POEM ? 0 : 1300, REST = 300, TOT = TA + HOLD + TC + REST;   // to the poem; the hold; on to Home (not on the poem's page); at rest before the landing
-  function angle(t) {                                                     // degrees past Home
-    if (t < TA) return (N - 1) * STEP * inOut(t / TA);                    // Home to Our Children, easing out of rest and into the hold
-    t -= TA; if (t < HOLD || POEM) return (N - 1) * STEP;                 // the hold, in the light (on the poem's page it stays)
-    t -= HOLD; if (t < TC) return (N - 1) * STEP + STEP * inOut(t / TC);  // on to Home
-    return N * STEP;
+  var HOLD = 400, TURN = 3200, REST = 300, TOT = HOLD + TURN + REST;   // on Our Children; back to Home; at rest before the landing
+  function angle(t) {                                                   // degrees past Home
+    if (t < HOLD) return START * STEP;                                  // Our Children, in the light
+    t -= HOLD; if (t < TURN) return START * STEP * (1 - inOut(t / TURN));   // back through Legacy, Mission and Going Federal to Home
+    return HERE * STEP;
   }
   var lit = -1, shown = -1, t0 = 0;
   function dark(app) { var lit = Math.max(0, Math.cos((app + 6) * Math.PI / 180)); return Math.min(.92, Math.pow(1 - lit, 1.4) * 1.05).toFixed(3); }
@@ -1366,8 +1364,8 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     var t = now - t0, phi = angle(Math.min(t, TOT));
     drum.style.transform = 'rotateY(' + (-phi) + 'deg)'; shadeAll(phi, -1);
     var f = front(phi); light(f);
-    // the light (arrive.css): it rises as the drum settles on Our Children, stays through the hold, and fades on the turn home
-    stage.classList.toggle('ar-shine', t >= TA - 300 && (POEM || t < TA + HOLD));
+    // the light (arrive.css): on Our Children as the drum appears; it fades as the turn begins
+    stage.classList.toggle('ar-shine', t < HOLD);
     if (f !== shown && Math.abs(phi - Math.round(phi / STEP) * STEP) < STEP * .3) { shown = f; caption(f); }
     if (t >= TOT) return land();
     raf = requestAnimationFrame(frame);
@@ -1401,9 +1399,9 @@ html.arrive .nav-a.ar-lit { opacity: 1; border-bottom-color: #FFFFFF; text-shado
     raf = requestAnimationFrame(step);
   }
 
-  // it plays only once the four pictures are ready, and not at all if they take too long
+  // it plays only once the five pictures are ready (the poem's page loads them beforehand), and not at all if they take too long
   var ready = PAGES.map(function (p) { var im = new Image(); im.src = p.src; return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); });
-  var waited = false, late = setTimeout(function () { waited = true; skip(); }, 1600);
+  var waited = false, late = setTimeout(function () { waited = true; skip(); }, 2400);
   Promise.all(ready).then(function () { if (waited || done) return; clearTimeout(late); raf = requestAnimationFrame(frame); });
 })();
 </script>
