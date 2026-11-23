@@ -56,6 +56,13 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
 .poem .ded { margin: clamp(18px, 3vh, 26px) auto clamp(40px, 7vh, 72px); max-width: 26rem; text-align: center; font: italic 400 clamp(1.1rem, 1.9vw, 1.28rem)/1.45 var(--old);
   color: var(--soft) }
 .poem .ded span { display: block }
+.song { margin: calc(-1 * clamp(14px, 3vh, 40px)) 0 clamp(40px, 7vh, 72px); text-align: center }
+.song-b { appearance: none; width: 46px; height: 46px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(255, 255, 255, .55);
+  color: var(--soft); cursor: pointer; display: inline-grid; place-items: center; transition: color .2s ease, background-color .2s ease; -webkit-tap-highlight-color: transparent }
+.song-b:hover { color: var(--ink); background: rgba(255, 255, 255, .85) }
+.song-b svg { width: 18px; height: 18px; fill: currentColor }
+.song-b .i-pause, .song-b[aria-pressed="true"] .i-play { display: none }
+.song-b[aria-pressed="true"] .i-pause { display: inline }
 .poem .st { margin: 0 0 1.45em; font: 400 clamp(1.25rem, 2.3vw, 1.55rem)/1.42 var(--old); color: var(--ink) }
 .poem .st > span { display: block; padding-left: 1.1em; text-indent: -1.1em }
 .poem .st > span + span { margin-top: .12em }
@@ -91,6 +98,7 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
     <p class="kick">Our Children</p>
     <h1 id="poem-h">Two Bowls</h1>
     <p class="ded"><span>for every parent who loves a child they cannot reach</span></p>
+    <div class="song"><button type="button" class="song-b" aria-pressed="false" aria-label="Play the song"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8.5 5.5v13l10.5-6.5z"/><g class="i-pause"><rect x="6.5" y="5.5" width="4" height="13" rx="1"/><rect x="13.5" y="5.5" width="4" height="13" rx="1"/></g></svg></button><audio id="song" src="/our-children/two-worlds.mp3" preload="metadata"></audio></div>
     <p class="st"><span>You know the moment. I know you do.</span>
       <span>You walk in from the evening</span>
       <span>the way a tired person will,</span>
@@ -156,6 +164,19 @@ a { color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1
     <p class="help">If you are a parent or a child who is hurting tonight, call or text <a href="tel:988">988</a>, any hour.</p>
   </article>
 </main>
+<script>
+(function () {
+  // the song: it tries to play as the page opens; where the browser blocks sound until a tap, the button shows play
+  var a = document.getElementById('song'), b = document.querySelector('.song-b');
+  if (!a || !b) return;
+  function set(on) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Pause the song' : 'Play the song'); }
+  a.addEventListener('play', function () { set(true); });
+  a.addEventListener('pause', function () { set(false); });
+  a.addEventListener('ended', function () { set(false); });
+  b.addEventListener('click', function () { if (a.paused) { var p = a.play(); if (p && p.catch) p.catch(function () {}); } else a.pause(); });
+  var p = a.play(); if (p && p.catch) p.catch(function () { set(false); });
+})();
+</script>
 <script>
 (function () {
   var s = document.querySelector('.sign');
